@@ -1,0 +1,858 @@
+---
+title: Select
+description: Displays a list of options for the user to pick from—triggered by a button.
+---
+
+# Select
+
+Displays a list of options for the user to pick from—triggered by a button. Perfect for forms, filters, and any interface where users need to choose from a predefined set of options.
+
+## Installation
+
+```bash
+npm install @radix-ui/react-select
+```
+
+## Import
+
+```tsx
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+```
+
+## Usage
+
+### Basic Example
+
+```tsx
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+
+export function SelectDemo() {
+  return (
+    <Select>
+      <SelectTrigger className="w-[180px]">
+        <SelectValue placeholder="Select a fruit" />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectItem value="apple">Apple</SelectItem>
+        <SelectItem value="banana">Banana</SelectItem>
+        <SelectItem value="blueberry">Blueberry</SelectItem>
+        <SelectItem value="grapes">Grapes</SelectItem>
+        <SelectItem value="pineapple">Pineapple</SelectItem>
+      </SelectContent>
+    </Select>
+  )
+}
+```
+
+### With Label
+
+```tsx
+import { Label } from "@/components/ui/label"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+
+export function SelectWithLabel() {
+  return (
+    <div className="grid w-full max-w-sm items-center gap-1.5">
+      <Label htmlFor="fruit">Fruit</Label>
+      <Select>
+        <SelectTrigger id="fruit">
+          <SelectValue placeholder="Select a fruit" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="apple">Apple</SelectItem>
+          <SelectItem value="banana">Banana</SelectItem>
+          <SelectItem value="blueberry">Blueberry</SelectItem>
+          <SelectItem value="grapes">Grapes</SelectItem>
+          <SelectItem value="pineapple">Pineapple</SelectItem>
+        </SelectContent>
+      </Select>
+    </div>
+  )
+}
+```
+
+### Controlled
+
+```tsx
+import { useState } from "react"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+
+export function SelectControlled() {
+  const [value, setValue] = useState("")
+
+  return (
+    <div className="space-y-2">
+      <Select value={value} onValueChange={setValue}>
+        <SelectTrigger className="w-[180px]">
+          <SelectValue placeholder="Select a fruit" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="apple">Apple</SelectItem>
+          <SelectItem value="banana">Banana</SelectItem>
+          <SelectItem value="blueberry">Blueberry</SelectItem>
+          <SelectItem value="grapes">Grapes</SelectItem>
+          <SelectItem value="pineapple">Pineapple</SelectItem>
+        </SelectContent>
+      </Select>
+      <p className="text-sm text-muted-foreground">
+        Selected: {value || "None"}
+      </p>
+    </div>
+  )
+}
+```
+
+### With Groups
+
+```tsx
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+
+export function SelectWithGroups() {
+  return (
+    <Select>
+      <SelectTrigger className="w-[280px]">
+        <SelectValue placeholder="Select a timezone" />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectGroup>
+          <SelectLabel>North America</SelectLabel>
+          <SelectItem value="est">Eastern Standard Time (EST)</SelectItem>
+          <SelectItem value="cst">Central Standard Time (CST)</SelectItem>
+          <SelectItem value="mst">Mountain Standard Time (MST)</SelectItem>
+          <SelectItem value="pst">Pacific Standard Time (PST)</SelectItem>
+          <SelectItem value="akst">Alaska Standard Time (AKST)</SelectItem>
+          <SelectItem value="hst">Hawaii Standard Time (HST)</SelectItem>
+        </SelectGroup>
+        <SelectGroup>
+          <SelectLabel>Europe & Africa</SelectLabel>
+          <SelectItem value="gmt">Greenwich Mean Time (GMT)</SelectItem>
+          <SelectItem value="cet">Central European Time (CET)</SelectItem>
+          <SelectItem value="eet">Eastern European Time (EET)</SelectItem>
+          <SelectItem value="west">Western European Summer Time (WEST)</SelectItem>
+          <SelectItem value="cat">Central Africa Time (CAT)</SelectItem>
+          <SelectItem value="eat">East Africa Time (EAT)</SelectItem>
+        </SelectGroup>
+        <SelectGroup>
+          <SelectLabel>Asia</SelectLabel>
+          <SelectItem value="msk">Moscow Time (MSK)</SelectItem>
+          <SelectItem value="ist">India Standard Time (IST)</SelectItem>
+          <SelectItem value="cst_china">China Standard Time (CST)</SelectItem>
+          <SelectItem value="jst">Japan Standard Time (JST)</SelectItem>
+          <SelectItem value="kst">Korea Standard Time (KST)</SelectItem>
+          <SelectItem value="ist_indonesia">Indonesia Central Standard Time (WITA)</SelectItem>
+        </SelectGroup>
+        <SelectGroup>
+          <SelectLabel>Australia & Pacific</SelectLabel>
+          <SelectItem value="awst">Australian Western Standard Time (AWST)</SelectItem>
+          <SelectItem value="acst">Australian Central Standard Time (ACST)</SelectItem>
+          <SelectItem value="aest">Australian Eastern Standard Time (AEST)</SelectItem>
+          <SelectItem value="nzst">New Zealand Standard Time (NZST)</SelectItem>
+          <SelectItem value="fjt">Fiji Time (FJT)</SelectItem>
+        </SelectGroup>
+      </SelectContent>
+    </Select>
+  )
+}
+```
+
+### With Separators
+
+```tsx
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectSeparator,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+
+export function SelectWithSeparators() {
+  return (
+    <Select>
+      <SelectTrigger className="w-[200px]">
+        <SelectValue placeholder="Select an option" />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectItem value="profile">Profile</SelectItem>
+        <SelectItem value="billing">Billing</SelectItem>
+        <SelectItem value="team">Team</SelectItem>
+        <SelectSeparator />
+        <SelectItem value="settings">Settings</SelectItem>
+        <SelectItem value="support">Support</SelectItem>
+        <SelectSeparator />
+        <SelectItem value="logout">Logout</SelectItem>
+      </SelectContent>
+    </Select>
+  )
+}
+```
+
+### Disabled
+
+```tsx
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+
+export function SelectDisabled() {
+  return (
+    <Select disabled>
+      <SelectTrigger className="w-[180px]">
+        <SelectValue placeholder="Select a fruit" />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectItem value="apple">Apple</SelectItem>
+        <SelectItem value="banana">Banana</SelectItem>
+        <SelectItem value="blueberry">Blueberry</SelectItem>
+      </SelectContent>
+    </Select>
+  )
+}
+```
+
+### With Icons
+
+```tsx
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import {
+  Apple,
+  Banana,
+  Cherry,
+  Grape,
+  Orange,
+} from "lucide-react"
+
+export function SelectWithIcons() {
+  return (
+    <Select>
+      <SelectTrigger className="w-[200px]">
+        <SelectValue placeholder="Select a fruit" />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectItem value="apple">
+          <div className="flex items-center">
+            <Apple className="mr-2 h-4 w-4" />
+            <span>Apple</span>
+          </div>
+        </SelectItem>
+        <SelectItem value="banana">
+          <div className="flex items-center">
+            <Banana className="mr-2 h-4 w-4" />
+            <span>Banana</span>
+          </div>
+        </SelectItem>
+        <SelectItem value="cherry">
+          <div className="flex items-center">
+            <Cherry className="mr-2 h-4 w-4" />
+            <span>Cherry</span>
+          </div>
+        </SelectItem>
+        <SelectItem value="grape">
+          <div className="flex items-center">
+            <Grape className="mr-2 h-4 w-4" />
+            <span>Grape</span>
+          </div>
+        </SelectItem>
+        <SelectItem value="orange">
+          <div className="flex items-center">
+            <Orange className="mr-2 h-4 w-4" />
+            <span>Orange</span>
+          </div>
+        </SelectItem>
+      </SelectContent>
+    </Select>
+  )
+}
+```
+
+### Country Selector
+
+```tsx
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+
+const countries = [
+  { value: "us", label: "United States", flag: "🇺🇸" },
+  { value: "ca", label: "Canada", flag: "🇨🇦" },
+  { value: "gb", label: "United Kingdom", flag: "🇬🇧" },
+  { value: "de", label: "Germany", flag: "🇩🇪" },
+  { value: "fr", label: "France", flag: "🇫🇷" },
+  { value: "jp", label: "Japan", flag: "🇯🇵" },
+  { value: "au", label: "Australia", flag: "🇦🇺" },
+  { value: "in", label: "India", flag: "🇮🇳" },
+]
+
+export function CountrySelector() {
+  return (
+    <Select>
+      <SelectTrigger className="w-[250px]">
+        <SelectValue placeholder="Select a country" />
+      </SelectTrigger>
+      <SelectContent>
+        {countries.map((country) => (
+          <SelectItem key={country.value} value={country.value}>
+            <div className="flex items-center">
+              <span className="mr-2 text-lg">{country.flag}</span>
+              <span>{country.label}</span>
+            </div>
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
+  )
+}
+```
+
+### Form Example
+
+```tsx
+import { useState } from "react"
+import { Button } from "@/components/ui/button"
+import { Label } from "@/components/ui/label"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+
+export function SelectFormExample() {
+  const [formData, setFormData] = useState({
+    category: "",
+    priority: "",
+    status: "",
+  })
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    console.log("Form submitted:", formData)
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-4 max-w-sm">
+      <div className="grid items-center gap-1.5">
+        <Label htmlFor="category">Category</Label>
+        <Select
+          value={formData.category}
+          onValueChange={(value) => setFormData(prev => ({ ...prev, category: value }))}
+        >
+          <SelectTrigger id="category">
+            <SelectValue placeholder="Select category" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="bug">Bug Report</SelectItem>
+            <SelectItem value="feature">Feature Request</SelectItem>
+            <SelectItem value="question">Question</SelectItem>
+            <SelectItem value="feedback">Feedback</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+
+      <div className="grid items-center gap-1.5">
+        <Label htmlFor="priority">Priority</Label>
+        <Select
+          value={formData.priority}
+          onValueChange={(value) => setFormData(prev => ({ ...prev, priority: value }))}
+        >
+          <SelectTrigger id="priority">
+            <SelectValue placeholder="Select priority" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="low">Low</SelectItem>
+            <SelectItem value="medium">Medium</SelectItem>
+            <SelectItem value="high">High</SelectItem>
+            <SelectItem value="urgent">Urgent</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+
+      <div className="grid items-center gap-1.5">
+        <Label htmlFor="status">Status</Label>
+        <Select
+          value={formData.status}
+          onValueChange={(value) => setFormData(prev => ({ ...prev, status: value }))}
+        >
+          <SelectTrigger id="status">
+            <SelectValue placeholder="Select status" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="open">Open</SelectItem>
+            <SelectItem value="in-progress">In Progress</SelectItem>
+            <SelectItem value="review">Under Review</SelectItem>
+            <SelectItem value="closed">Closed</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+
+      <Button type="submit" className="w-full">
+        Submit
+      </Button>
+    </form>
+  )
+}
+```
+
+### Multi-Select Alternative
+
+```tsx
+import { useState } from "react"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { X } from "lucide-react"
+
+const skills = [
+  "JavaScript", "TypeScript", "React", "Vue", "Angular",
+  "Node.js", "Python", "Java", "C#", "Go", "Rust", "PHP"
+]
+
+export function MultiSelectAlternative() {
+  const [selectedSkills, setSelectedSkills] = useState<string[]>([])
+  const [currentValue, setCurrentValue] = useState("")
+
+  const addSkill = (skill: string) => {
+    if (!selectedSkills.includes(skill)) {
+      setSelectedSkills([...selectedSkills, skill])
+    }
+    setCurrentValue("")
+  }
+
+  const removeSkill = (skill: string) => {
+    setSelectedSkills(selectedSkills.filter(s => s !== skill))
+  }
+
+  const availableSkills = skills.filter(skill => !selectedSkills.includes(skill))
+
+  return (
+    <div className="space-y-4 max-w-md">
+      <div>
+        <label className="text-sm font-medium">Skills</label>
+        <div className="mt-1">
+          <Select value={currentValue} onValueChange={addSkill}>
+            <SelectTrigger>
+              <SelectValue placeholder="Add a skill" />
+            </SelectTrigger>
+            <SelectContent>
+              {availableSkills.map((skill) => (
+                <SelectItem key={skill} value={skill}>
+                  {skill}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+      </div>
+
+      {selectedSkills.length > 0 && (
+        <div className="space-y-2">
+          <label className="text-sm font-medium">Selected Skills:</label>
+          <div className="flex flex-wrap gap-2">
+            {selectedSkills.map((skill) => (
+              <Badge key={skill} variant="secondary" className="pr-1">
+                {skill}
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="ml-1 h-auto p-0 text-muted-foreground hover:text-foreground"
+                  onClick={() => removeSkill(skill)}
+                >
+                  <X className="h-3 w-3" />
+                </Button>
+              </Badge>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+```
+
+### Searchable Select
+
+```tsx
+import { useState } from "react"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { Input } from "@/components/ui/input"
+
+const cities = [
+  "New York", "Los Angeles", "Chicago", "Houston", "Phoenix",
+  "Philadelphia", "San Antonio", "San Diego", "Dallas", "San Jose",
+  "Austin", "Jacksonville", "Fort Worth", "Columbus", "Charlotte",
+  "San Francisco", "Indianapolis", "Seattle", "Denver", "Washington"
+]
+
+export function SearchableSelect() {
+  const [searchTerm, setSearchTerm] = useState("")
+  const [selectedCity, setSelectedCity] = useState("")
+
+  const filteredCities = cities.filter(city =>
+    city.toLowerCase().includes(searchTerm.toLowerCase())
+  )
+
+  return (
+    <div className="space-y-2">
+      <Select value={selectedCity} onValueChange={setSelectedCity}>
+        <SelectTrigger className="w-[250px]">
+          <SelectValue placeholder="Select a city" />
+        </SelectTrigger>
+        <SelectContent>
+          <div className="p-2">
+            <Input
+              placeholder="Search cities..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="h-8"
+            />
+          </div>
+          {filteredCities.length === 0 ? (
+            <div className="p-2 text-sm text-muted-foreground">
+              No cities found.
+            </div>
+          ) : (
+            filteredCities.map((city) => (
+              <SelectItem key={city} value={city}>
+                {city}
+              </SelectItem>
+            ))
+          )}
+        </SelectContent>
+      </Select>
+      {selectedCity && (
+        <p className="text-sm text-muted-foreground">
+          Selected: {selectedCity}
+        </p>
+      )}
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Select
+
+The root select component.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | - | The controlled value |
+| `defaultValue` | `string` | - | The default value (uncontrolled) |
+| `onValueChange` | `(value: string) => void` | - | Callback when value changes |
+| `open` | `boolean` | - | The controlled open state |
+| `defaultOpen` | `boolean` | `false` | The default open state |
+| `onOpenChange` | `(open: boolean) => void` | - | Callback when open state changes |
+| `disabled` | `boolean` | `false` | Whether the select is disabled |
+| `required` | `boolean` | `false` | Whether the select is required |
+| `name` | `string` | - | The name attribute |
+| `dir` | `"ltr" \| "rtl"` | - | Reading direction |
+| `children` | `ReactNode` | - | The select content |
+
+### SelectTrigger
+
+The button that opens the select.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | The trigger content |
+| `asChild` | `boolean` | `false` | Render as child component |
+
+**Default Styles:**
+- `flex h-10 w-full items-center justify-between` - Layout
+- `rounded-md border border-input bg-background` - Appearance
+- `px-3 py-2 text-sm ring-offset-background` - Spacing and typography
+- `placeholder:text-muted-foreground` - Placeholder styling
+- `focus:outline-none focus:ring-2 focus:ring-ring` - Focus states
+- `disabled:cursor-not-allowed disabled:opacity-50` - Disabled state
+
+### SelectValue
+
+Displays the selected value or placeholder.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `placeholder` | `string` | - | Placeholder text |
+| `className` | `string` | - | Additional CSS classes |
+
+### SelectContent
+
+The dropdown content container.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `position` | `"item-aligned" \| "popper"` | `"item-aligned"` | Positioning strategy |
+| `side` | `"top" \| "right" \| "bottom" \| "left"` | `"bottom"` | Preferred side |
+| `sideOffset` | `number` | `4` | Distance from trigger |
+| `align` | `"start" \| "center" \| "end"` | `"center"` | Alignment relative to trigger |
+| `alignOffset` | `number` | `0` | Offset from align axis |
+| `avoidCollisions` | `boolean` | `true` | Whether to avoid collisions |
+| `collisionBoundary` | `Element \| Element[]` | - | Collision boundary |
+| `collisionPadding` | `number \| Partial<Record<Side, number>>` | `0` | Collision padding |
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | The content |
+
+**Default Styles:**
+- `relative z-50 max-h-96 min-w-[8rem]` - Layout and constraints
+- `overflow-hidden rounded-md border bg-popover` - Appearance
+- `text-popover-foreground shadow-md` - Typography and shadow
+- `data-[state=open]:animate-in` - Opening animation
+- `data-[state=closed]:animate-out` - Closing animation
+
+### SelectItem
+
+A selectable item within the dropdown.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | - | The item value (required) |
+| `disabled` | `boolean` | `false` | Whether the item is disabled |
+| `textValue` | `string` | - | Text value for typeahead |
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | The item content |
+
+**Default Styles:**
+- `relative flex w-full cursor-default select-none` - Layout and interaction
+- `items-center rounded-sm py-1.5 pl-8 pr-2` - Spacing
+- `text-sm outline-none` - Typography
+- `focus:bg-accent focus:text-accent-foreground` - Focus states
+- `data-[disabled]:pointer-events-none data-[disabled]:opacity-50` - Disabled state
+
+### SelectLabel
+
+A label for grouping select items.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | The label content |
+
+**Default Styles:**
+- `py-1.5 pl-8 pr-2 text-sm font-semibold` - Spacing and typography
+
+### SelectSeparator
+
+A visual separator between select items.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+**Default Styles:**
+- `-mx-1 my-1 h-px bg-muted` - Spacing and appearance
+
+### SelectGroup
+
+Groups related select items.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | The grouped items |
+
+## Features
+
+- **Accessible**: Full keyboard navigation and screen reader support
+- **Customizable**: Easy to style and extend
+- **Searchable**: Built-in typeahead functionality
+- **Grouping**: Support for grouped options
+- **Positioning**: Smart positioning with collision detection
+- **Controlled/Uncontrolled**: Support for both usage patterns
+- **Form Integration**: Works seamlessly with forms
+- **Mobile Friendly**: Touch-optimized interface
+
+## Accessibility
+
+- Uses proper ARIA attributes (`role="combobox"`, `aria-expanded`, etc.)
+- Keyboard navigation with arrow keys, Enter, and Escape
+- Typeahead support for quick selection
+- Focus management and restoration
+- Screen reader announcements
+- Proper labeling and descriptions
+
+## Styling
+
+The component uses Tailwind CSS classes and includes:
+
+1. **States**: Visual feedback for hover, focus, and disabled states
+2. **Animations**: Smooth open/close animations
+3. **Positioning**: Smart positioning system
+4. **Typography**: Consistent text styling
+5. **Spacing**: Proper padding and margins
+
+## Common Patterns
+
+### Filter Dropdown
+
+```tsx
+function FilterDropdown() {
+  const [filter, setFilter] = useState("all")
+  
+  return (
+    <Select value={filter} onValueChange={setFilter}>
+      <SelectTrigger className="w-[150px]">
+        <SelectValue />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectItem value="all">All Items</SelectItem>
+        <SelectItem value="active">Active</SelectItem>
+        <SelectItem value="inactive">Inactive</SelectItem>
+        <SelectItem value="pending">Pending</SelectItem>
+      </SelectContent>
+    </Select>
+  )
+}
+```
+
+### Language Selector
+
+```tsx
+function LanguageSelector() {
+  const [language, setLanguage] = useState("en")
+  
+  const languages = [
+    { value: "en", label: "English", flag: "🇺🇸" },
+    { value: "es", label: "Español", flag: "🇪🇸" },
+    { value: "fr", label: "Français", flag: "🇫🇷" },
+    { value: "de", label: "Deutsch", flag: "🇩🇪" },
+  ]
+  
+  return (
+    <Select value={language} onValueChange={setLanguage}>
+      <SelectTrigger className="w-[180px]">
+        <SelectValue />
+      </SelectTrigger>
+      <SelectContent>
+        {languages.map((lang) => (
+          <SelectItem key={lang.value} value={lang.value}>
+            <div className="flex items-center">
+              <span className="mr-2">{lang.flag}</span>
+              {lang.label}
+            </div>
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
+  )
+}
+```
+
+## Best Practices
+
+1. **Clear Labels**: Use descriptive labels and placeholders
+2. **Logical Grouping**: Group related options together
+3. **Reasonable Options**: Limit the number of options (consider search for large lists)
+4. **Default Values**: Provide sensible default selections when appropriate
+5. **Validation**: Provide clear validation feedback
+6. **Loading States**: Handle loading states for dynamic options
+7. **Empty States**: Show appropriate messages for empty option lists
+8. **Mobile Optimization**: Ensure touch targets are large enough
+9. **Keyboard Support**: Test keyboard navigation thoroughly
+10. **Consistent Styling**: Maintain consistent appearance across your app
+
+## Troubleshooting
+
+### Select Not Opening
+
+Ensure the trigger is properly configured:
+
+```tsx
+<SelectTrigger>
+  <SelectValue placeholder="Select..." />
+</SelectTrigger>
+```
+
+### Value Not Updating
+
+For controlled selects, ensure you're handling the change:
+
+```tsx
+const [value, setValue] = useState("")
+
+<Select value={value} onValueChange={setValue}>
+  {/* content */}
+</Select>
+```
+
+### Positioning Issues
+
+Adjust the positioning props:
+
+```tsx
+<SelectContent
+  position="popper"
+  side="bottom"
+  align="start"
+  sideOffset={4}
+>
+  {/* items */}
+</SelectContent>
+```
+
+### Styling Issues
+
+Ensure Tailwind CSS is properly configured and component styles are included in your build.
+
+### Performance with Large Lists
+
+For large option lists, consider implementing virtualization or search functionality to improve performance.

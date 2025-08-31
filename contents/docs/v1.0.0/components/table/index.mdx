@@ -1,0 +1,1182 @@
+---
+title: Table
+description: A responsive table component for displaying tabular data with sorting, filtering, and pagination.
+---
+
+# Table
+
+A responsive table component for displaying tabular data with sorting, filtering, and pagination. Perfect for data tables, dashboards, and any interface that needs to display structured information.
+
+## Installation
+
+No additional dependencies required. The table component is built using semantic HTML and Tailwind CSS.
+
+## Import
+
+```tsx
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
+```
+
+## Usage
+
+### Basic Example
+
+```tsx
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
+
+const invoices = [
+  {
+    invoice: "INV001",
+    paymentStatus: "Paid",
+    totalAmount: "$250.00",
+    paymentMethod: "Credit Card",
+  },
+  {
+    invoice: "INV002",
+    paymentStatus: "Pending",
+    totalAmount: "$150.00",
+    paymentMethod: "PayPal",
+  },
+  {
+    invoice: "INV003",
+    paymentStatus: "Unpaid",
+    totalAmount: "$350.00",
+    paymentMethod: "Bank Transfer",
+  },
+  {
+    invoice: "INV004",
+    paymentStatus: "Paid",
+    totalAmount: "$450.00",
+    paymentMethod: "Credit Card",
+  },
+  {
+    invoice: "INV005",
+    paymentStatus: "Paid",
+    totalAmount: "$550.00",
+    paymentMethod: "PayPal",
+  },
+]
+
+export function TableDemo() {
+  return (
+    <Table>
+      <TableCaption>A list of your recent invoices.</TableCaption>
+      <TableHeader>
+        <TableRow>
+          <TableHead className="w-[100px]">Invoice</TableHead>
+          <TableHead>Status</TableHead>
+          <TableHead>Method</TableHead>
+          <TableHead className="text-right">Amount</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {invoices.map((invoice) => (
+          <TableRow key={invoice.invoice}>
+            <TableCell className="font-medium">{invoice.invoice}</TableCell>
+            <TableCell>{invoice.paymentStatus}</TableCell>
+            <TableCell>{invoice.paymentMethod}</TableCell>
+            <TableCell className="text-right">{invoice.totalAmount}</TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  )
+}
+```
+
+### With Status Badges
+
+```tsx
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
+import { Badge } from "@/components/ui/badge"
+
+const orders = [
+  {
+    id: "ORD001",
+    customer: "John Doe",
+    status: "delivered",
+    amount: "$250.00",
+    date: "2024-01-15",
+  },
+  {
+    id: "ORD002",
+    customer: "Jane Smith",
+    status: "pending",
+    amount: "$150.00",
+    date: "2024-01-14",
+  },
+  {
+    id: "ORD003",
+    customer: "Bob Johnson",
+    status: "cancelled",
+    amount: "$350.00",
+    date: "2024-01-13",
+  },
+  {
+    id: "ORD004",
+    customer: "Alice Brown",
+    status: "processing",
+    amount: "$450.00",
+    date: "2024-01-12",
+  },
+]
+
+const getStatusVariant = (status: string) => {
+  switch (status) {
+    case "delivered":
+      return "default"
+    case "pending":
+      return "secondary"
+    case "processing":
+      return "outline"
+    case "cancelled":
+      return "destructive"
+    default:
+      return "secondary"
+  }
+}
+
+export function TableWithBadges() {
+  return (
+    <Table>
+      <TableCaption>Recent orders and their status.</TableCaption>
+      <TableHeader>
+        <TableRow>
+          <TableHead>Order ID</TableHead>
+          <TableHead>Customer</TableHead>
+          <TableHead>Status</TableHead>
+          <TableHead>Date</TableHead>
+          <TableHead className="text-right">Amount</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {orders.map((order) => (
+          <TableRow key={order.id}>
+            <TableCell className="font-medium">{order.id}</TableCell>
+            <TableCell>{order.customer}</TableCell>
+            <TableCell>
+              <Badge variant={getStatusVariant(order.status)} className="capitalize">
+                {order.status}
+              </Badge>
+            </TableCell>
+            <TableCell>{order.date}</TableCell>
+            <TableCell className="text-right">{order.amount}</TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  )
+}
+```
+
+### Sortable Table
+
+```tsx
+import { useState } from "react"
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
+import { Button } from "@/components/ui/button"
+import { ArrowUpDown, ArrowUp, ArrowDown } from "lucide-react"
+
+interface User {
+  id: string
+  name: string
+  email: string
+  role: string
+  status: string
+  joinDate: string
+}
+
+const users: User[] = [
+  {
+    id: "1",
+    name: "John Doe",
+    email: "john@example.com",
+    role: "Admin",
+    status: "Active",
+    joinDate: "2024-01-15",
+  },
+  {
+    id: "2",
+    name: "Jane Smith",
+    email: "jane@example.com",
+    role: "User",
+    status: "Active",
+    joinDate: "2024-01-10",
+  },
+  {
+    id: "3",
+    name: "Bob Johnson",
+    email: "bob@example.com",
+    role: "Moderator",
+    status: "Inactive",
+    joinDate: "2024-01-05",
+  },
+  {
+    id: "4",
+    name: "Alice Brown",
+    email: "alice@example.com",
+    role: "User",
+    status: "Active",
+    joinDate: "2024-01-20",
+  },
+]
+
+type SortField = keyof User
+type SortDirection = "asc" | "desc" | null
+
+export function SortableTable() {
+  const [sortField, setSortField] = useState<SortField | null>(null)
+  const [sortDirection, setSortDirection] = useState<SortDirection>(null)
+
+  const handleSort = (field: SortField) => {
+    if (sortField === field) {
+      if (sortDirection === "asc") {
+        setSortDirection("desc")
+      } else if (sortDirection === "desc") {
+        setSortDirection(null)
+        setSortField(null)
+      } else {
+        setSortDirection("asc")
+      }
+    } else {
+      setSortField(field)
+      setSortDirection("asc")
+    }
+  }
+
+  const sortedUsers = [...users].sort((a, b) => {
+    if (!sortField || !sortDirection) return 0
+
+    const aValue = a[sortField]
+    const bValue = b[sortField]
+
+    if (aValue < bValue) return sortDirection === "asc" ? -1 : 1
+    if (aValue > bValue) return sortDirection === "asc" ? 1 : -1
+    return 0
+  })
+
+  const getSortIcon = (field: SortField) => {
+    if (sortField !== field) return <ArrowUpDown className="ml-2 h-4 w-4" />
+    if (sortDirection === "asc") return <ArrowUp className="ml-2 h-4 w-4" />
+    if (sortDirection === "desc") return <ArrowDown className="ml-2 h-4 w-4" />
+    return <ArrowUpDown className="ml-2 h-4 w-4" />
+  }
+
+  return (
+    <Table>
+      <TableCaption>A list of users with sortable columns.</TableCaption>
+      <TableHeader>
+        <TableRow>
+          <TableHead>
+            <Button
+              variant="ghost"
+              onClick={() => handleSort("name")}
+              className="h-auto p-0 font-semibold"
+            >
+              Name
+              {getSortIcon("name")}
+            </Button>
+          </TableHead>
+          <TableHead>
+            <Button
+              variant="ghost"
+              onClick={() => handleSort("email")}
+              className="h-auto p-0 font-semibold"
+            >
+              Email
+              {getSortIcon("email")}
+            </Button>
+          </TableHead>
+          <TableHead>
+            <Button
+              variant="ghost"
+              onClick={() => handleSort("role")}
+              className="h-auto p-0 font-semibold"
+            >
+              Role
+              {getSortIcon("role")}
+            </Button>
+          </TableHead>
+          <TableHead>
+            <Button
+              variant="ghost"
+              onClick={() => handleSort("status")}
+              className="h-auto p-0 font-semibold"
+            >
+              Status
+              {getSortIcon("status")}
+            </Button>
+          </TableHead>
+          <TableHead>
+            <Button
+              variant="ghost"
+              onClick={() => handleSort("joinDate")}
+              className="h-auto p-0 font-semibold"
+            >
+              Join Date
+              {getSortIcon("joinDate")}
+            </Button>
+          </TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {sortedUsers.map((user) => (
+          <TableRow key={user.id}>
+            <TableCell className="font-medium">{user.name}</TableCell>
+            <TableCell>{user.email}</TableCell>
+            <TableCell>{user.role}</TableCell>
+            <TableCell>{user.status}</TableCell>
+            <TableCell>{user.joinDate}</TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  )
+}
+```
+
+### Table with Actions
+
+```tsx
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
+import { Button } from "@/components/ui/button"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { Badge } from "@/components/ui/badge"
+import { MoreHorizontal, Edit, Trash2, Eye } from "lucide-react"
+
+const products = [
+  {
+    id: "1",
+    name: "Wireless Headphones",
+    category: "Electronics",
+    price: "$99.99",
+    stock: 45,
+    status: "active",
+  },
+  {
+    id: "2",
+    name: "Smart Watch",
+    category: "Electronics",
+    price: "$199.99",
+    stock: 23,
+    status: "active",
+  },
+  {
+    id: "3",
+    name: "Coffee Mug",
+    category: "Home",
+    price: "$12.99",
+    stock: 0,
+    status: "out_of_stock",
+  },
+  {
+    id: "4",
+    name: "Desk Lamp",
+    category: "Home",
+    price: "$49.99",
+    stock: 12,
+    status: "low_stock",
+  },
+]
+
+const getStatusVariant = (status: string) => {
+  switch (status) {
+    case "active":
+      return "default"
+    case "low_stock":
+      return "secondary"
+    case "out_of_stock":
+      return "destructive"
+    default:
+      return "secondary"
+  }
+}
+
+const getStatusLabel = (status: string) => {
+  switch (status) {
+    case "active":
+      return "Active"
+    case "low_stock":
+      return "Low Stock"
+    case "out_of_stock":
+      return "Out of Stock"
+    default:
+      return status
+  }
+}
+
+export function TableWithActions() {
+  const handleView = (id: string) => {
+    console.log("View product:", id)
+  }
+
+  const handleEdit = (id: string) => {
+    console.log("Edit product:", id)
+  }
+
+  const handleDelete = (id: string) => {
+    console.log("Delete product:", id)
+  }
+
+  return (
+    <Table>
+      <TableCaption>Product inventory with actions.</TableCaption>
+      <TableHeader>
+        <TableRow>
+          <TableHead>Product</TableHead>
+          <TableHead>Category</TableHead>
+          <TableHead>Price</TableHead>
+          <TableHead>Stock</TableHead>
+          <TableHead>Status</TableHead>
+          <TableHead className="text-right">Actions</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {products.map((product) => (
+          <TableRow key={product.id}>
+            <TableCell className="font-medium">{product.name}</TableCell>
+            <TableCell>{product.category}</TableCell>
+            <TableCell>{product.price}</TableCell>
+            <TableCell>{product.stock}</TableCell>
+            <TableCell>
+              <Badge variant={getStatusVariant(product.status)}>
+                {getStatusLabel(product.status)}
+              </Badge>
+            </TableCell>
+            <TableCell className="text-right">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="h-8 w-8 p-0">
+                    <span className="sr-only">Open menu</span>
+                    <MoreHorizontal className="h-4 w-4" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                  <DropdownMenuItem onClick={() => handleView(product.id)}>
+                    <Eye className="mr-2 h-4 w-4" />
+                    View
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => handleEdit(product.id)}>
+                    <Edit className="mr-2 h-4 w-4" />
+                    Edit
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem 
+                    onClick={() => handleDelete(product.id)}
+                    className="text-destructive"
+                  >
+                    <Trash2 className="mr-2 h-4 w-4" />
+                    Delete
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  )
+}
+```
+
+### Selectable Table
+
+```tsx
+import { useState } from "react"
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
+import { Checkbox } from "@/components/ui/checkbox"
+import { Button } from "@/components/ui/button"
+import { Trash2 } from "lucide-react"
+
+const emails = [
+  {
+    id: "1",
+    from: "john@example.com",
+    subject: "Meeting Tomorrow",
+    date: "2024-01-15",
+    read: false,
+  },
+  {
+    id: "2",
+    from: "jane@example.com",
+    subject: "Project Update",
+    date: "2024-01-14",
+    read: true,
+  },
+  {
+    id: "3",
+    from: "bob@example.com",
+    subject: "Invoice #123",
+    date: "2024-01-13",
+    read: false,
+  },
+  {
+    id: "4",
+    from: "alice@example.com",
+    subject: "Welcome!",
+    date: "2024-01-12",
+    read: true,
+  },
+]
+
+export function SelectableTable() {
+  const [selectedEmails, setSelectedEmails] = useState<string[]>([])
+
+  const handleSelectAll = (checked: boolean) => {
+    if (checked) {
+      setSelectedEmails(emails.map(email => email.id))
+    } else {
+      setSelectedEmails([])
+    }
+  }
+
+  const handleSelectEmail = (emailId: string, checked: boolean) => {
+    if (checked) {
+      setSelectedEmails(prev => [...prev, emailId])
+    } else {
+      setSelectedEmails(prev => prev.filter(id => id !== emailId))
+    }
+  }
+
+  const handleDeleteSelected = () => {
+    console.log("Delete emails:", selectedEmails)
+    setSelectedEmails([])
+  }
+
+  const isAllSelected = selectedEmails.length === emails.length
+  const isIndeterminate = selectedEmails.length > 0 && selectedEmails.length < emails.length
+
+  return (
+    <div className="space-y-4">
+      {selectedEmails.length > 0 && (
+        <div className="flex items-center justify-between">
+          <p className="text-sm text-muted-foreground">
+            {selectedEmails.length} of {emails.length} email(s) selected
+          </p>
+          <Button
+            variant="destructive"
+            size="sm"
+            onClick={handleDeleteSelected}
+          >
+            <Trash2 className="mr-2 h-4 w-4" />
+            Delete Selected
+          </Button>
+        </div>
+      )}
+      
+      <Table>
+        <TableCaption>Your email inbox with selection.</TableCaption>
+        <TableHeader>
+          <TableRow>
+            <TableHead className="w-[50px]">
+              <Checkbox
+                checked={isAllSelected}
+                onCheckedChange={handleSelectAll}
+                aria-label="Select all emails"
+                {...(isIndeterminate && { "data-state": "indeterminate" })}
+              />
+            </TableHead>
+            <TableHead>From</TableHead>
+            <TableHead>Subject</TableHead>
+            <TableHead>Date</TableHead>
+            <TableHead>Status</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {emails.map((email) => (
+            <TableRow 
+              key={email.id}
+              className={selectedEmails.includes(email.id) ? "bg-muted/50" : ""}
+            >
+              <TableCell>
+                <Checkbox
+                  checked={selectedEmails.includes(email.id)}
+                  onCheckedChange={(checked) => handleSelectEmail(email.id, checked as boolean)}
+                  aria-label={`Select email from ${email.from}`}
+                />
+              </TableCell>
+              <TableCell className="font-medium">{email.from}</TableCell>
+              <TableCell className={email.read ? "" : "font-semibold"}>
+                {email.subject}
+              </TableCell>
+              <TableCell>{email.date}</TableCell>
+              <TableCell>
+                <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs ${
+                  email.read 
+                    ? "bg-gray-100 text-gray-800" 
+                    : "bg-blue-100 text-blue-800"
+                }`}>
+                  {email.read ? "Read" : "Unread"}
+                </span>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </div>
+  )
+}
+```
+
+### Responsive Table
+
+```tsx
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
+import { Badge } from "@/components/ui/badge"
+import { ScrollArea } from "@/components/ui/scroll-area"
+
+const transactions = [
+  {
+    id: "TXN001",
+    date: "2024-01-15",
+    description: "Payment from John Doe",
+    amount: "+$250.00",
+    status: "completed",
+    method: "Credit Card",
+    reference: "REF123456",
+  },
+  {
+    id: "TXN002",
+    date: "2024-01-14",
+    description: "Refund to Jane Smith",
+    amount: "-$75.00",
+    status: "pending",
+    method: "PayPal",
+    reference: "REF123457",
+  },
+  {
+    id: "TXN003",
+    date: "2024-01-13",
+    description: "Payment from Bob Johnson",
+    amount: "+$150.00",
+    status: "completed",
+    method: "Bank Transfer",
+    reference: "REF123458",
+  },
+  {
+    id: "TXN004",
+    date: "2024-01-12",
+    description: "Subscription fee",
+    amount: "-$29.99",
+    status: "failed",
+    method: "Credit Card",
+    reference: "REF123459",
+  },
+]
+
+const getStatusVariant = (status: string) => {
+  switch (status) {
+    case "completed":
+      return "default"
+    case "pending":
+      return "secondary"
+    case "failed":
+      return "destructive"
+    default:
+      return "secondary"
+  }
+}
+
+export function ResponsiveTable() {
+  return (
+    <div className="w-full">
+      <div className="rounded-md border">
+        <ScrollArea className="h-[400px] w-full">
+          <Table>
+            <TableCaption>Recent transactions with full details.</TableCaption>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="w-[100px]">ID</TableHead>
+                <TableHead className="min-w-[100px]">Date</TableHead>
+                <TableHead className="min-w-[200px]">Description</TableHead>
+                <TableHead className="min-w-[100px]">Amount</TableHead>
+                <TableHead className="min-w-[100px]">Status</TableHead>
+                <TableHead className="min-w-[120px]">Method</TableHead>
+                <TableHead className="min-w-[120px]">Reference</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {transactions.map((transaction) => (
+                <TableRow key={transaction.id}>
+                  <TableCell className="font-medium">{transaction.id}</TableCell>
+                  <TableCell>{transaction.date}</TableCell>
+                  <TableCell>{transaction.description}</TableCell>
+                  <TableCell className={`font-medium ${
+                    transaction.amount.startsWith("+") 
+                      ? "text-green-600" 
+                      : "text-red-600"
+                  }`}>
+                    {transaction.amount}
+                  </TableCell>
+                  <TableCell>
+                    <Badge variant={getStatusVariant(transaction.status)} className="capitalize">
+                      {transaction.status}
+                    </Badge>
+                  </TableCell>
+                  <TableCell>{transaction.method}</TableCell>
+                  <TableCell className="font-mono text-sm">{transaction.reference}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </ScrollArea>
+      </div>
+    </div>
+  )
+}
+```
+
+### Data Table with Pagination
+
+```tsx
+import { useState } from "react"
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
+import { Button } from "@/components/ui/button"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { ChevronLeft, ChevronRight } from "lucide-react"
+
+// Sample data - in real app this would come from API
+const generateUsers = (count: number) => {
+  return Array.from({ length: count }, (_, i) => ({
+    id: `user-${i + 1}`,
+    name: `User ${i + 1}`,
+    email: `user${i + 1}@example.com`,
+    role: ["Admin", "User", "Moderator"][i % 3],
+    status: ["Active", "Inactive"][i % 2],
+    joinDate: new Date(2024, 0, (i % 30) + 1).toISOString().split('T')[0],
+  }))
+}
+
+const allUsers = generateUsers(100)
+
+export function PaginatedTable() {
+  const [currentPage, setCurrentPage] = useState(1)
+  const [pageSize, setPageSize] = useState(10)
+
+  const totalPages = Math.ceil(allUsers.length / pageSize)
+  const startIndex = (currentPage - 1) * pageSize
+  const endIndex = startIndex + pageSize
+  const currentUsers = allUsers.slice(startIndex, endIndex)
+
+  const goToPage = (page: number) => {
+    setCurrentPage(Math.max(1, Math.min(page, totalPages)))
+  }
+
+  const handlePageSizeChange = (newPageSize: string) => {
+    setPageSize(Number(newPageSize))
+    setCurrentPage(1) // Reset to first page
+  }
+
+  return (
+    <div className="space-y-4">
+      <Table>
+        <TableCaption>
+          Showing {startIndex + 1} to {Math.min(endIndex, allUsers.length)} of {allUsers.length} users
+        </TableCaption>
+        <TableHeader>
+          <TableRow>
+            <TableHead>Name</TableHead>
+            <TableHead>Email</TableHead>
+            <TableHead>Role</TableHead>
+            <TableHead>Status</TableHead>
+            <TableHead>Join Date</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {currentUsers.map((user) => (
+            <TableRow key={user.id}>
+              <TableCell className="font-medium">{user.name}</TableCell>
+              <TableCell>{user.email}</TableCell>
+              <TableCell>{user.role}</TableCell>
+              <TableCell>{user.status}</TableCell>
+              <TableCell>{user.joinDate}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+      
+      <div className="flex items-center justify-between">
+        <div className="flex items-center space-x-2">
+          <p className="text-sm font-medium">Rows per page</p>
+          <Select value={pageSize.toString()} onValueChange={handlePageSizeChange}>
+            <SelectTrigger className="h-8 w-[70px]">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent side="top">
+              {[5, 10, 20, 30, 40, 50].map((size) => (
+                <SelectItem key={size} value={size.toString()}>
+                  {size}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+        
+        <div className="flex items-center space-x-6 lg:space-x-8">
+          <div className="flex w-[100px] items-center justify-center text-sm font-medium">
+            Page {currentPage} of {totalPages}
+          </div>
+          <div className="flex items-center space-x-2">
+            <Button
+              variant="outline"
+              className="h-8 w-8 p-0"
+              onClick={() => goToPage(currentPage - 1)}
+              disabled={currentPage === 1}
+            >
+              <span className="sr-only">Go to previous page</span>
+              <ChevronLeft className="h-4 w-4" />
+            </Button>
+            <Button
+              variant="outline"
+              className="h-8 w-8 p-0"
+              onClick={() => goToPage(currentPage + 1)}
+              disabled={currentPage === totalPages}
+            >
+              <span className="sr-only">Go to next page</span>
+              <ChevronRight className="h-4 w-4" />
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Table
+
+The root table container.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | Table content |
+
+**Default Styles:**
+- `w-full caption-bottom text-sm` - Layout and typography
+
+### TableHeader
+
+Container for table header rows.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | Header content |
+
+**Default Styles:**
+- `[&_tr]:border-b` - Border styling for header rows
+
+### TableBody
+
+Container for table body rows.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | Body content |
+
+**Default Styles:**
+- `[&_tr:last-child]:border-0` - Remove border from last row
+
+### TableFooter
+
+Container for table footer rows.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | Footer content |
+
+**Default Styles:**
+- `border-t bg-muted/50 font-medium` - Border, background, and typography
+- `[&>tr]:last:border-b-0` - Remove border from last row
+
+### TableRow
+
+A table row element.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | Row content |
+
+**Default Styles:**
+- `border-b transition-colors` - Border and smooth transitions
+- `hover:bg-muted/50` - Hover state
+- `data-[state=selected]:bg-muted` - Selected state
+
+### TableHead
+
+A table header cell.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | Header cell content |
+
+**Default Styles:**
+- `h-12 px-4 text-left align-middle` - Layout and alignment
+- `font-medium text-muted-foreground` - Typography
+- `[&:has([role=checkbox])]:pr-0` - Checkbox column spacing
+
+### TableCell
+
+A table data cell.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | Cell content |
+
+**Default Styles:**
+- `p-4 align-middle` - Padding and alignment
+- `[&:has([role=checkbox])]:pr-0` - Checkbox column spacing
+
+### TableCaption
+
+A table caption element.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | Caption content |
+
+**Default Styles:**
+- `mt-4 text-sm text-muted-foreground` - Spacing and typography
+
+## Features
+
+- **Semantic HTML**: Uses proper table elements for accessibility
+- **Responsive**: Adapts to different screen sizes
+- **Customizable**: Easy to style and extend
+- **Sortable**: Support for sortable columns
+- **Selectable**: Support for row selection
+- **Actions**: Support for row actions and menus
+- **Pagination**: Built-in pagination support
+- **Scrollable**: Horizontal scrolling for wide tables
+- **Status Indicators**: Support for badges and status indicators
+
+## Accessibility
+
+- Uses semantic HTML table elements
+- Proper heading structure with `<th>` elements
+- Support for table captions
+- Keyboard navigation support
+- Screen reader friendly
+- ARIA attributes for interactive elements
+- Focus management for sortable headers
+
+## Styling
+
+The component uses Tailwind CSS classes and includes:
+
+1. **Layout**: Proper table layout and spacing
+2. **Typography**: Consistent text styling
+3. **Borders**: Clean border styling
+4. **States**: Hover and selected states
+5. **Responsive**: Mobile-friendly design
+
+## Common Patterns
+
+### Data Grid
+
+```tsx
+function DataGrid() {
+  return (
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableHead>Column 1</TableHead>
+          <TableHead>Column 2</TableHead>
+          <TableHead>Actions</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {/* Data rows */}
+      </TableBody>
+    </Table>
+  )
+}
+```
+
+### Invoice Table
+
+```tsx
+function InvoiceTable() {
+  return (
+    <Table>
+      <TableCaption>Invoice details</TableCaption>
+      <TableHeader>
+        <TableRow>
+          <TableHead>Item</TableHead>
+          <TableHead>Quantity</TableHead>
+          <TableHead className="text-right">Amount</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {/* Invoice items */}
+      </TableBody>
+    </Table>
+  )
+}
+```
+
+## Best Practices
+
+1. **Use Semantic HTML**: Always use proper table elements
+2. **Provide Captions**: Use table captions for accessibility
+3. **Consistent Alignment**: Align numbers to the right, text to the left
+4. **Clear Headers**: Use descriptive column headers
+5. **Row Actions**: Place actions in the last column
+6. **Loading States**: Show loading indicators for async data
+7. **Empty States**: Handle empty data gracefully
+8. **Responsive Design**: Consider mobile layouts
+9. **Performance**: Virtualize large datasets
+10. **Keyboard Navigation**: Ensure keyboard accessibility
+
+## Troubleshooting
+
+### Table Not Responsive
+
+Wrap the table in a scroll container:
+
+```tsx
+<ScrollArea className="w-full">
+  <Table>
+    {/* table content */}
+  </Table>
+</ScrollArea>
+```
+
+### Styling Issues
+
+Ensure Tailwind CSS is properly configured and component styles are included in your build.
+
+### Performance Issues
+
+For large datasets, consider implementing virtualization:
+
+```tsx
+// Use libraries like react-window or @tanstack/react-virtual
+import { useVirtualizer } from '@tanstack/react-virtual'
+```
+
+### Accessibility Issues
+
+Ensure proper table structure:
+
+```tsx
+<Table>
+  <TableCaption>Descriptive caption</TableCaption>
+  <TableHeader>
+    <TableRow>
+      <TableHead scope="col">Column Header</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    {/* table rows */}
+  </TableBody>
+</Table>
+```
+
+### Mobile Layout Issues
+
+For complex tables on mobile, consider alternative layouts:
+
+```tsx
+// Card layout for mobile
+<div className="md:hidden">
+  {data.map(item => (
+    <Card key={item.id}>
+      {/* Card content */}
+    </Card>
+  ))}
+</div>
+
+<div className="hidden md:block">
+  <Table>
+    {/* Table content */}
+  </Table>
+</div>
+```

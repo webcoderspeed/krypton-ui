@@ -1,0 +1,401 @@
+---
+title: Avatar
+description: An image element with a fallback for representing the user.
+---
+
+# Avatar
+
+An image element with a fallback for representing the user. Built on top of Radix UI Avatar primitive.
+
+## Installation
+
+```bash
+npm install @radix-ui/react-avatar
+```
+
+## Import
+
+```tsx
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/avatar"
+```
+
+## Usage
+
+### Basic Example
+
+```tsx
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/avatar"
+
+export function AvatarDemo() {
+  return (
+    <Avatar>
+      <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+      <AvatarFallback>CN</AvatarFallback>
+    </Avatar>
+  )
+}
+```
+
+### With Fallback
+
+```tsx
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/avatar"
+
+export function AvatarWithFallback() {
+  return (
+    <Avatar>
+      <AvatarImage src="https://broken-link.jpg" alt="User" />
+      <AvatarFallback>JD</AvatarFallback>
+    </Avatar>
+  )
+}
+```
+
+### Different Sizes
+
+```tsx
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/avatar"
+
+export function AvatarSizes() {
+  return (
+    <div className="flex items-center space-x-4">
+      {/* Small */}
+      <Avatar className="h-8 w-8">
+        <AvatarImage src="https://github.com/shadcn.png" alt="Small" />
+        <AvatarFallback className="text-xs">SM</AvatarFallback>
+      </Avatar>
+      
+      {/* Default */}
+      <Avatar>
+        <AvatarImage src="https://github.com/shadcn.png" alt="Default" />
+        <AvatarFallback>DF</AvatarFallback>
+      </Avatar>
+      
+      {/* Large */}
+      <Avatar className="h-16 w-16">
+        <AvatarImage src="https://github.com/shadcn.png" alt="Large" />
+        <AvatarFallback className="text-lg">LG</AvatarFallback>
+      </Avatar>
+      
+      {/* Extra Large */}
+      <Avatar className="h-24 w-24">
+        <AvatarImage src="https://github.com/shadcn.png" alt="Extra Large" />
+        <AvatarFallback className="text-2xl">XL</AvatarFallback>
+      </Avatar>
+    </div>
+  )
+}
+```
+
+### Avatar Group
+
+```tsx
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/avatar"
+
+export function AvatarGroup() {
+  const users = [
+    { src: "https://github.com/shadcn.png", fallback: "CN", alt: "@shadcn" },
+    { src: "https://github.com/vercel.png", fallback: "VC", alt: "@vercel" },
+    { src: "https://github.com/nextjs.png", fallback: "NJ", alt: "@nextjs" },
+  ]
+
+  return (
+    <div className="flex -space-x-2">
+      {users.map((user, index) => (
+        <Avatar key={index} className="border-2 border-background">
+          <AvatarImage src={user.src} alt={user.alt} />
+          <AvatarFallback>{user.fallback}</AvatarFallback>
+        </Avatar>
+      ))}
+      <Avatar className="border-2 border-background">
+        <AvatarFallback>+3</AvatarFallback>
+      </Avatar>
+    </div>
+  )
+}
+```
+
+### With Status Indicator
+
+```tsx
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/avatar"
+
+export function AvatarWithStatus() {
+  return (
+    <div className="relative">
+      <Avatar>
+        <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+        <AvatarFallback>CN</AvatarFallback>
+      </Avatar>
+      <span className="absolute bottom-0 right-0 block h-3 w-3 rounded-full bg-green-400 ring-2 ring-white" />
+    </div>
+  )
+}
+```
+
+### Custom Shapes
+
+```tsx
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/avatar"
+
+export function AvatarShapes() {
+  return (
+    <div className="flex items-center space-x-4">
+      {/* Rounded (default) */}
+      <Avatar>
+        <AvatarImage src="https://github.com/shadcn.png" alt="Rounded" />
+        <AvatarFallback>RD</AvatarFallback>
+      </Avatar>
+      
+      {/* Square */}
+      <Avatar className="rounded-lg">
+        <AvatarImage src="https://github.com/shadcn.png" alt="Square" />
+        <AvatarFallback>SQ</AvatarFallback>
+      </Avatar>
+      
+      {/* Rounded Square */}
+      <Avatar className="rounded-md">
+        <AvatarImage src="https://github.com/shadcn.png" alt="Rounded Square" />
+        <AvatarFallback>RS</AvatarFallback>
+      </Avatar>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Avatar
+
+The root avatar component that contains the image and fallback.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | The avatar image and fallback components |
+
+**Default Styles:**
+- `h-10 w-10` - 40px × 40px size
+- `rounded-full` - Circular shape
+- `overflow-hidden` - Clips content to shape
+- `shrink-0` - Prevents shrinking in flex containers
+
+### AvatarImage
+
+The image element of the avatar.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `src` | `string` | - | The image source URL |
+| `alt` | `string` | - | Alternative text for the image |
+| `className` | `string` | - | Additional CSS classes |
+| `onLoadingStatusChange` | `(status: "idle" \| "loading" \| "loaded" \| "error") => void` | - | Callback fired when loading status changes |
+
+**Default Styles:**
+- `aspect-square` - Maintains 1:1 aspect ratio
+- `h-full w-full` - Fills the avatar container
+
+### AvatarFallback
+
+The fallback element displayed when the image fails to load or is loading.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | The fallback content (usually initials) |
+| `delayMs` | `number` | - | Delay before showing fallback |
+
+**Default Styles:**
+- `flex h-full w-full` - Fills container and enables flexbox
+- `items-center justify-center` - Centers content
+- `rounded-full` - Circular shape
+- `bg-muted` - Muted background color
+
+## Size Variants
+
+Common size classes you can apply:
+
+```tsx
+// Extra Small
+<Avatar className="h-6 w-6">
+  <AvatarFallback className="text-xs">XS</AvatarFallback>
+</Avatar>
+
+// Small
+<Avatar className="h-8 w-8">
+  <AvatarFallback className="text-xs">SM</AvatarFallback>
+</Avatar>
+
+// Default
+<Avatar>
+  <AvatarFallback>MD</AvatarFallback>
+</Avatar>
+
+// Large
+<Avatar className="h-16 w-16">
+  <AvatarFallback className="text-lg">LG</AvatarFallback>
+</Avatar>
+
+// Extra Large
+<Avatar className="h-24 w-24">
+  <AvatarFallback className="text-2xl">XL</AvatarFallback>
+</Avatar>
+```
+
+## Features
+
+- **Automatic Fallback**: Shows fallback when image fails to load
+- **Accessible**: Proper alt text and ARIA attributes
+- **Customizable**: Easy to style and resize
+- **Loading States**: Built-in loading state management
+- **Flexible**: Works with any image source
+- **Responsive**: Scales well across different screen sizes
+
+## Accessibility
+
+- Always provide meaningful `alt` text for images
+- Use appropriate contrast for fallback text
+- Consider screen reader users when choosing fallback content
+- Ensure sufficient color contrast for status indicators
+
+## Styling
+
+The component uses Tailwind CSS classes and can be customized by:
+
+1. **Size**: Use `h-{size} w-{size}` classes
+2. **Shape**: Use `rounded-{variant}` classes
+3. **Border**: Add `border` and `ring` classes
+4. **Background**: Customize fallback background with `bg-{color}` classes
+
+## Common Patterns
+
+### User Profile
+
+```tsx
+function UserProfile({ user }) {
+  return (
+    <div className="flex items-center space-x-3">
+      <Avatar>
+        <AvatarImage src={user.avatar} alt={user.name} />
+        <AvatarFallback>
+          {user.name.split(' ').map(n => n[0]).join('')}
+        </AvatarFallback>
+      </Avatar>
+      <div>
+        <p className="font-medium">{user.name}</p>
+        <p className="text-sm text-muted-foreground">{user.email}</p>
+      </div>
+    </div>
+  )
+}
+```
+
+### Comment System
+
+```tsx
+function Comment({ comment }) {
+  return (
+    <div className="flex space-x-3">
+      <Avatar className="h-8 w-8">
+        <AvatarImage src={comment.author.avatar} alt={comment.author.name} />
+        <AvatarFallback className="text-xs">
+          {comment.author.initials}
+        </AvatarFallback>
+      </Avatar>
+      <div className="flex-1">
+        <div className="flex items-center space-x-2">
+          <span className="font-medium text-sm">{comment.author.name}</span>
+          <span className="text-xs text-muted-foreground">{comment.timestamp}</span>
+        </div>
+        <p className="text-sm mt-1">{comment.content}</p>
+      </div>
+    </div>
+  )
+}
+```
+
+### Team Members
+
+```tsx
+function TeamMembers({ members }) {
+  return (
+    <div className="space-y-4">
+      {members.map((member) => (
+        <div key={member.id} className="flex items-center justify-between">
+          <div className="flex items-center space-x-3">
+            <div className="relative">
+              <Avatar>
+                <AvatarImage src={member.avatar} alt={member.name} />
+                <AvatarFallback>{member.initials}</AvatarFallback>
+              </Avatar>
+              {member.isOnline && (
+                <span className="absolute bottom-0 right-0 block h-3 w-3 rounded-full bg-green-400 ring-2 ring-white" />
+              )}
+            </div>
+            <div>
+              <p className="font-medium">{member.name}</p>
+              <p className="text-sm text-muted-foreground">{member.role}</p>
+            </div>
+          </div>
+          <span className="text-sm text-muted-foreground">{member.status}</span>
+        </div>
+      ))}
+    </div>
+  )
+}
+```
+
+## Best Practices
+
+1. **Always provide fallback**: Include meaningful initials or icons
+2. **Use appropriate sizes**: Match avatar size to context (small for comments, large for profiles)
+3. **Consistent styling**: Maintain consistent avatar styling across your app
+4. **Meaningful alt text**: Provide descriptive alt text for images
+5. **Handle loading states**: Consider showing loading indicators for slow connections
+6. **Optimize images**: Use appropriately sized images to improve performance
+7. **Consider accessibility**: Ensure sufficient contrast and screen reader support
+
+## Troubleshooting
+
+### Image not loading
+- Check if the image URL is accessible
+- Verify CORS settings for external images
+- Ensure the fallback is properly configured
+
+### Fallback not showing
+- Make sure AvatarFallback is included as a child
+- Check if there are any CSS conflicts
+- Verify the image src is actually failing to load
+
+### Size issues
+- Use consistent width and height classes
+- Adjust fallback text size accordingly
+- Consider using aspect-ratio utilities for complex layouts
