@@ -1,6 +1,18 @@
 {
   "name": "krypton-ui",
   "version": "1.0.0",
+  "description": "A next-generation design system for Next.js with comprehensive theming, accessibility, and type safety",
+  "keywords": [
+    "design-system",
+    "react",
+    "nextjs",
+    "tailwindcss",
+    "typescript",
+    "ui-components",
+    "accessibility"
+  ],
+  "author": "Krypton UI Team",
+  "license": "MIT",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -27,8 +39,10 @@
     "next": "^14.2.6",
     "next-mdx-remote": "^5.0.0",
     "next-themes": "^0.3.0",
+    "prism-react-renderer": "^2.4.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-live": "^4.1.8",
     "rehype-autolink-headings": "^7.1.0",
     "rehype-code-titles": "^1.2.0",
     "rehype-prism-plus": "^2.0.0",

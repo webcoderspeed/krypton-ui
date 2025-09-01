@@ -2,49 +2,89 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Krypton-UI Font Variables */
+@theme {
+  --font-family-sans: var(--font-geist-sans);
+  --font-family-mono: var(--font-geist-mono);
+}
+
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-    --primary: 240 5.9% 10%;
+    /* Krypton-UI Design Tokens - WCAG AA Compliant */
+    --k-color-bg: 0 0% 100%;
+    --k-color-fg: 240 10% 3.9%;
+    --k-color-muted: 240 4.8% 94%;
+    --k-color-primary: 240 5.9% 10%;
+    --k-color-accent: 240 4.8% 94%;
+    
+    --k-radius-sm: 0.25rem;
+    --k-radius-md: 0.5rem;
+    --k-radius-lg: 0.75rem;
+    
+    --k-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --k-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --k-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    
+    --k-ease-out: cubic-bezier(0, 0, 0.2, 1);
+    --k-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+    --k-duration-150: 150ms;
+    --k-duration-250: 250ms;
+    --k-duration-350: 350ms;
+    
+    /* Legacy shadcn variables for compatibility */
+    --background: var(--k-color-bg);
+    --foreground: var(--k-color-fg);
+    --card: var(--k-color-bg);
+    --card-foreground: var(--k-color-fg);
+    --popover: var(--k-color-bg);
+    --popover-foreground: var(--k-color-fg);
+    --primary: var(--k-color-primary);
     --primary-foreground: 0 0% 98%;
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
-    --destructive: 0 84.2% 60.2%;
+    --secondary: var(--k-color-muted);
+    --secondary-foreground: var(--k-color-primary);
+    --muted: var(--k-color-muted);
+    --muted-foreground: 240 3.8% 40%;
+    --accent: var(--k-color-accent);
+    --accent-foreground: var(--k-color-primary);
+    --destructive: 0 84.2% 55%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 240 5.9% 10%;
-    --radius: 0.5rem;
+    --border: 240 5.9% 88%;
+    --input: 240 5.9% 88%;
+    --ring: var(--k-color-primary);
+    --radius: var(--k-radius-md);
   }
 
   .dark {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
+    /* Krypton-UI Dark Theme Tokens - WCAG AA Compliant */
+    --k-color-bg: 240 10% 3.9%;
+    --k-color-fg: 0 0% 98%;
+    --k-color-muted: 240 3.7% 20%;
+    --k-color-primary: 0 0% 98%;
+    --k-color-accent: 240 3.7% 20%;
+    
+    --k-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+    --k-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4);
+    --k-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5), 0 4px 6px -4px rgb(0 0 0 / 0.5);
+    
+    /* Legacy shadcn variables for compatibility */
+    --background: var(--k-color-bg);
+    --foreground: var(--k-color-fg);
+    --card: var(--k-color-bg);
+    --card-foreground: var(--k-color-fg);
+    --popover: var(--k-color-bg);
+    --popover-foreground: var(--k-color-fg);
+    --primary: var(--k-color-primary);
     --primary-foreground: 240 5.9% 10%;
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
+    --secondary: var(--k-color-muted);
+    --secondary-foreground: var(--k-color-fg);
+    --muted: var(--k-color-muted);
+    --muted-foreground: 240 5% 70%;
+    --accent: var(--k-color-accent);
+    --accent-foreground: var(--k-color-fg);
+    --destructive: 0 62.8% 50%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
+    --border: 240 3.7% 25%;
+    --input: 240 3.7% 25%;
     --ring: 240 4.9% 83.9%;
   }
 }

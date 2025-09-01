@@ -16,7 +16,7 @@ export function helperSearch(
   const res: EachRoute[] = [];
   let parentHas = false;
 
-  const nextLink = `${prefix}${node.href}`;
+  const nextLink = node.href;
   if (!node.noLink && node.title.toLowerCase().includes(query.toLowerCase())) {
     res.push({ ...node, items: undefined, href: nextLink });
     parentHas = true;

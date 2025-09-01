@@ -1,4 +1,4 @@
-import { ModeToggle } from "@/components/theme-toggle";
+import { EnhancedThemeToggle } from "@/components/enhanced-theme-toggle";
 import {
   GithubIcon,
   TwitterIcon,
@@ -35,19 +35,6 @@ export const NAVLINKS: NavLink[] = [
   {
     title: "Blog",
     href: "/blog",
-  },
-  {
-    title: "Examples",
-    href: "#",
-  },
-  {
-    title: "Guides",
-    href: "#",
-  },
-  {
-    title: "Community",
-    href: "#",
-    external: true,
   },
 ];
 
@@ -87,7 +74,7 @@ export function Navbar() {
               >
                 <TwitterIcon className="h-[1.1rem] w-[1.1rem]" />
               </Link>
-              <ModeToggle />
+              <EnhancedThemeToggle />
             </div>
           </div>
         </div>
@@ -100,7 +87,7 @@ export function Logo() {
   return (
     <Link href="/" className="flex items-center gap-2.5">
       <HexagonIcon className="w-7 h-7 text-muted-foreground fill-current" />
-      <h2 className="text-md font-bold">AriaDocs</h2>
+      <h2 className="text-md font-bold">Krypton-UI</h2>
     </Link>
   );
 }

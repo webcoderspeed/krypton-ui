@@ -8,10 +8,10 @@ import "./globals.css";
 import VersionContextWrapper from "@/components/version-context-wrapper";
 
 export const metadata: Metadata = {
-  title: "AriaDocs - Template",
-  metadataBase: new URL("https://ariadocs.vercel.app/"),
+  title: "Krypton-UI - Next-Generation Design System",
+  metadataBase: new URL("https://krypton-ui.vercel.app/"),
   description:
-    "This comprehensive documentation template, crafted with Next.js and available as open-source, delivers a sleek and responsive design, tailored to meet all your project documentation requirements.",
+    "A next-generation design system for Next.js with comprehensive theming, accessibility, and type safety. Built with performance and developer experience in mind.",
 };
 
 export default function RootLayout({
@@ -20,9 +20,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html 
+      lang="en" 
+      className={`${GeistSans.variable} ${GeistMono.variable} font-sans antialiased`}
+      suppressHydrationWarning
+    >
       <body
-        className={`${GeistSans.variable} ${GeistMono.variable} font-regular`}
+        className="min-h-screen bg-background text-foreground"
         suppressHydrationWarning
       >
         <ThemeProvider
