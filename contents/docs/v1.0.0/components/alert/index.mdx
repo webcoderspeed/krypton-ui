@@ -1,0 +1,340 @@
+---
+title: Alert
+description: Displays a callout for user attention with contextual information and actions.
+---
+
+# Alert
+
+A versatile alert component for displaying important messages, notifications, and contextual information to users. Supports multiple variants and can include icons, titles, and descriptions.
+
+## Installation
+
+```bash
+npm install krypton-ui
+```
+
+## Import
+
+```tsx
+import { Alert, AlertDescription, AlertTitle } from 'krypton-ui'
+```
+
+## Basic Usage
+
+The Alert component provides a simple way to display important information to users.
+
+<CodePreview
+  code={`import { Alert, AlertDescription, AlertTitle } from 'krypton-ui'
+
+export default function BasicAlert() {
+  return (
+    <Alert>
+      <AlertTitle>Heads up!</AlertTitle>
+      <AlertDescription>
+        You can add components and dependencies to your app using the cli.
+      </AlertDescription>
+    </Alert>
+  )
+}`}
+  preview={
+    <Alert>
+      <AlertTitle>Heads up!</AlertTitle>
+      <AlertDescription>
+        You can add components and dependencies to your app using the cli.
+      </AlertDescription>
+    </Alert>
+  }
+/>
+
+## Variants
+
+### Default Alert
+
+The default variant provides a neutral appearance for general information.
+
+<CodePreview
+  code={`import { Alert, AlertDescription, AlertTitle } from 'krypton-ui'
+
+export default function DefaultAlert() {
+  return (
+    <Alert>
+      <AlertTitle>Information</AlertTitle>
+      <AlertDescription>
+        This is a default alert with neutral styling for general information.
+      </AlertDescription>
+    </Alert>
+  )
+}`}
+  preview={
+    <Alert>
+      <AlertTitle>Information</AlertTitle>
+      <AlertDescription>
+        This is a default alert with neutral styling for general information.
+      </AlertDescription>
+    </Alert>
+  }
+/>
+
+### Destructive Alert
+
+Use the destructive variant for error messages and critical warnings.
+
+<CodePreview
+  code={`import { Alert, AlertDescription, AlertTitle } from 'krypton-ui'
+
+export default function DestructiveAlert() {
+  return (
+    <Alert variant="destructive">
+      <AlertTitle>Error</AlertTitle>
+      <AlertDescription>
+        Your session has expired. Please log in again.
+      </AlertDescription>
+    </Alert>
+  )
+}`}
+  preview={
+    <Alert variant="destructive">
+      <AlertTitle>Error</AlertTitle>
+      <AlertDescription>
+        Your session has expired. Please log in again.
+      </AlertDescription>
+    </Alert>
+  }
+/>
+
+## With Icons
+
+Enhance alerts with icons to provide visual context and improve user understanding.
+
+<CodePreview
+  code={`import { Alert, AlertDescription, AlertTitle } from 'krypton-ui'
+import LucideIcon from '../../../../components/lucide-icon'
+
+export default function AlertsWithIcons() {
+  return (
+    <div className="space-y-4">
+      <Alert>
+        <LucideIcon name="Terminal" className="h-4 w-4" />
+        <AlertTitle>Terminal</AlertTitle>
+        <AlertDescription>
+          You can add components to your app using the cli.
+        </AlertDescription>
+      </Alert>
+      
+      <Alert>
+        <LucideIcon name="Info" className="h-4 w-4" />
+        <AlertTitle>Information</AlertTitle>
+        <AlertDescription>
+          Your changes have been saved successfully.
+        </AlertDescription>
+      </Alert>
+      
+      <Alert>
+        <LucideIcon name="CheckCircle" className="h-4 w-4" />
+        <AlertTitle>Success</AlertTitle>
+        <AlertDescription>
+          Your account has been created successfully.
+        </AlertDescription>
+      </Alert>
+      
+      <Alert variant="destructive">
+          <LucideIcon name="AlertCircle" className="h-4 w-4" />
+          <AlertTitle>Error</AlertTitle>
+          <AlertDescription>
+            Something went wrong. Please try again.
+          </AlertDescription>
+        </Alert>
+    </div>
+  )
+}`}
+  preview={
+    <div className="space-y-4">
+      <Alert>
+        <LucideIcon name="Terminal" className="h-4 w-4" />
+        <AlertTitle>Terminal</AlertTitle>
+        <AlertDescription>
+          You can add components to your app using the cli.
+        </AlertDescription>
+      </Alert>
+      
+      <Alert>
+        <LucideIcon name="Info" className="h-4 w-4" />
+        <AlertTitle>Information</AlertTitle>
+        <AlertDescription>
+          Your changes have been saved successfully.
+        </AlertDescription>
+      </Alert>
+      
+      <Alert>
+        <LucideIcon name="CheckCircle" className="h-4 w-4" />
+        <AlertTitle>Success</AlertTitle>
+        <AlertDescription>
+          Your account has been created successfully.
+        </AlertDescription>
+      </Alert>
+      
+      <Alert variant="destructive">
+        <LucideIcon name="AlertCircle" className="h-4 w-4" />
+        <AlertTitle>Error</AlertTitle>
+        <AlertDescription>
+          Something went wrong. Please try again.
+        </AlertDescription>
+      </Alert>
+    </div>
+  }
+/>
+
+## Description Only
+
+Simple alerts with just a description, without a title.
+
+<CodePreview
+  code={`import { Alert, AlertDescription, LucideIcon } from 'krypton-ui'
+
+export default function DescriptionOnlyAlert() {
+  return (
+    <div className="space-y-4">
+      <Alert>
+        <AlertDescription>
+          This is a simple alert with just a description.
+        </AlertDescription>
+      </Alert>
+      
+      <Alert variant="destructive">
+        <LucideIcon name="AlertTriangle" className="h-4 w-4" />
+        <AlertDescription>
+          This action cannot be undone. This will permanently delete your account.
+        </AlertDescription>
+      </Alert>
+    </div>
+  )
+}`}
+  preview={
+    <div className="space-y-4">
+      <Alert>
+        <AlertDescription>
+          This is a simple alert with just a description.
+        </AlertDescription>
+      </Alert>
+      
+      <Alert variant="destructive">
+        <LucideIcon name="AlertTriangle" className="h-4 w-4" />
+        <AlertDescription>
+          This action cannot be undone. This will permanently delete your account.
+        </AlertDescription>
+      </Alert>
+    </div>
+  }
+/>
+
+## Custom Styling
+
+Customize the appearance of alerts to match your design requirements.
+
+<CodePreview
+  code={`import { Alert, AlertDescription, AlertTitle } from 'krypton-ui'
+import LucideIcon from '../../../../components/lucide-icon'
+
+export default function CustomStyledAlerts() {
+  return (
+    <div className="space-y-4">
+      <Alert className="border-blue-200 bg-blue-50 text-blue-900">
+        <LucideIcon name="Lightbulb" className="h-4 w-4 text-blue-600" />
+        <AlertTitle className="text-blue-900">Pro Tip</AlertTitle>
+        <AlertDescription className="text-blue-800">
+          Use keyboard shortcuts to navigate faster through the interface.
+        </AlertDescription>
+      </Alert>
+      
+      <Alert className="border-green-200 bg-green-50 text-green-900">
+        <LucideIcon name="Zap" className="h-4 w-4 text-green-600" />
+        <AlertTitle className="text-green-900">Performance</AlertTitle>
+        <AlertDescription className="text-green-800">
+          Your app is running 40% faster after the latest optimizations.
+        </AlertDescription>
+      </Alert>
+      
+      <Alert className="border-pink-200 bg-pink-50 text-pink-900">
+        <LucideIcon name="Heart" className="h-4 w-4 text-pink-600" />
+        <AlertTitle className="text-pink-900">Thank You</AlertTitle>
+        <AlertDescription className="text-pink-800">
+          We appreciate your feedback and support!
+        </AlertDescription>
+      </Alert>
+    </div>
+  )
+}`}
+  preview={
+    <div className="space-y-4">
+      <Alert className="border-blue-200 bg-blue-50 text-blue-900">
+        <LucideIcon name="Lightbulb" className="h-4 w-4 text-blue-600" />
+        <AlertTitle className="text-blue-900">Pro Tip</AlertTitle>
+        <AlertDescription className="text-blue-800">
+          Use keyboard shortcuts to navigate faster through the interface.
+        </AlertDescription>
+      </Alert>
+      
+      <Alert className="border-green-200 bg-green-50 text-green-900">
+        <LucideIcon name="Zap" className="h-4 w-4 text-green-600" />
+        <AlertTitle className="text-green-900">Performance</AlertTitle>
+        <AlertDescription className="text-green-800">
+          Your app is running 40% faster after the latest optimizations.
+        </AlertDescription>
+      </Alert>
+      
+      <Alert className="border-pink-200 bg-pink-50 text-pink-900">
+        <LucideIcon name="Heart" className="h-4 w-4 text-pink-600" />
+        <AlertTitle className="text-pink-900">Thank You</AlertTitle>
+        <AlertDescription className="text-pink-800">
+          We appreciate your feedback and support!
+        </AlertDescription>
+      </Alert>
+    </div>
+  }
+/>
+
+## API Reference
+
+### Alert
+
+The main alert container component.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| variant | "default" \| "destructive" | "default" | The visual style variant of the alert |
+| className | string | - | Additional CSS classes |
+| children | ReactNode | - | The content of the alert |
+
+### AlertTitle
+
+The title component for the alert.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| className | string | - | Additional CSS classes |
+| children | ReactNode | - | The title content |
+
+### AlertDescription
+
+The description component for the alert.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| className | string | - | Additional CSS classes |
+| children | ReactNode | - | The description content |
+
+## Accessibility
+
+- Uses the `alert` role for screen readers
+- Supports keyboard navigation
+- Proper color contrast for all variants
+- Icons are properly labeled for screen readers
+- Text content is readable and well-structured
+
+## Best Practices
+
+- Use the appropriate variant for the message type
+- Include clear, actionable text
+- Add relevant icons to improve visual communication
+- Keep messages concise and easy to understand
+- Use destructive variant sparingly for critical errors only

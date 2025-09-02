@@ -1,0 +1,674 @@
+---
+title: Drawer
+description: A drawer component for React that can be used to display content in a slide-out panel.
+---
+
+## Usage
+
+### Basic Drawer
+
+<CodePreview
+  code={`import {
+  Button,
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "krypton-ui"
+
+export default function Component() {
+  return (
+    <Drawer>
+      <DrawerTrigger asChild>
+        <Button variant="outline">Open Drawer</Button>
+      </DrawerTrigger>
+      <DrawerContent>
+        <DrawerHeader>
+          <DrawerTitle>Are you absolutely sure?</DrawerTitle>
+          <DrawerDescription>
+            This action cannot be undone.
+          </DrawerDescription>
+        </DrawerHeader>
+        <DrawerFooter>
+          <Button>Submit</Button>
+          <DrawerClose asChild>
+            <Button variant="outline">Cancel</Button>
+          </DrawerClose>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
+  )
+}`}
+  preview={
+    <Drawer>
+      <DrawerTrigger asChild>
+        <Button variant="outline">Open Drawer</Button>
+      </DrawerTrigger>
+      <DrawerContent>
+        <DrawerHeader>
+          <DrawerTitle>Are you absolutely sure?</DrawerTitle>
+          <DrawerDescription>
+            This action cannot be undone.
+          </DrawerDescription>
+        </DrawerHeader>
+        <DrawerFooter>
+          <Button>Submit</Button>
+          <DrawerClose asChild>
+            <Button variant="outline">Cancel</Button>
+          </DrawerClose>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
+  }
+/>
+
+### Drawer with Form
+
+<CodePreview
+  code={`import {
+  Button,
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+  Input,
+  Label,
+} from "krypton-ui"
+import { Plus } from "lucide-react"
+
+export default function Component() {
+  return (
+    <Drawer>
+      <DrawerTrigger asChild>
+        <Button>
+          <Plus className="mr-2 h-4 w-4" />
+          Add User
+        </Button>
+      </DrawerTrigger>
+      <DrawerContent>
+        <DrawerHeader>
+          <DrawerTitle>Add New User</DrawerTitle>
+          <DrawerDescription>
+            Fill in the information below to create a new user account.
+          </DrawerDescription>
+        </DrawerHeader>
+        <div className="p-4 pb-0">
+          <div className="flex items-center justify-center space-x-2">
+            <div className="grid flex-1 gap-2">
+              <Label htmlFor="name">Name</Label>
+              <Input
+                id="name"
+                placeholder="Enter full name"
+              />
+            </div>
+          </div>
+          <div className="mt-3 h-[120px]">
+            <div className="grid gap-2">
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="Enter email address"
+              />
+            </div>
+          </div>
+        </div>
+        <DrawerFooter>
+          <Button>Create User</Button>
+          <DrawerClose asChild>
+            <Button variant="outline">Cancel</Button>
+          </DrawerClose>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
+  )
+}`}
+  preview={
+    <Drawer>
+      <DrawerTrigger asChild>
+        <Button>
+          <Plus className="mr-2 h-4 w-4" />
+          Add User
+        </Button>
+      </DrawerTrigger>
+      <DrawerContent>
+        <DrawerHeader>
+          <DrawerTitle>Add New User</DrawerTitle>
+          <DrawerDescription>
+            Fill in the information below to create a new user account.
+          </DrawerDescription>
+        </DrawerHeader>
+        <div className="p-4 pb-0">
+          <div className="flex items-center justify-center space-x-2">
+            <div className="grid flex-1 gap-2">
+              <Label htmlFor="name">Name</Label>
+              <Input
+                id="name"
+                placeholder="Enter full name"
+              />
+            </div>
+          </div>
+          <div className="mt-3 h-[120px]">
+            <div className="grid gap-2">
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="Enter email address"
+              />
+            </div>
+          </div>
+        </div>
+        <DrawerFooter>
+          <Button>Create User</Button>
+          <DrawerClose asChild>
+            <Button variant="outline">Cancel</Button>
+          </DrawerClose>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
+  }
+/>
+
+### Drawer with Custom Content
+
+<CodePreview
+  code={`import {
+  Button,
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "krypton-ui"
+import { Settings, Bell, Moon, Globe } from "lucide-react"
+
+export default function Component() {
+  return (
+    <Drawer>
+      <DrawerTrigger asChild>
+        <Button variant="outline">
+          <Settings className="mr-2 h-4 w-4" />
+          Settings
+        </Button>
+      </DrawerTrigger>
+      <DrawerContent>
+        <DrawerHeader>
+          <DrawerTitle>Settings</DrawerTitle>
+          <DrawerDescription>
+            Configure your application preferences.
+          </DrawerDescription>
+        </DrawerHeader>
+        <div className="p-4 pb-0">
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <div className="space-y-0.5">
+                <div className="text-base">Notifications</div>
+                <div className="text-sm text-muted-foreground">
+                  Receive notifications about updates
+                </div>
+              </div>
+              <Button variant="outline" size="sm">
+                <Bell className="h-4 w-4" />
+              </Button>
+            </div>
+            <div className="flex items-center justify-between">
+              <div className="space-y-0.5">
+                <div className="text-base">Dark Mode</div>
+                <div className="text-sm text-muted-foreground">
+                  Toggle dark mode theme
+                </div>
+              </div>
+              <Button variant="outline" size="sm">
+                <Moon className="h-4 w-4" />
+              </Button>
+            </div>
+            <div className="flex items-center justify-between">
+              <div className="space-y-0.5">
+                <div className="text-base">Language</div>
+                <div className="text-sm text-muted-foreground">
+                  Choose your preferred language
+                </div>
+              </div>
+              <Button variant="outline" size="sm">
+                <Globe className="h-4 w-4" />
+              </Button>
+            </div>
+          </div>
+        </div>
+        <DrawerFooter>
+          <Button>Save Changes</Button>
+          <DrawerClose asChild>
+            <Button variant="outline">Cancel</Button>
+          </DrawerClose>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
+  )
+}`}
+  preview={
+    <Drawer>
+      <DrawerTrigger asChild>
+        <Button variant="outline">
+          <Settings className="mr-2 h-4 w-4" />
+          Settings
+        </Button>
+      </DrawerTrigger>
+      <DrawerContent>
+        <DrawerHeader>
+          <DrawerTitle>Settings</DrawerTitle>
+          <DrawerDescription>
+            Configure your application preferences.
+          </DrawerDescription>
+        </DrawerHeader>
+        <div className="p-4 pb-0">
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <div className="space-y-0.5">
+                <div className="text-base">Notifications</div>
+                <div className="text-sm text-muted-foreground">
+                  Receive notifications about updates
+                </div>
+              </div>
+              <Button variant="outline" size="sm">
+                <Bell className="h-4 w-4" />
+              </Button>
+            </div>
+            <div className="flex items-center justify-between">
+              <div className="space-y-0.5">
+                <div className="text-base">Dark Mode</div>
+                <div className="text-sm text-muted-foreground">
+                  Toggle dark mode theme
+                </div>
+              </div>
+              <Button variant="outline" size="sm">
+                <Moon className="h-4 w-4" />
+              </Button>
+            </div>
+            <div className="flex items-center justify-between">
+              <div className="space-y-0.5">
+                <div className="text-base">Language</div>
+                <div className="text-sm text-muted-foreground">
+                  Choose your preferred language
+                </div>
+              </div>
+              <Button variant="outline" size="sm">
+                <Globe className="h-4 w-4" />
+              </Button>
+            </div>
+          </div>
+        </div>
+        <DrawerFooter>
+          <Button>Save Changes</Button>
+          <DrawerClose asChild>
+            <Button variant="outline">Cancel</Button>
+          </DrawerClose>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
+  }
+/>
+
+### Drawer with Scrollable Content
+
+<CodePreview
+  code={`import {
+  Button,
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "krypton-ui"
+import { List, MoreHorizontal } from "lucide-react"
+
+export default function Component() {
+  const items = Array.from({ length: 20 }, (_, i) => \`Item \${i + 1}\`)
+
+  return (
+    <Drawer>
+      <DrawerTrigger asChild>
+        <Button variant="outline">
+          <List className="mr-2 h-4 w-4" />
+          View List
+        </Button>
+      </DrawerTrigger>
+      <DrawerContent>
+        <DrawerHeader>
+          <DrawerTitle>Long List</DrawerTitle>
+          <DrawerDescription>
+            A drawer with scrollable content.
+          </DrawerDescription>
+        </DrawerHeader>
+        <div className="p-4 pb-0 max-h-[300px] overflow-y-auto">
+          <div className="space-y-2">
+            {items.map((item) => (
+              <div
+                key={item}
+                className="flex items-center justify-between p-2 border rounded"
+              >
+                <span>{item}</span>
+                <Button variant="ghost" size="sm">
+                  <MoreHorizontal className="h-4 w-4" />
+                </Button>
+              </div>
+            ))}
+          </div>
+        </div>
+        <DrawerFooter>
+          <DrawerClose asChild>
+            <Button variant="outline">Close</Button>
+          </DrawerClose>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
+  )
+}`}
+  preview={
+    <Drawer>
+      <DrawerTrigger asChild>
+        <Button variant="outline">
+          <List className="mr-2 h-4 w-4" />
+          View List
+        </Button>
+      </DrawerTrigger>
+      <DrawerContent>
+        <DrawerHeader>
+          <DrawerTitle>Long List</DrawerTitle>
+          <DrawerDescription>
+            A drawer with scrollable content.
+          </DrawerDescription>
+        </DrawerHeader>
+        <div className="p-4 pb-0 max-h-[300px] overflow-y-auto">
+          <div className="space-y-2">
+            {Array.from({ length: 20 }, (_, i) => `Item ${i + 1}`).map((item) => (
+              <div
+                key={item}
+                className="flex items-center justify-between p-2 border rounded"
+              >
+                <span>{item}</span>
+                <Button variant="ghost" size="sm">
+                  <MoreHorizontal className="h-4 w-4" />
+                </Button>
+              </div>
+            ))}
+          </div>
+        </div>
+        <DrawerFooter>
+          <DrawerClose asChild>
+            <Button variant="outline">Close</Button>
+          </DrawerClose>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
+  }
+/>
+
+### Controlled Drawer
+
+<CodePreview
+  code={`import {
+  Button,
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "krypton-ui"
+import { useState } from "react"
+
+export default function Component() {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <div className="space-x-2">
+      <Drawer open={open} onOpenChange={setOpen}>
+        <DrawerTrigger asChild>
+          <Button variant="outline">Open Controlled Drawer</Button>
+        </DrawerTrigger>
+        <DrawerContent>
+          <DrawerHeader>
+            <DrawerTitle>Controlled Drawer</DrawerTitle>
+            <DrawerDescription>
+              This drawer's open state is controlled by React state.
+            </DrawerDescription>
+          </DrawerHeader>
+          <div className="p-4 pb-0">
+            <p className="text-sm text-muted-foreground">
+              You can control this drawer programmatically using the buttons below.
+            </p>
+          </div>
+          <DrawerFooter>
+            <Button onClick={() => setOpen(false)}>Close Programmatically</Button>
+            <DrawerClose asChild>
+              <Button variant="outline">Close with DrawerClose</Button>
+            </DrawerClose>
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
+      <Button 
+        variant="secondary" 
+        onClick={() => setOpen(true)}
+        disabled={open}
+      >
+        Open Externally
+      </Button>
+    </div>
+  )
+}`}
+  preview={
+    <div className="space-x-2">
+      <Drawer>
+        <DrawerTrigger asChild>
+          <Button variant="outline">Open Controlled Drawer</Button>
+        </DrawerTrigger>
+        <DrawerContent>
+          <DrawerHeader>
+            <DrawerTitle>Controlled Drawer</DrawerTitle>
+            <DrawerDescription>
+              This drawer's open state is controlled by React state.
+            </DrawerDescription>
+          </DrawerHeader>
+          <div className="p-4 pb-0">
+            <p className="text-sm text-muted-foreground">
+              You can control this drawer programmatically using the buttons below.
+            </p>
+          </div>
+          <DrawerFooter>
+            <Button>Close Programmatically</Button>
+            <DrawerClose asChild>
+              <Button variant="outline">Close with DrawerClose</Button>
+            </DrawerClose>
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
+      <Button variant="secondary">
+        Open Externally
+      </Button>
+    </div>
+  }
+/>
+
+## API Reference
+
+### Drawer
+
+The root component that manages the drawer state.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `open` | `boolean` | - | The controlled open state of the drawer |
+| `onOpenChange` | `(open: boolean) => void` | - | Event handler called when the open state changes |
+| `shouldScaleBackground` | `boolean` | `true` | Whether the background should scale when the drawer is open |
+| `children` | `ReactNode` | - | The drawer trigger and content |
+
+### DrawerTrigger
+
+The button that opens the drawer.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `asChild` | `boolean` | `false` | Change the default rendered element |
+| `children` | `ReactNode` | - | The trigger content |
+| `className` | `string` | - | Additional CSS classes |
+
+### DrawerContent
+
+The component that contains the drawer content.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | The drawer content |
+
+### DrawerHeader
+
+The header section of the drawer.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | The header content |
+
+### DrawerTitle
+
+The title of the drawer.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | The title content |
+
+### DrawerDescription
+
+The description text of the drawer.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | The description content |
+
+### DrawerFooter
+
+The footer section of the drawer.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | The footer content |
+
+### DrawerClose
+
+A button that closes the drawer.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `asChild` | `boolean` | `false` | Change the default rendered element |
+| `children` | `ReactNode` | - | The close button content |
+| `className` | `string` | - | Additional CSS classes |
+
+## Examples
+
+### Drawer without Background Scaling
+
+<CodePreview
+  code={`<Drawer shouldScaleBackground={false}>
+  <DrawerTrigger asChild>
+    <Button>Open Drawer</Button>
+  </DrawerTrigger>
+  <DrawerContent>
+    <DrawerHeader>
+      <DrawerTitle>No Background Scaling</DrawerTitle>
+      <DrawerDescription>
+        The background won't scale when this drawer opens.
+      </DrawerDescription>
+    </DrawerHeader>
+    <DrawerFooter>
+      <DrawerClose asChild>
+        <Button variant="outline">Close</Button>
+      </DrawerClose>
+    </DrawerFooter>
+  </DrawerContent>
+</Drawer>`}
+  preview={
+    <Drawer shouldScaleBackground={false}>
+      <DrawerTrigger asChild>
+        <Button>Open Drawer</Button>
+      </DrawerTrigger>
+      <DrawerContent>
+        <DrawerHeader>
+          <DrawerTitle>No Background Scaling</DrawerTitle>
+          <DrawerDescription>
+            The background won't scale when this drawer opens.
+          </DrawerDescription>
+        </DrawerHeader>
+        <DrawerFooter>
+          <DrawerClose asChild>
+            <Button variant="outline">Close</Button>
+          </DrawerClose>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
+  }
+/>
+
+### Custom Styled Drawer
+
+<CodePreview
+  code={`<DrawerContent className="max-h-[80vh]">
+  <DrawerHeader className="border-b">
+    <DrawerTitle className="text-xl">Custom Styled Drawer</DrawerTitle>
+    <DrawerDescription className="text-base">
+      This drawer has custom styling applied.
+    </DrawerDescription>
+  </DrawerHeader>
+  <div className="p-6">
+    <p>Custom content area with padding.</p>
+  </div>
+  <DrawerFooter className="border-t bg-muted/50">
+    <DrawerClose asChild>
+      <Button>Close</Button>
+    </DrawerClose>
+  </DrawerFooter>
+</DrawerContent>`}
+  preview={
+    <Drawer>
+      <DrawerTrigger asChild>
+        <Button variant="outline">Open Custom Styled Drawer</Button>
+      </DrawerTrigger>
+      <DrawerContent className="max-h-[80vh]">
+        <DrawerHeader className="border-b">
+          <DrawerTitle className="text-xl">Custom Styled Drawer</DrawerTitle>
+          <DrawerDescription className="text-base">
+            This drawer has custom styling applied.
+          </DrawerDescription>
+        </DrawerHeader>
+        <div className="p-6">
+          <p>Custom content area with padding.</p>
+        </div>
+        <DrawerFooter className="border-t bg-muted/50">
+          <DrawerClose asChild>
+            <Button>Close</Button>
+          </DrawerClose>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
+  }
+/>

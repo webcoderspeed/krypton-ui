@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Krypton-UI Font Variables */
 @theme {
   --font-family-sans: var(--font-geist-sans);
   --font-family-mono: var(--font-geist-mono);
@@ -10,7 +9,6 @@
 
 @layer base {
   :root {
-    /* Krypton-UI Design Tokens - WCAG AA Compliant */
     --k-color-bg: 0 0% 100%;
     --k-color-fg: 240 10% 3.9%;
     --k-color-muted: 240 4.8% 94%;

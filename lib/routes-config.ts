@@ -16,8 +16,24 @@ const v1_0_0_ROUTES: EachRoute[] = [
         "href": "/components/accordion"
       },
       {
+        "title": "Alert",
+        "href": "/components/alert"
+      },
+      {
+        "title": "Alert Dialog",
+        "href": "/components/alert-dialog"
+      },
+      {
+        "title": "Aspect Ratio",
+        "href": "/components/aspect-ratio"
+      },
+      {
         "title": "Avatar",
         "href": "/components/avatar"
+      },
+      {
+        "title": "Badge",
+        "href": "/components/badge"
       },
       {
         "title": "Breadcrumb",
@@ -28,20 +44,92 @@ const v1_0_0_ROUTES: EachRoute[] = [
         "href": "/components/button"
       },
       {
+        "title": "Calendar",
+        "href": "/components/calendar"
+      },
+      {
+        "title": "Card",
+        "href": "/components/card"
+      },
+      {
+        "title": "Carousel",
+        "href": "/components/carousel"
+      },
+      {
+        "title": "Chart",
+        "href": "/components/chart"
+      },
+      {
+        "title": "Checkbox",
+        "href": "/components/checkbox"
+      },
+      {
         "title": "Collapsible",
         "href": "/components/collapsible"
+      },
+      {
+        "title": "Command",
+        "href": "/components/command"
+      },
+      {
+        "title": "Context Menu",
+        "href": "/components/context-menu"
       },
       {
         "title": "Dialog",
         "href": "/components/dialog"
       },
       {
+        "title": "Drawer",
+        "href": "/components/drawer"
+      },
+      {
         "title": "Dropdown Menu",
         "href": "/components/dropdown-menu"
       },
       {
+        "title": "Form",
+        "href": "/components/form"
+      },
+      {
+        "title": "Hover Card",
+        "href": "/components/hover-card"
+      },
+      {
         "title": "Input",
         "href": "/components/input"
+      },
+      {
+        "title": "Input Otp",
+        "href": "/components/input-otp"
+      },
+      {
+        "title": "Label",
+        "href": "/components/label"
+      },
+      {
+        "title": "Menubar",
+        "href": "/components/menubar"
+      },
+      {
+        "title": "Navigation Menu",
+        "href": "/components/navigation-menu"
+      },
+      {
+        "title": "Pagination",
+        "href": "/components/pagination"
+      },
+      {
+        "title": "Popover",
+        "href": "/components/popover"
+      },
+      {
+        "title": "Progress",
+        "href": "/components/progress"
+      },
+      {
+        "title": "Radio Group",
+        "href": "/components/radio-group"
       },
       {
         "title": "Scroll Area",
@@ -60,12 +148,28 @@ const v1_0_0_ROUTES: EachRoute[] = [
         "href": "/components/stepper"
       },
       {
+        "title": "Switch",
+        "href": "/components/switch"
+      },
+      {
         "title": "Table",
         "href": "/components/table"
       },
       {
         "title": "Tabs",
         "href": "/components/tabs"
+      },
+      {
+        "title": "Textarea",
+        "href": "/components/textarea"
+      },
+      {
+        "title": "Toggle",
+        "href": "/components/toggle"
+      },
+      {
+        "title": "Tooltip",
+        "href": "/components/tooltip"
       }
     ]
   },
@@ -105,7 +209,8 @@ function getRecurrsiveAllLinks(node: EachRoute) {
     ans.push({ title: node.title, href: node.href });
   }
   node.items?.forEach((subNode) => {
-    ans.push(...getRecurrsiveAllLinks(subNode));
+    const temp = { ...subNode, href: subNode.href };
+    ans.push(...getRecurrsiveAllLinks(temp));
   });
   return ans;
 }

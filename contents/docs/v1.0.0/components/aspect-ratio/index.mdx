@@ -1,0 +1,458 @@
+---
+title: Aspect Ratio
+description: Displays content within a desired ratio, maintaining proportions across different screen sizes.
+---
+
+# Aspect Ratio
+
+A component that maintains a consistent aspect ratio for its content, ensuring proper proportions across different screen sizes and devices. Built on top of Radix UI AspectRatio primitive.
+
+## Installation
+
+```bash
+npm install krypton-ui
+```
+
+## Import
+
+```tsx
+import { AspectRatio } from 'krypton-ui'
+```
+
+## Basic Usage
+
+The AspectRatio component wraps content to maintain a specific width-to-height ratio.
+
+<CodePreview
+  code={`import { AspectRatio } from 'krypton-ui'
+
+export default function BasicAspectRatio() {
+  return (
+    <div className="w-[450px]">
+      <AspectRatio ratio={16 / 9}>
+        <img
+          src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80"
+          alt="Photo by Drew Beamer"
+          className="rounded-md object-cover w-full h-full"
+        />
+      </AspectRatio>
+    </div>
+  )
+}`}
+  preview={
+    <div className="w-[450px]">
+      <AspectRatio ratio={16 / 9}>
+        <img
+          src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80"
+          alt="Photo by Drew Beamer"
+          className="rounded-md object-cover w-full h-full"
+        />
+      </AspectRatio>
+    </div>
+  }
+/>
+
+## Common Aspect Ratios
+
+Different aspect ratios for various use cases and content types.
+
+<CodePreview
+  code={`import { AspectRatio } from 'krypton-ui'
+
+export default function CommonAspectRatios() {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {/* 16:9 - Widescreen */}
+      <div>
+        <h3 className="text-sm font-medium mb-2">16:9 - Widescreen</h3>
+        <AspectRatio ratio={16 / 9}>
+          <div className="bg-gradient-to-br from-blue-400 to-purple-600 rounded-md flex items-center justify-center text-white font-semibold">
+            16:9 Ratio
+          </div>
+        </AspectRatio>
+      </div>
+      
+      {/* 4:3 - Standard */}
+      <div>
+        <h3 className="text-sm font-medium mb-2">4:3 - Standard</h3>
+        <AspectRatio ratio={4 / 3}>
+          <div className="bg-gradient-to-br from-green-400 to-blue-600 rounded-md flex items-center justify-center text-white font-semibold">
+            4:3 Ratio
+          </div>
+        </AspectRatio>
+      </div>
+      
+      {/* 1:1 - Square */}
+      <div>
+        <h3 className="text-sm font-medium mb-2">1:1 - Square</h3>
+        <AspectRatio ratio={1}>
+          <div className="bg-gradient-to-br from-pink-400 to-red-600 rounded-md flex items-center justify-center text-white font-semibold">
+            1:1 Ratio
+          </div>
+        </AspectRatio>
+      </div>
+      
+      {/* 3:2 - Photography */}
+      <div>
+        <h3 className="text-sm font-medium mb-2">3:2 - Photography</h3>
+        <AspectRatio ratio={3 / 2}>
+          <div className="bg-gradient-to-br from-yellow-400 to-orange-600 rounded-md flex items-center justify-center text-white font-semibold">
+            3:2 Ratio
+          </div>
+        </AspectRatio>
+      </div>
+    </div>
+  )
+}`}
+  preview={
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {/* 16:9 - Widescreen */}
+      <div>
+        <h3 className="text-sm font-medium mb-2">16:9 - Widescreen</h3>
+        <AspectRatio ratio={16 / 9}>
+          <div className="bg-gradient-to-br from-blue-400 to-purple-600 rounded-md flex items-center justify-center text-white font-semibold">
+            16:9 Ratio
+          </div>
+        </AspectRatio>
+      </div>
+      
+      {/* 4:3 - Standard */}
+      <div>
+        <h3 className="text-sm font-medium mb-2">4:3 - Standard</h3>
+        <AspectRatio ratio={4 / 3}>
+          <div className="bg-gradient-to-br from-green-400 to-blue-600 rounded-md flex items-center justify-center text-white font-semibold">
+            4:3 Ratio
+          </div>
+        </AspectRatio>
+      </div>
+      
+      {/* 1:1 - Square */}
+      <div>
+        <h3 className="text-sm font-medium mb-2">1:1 - Square</h3>
+        <AspectRatio ratio={1}>
+          <div className="bg-gradient-to-br from-pink-400 to-red-600 rounded-md flex items-center justify-center text-white font-semibold">
+            1:1 Ratio
+          </div>
+        </AspectRatio>
+      </div>
+      
+      {/* 3:2 - Photography */}
+      <div>
+        <h3 className="text-sm font-medium mb-2">3:2 - Photography</h3>
+        <AspectRatio ratio={3 / 2}>
+          <div className="bg-gradient-to-br from-yellow-400 to-orange-600 rounded-md flex items-center justify-center text-white font-semibold">
+            3:2 Ratio
+          </div>
+        </AspectRatio>
+      </div>
+    </div>
+  }
+/>
+
+## Image Gallery
+
+Use AspectRatio to create consistent image galleries with uniform proportions.
+
+<CodePreview
+  code={`import { AspectRatio } from 'krypton-ui'
+
+export default function ImageGallery() {
+  const images = [
+    {
+      src: "https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80",
+      alt: "Photo by Drew Beamer"
+    },
+    {
+      src: "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?w=800&dpr=2&q=80",
+      alt: "Photo by Quaritsch Photography"
+    },
+    {
+      src: "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=800&dpr=2&q=80",
+      alt: "Photo by Quaritsch Photography"
+    },
+    {
+      src: "https://images.unsplash.com/photo-1549692520-acc6669e2f0c?w=800&dpr=2&q=80",
+      alt: "Photo by Quaritsch Photography"
+    }
+  ]
+  
+  return (
+    <div className="grid grid-cols-2 gap-4">
+      {images.map((image, index) => (
+        <AspectRatio key={index} ratio={1} className="bg-muted">
+          <img
+            src={image.src}
+            alt={image.alt}
+            className="rounded-md object-cover w-full h-full"
+          />
+        </AspectRatio>
+      ))}
+    </div>
+  )
+}`}
+  preview={
+    <div className="grid grid-cols-2 gap-4">
+      {[
+        {
+          src: "https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80",
+          alt: "Photo by Drew Beamer"
+        },
+        {
+          src: "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?w=800&dpr=2&q=80",
+          alt: "Photo by Quaritsch Photography"
+        },
+        {
+          src: "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=800&dpr=2&q=80",
+          alt: "Photo by Quaritsch Photography"
+        },
+        {
+          src: "https://images.unsplash.com/photo-1549692520-acc6669e2f0c?w=800&dpr=2&q=80",
+          alt: "Photo by Quaritsch Photography"
+        }
+      ].map((image, index) => (
+        <AspectRatio key={index} ratio={1} className="bg-muted">
+          <img
+            src={image.src}
+            alt={image.alt}
+            className="rounded-md object-cover w-full h-full"
+          />
+        </AspectRatio>
+      ))}
+    </div>
+  }
+/>
+
+## Video Embed
+
+Maintain proper aspect ratios for embedded videos and media content.
+
+<CodePreview
+  code={`import { AspectRatio } from 'krypton-ui'
+
+export default function VideoEmbed() {
+  return (
+    <div className="w-full max-w-2xl">
+      <AspectRatio ratio={16 / 9}>
+        <iframe
+          src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+          title="YouTube video player"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          className="w-full h-full rounded-md"
+        />
+      </AspectRatio>
+    </div>
+  )
+}`}
+  preview={
+    <div className="w-full max-w-2xl">
+      <AspectRatio ratio={16 / 9}>
+        <div className="w-full h-full rounded-md bg-gray-200 flex items-center justify-center text-gray-500">
+          <div className="text-center">
+            <div className="text-4xl mb-2">▶️</div>
+            <div className="text-sm">Video Player Placeholder</div>
+            <div className="text-xs text-gray-400 mt-1">16:9 Aspect Ratio</div>
+          </div>
+        </div>
+      </AspectRatio>
+    </div>
+  }
+/>
+
+## Card Layout
+
+Create consistent card layouts with AspectRatio for featured content.
+
+<CodePreview
+  code={`import { AspectRatio } from 'krypton-ui'
+
+export default function CardLayout() {
+  const cards = [
+    {
+      title: "Mountain Landscape",
+      description: "Beautiful mountain scenery with snow-capped peaks",
+      image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&dpr=2&q=80"
+    },
+    {
+      title: "Ocean Waves",
+      description: "Peaceful ocean waves crashing on the shore",
+      image: "https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=800&dpr=2&q=80"
+    },
+    {
+      title: "Forest Path",
+      description: "A winding path through a lush green forest",
+      image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&dpr=2&q=80"
+    }
+  ]
+  
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {cards.map((card, index) => (
+        <div key={index} className="border rounded-lg overflow-hidden">
+          <AspectRatio ratio={16 / 9}>
+            <img
+              src={card.image}
+              alt={card.title}
+              className="object-cover w-full h-full"
+            />
+          </AspectRatio>
+          <div className="p-4">
+            <h3 className="font-semibold text-lg mb-2">{card.title}</h3>
+            <p className="text-sm text-gray-600">{card.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}`}
+  preview={
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {[
+        {
+          title: "Mountain Landscape",
+          description: "Beautiful mountain scenery with snow-capped peaks",
+          image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&dpr=2&q=80"
+        },
+        {
+          title: "Ocean Waves",
+          description: "Peaceful ocean waves crashing on the shore",
+          image: "https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=800&dpr=2&q=80"
+        },
+        {
+          title: "Forest Path",
+          description: "A winding path through a lush green forest",
+          image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&dpr=2&q=80"
+        }
+      ].map((card, index) => (
+        <div key={index} className="border rounded-lg overflow-hidden">
+          <AspectRatio ratio={16 / 9}>
+            <img
+              src={card.image}
+              alt={card.title}
+              className="object-cover w-full h-full"
+            />
+          </AspectRatio>
+          <div className="p-4">
+            <h3 className="font-semibold text-lg mb-2">{card.title}</h3>
+            <p className="text-sm text-gray-600">{card.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  }
+/>
+
+## Custom Ratios
+
+Create custom aspect ratios for specific design requirements.
+
+<CodePreview
+  code={`import { AspectRatio } from 'krypton-ui'
+
+export default function CustomRatios() {
+  return (
+    <div className="space-y-6">
+      {/* Ultra-wide 21:9 */}
+      <div>
+        <h3 className="text-sm font-medium mb-2">21:9 - Ultra-wide</h3>
+        <AspectRatio ratio={21 / 9}>
+          <div className="bg-gradient-to-r from-indigo-500 to-purple-600 rounded-md flex items-center justify-center text-white font-semibold">
+            21:9 Ultra-wide Ratio
+          </div>
+        </AspectRatio>
+      </div>
+      
+      {/* Golden Ratio 1.618:1 */}
+      <div>
+        <h3 className="text-sm font-medium mb-2">1.618:1 - Golden Ratio</h3>
+        <AspectRatio ratio={1.618}>
+          <div className="bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-md flex items-center justify-center text-white font-semibold">
+            Golden Ratio (φ)
+          </div>
+        </AspectRatio>
+      </div>
+      
+      {/* Portrait 9:16 */}
+      <div className="max-w-xs">
+        <h3 className="text-sm font-medium mb-2">9:16 - Portrait</h3>
+        <AspectRatio ratio={9 / 16}>
+          <div className="bg-gradient-to-b from-green-400 to-green-600 rounded-md flex items-center justify-center text-white font-semibold">
+            9:16 Portrait
+          </div>
+        </AspectRatio>
+      </div>
+    </div>
+  )
+}`}
+  preview={
+    <div className="space-y-6">
+      {/* Ultra-wide 21:9 */}
+      <div>
+        <h3 className="text-sm font-medium mb-2">21:9 - Ultra-wide</h3>
+        <AspectRatio ratio={21 / 9}>
+          <div className="bg-gradient-to-r from-indigo-500 to-purple-600 rounded-md flex items-center justify-center text-white font-semibold">
+            21:9 Ultra-wide Ratio
+          </div>
+        </AspectRatio>
+      </div>
+      
+      {/* Golden Ratio 1.618:1 */}
+      <div>
+        <h3 className="text-sm font-medium mb-2">1.618:1 - Golden Ratio</h3>
+        <AspectRatio ratio={1.618}>
+          <div className="bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-md flex items-center justify-center text-white font-semibold">
+            Golden Ratio (φ)
+          </div>
+        </AspectRatio>
+      </div>
+      
+      {/* Portrait 9:16 */}
+      <div className="max-w-xs">
+        <h3 className="text-sm font-medium mb-2">9:16 - Portrait</h3>
+        <AspectRatio ratio={9 / 16}>
+          <div className="bg-gradient-to-b from-green-400 to-green-600 rounded-md flex items-center justify-center text-white font-semibold">
+            9:16 Portrait
+          </div>
+        </AspectRatio>
+      </div>
+    </div>
+  }
+/>
+
+## API Reference
+
+### AspectRatio
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| ratio | number | 1 | The desired aspect ratio (width / height) |
+| className | string | - | Additional CSS classes |
+| children | ReactNode | - | The content to be displayed within the aspect ratio container |
+
+## Common Aspect Ratios
+
+| Ratio | Value | Use Case |
+| --- | --- | --- |
+| 16:9 | 16/9 ≈ 1.78 | Widescreen videos, modern displays |
+| 4:3 | 4/3 ≈ 1.33 | Traditional TV, computer monitors |
+| 3:2 | 3/2 = 1.5 | Photography, print media |
+| 1:1 | 1 | Square images, social media posts |
+| 21:9 | 21/9 ≈ 2.33 | Ultra-wide displays, cinematic content |
+| 9:16 | 9/16 = 0.56 | Mobile screens, vertical videos |
+| Golden Ratio | 1.618 | Aesthetically pleasing proportions |
+
+## Accessibility
+
+- Maintains proper proportions across different screen sizes
+- Works with screen readers and assistive technologies
+- Supports keyboard navigation for interactive content
+- Preserves image alt text and other accessibility attributes
+
+## Best Practices
+
+- Use consistent aspect ratios throughout your application
+- Choose appropriate ratios for your content type
+- Consider responsive design when selecting aspect ratios
+- Test on different screen sizes to ensure proper display
+- Use object-cover for images to maintain aspect ratio without distortion

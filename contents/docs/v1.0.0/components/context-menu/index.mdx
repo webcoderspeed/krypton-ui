@@ -1,0 +1,715 @@
+---
+title: Context Menu
+description: Displays a menu to the user — such as a set of actions or functions — triggered by a right click.
+---
+
+## Usage
+
+### Basic Context Menu
+
+<CodePreview
+  code={`import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuTrigger,
+} from "krypton-ui"
+
+export default function Component() {
+  return (
+    <ContextMenu>
+      <ContextMenuTrigger className="flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm">
+        Right click here
+      </ContextMenuTrigger>
+      <ContextMenuContent className="w-64">
+        <ContextMenuItem>Back</ContextMenuItem>
+        <ContextMenuItem>Forward</ContextMenuItem>
+        <ContextMenuItem>Reload</ContextMenuItem>
+        <ContextMenuItem disabled>View Source</ContextMenuItem>
+      </ContextMenuContent>
+    </ContextMenu>
+  )
+}`}
+  preview={
+    <ContextMenu>
+      <ContextMenuTrigger className="flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm">
+        Right click here
+      </ContextMenuTrigger>
+      <ContextMenuContent className="w-64">
+        <ContextMenuItem>Back</ContextMenuItem>
+        <ContextMenuItem>Forward</ContextMenuItem>
+        <ContextMenuItem>Reload</ContextMenuItem>
+        <ContextMenuItem disabled>View Source</ContextMenuItem>
+      </ContextMenuContent>
+    </ContextMenu>
+  }
+/>
+
+### With Icons and Shortcuts
+
+<CodePreview
+  code={`import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuShortcut,
+  ContextMenuTrigger,
+} from "krypton-ui"
+import { LucideIcon } from "krypton-ui"
+
+export default function Component() {
+  return (
+    <ContextMenu>
+      <ContextMenuTrigger className="flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm">
+        Right click here
+      </ContextMenuTrigger>
+      <ContextMenuContent className="w-64">
+        <ContextMenuItem>
+          <LucideIcon name="ArrowLeft" className="mr-2 h-4 w-4" />
+          Back
+          <ContextMenuShortcut>⌘[</ContextMenuShortcut>
+        </ContextMenuItem>
+        <ContextMenuItem>
+          <LucideIcon name="ArrowRight" className="mr-2 h-4 w-4" />
+          Forward
+          <ContextMenuShortcut>⌘]</ContextMenuShortcut>
+        </ContextMenuItem>
+        <ContextMenuItem>
+          <LucideIcon name="RotateCcw" className="mr-2 h-4 w-4" />
+          Reload
+          <ContextMenuShortcut>⌘R</ContextMenuShortcut>
+        </ContextMenuItem>
+        <ContextMenuItem disabled>
+          <LucideIcon name="Code" className="mr-2 h-4 w-4" />
+          View Source
+          <ContextMenuShortcut>⌘U</ContextMenuShortcut>
+        </ContextMenuItem>
+      </ContextMenuContent>
+    </ContextMenu>
+  )
+}`}
+  preview={
+    <ContextMenu>
+      <ContextMenuTrigger className="flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm">
+        Right click here
+      </ContextMenuTrigger>
+      <ContextMenuContent className="w-64">
+        <ContextMenuItem>
+          <LucideIcon name="ArrowLeft" className="mr-2 h-4 w-4" />
+          Back
+          <ContextMenuShortcut>⌘[</ContextMenuShortcut>
+        </ContextMenuItem>
+        <ContextMenuItem>
+          <LucideIcon name="ArrowRight" className="mr-2 h-4 w-4" />
+          Forward
+          <ContextMenuShortcut>⌘]</ContextMenuShortcut>
+        </ContextMenuItem>
+        <ContextMenuItem>
+          <LucideIcon name="RotateCcw" className="mr-2 h-4 w-4" />
+          Reload
+          <ContextMenuShortcut>⌘R</ContextMenuShortcut>
+        </ContextMenuItem>
+        <ContextMenuItem disabled>
+          <LucideIcon name="Code" className="mr-2 h-4 w-4" />
+          View Source
+          <ContextMenuShortcut>⌘U</ContextMenuShortcut>
+        </ContextMenuItem>
+      </ContextMenuContent>
+    </ContextMenu>
+  }
+/>
+
+### With Separators and Labels
+
+<CodePreview
+  code={`import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuLabel,
+  ContextMenuSeparator,
+  ContextMenuShortcut,
+  ContextMenuTrigger,
+} from "krypton-ui"
+import { LucideIcon } from "krypton-ui"
+
+export default function Component() {
+  return (
+    <ContextMenu>
+      <ContextMenuTrigger className="flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm">
+        Right click here
+      </ContextMenuTrigger>
+      <ContextMenuContent className="w-64">
+        <ContextMenuLabel>Navigation</ContextMenuLabel>
+        <ContextMenuItem>
+          <LucideIcon name="ArrowLeft" className="mr-2 h-4 w-4" />
+          Back
+          <ContextMenuShortcut>⌘[</ContextMenuShortcut>
+        </ContextMenuItem>
+        <ContextMenuItem>
+          <LucideIcon name="ArrowRight" className="mr-2 h-4 w-4" />
+          Forward
+          <ContextMenuShortcut>⌘]</ContextMenuShortcut>
+        </ContextMenuItem>
+        <ContextMenuItem>
+          <LucideIcon name="RotateCcw" className="mr-2 h-4 w-4" />
+          Reload
+          <ContextMenuShortcut>⌘R</ContextMenuShortcut>
+        </ContextMenuItem>
+        <ContextMenuSeparator />
+        <ContextMenuLabel>Developer</ContextMenuLabel>
+        <ContextMenuItem>
+          <LucideIcon name="Code" className="mr-2 h-4 w-4" />
+          View Source
+          <ContextMenuShortcut>⌘U</ContextMenuShortcut>
+        </ContextMenuItem>
+        <ContextMenuItem>
+          <LucideIcon name="Bug" className="mr-2 h-4 w-4" />
+          Inspect Element
+          <ContextMenuShortcut>⌘⇧I</ContextMenuShortcut>
+        </ContextMenuItem>
+      </ContextMenuContent>
+    </ContextMenu>
+  )
+}`}
+  preview={
+    <ContextMenu>
+      <ContextMenuTrigger className="flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm">
+        Right click here
+      </ContextMenuTrigger>
+      <ContextMenuContent className="w-64">
+        <ContextMenuLabel>Navigation</ContextMenuLabel>
+        <ContextMenuItem>
+          <LucideIcon name="ArrowLeft" className="mr-2 h-4 w-4" />
+          Back
+          <ContextMenuShortcut>⌘[</ContextMenuShortcut>
+        </ContextMenuItem>
+        <ContextMenuItem>
+          <LucideIcon name="ArrowRight" className="mr-2 h-4 w-4" />
+          Forward
+          <ContextMenuShortcut>⌘]</ContextMenuShortcut>
+        </ContextMenuItem>
+        <ContextMenuItem>
+          <LucideIcon name="RotateCcw" className="mr-2 h-4 w-4" />
+          Reload
+          <ContextMenuShortcut>⌘R</ContextMenuShortcut>
+        </ContextMenuItem>
+        <ContextMenuSeparator />
+        <ContextMenuLabel>Developer</ContextMenuLabel>
+        <ContextMenuItem>
+          <LucideIcon name="Code" className="mr-2 h-4 w-4" />
+          View Source
+          <ContextMenuShortcut>⌘U</ContextMenuShortcut>
+        </ContextMenuItem>
+        <ContextMenuItem>
+          <LucideIcon name="Bug" className="mr-2 h-4 w-4" />
+          Inspect Element
+          <ContextMenuShortcut>⌘⇧I</ContextMenuShortcut>
+        </ContextMenuItem>
+      </ContextMenuContent>
+    </ContextMenu>
+  }
+/>
+
+### With Checkboxes
+
+<CodePreview
+  code={`import {
+  ContextMenu,
+  ContextMenuCheckboxItem,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuLabel,
+  ContextMenuSeparator,
+  ContextMenuTrigger,
+} from "krypton-ui"
+import { LucideIcon } from "krypton-ui"
+import { useState } from "react"
+
+export default function Component() {
+  const [bookmarksChecked, setBookmarksChecked] = useState(true)
+  const [urlsChecked, setUrlsChecked] = useState(false)
+
+  return (
+    <ContextMenu>
+      <ContextMenuTrigger className="flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm">
+        Right click here
+      </ContextMenuTrigger>
+      <ContextMenuContent className="w-64">
+        <ContextMenuItem>
+          <LucideIcon name="Plus" className="mr-2 h-4 w-4" />
+          New Tab
+        </ContextMenuItem>
+        <ContextMenuItem>
+          <LucideIcon name="Download" className="mr-2 h-4 w-4" />
+          Download
+        </ContextMenuItem>
+        <ContextMenuSeparator />
+        <ContextMenuCheckboxItem
+          checked={bookmarksChecked}
+          onCheckedChange={setBookmarksChecked}
+        >
+          <LucideIcon name="Bookmark" className="mr-2 h-4 w-4" />
+          Show Bookmarks
+        </ContextMenuCheckboxItem>
+        <ContextMenuCheckboxItem
+          checked={urlsChecked}
+          onCheckedChange={setUrlsChecked}
+        >
+          <LucideIcon name="Link" className="mr-2 h-4 w-4" />
+          Show Full URLs
+        </ContextMenuCheckboxItem>
+      </ContextMenuContent>
+    </ContextMenu>
+  )
+}`}
+  preview={
+    <ContextMenu>
+      <ContextMenuTrigger className="flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm">
+        Right click here
+      </ContextMenuTrigger>
+      <ContextMenuContent className="w-64">
+        <ContextMenuItem>
+          <LucideIcon name="Plus" className="mr-2 h-4 w-4" />
+          New Tab
+        </ContextMenuItem>
+        <ContextMenuItem>
+          <LucideIcon name="Download" className="mr-2 h-4 w-4" />
+          Download
+        </ContextMenuItem>
+        <ContextMenuSeparator />
+        <ContextMenuCheckboxItem
+          checked={true}
+          onCheckedChange={() => {}}
+        >
+          <LucideIcon name="Bookmark" className="mr-2 h-4 w-4" />
+          Show Bookmarks
+        </ContextMenuCheckboxItem>
+        <ContextMenuCheckboxItem
+          checked={false}
+          onCheckedChange={() => {}}
+        >
+          <LucideIcon name="Link" className="mr-2 h-4 w-4" />
+          Show Full URLs
+        </ContextMenuCheckboxItem>
+      </ContextMenuContent>
+    </ContextMenu>
+   }
+/>
+
+### With Radio Groups
+
+<CodePreview
+  code={`import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuLabel,
+  ContextMenuRadioGroup,
+  ContextMenuRadioItem,
+  ContextMenuSeparator,
+  ContextMenuTrigger,
+} from "krypton-ui"
+import { LucideIcon } from "krypton-ui"
+import { useState } from "react"
+
+export default function Component() {
+  const [person, setPerson] = useState("pedro")
+
+  return (
+    <ContextMenu>
+      <ContextMenuTrigger className="flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm">
+        Right click here
+      </ContextMenuTrigger>
+      <ContextMenuContent className="w-64">
+        <ContextMenuItem>
+          <LucideIcon name="Plus" className="mr-2 h-4 w-4" />
+          New Tab
+        </ContextMenuItem>
+        <ContextMenuItem>
+          <LucideIcon name="Download" className="mr-2 h-4 w-4" />
+          Download
+        </ContextMenuItem>
+        <ContextMenuSeparator />
+        <ContextMenuLabel>People</ContextMenuLabel>
+        <ContextMenuRadioGroup value={person} onValueChange={setPerson}>
+          <ContextMenuRadioItem value="pedro">
+            <LucideIcon name="User" className="mr-2 h-4 w-4" />
+            Pedro Duarte
+          </ContextMenuRadioItem>
+          <ContextMenuRadioItem value="colm">
+            <LucideIcon name="User" className="mr-2 h-4 w-4" />
+            Colm Tuite
+          </ContextMenuRadioItem>
+        </ContextMenuRadioGroup>
+      </ContextMenuContent>
+    </ContextMenu>
+  )
+}`}
+  preview={
+    <ContextMenu>
+      <ContextMenuTrigger className="flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm">
+        Right click here
+      </ContextMenuTrigger>
+      <ContextMenuContent className="w-64">
+        <ContextMenuItem>
+          <LucideIcon name="Plus" className="mr-2 h-4 w-4" />
+          New Tab
+        </ContextMenuItem>
+        <ContextMenuItem>
+          <LucideIcon name="Download" className="mr-2 h-4 w-4" />
+          Download
+        </ContextMenuItem>
+        <ContextMenuSeparator />
+        <ContextMenuLabel>People</ContextMenuLabel>
+        <ContextMenuRadioGroup value="pedro" onValueChange={() => {}}>
+          <ContextMenuRadioItem value="pedro">
+            <LucideIcon name="User" className="mr-2 h-4 w-4" />
+            Pedro Duarte
+          </ContextMenuRadioItem>
+          <ContextMenuRadioItem value="colm">
+            <LucideIcon name="User" className="mr-2 h-4 w-4" />
+            Colm Tuite
+          </ContextMenuRadioItem>
+        </ContextMenuRadioGroup>
+      </ContextMenuContent>
+    </ContextMenu>
+  }
+/>
+
+### With Sub Menus
+
+<CodePreview
+  code={`import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuSeparator,
+  ContextMenuSub,
+  ContextMenuSubContent,
+  ContextMenuSubTrigger,
+  ContextMenuTrigger,
+} from "krypton-ui"
+import { LucideIcon } from "krypton-ui"
+
+export default function Component() {
+  return (
+    <ContextMenu>
+      <ContextMenuTrigger className="flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm">
+        Right click here
+      </ContextMenuTrigger>
+      <ContextMenuContent className="w-64">
+        <ContextMenuItem>
+          <LucideIcon name="ArrowLeft" className="mr-2 h-4 w-4" />
+          Back
+        </ContextMenuItem>
+        <ContextMenuItem>
+          <LucideIcon name="ArrowRight" className="mr-2 h-4 w-4" />
+          Forward
+        </ContextMenuItem>
+        <ContextMenuItem>
+          <LucideIcon name="RotateCcw" className="mr-2 h-4 w-4" />
+          Reload
+        </ContextMenuItem>
+        <ContextMenuSeparator />
+        <ContextMenuSub>
+          <ContextMenuSubTrigger>
+            <LucideIcon name="Share" className="mr-2 h-4 w-4" />
+            Share
+          </ContextMenuSubTrigger>
+          <ContextMenuSubContent className="w-48">
+            <ContextMenuItem>
+              <LucideIcon name="Mail" className="mr-2 h-4 w-4" />
+              Email
+            </ContextMenuItem>
+            <ContextMenuItem>
+              <LucideIcon name="MessageSquare" className="mr-2 h-4 w-4" />
+              Message
+            </ContextMenuItem>
+            <ContextMenuSeparator />
+            <ContextMenuItem>
+              <LucideIcon name="PlusCircle" className="mr-2 h-4 w-4" />
+              More...
+            </ContextMenuItem>
+          </ContextMenuSubContent>
+        </ContextMenuSub>
+        <ContextMenuSub>
+          <ContextMenuSubTrigger>
+            <LucideIcon name="Plus" className="mr-2 h-4 w-4" />
+            More Tools
+          </ContextMenuSubTrigger>
+          <ContextMenuSubContent className="w-48">
+            <ContextMenuItem>
+              <LucideIcon name="Save" className="mr-2 h-4 w-4" />
+              Save Page As...
+            </ContextMenuItem>
+            <ContextMenuItem>
+              <LucideIcon name="Globe" className="mr-2 h-4 w-4" />
+              Create Shortcut...
+            </ContextMenuItem>
+            <ContextMenuItem>
+              <LucideIcon name="Bookmark" className="mr-2 h-4 w-4" />
+              Name Window...
+            </ContextMenuItem>
+            <ContextMenuSeparator />
+            <ContextMenuItem>
+              <LucideIcon name="Code" className="mr-2 h-4 w-4" />
+              Developer Tools
+            </ContextMenuItem>
+          </ContextMenuSubContent>
+        </ContextMenuSub>
+      </ContextMenuContent>
+    </ContextMenu>
+  )
+}`}
+  preview={
+    <ContextMenu>
+      <ContextMenuTrigger className="flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm">
+        Right click here
+      </ContextMenuTrigger>
+      <ContextMenuContent className="w-64">
+        <ContextMenuItem>
+          <LucideIcon name="ArrowLeft" className="mr-2 h-4 w-4" />
+          Back
+        </ContextMenuItem>
+        <ContextMenuItem>
+          <LucideIcon name="ArrowRight" className="mr-2 h-4 w-4" />
+          Forward
+        </ContextMenuItem>
+        <ContextMenuItem>
+          <LucideIcon name="RotateCcw" className="mr-2 h-4 w-4" />
+          Reload
+        </ContextMenuItem>
+        <ContextMenuSeparator />
+        <ContextMenuSub>
+          <ContextMenuSubTrigger>
+            <LucideIcon name="Share" className="mr-2 h-4 w-4" />
+            Share
+          </ContextMenuSubTrigger>
+          <ContextMenuSubContent className="w-48">
+            <ContextMenuItem>
+              <LucideIcon name="Mail" className="mr-2 h-4 w-4" />
+              Email
+            </ContextMenuItem>
+            <ContextMenuItem>
+              <LucideIcon name="MessageSquare" className="mr-2 h-4 w-4" />
+              Message
+            </ContextMenuItem>
+            <ContextMenuSeparator />
+            <ContextMenuItem>
+              <LucideIcon name="PlusCircle" className="mr-2 h-4 w-4" />
+              More...
+            </ContextMenuItem>
+          </ContextMenuSubContent>
+        </ContextMenuSub>
+        <ContextMenuSub>
+          <ContextMenuSubTrigger>
+            <LucideIcon name="Plus" className="mr-2 h-4 w-4" />
+            More Tools
+          </ContextMenuSubTrigger>
+          <ContextMenuSubContent className="w-48">
+            <ContextMenuItem>
+              <LucideIcon name="Save" className="mr-2 h-4 w-4" />
+              Save Page As...
+            </ContextMenuItem>
+            <ContextMenuItem>
+              <LucideIcon name="Globe" className="mr-2 h-4 w-4" />
+              Create Shortcut...
+            </ContextMenuItem>
+            <ContextMenuItem>
+              <LucideIcon name="Bookmark" className="mr-2 h-4 w-4" />
+              Name Window...
+            </ContextMenuItem>
+            <ContextMenuSeparator />
+            <ContextMenuItem>
+              <LucideIcon name="Code" className="mr-2 h-4 w-4" />
+              Developer Tools
+            </ContextMenuItem>
+          </ContextMenuSubContent>
+        </ContextMenuSub>
+      </ContextMenuContent>
+    </ContextMenu>
+  }
+/>
+
+## API Reference
+
+### ContextMenu
+
+The root component that wraps the trigger and content.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | The trigger and content components |
+
+### ContextMenuTrigger
+
+The element that triggers the context menu on right-click.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `asChild` | `boolean` | `false` | Change the default rendered element |
+| `children` | `ReactNode` | - | The trigger content |
+| `className` | `string` | - | Additional CSS classes |
+
+### ContextMenuContent
+
+The component that pops out when the context menu is open.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `sideOffset` | `number` | `4` | The distance in pixels from the trigger |
+| `children` | `ReactNode` | - | The menu items |
+
+### ContextMenuItem
+
+The component that contains the context menu items.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `asChild` | `boolean` | `false` | Change the default rendered element |
+| `className` | `string` | - | Additional CSS classes |
+| `inset` | `boolean` | `false` | Add left padding for alignment |
+| `disabled` | `boolean` | `false` | Whether the item is disabled |
+| `onSelect` | `(event: Event) => void` | - | Event handler called when the user selects an item |
+| `children` | `ReactNode` | - | The item content |
+
+### ContextMenuCheckboxItem
+
+An item that can be controlled and rendered like a checkbox.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `checked` | `boolean` | - | The controlled checked state |
+| `onCheckedChange` | `(checked: boolean) => void` | - | Event handler called when the checked state changes |
+| `className` | `string` | - | Additional CSS classes |
+| `disabled` | `boolean` | `false` | Whether the item is disabled |
+| `children` | `ReactNode` | - | The item content |
+
+### ContextMenuRadioItem
+
+An item that can be controlled and rendered like a radio button.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | - | The unique value of the item |
+| `className` | `string` | - | Additional CSS classes |
+| `disabled` | `boolean` | `false` | Whether the item is disabled |
+| `children` | `ReactNode` | - | The item content |
+
+### ContextMenuRadioGroup
+
+Used to group multiple `ContextMenuRadioItem`s.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | - | The controlled value of the radio group |
+| `onValueChange` | `(value: string) => void` | - | Event handler called when the value changes |
+| `children` | `ReactNode` | - | The radio items |
+
+### ContextMenuLabel
+
+Used to render a label. It won't be focusable using arrow keys.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `inset` | `boolean` | `false` | Add left padding for alignment |
+| `children` | `ReactNode` | - | The label content |
+
+### ContextMenuSeparator
+
+Used to visually separate items in the context menu.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+### ContextMenuShortcut
+
+A small utility to help display keyboard shortcuts.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | The shortcut text |
+
+### ContextMenuSub
+
+Contains all the parts of a submenu.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | The sub trigger and content |
+
+### ContextMenuSubTrigger
+
+An item that opens a submenu.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `inset` | `boolean` | `false` | Add left padding for alignment |
+| `disabled` | `boolean` | `false` | Whether the item is disabled |
+| `children` | `ReactNode` | - | The trigger content |
+
+### ContextMenuSubContent
+
+The component that pops out when a submenu is open.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | The submenu items |
+
+## Examples
+
+### Custom Trigger
+
+<CodePreview
+  code={`<ContextMenu>
+  <ContextMenuTrigger asChild>
+    <Button variant="outline">Right click me</Button>
+  </ContextMenuTrigger>
+  <ContextMenuContent>
+    <ContextMenuItem>Edit</ContextMenuItem>
+    <ContextMenuItem>Delete</ContextMenuItem>
+  </ContextMenuContent>
+</ContextMenu>`}
+  preview={
+    <ContextMenu>
+      <ContextMenuTrigger asChild>
+        <Button variant="outline">Right click me</Button>
+      </ContextMenuTrigger>
+      <ContextMenuContent>
+        <ContextMenuItem>Edit</ContextMenuItem>
+        <ContextMenuItem>Delete</ContextMenuItem>
+      </ContextMenuContent>
+    </ContextMenu>
+  }
+/>
+
+### With Custom Styling
+
+<CodePreview
+  code={`<ContextMenuContent className="w-80">
+  <ContextMenuItem className="text-red-600">
+    <LucideIcon name="Trash" className="mr-2 h-4 w-4" />
+    Delete
+  </ContextMenuItem>
+</ContextMenuContent>`}
+  preview={
+    <ContextMenu>
+      <ContextMenuTrigger className="flex h-[100px] w-[200px] items-center justify-center rounded-md border border-dashed text-sm">
+        Right click for styled menu
+      </ContextMenuTrigger>
+      <ContextMenuContent className="w-80">
+        <ContextMenuItem className="text-red-600">
+          <LucideIcon name="Trash" className="mr-2 h-4 w-4" />
+          Delete
+        </ContextMenuItem>
+      </ContextMenuContent>
+    </ContextMenu>
+  }
+/>

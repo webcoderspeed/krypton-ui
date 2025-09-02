@@ -212,24 +212,23 @@ export default function IconButtons() {
 Buttons with leading or trailing icons.
 
 <CodePreview
-  code={`import { Button } from 'krypton-ui'
-import { Download, ArrowRight, Plus } from 'lucide-react'
+  code={`import { Button, LucideIcon } from 'krypton-ui'
 
 export default function ButtonsWithIcons() {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center gap-2">
         <Button>
-          <Download className="mr-2 h-4 w-4" />
+          <LucideIcon name="Download" className="mr-2 h-4 w-4" />
           Download
         </Button>
         <Button variant="outline">
           Continue
-          <ArrowRight className="ml-2 h-4 w-4" />
+          <LucideIcon name="ArrowRight" className="ml-2 h-4 w-4" />
         </Button>
       </div>
       <Button variant="secondary">
-        <Plus className="mr-2 h-4 w-4" />
+        <LucideIcon name="Plus" className="mr-2 h-4 w-4" />
         Add Item
       </Button>
     </div>
@@ -239,12 +238,12 @@ export default function ButtonsWithIcons() {
     <div className="flex flex-col gap-4">
       <div className="flex items-center gap-2">
         <Button>
-          <Download className="mr-2 h-4 w-4" />
+          <LucideIcon name="Download" className="mr-2 h-4 w-4" />
           Download
         </Button>
         <Button variant="outline">
           Continue
-          <ArrowRight className="ml-2 h-4 w-4" />
+          <LucideIcon name="ArrowRight" className="ml-2 h-4 w-4" />
         </Button>
       </div>
       <Button variant="secondary">
@@ -422,13 +421,13 @@ export default function CardActions() {
   return (
     <div className="flex items-center gap-1">
       <Button size="sm" variant="ghost">
-        <Eye className="h-4 w-4" />
+        <LucideIcon name="Eye" className="h-4 w-4" />
       </Button>
       <Button size="sm" variant="ghost">
-        <Edit className="h-4 w-4" />
+        <LucideIcon name="Edit" className="h-4 w-4" />
       </Button>
       <Button size="sm" variant="ghost">
-        <Trash2 className="h-4 w-4" />
+        <LucideIcon name="Trash2" className="h-4 w-4" />
       </Button>
     </div>
   )
@@ -452,18 +451,19 @@ export default function CardActions() {
 
 <CodePreview
   code={`import { Button } from 'krypton-ui'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import LucideIcon from '../../../../components/lucide-icon'
 
 export default function Navigation() {
   return (
     <div className="flex items-center justify-between">
       <Button variant="outline">
-        <ChevronLeft className="mr-2 h-4 w-4" />
+                <LucideIcon name="ChevronLeft" className="h-4 w-4" />
         Previous
       </Button>
       <Button>
         Next
-        <ChevronRight className="ml-2 h-4 w-4" />
+                <LucideIcon name="ChevronRight" className="h-4 w-4" />
+
       </Button>
     </div>
   )
@@ -471,12 +471,13 @@ export default function Navigation() {
   preview={
     <div className="flex items-center justify-between">
       <Button variant="outline">
-        <ChevronLeft className="mr-2 h-4 w-4" />
+                <LucideIcon name="ChevronLeft" className="h-4 w-4" />
+
         Previous
       </Button>
       <Button>
         Next
-        <ChevronRight className="ml-2 h-4 w-4" />
+       <LucideIcon name="ChevronRight" className="h-4 w-4" />
       </Button>
     </div>
   }

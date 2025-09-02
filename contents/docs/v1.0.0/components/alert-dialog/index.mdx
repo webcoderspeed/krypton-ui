@@ -1,0 +1,391 @@
+---
+title: Alert Dialog
+description: A modal dialog that interrupts the user with important content and expects a response.
+---
+
+# Alert Dialog
+
+A modal dialog component that displays important information and requires user confirmation before proceeding. Built on top of Radix UI with full accessibility support and smooth animations.
+
+## Installation
+
+```bash
+npm install krypton-ui
+```
+
+## Import
+
+```tsx
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from 'krypton-ui'
+```
+
+## Basic Usage
+
+The AlertDialog component provides a way to display critical information that requires user confirmation.
+
+<CodePreview
+  code={`import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from 'krypton-ui'
+
+export default function BasicAlertDialog() {
+  return (
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <button className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
+          Delete Account
+        </button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+          <AlertDialogDescription>
+            This action cannot be undone. This will permanently delete your
+            account and remove your data from our servers.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction>Continue</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  )
+}`}
+  preview={
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <button className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
+          Delete Account
+        </button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+          <AlertDialogDescription>
+            This action cannot be undone. This will permanently delete your
+            account and remove your data from our servers.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction>Continue</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  }
+/>
+
+## Confirmation Dialog
+
+Use AlertDialog for actions that require explicit user confirmation.
+
+<CodePreview
+  code={`import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from 'krypton-ui'
+
+export default function ConfirmationDialog() {
+  return (
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <button className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+          Save Changes
+        </button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Save Changes?</AlertDialogTitle>
+          <AlertDialogDescription>
+            You have unsaved changes. Do you want to save them before leaving?
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Don't Save</AlertDialogCancel>
+          <AlertDialogAction>Save Changes</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  )
+}`}
+  preview={
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <button className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+          Save Changes
+        </button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Save Changes?</AlertDialogTitle>
+          <AlertDialogDescription>
+            You have unsaved changes. Do you want to save them before leaving?
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Don't Save</AlertDialogCancel>
+          <AlertDialogAction>Save Changes</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  }
+/>
+
+## Warning Dialog
+
+Display warning messages with appropriate styling for destructive actions.
+
+<CodePreview
+  code={`import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from 'krypton-ui'
+
+export default function WarningDialog() {
+  return (
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <button className="px-4 py-2 bg-orange-600 text-white rounded hover:bg-orange-700">
+          Clear All Data
+        </button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle className="text-orange-600">⚠️ Warning</AlertDialogTitle>
+          <AlertDialogDescription>
+            This will permanently delete all your data including projects, settings, and preferences. 
+            This action cannot be undone.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Keep Data</AlertDialogCancel>
+          <AlertDialogAction className="bg-orange-600 hover:bg-orange-700">
+            Clear All Data
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  )
+}`}
+  preview={
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <button className="px-4 py-2 bg-orange-600 text-white rounded hover:bg-orange-700">
+          Clear All Data
+        </button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle className="text-orange-600">⚠️ Warning</AlertDialogTitle>
+          <AlertDialogDescription>
+            This will permanently delete all your data including projects, settings, and preferences. 
+            This action cannot be undone.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Keep Data</AlertDialogCancel>
+          <AlertDialogAction className="bg-orange-600 hover:bg-orange-700">
+            Clear All Data
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  }
+/>
+
+## Custom Styling
+
+Customize the appearance of the AlertDialog components to match your design.
+
+<CodePreview
+  code={`import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from 'krypton-ui'
+
+export default function CustomStyledDialog() {
+  return (
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <button className="px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg hover:from-purple-700 hover:to-pink-700">
+          Launch Feature
+        </button>
+      </AlertDialogTrigger>
+      <AlertDialogContent className="max-w-md">
+        <AlertDialogHeader className="text-center">
+          <AlertDialogTitle className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+            🚀 Ready to Launch?
+          </AlertDialogTitle>
+          <AlertDialogDescription className="text-base mt-4">
+            Your new feature is ready to go live. This will make it available to all users immediately.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter className="flex-col sm:flex-row gap-2">
+          <AlertDialogCancel className="w-full sm:w-auto">
+            Not Yet
+          </AlertDialogCancel>
+          <AlertDialogAction className="w-full sm:w-auto bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700">
+            Launch Now
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  )
+}`}
+  preview={
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <button className="px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg hover:from-purple-700 hover:to-pink-700">
+          Launch Feature
+        </button>
+      </AlertDialogTrigger>
+      <AlertDialogContent className="max-w-md">
+        <AlertDialogHeader className="text-center">
+          <AlertDialogTitle className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+            🚀 Ready to Launch?
+          </AlertDialogTitle>
+          <AlertDialogDescription className="text-base mt-4">
+            Your new feature is ready to go live. This will make it available to all users immediately.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter className="flex-col sm:flex-row gap-2">
+          <AlertDialogCancel className="w-full sm:w-auto">
+            Not Yet
+          </AlertDialogCancel>
+          <AlertDialogAction className="w-full sm:w-auto bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700">
+            Launch Now
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  }
+/>
+
+## API Reference
+
+### AlertDialog
+
+The root component that manages the dialog state.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| defaultOpen | boolean | false | The open state of the dialog when it is initially rendered |
+| open | boolean | - | The controlled open state of the dialog |
+| onOpenChange | function | - | Event handler called when the open state changes |
+
+### AlertDialogTrigger
+
+The button that opens the dialog.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| asChild | boolean | false | Change the default rendered element for the one passed as a child |
+
+### AlertDialogContent
+
+The content area of the dialog.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| className | string | - | Additional CSS classes |
+| onEscapeKeyDown | function | - | Event handler called when the escape key is down |
+| onPointerDownOutside | function | - | Event handler called when a pointer event occurs outside the bounds |
+
+### AlertDialogHeader
+
+Container for the dialog title and description.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| className | string | - | Additional CSS classes |
+
+### AlertDialogFooter
+
+Container for the dialog action buttons.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| className | string | - | Additional CSS classes |
+
+### AlertDialogTitle
+
+The title of the dialog.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| className | string | - | Additional CSS classes |
+
+### AlertDialogDescription
+
+The description text of the dialog.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| className | string | - | Additional CSS classes |
+
+### AlertDialogAction
+
+The primary action button that closes the dialog.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| className | string | - | Additional CSS classes |
+| asChild | boolean | false | Change the default rendered element for the one passed as a child |
+
+### AlertDialogCancel
+
+The cancel button that closes the dialog without performing the action.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| className | string | - | Additional CSS classes |
+| asChild | boolean | false | Change the default rendered element for the one passed as a child |
+
+## Accessibility
+
+- Supports keyboard navigation
+- Focus is automatically trapped within the dialog
+- Pressing `Esc` closes the dialog
+- Clicking outside the dialog closes it
+- Supports screen readers with proper ARIA attributes
+- Focus returns to the trigger element when closed

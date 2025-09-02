@@ -66,7 +66,6 @@ export function BreadcrumbDemo() {
 ### With Custom Separator
 
 ```tsx
-import { Slash } from "lucide-react"
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -74,7 +73,8 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
+  LucideIcon
+} from 'krypton-ui'
 
 export function BreadcrumbWithCustomSeparator() {
   return (
@@ -84,13 +84,13 @@ export function BreadcrumbWithCustomSeparator() {
           <BreadcrumbLink href="/">Home</BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator>
-          <Slash className="h-4 w-4" />
+          <LucideIcon name="Slash" className="h-4 w-4" />
         </BreadcrumbSeparator>
         <BreadcrumbItem>
           <BreadcrumbLink href="/docs">Documentation</BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator>
-          <Slash className="h-4 w-4" />
+          <LucideIcon name="Slash" className="h-4 w-4" />
         </BreadcrumbSeparator>
         <BreadcrumbItem>
           <BreadcrumbPage>Components</BreadcrumbPage>
@@ -142,7 +142,6 @@ export function BreadcrumbWithEllipsis() {
 ### With Dropdown Menu
 
 ```tsx
-import { ChevronDown } from "lucide-react"
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -150,13 +149,12 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
-import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+  LucideIcon
+} from 'krypton-ui'
 
 export function BreadcrumbWithDropdown() {
   return (
@@ -170,7 +168,7 @@ export function BreadcrumbWithDropdown() {
           <DropdownMenu>
             <DropdownMenuTrigger className="flex items-center gap-1">
               Documentation
-              <ChevronDown className="h-4 w-4" />
+              <LucideIcon name="ChevronDown" className="h-4 w-4" />
             </DropdownMenuTrigger>
             <DropdownMenuContent align="start">
               <DropdownMenuItem>

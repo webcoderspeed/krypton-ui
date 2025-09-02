@@ -15,7 +15,6 @@ import { Stepper, StepperItem } from "@/components/ui/stepper";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import CodePreview from "@/components/code-preview";
-import * as LucideIcons from "lucide-react";
 import { Label } from "@radix-ui/react-dropdown-menu";
 import { DialogDescription } from "@radix-ui/react-dialog";
 import {
@@ -32,28 +31,101 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-
-const icons = {
-  Eye: LucideIcons.Eye,
-  EyeOff: LucideIcons.EyeOff,
-  Search: LucideIcons.Search,
-  Mail: LucideIcons.Mail,
-  Lock: LucideIcons.Lock,
-  User: LucideIcons.User,
-  ArrowRight: LucideIcons.ArrowRight,
-  Download: LucideIcons.Download,
-  ChevronRight: LucideIcons.ChevronRight,
-  Loader2: LucideIcons.Loader2,
-  Heart: LucideIcons.Heart,
-  ChevronLeft: LucideIcons.ChevronLeft,
-  Settings: LucideIcons.Settings,
-  Plus: LucideIcons.Plus,
-  Edit: LucideIcons.Edit,
-  Trash2: LucideIcons.Trash2,
-};
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import {
+  Breadcrumb,
+  BreadcrumbEllipsis,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+import { Calendar } from "@/components/ui/calendar";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import LucideIcon from "@/components/lucide-icon";
+import {
+  ContextMenu,
+  ContextMenuCheckboxItem,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuLabel,
+  ContextMenuRadioGroup,
+  ContextMenuRadioItem,
+  ContextMenuSeparator,
+  ContextMenuShortcut,
+  ContextMenuSub,
+  ContextMenuSubContent,
+  ContextMenuSubTrigger,
+  ContextMenuTrigger,
+} from "@/components/ui/context-menu";
+import {
+  Command,
+  CommandDialog,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+  CommandSeparator,
+  CommandShortcut,
+} from "@/components/ui/command";
+import {
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@/components/ui/chart";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSeparator,
+  InputOTPSlot,
+} from "@/components/ui/input-otp";
 
 const components = {
-  ...icons,
+  LucideIcon,
   Tabs,
   TabsContent,
   TabsList,
@@ -77,6 +149,81 @@ const components = {
   SelectTrigger,
   SelectValue,
   CodePreview,
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+  Alert,
+  AlertTitle,
+  AlertDescription,
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+  AspectRatio,
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+  Badge,
+  Breadcrumb,
+  BreadcrumbEllipsis,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+  Calendar,
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+  ContextMenu,
+  ContextMenuCheckboxItem,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuLabel,
+  ContextMenuRadioGroup,
+  ContextMenuRadioItem,
+  ContextMenuSeparator,
+  ContextMenuShortcut,
+  ContextMenuSub,
+  ContextMenuSubContent,
+  ContextMenuSubTrigger,
+  ContextMenuTrigger,
+  Command,
+  CommandDialog,
+  CommandGroup,
+  CommandItem,
+  CommandList,
+  CommandEmpty,
+  CommandInput,
+  CommandSeparator,
+  CommandShortcut,
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSeparator,
+  InputOTPSlot
 };
 
 async function parseMdx<Frontmatter>(rawMdx: string) {

@@ -1,0 +1,493 @@
+---
+title: Popover
+description: Displays rich content in a portal, triggered by a button.
+component: true
+---
+
+<ComponentPreview name="popover-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx krypton-ui@latest add popover
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install @radix-ui/react-popover
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="popover" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
+```
+
+```tsx
+<Popover>
+  <PopoverTrigger>Open</PopoverTrigger>
+  <PopoverContent>Place content for the popover here.</PopoverContent>
+</Popover>
+```
+
+## Examples
+
+### Basic Popover
+
+<ComponentPreview name="popover-demo" />
+
+### With Form
+
+<ComponentPreview name="popover-form" />
+
+### Date Picker
+
+<ComponentPreview name="popover-date-picker" />
+
+### User Profile
+
+<ComponentPreview name="popover-user-profile" />
+
+### Settings Menu
+
+<ComponentPreview name="popover-settings" />
+
+### Custom Positioning
+
+<ComponentPreview name="popover-positioning" />
+
+### With Arrow
+
+<ComponentPreview name="popover-arrow" />
+
+### Controlled Popover
+
+<ComponentPreview name="popover-controlled" />
+
+### Nested Popovers
+
+<ComponentPreview name="popover-nested" />
+
+### Large Content
+
+<ComponentPreview name="popover-large-content" />
+
+## API Reference
+
+### Popover
+
+The root component that manages the popover state.
+
+<PropsTable>
+  <PropsTableRow>
+    <PropsTableCell>defaultOpen</PropsTableCell>
+    <PropsTableCell>boolean</PropsTableCell>
+    <PropsTableCell>false</PropsTableCell>
+    <PropsTableCell>The open state of the popover when it is initially rendered.</PropsTableCell>
+  </PropsTableRow>
+  <PropsTableRow>
+    <PropsTableCell>open</PropsTableCell>
+    <PropsTableCell>boolean</PropsTableCell>
+    <PropsTableCell>-</PropsTableCell>
+    <PropsTableCell>The controlled open state of the popover.</PropsTableCell>
+  </PropsTableRow>
+  <PropsTableRow>
+    <PropsTableCell>onOpenChange</PropsTableCell>
+    <PropsTableCell>(open: boolean) => void</PropsTableCell>
+    <PropsTableCell>-</PropsTableCell>
+    <PropsTableCell>Event handler called when the open state changes.</PropsTableCell>
+  </PropsTableRow>
+  <PropsTableRow>
+    <PropsTableCell>modal</PropsTableCell>
+    <PropsTableCell>boolean</PropsTableCell>
+    <PropsTableCell>false</PropsTableCell>
+    <PropsTableCell>Whether the popover should be modal.</PropsTableCell>
+  </PropsTableRow>
+</PropsTable>
+
+### PopoverTrigger
+
+The button that toggles the popover. By default, the `PopoverContent` will position itself against the trigger.
+
+<PropsTable>
+  <PropsTableRow>
+    <PropsTableCell>asChild</PropsTableCell>
+    <PropsTableCell>boolean</PropsTableCell>
+    <PropsTableCell>false</PropsTableCell>
+    <PropsTableCell>Change the default rendered element for the one passed as a child.</PropsTableCell>
+  </PropsTableRow>
+</PropsTable>
+
+### PopoverContent
+
+The component that pops out when the popover is open.
+
+<PropsTable>
+  <PropsTableRow>
+    <PropsTableCell>align</PropsTableCell>
+    <PropsTableCell>"start" | "center" | "end"</PropsTableCell>
+    <PropsTableCell>"center"</PropsTableCell>
+    <PropsTableCell>The preferred alignment against the trigger.</PropsTableCell>
+  </PropsTableRow>
+  <PropsTableRow>
+    <PropsTableCell>alignOffset</PropsTableCell>
+    <PropsTableCell>number</PropsTableCell>
+    <PropsTableCell>0</PropsTableCell>
+    <PropsTableCell>An offset in pixels from the "start" or "end" alignment options.</PropsTableCell>
+  </PropsTableRow>
+  <PropsTableRow>
+    <PropsTableCell>side</PropsTableCell>
+    <PropsTableCell>"top" | "right" | "bottom" | "left"</PropsTableCell>
+    <PropsTableCell>"bottom"</PropsTableCell>
+    <PropsTableCell>The preferred side of the trigger to render against.</PropsTableCell>
+  </PropsTableRow>
+  <PropsTableRow>
+    <PropsTableCell>sideOffset</PropsTableCell>
+    <PropsTableCell>number</PropsTableCell>
+    <PropsTableCell>4</PropsTableCell>
+    <PropsTableCell>The distance in pixels from the trigger.</PropsTableCell>
+  </PropsTableRow>
+  <PropsTableRow>
+    <PropsTableCell>avoidCollisions</PropsTableCell>
+    <PropsTableCell>boolean</PropsTableCell>
+    <PropsTableCell>true</PropsTableCell>
+    <PropsTableCell>When true, overrides the side and align preferences to prevent collisions.</PropsTableCell>
+  </PropsTableRow>
+  <PropsTableRow>
+    <PropsTableCell>collisionBoundary</PropsTableCell>
+    <PropsTableCell>Element | null | Array<Element | null></PropsTableCell>
+    <PropsTableCell>[]</PropsTableCell>
+    <PropsTableCell>The element used as the collision boundary.</PropsTableCell>
+  </PropsTableRow>
+  <PropsTableRow>
+    <PropsTableCell>collisionPadding</PropsTableCell>
+    <PropsTableCell>number | Partial<Record<Side, number>></PropsTableCell>
+    <PropsTableCell>0</PropsTableCell>
+    <PropsTableCell>The distance in pixels from the boundary edges where collision detection should occur.</PropsTableCell>
+  </PropsTableRow>
+  <PropsTableRow>
+    <PropsTableCell>sticky</PropsTableCell>
+    <PropsTableCell>"partial" | "always"</PropsTableCell>
+    <PropsTableCell>"partial"</PropsTableCell>
+    <PropsTableCell>The sticky behavior on the align axis.</PropsTableCell>
+  </PropsTableRow>
+  <PropsTableRow>
+    <PropsTableCell>hideWhenDetached</PropsTableCell>
+    <PropsTableCell>boolean</PropsTableCell>
+    <PropsTableCell>false</PropsTableCell>
+    <PropsTableCell>Whether to hide the content when the trigger becomes fully occluded.</PropsTableCell>
+  </PropsTableRow>
+  <PropsTableRow>
+    <PropsTableCell>onEscapeKeyDown</PropsTableCell>
+    <PropsTableCell>(event: KeyboardEvent) => void</PropsTableCell>
+    <PropsTableCell>-</PropsTableCell>
+    <PropsTableCell>Event handler called when the escape key is down.</PropsTableCell>
+  </PropsTableRow>
+  <PropsTableRow>
+    <PropsTableCell>onPointerDownOutside</PropsTableCell>
+    <PropsTableCell>(event: PointerDownOutsideEvent) => void</PropsTableCell>
+    <PropsTableCell>-</PropsTableCell>
+    <PropsTableCell>Event handler called when a pointer event occurs outside the bounds of the component.</PropsTableCell>
+  </PropsTableRow>
+  <PropsTableRow>
+    <PropsTableCell>onFocusOutside</PropsTableCell>
+    <PropsTableCell>(event: FocusOutsideEvent) => void</PropsTableCell>
+    <PropsTableCell>-</PropsTableCell>
+    <PropsTableCell>Event handler called when focus moves outside the bounds of the component.</PropsTableCell>
+  </PropsTableRow>
+  <PropsTableRow>
+    <PropsTableCell>onInteractOutside</PropsTableCell>
+    <PropsTableCell>(event: PointerDownOutsideEvent | FocusOutsideEvent) => void</PropsTableCell>
+    <PropsTableCell>-</PropsTableCell>
+    <PropsTableCell>Event handler called when an interaction happens outside the bounds of the component.</PropsTableCell>
+  </PropsTableRow>
+  <PropsTableRow>
+    <PropsTableCell>forceMount</PropsTableCell>
+    <PropsTableCell>boolean</PropsTableCell>
+    <PropsTableCell>-</PropsTableCell>
+    <PropsTableCell>Used to force mounting when more control is needed.</PropsTableCell>
+  </PropsTableRow>
+</PropsTable>
+
+## Examples
+
+### Basic Usage
+
+```tsx
+import { Button } from "@/components/ui/button"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
+
+export function PopoverDemo() {
+  return (
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button variant="outline">Open popover</Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-80">
+        <div className="grid gap-4">
+          <div className="space-y-2">
+            <h4 className="font-medium leading-none">Dimensions</h4>
+            <p className="text-sm text-muted-foreground">
+              Set the dimensions for the layer.
+            </p>
+          </div>
+          <div className="grid gap-2">
+            <div className="grid grid-cols-3 items-center gap-4">
+              <label htmlFor="width">Width</label>
+              <input
+                id="width"
+                defaultValue="100%"
+                className="col-span-2 h-8"
+              />
+            </div>
+            <div className="grid grid-cols-3 items-center gap-4">
+              <label htmlFor="maxWidth">Max. width</label>
+              <input
+                id="maxWidth"
+                defaultValue="300px"
+                className="col-span-2 h-8"
+              />
+            </div>
+            <div className="grid grid-cols-3 items-center gap-4">
+              <label htmlFor="height">Height</label>
+              <input
+                id="height"
+                defaultValue="25px"
+                className="col-span-2 h-8"
+              />
+            </div>
+            <div className="grid grid-cols-3 items-center gap-4">
+              <label htmlFor="maxHeight">Max. height</label>
+              <input
+                id="maxHeight"
+                defaultValue="none"
+                className="col-span-2 h-8"
+              />
+            </div>
+          </div>
+        </div>
+      </PopoverContent>
+    </Popover>
+  )
+}
+```
+
+### With Form
+
+```tsx
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
+
+export function PopoverForm() {
+  return (
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button variant="outline">Settings</Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-80">
+        <div className="grid gap-4">
+          <div className="space-y-2">
+            <h4 className="font-medium leading-none">Profile Settings</h4>
+            <p className="text-sm text-muted-foreground">
+              Update your profile information.
+            </p>
+          </div>
+          <div className="grid gap-2">
+            <div className="grid grid-cols-3 items-center gap-4">
+              <Label htmlFor="name">Name</Label>
+              <Input
+                id="name"
+                defaultValue="Pedro Duarte"
+                className="col-span-2 h-8"
+              />
+            </div>
+            <div className="grid grid-cols-3 items-center gap-4">
+              <Label htmlFor="username">Username</Label>
+              <Input
+                id="username"
+                defaultValue="@peduarte"
+                className="col-span-2 h-8"
+              />
+            </div>
+          </div>
+          <Button size="sm" className="w-full">
+            Save changes
+          </Button>
+        </div>
+      </PopoverContent>
+    </Popover>
+  )
+}
+```
+
+### Controlled Popover
+
+```tsx
+import { useState } from "react"
+import { Button } from "@/components/ui/button"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
+
+export function ControlledPopover() {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
+        <Button variant="outline">
+          {open ? "Close" : "Open"} popover
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-80">
+        <div className="grid gap-4">
+          <div className="space-y-2">
+            <h4 className="font-medium leading-none">Controlled Popover</h4>
+            <p className="text-sm text-muted-foreground">
+              This popover is controlled by state.
+            </p>
+          </div>
+          <Button onClick={() => setOpen(false)} size="sm">
+            Close popover
+          </Button>
+        </div>
+      </PopoverContent>
+    </Popover>
+  )
+}
+```
+
+### Custom Positioning
+
+```tsx
+import { Button } from "@/components/ui/button"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
+
+export function PopoverPositioning() {
+  return (
+    <div className="flex gap-4">
+      <Popover>
+        <PopoverTrigger asChild>
+          <Button variant="outline">Top</Button>
+        </PopoverTrigger>
+        <PopoverContent side="top" className="w-80">
+          <p>This popover appears on top.</p>
+        </PopoverContent>
+      </Popover>
+      
+      <Popover>
+        <PopoverTrigger asChild>
+          <Button variant="outline">Right</Button>
+        </PopoverTrigger>
+        <PopoverContent side="right" className="w-80">
+          <p>This popover appears on the right.</p>
+        </PopoverContent>
+      </Popover>
+      
+      <Popover>
+        <PopoverTrigger asChild>
+          <Button variant="outline">Bottom</Button>
+        </PopoverTrigger>
+        <PopoverContent side="bottom" className="w-80">
+          <p>This popover appears on the bottom.</p>
+        </PopoverContent>
+      </Popover>
+      
+      <Popover>
+        <PopoverTrigger asChild>
+          <Button variant="outline">Left</Button>
+        </PopoverTrigger>
+        <PopoverContent side="left" className="w-80">
+          <p>This popover appears on the left.</p>
+        </PopoverContent>
+      </Popover>
+    </div>
+  )
+}
+```
+
+### With Custom Styling
+
+```tsx
+import { Button } from "@/components/ui/button"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
+
+export function CustomStyledPopover() {
+  return (
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button variant="outline">Custom Style</Button>
+      </PopoverTrigger>
+      <PopoverContent 
+        className="w-96 bg-gradient-to-r from-purple-400 to-pink-400 text-white border-none shadow-lg"
+        sideOffset={10}
+      >
+        <div className="grid gap-4">
+          <div className="space-y-2">
+            <h4 className="font-medium leading-none text-white">
+              Custom Styled Popover
+            </h4>
+            <p className="text-sm text-purple-100">
+              This popover has custom styling with gradients.
+            </p>
+          </div>
+          <Button variant="secondary" size="sm">
+            Action
+          </Button>
+        </div>
+      </PopoverContent>
+    </Popover>
+  )
+}
+```

@@ -1,43 +1,32 @@
 ---
 title: Accordion
-description: A vertically stacked set of interactive headings that each reveal a section of content.
+description: A collapsible content component that allows users to expand and collapse sections of content.
 ---
 
 # Accordion
 
-A vertically stacked set of interactive headings that each reveal a section of content. Built on top of Radix UI Accordion primitive.
+A flexible accordion component that allows users to show and hide sections of related content on a page. Built on top of Radix UI with full accessibility support and smooth animations.
 
 ## Installation
 
 ```bash
-npm install @radix-ui/react-accordion
-npm install lucide-react
+npm install krypton-ui
 ```
 
 ## Import
 
 ```tsx
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from 'krypton-ui'
 ```
 
-## Usage
+## Basic Usage
 
-### Basic Example
+The Accordion component provides an intuitive way to organize content in collapsible sections.
 
-```tsx
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion"
+<CodePreview
+  code={`import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from 'krypton-ui'
 
-export function AccordionDemo() {
+export default function BasicAccordion() {
   return (
     <Accordion type="single" collapsible className="w-full">
       <AccordionItem value="item-1">
@@ -60,68 +49,195 @@ export function AccordionDemo() {
       </AccordionItem>
     </Accordion>
   )
-}
-```
+}`}
+  preview={
+    <Accordion type="single" collapsible className="w-full">
+      <AccordionItem value="item-1">
+        <AccordionTrigger>Is it accessible?</AccordionTrigger>
+        <AccordionContent>
+          Yes. It adheres to the WAI-ARIA design pattern.
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-2">
+        <AccordionTrigger>Is it styled?</AccordionTrigger>
+        <AccordionContent>
+          Yes. It comes with default styles that matches the other components' aesthetic.
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-3">
+        <AccordionTrigger>Is it animated?</AccordionTrigger>
+        <AccordionContent>
+          Yes. It's animated by default, but you can disable it if you prefer.
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  }
+/>
 
-### Multiple Items Open
+## Multiple Items Open
 
-```tsx
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion"
+Allow multiple accordion items to be open simultaneously by setting the type to "multiple".
 
-export function AccordionMultiple() {
+<CodePreview
+  code={`import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from 'krypton-ui'
+
+export default function MultipleAccordion() {
   return (
     <Accordion type="multiple" className="w-full">
       <AccordionItem value="item-1">
-        <AccordionTrigger>Section 1</AccordionTrigger>
+        <AccordionTrigger>Getting Started</AccordionTrigger>
         <AccordionContent>
-          Content for section 1. Multiple sections can be open at the same time.
+          Learn the basics of our design system and how to integrate it into your project.
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value="item-2">
-        <AccordionTrigger>Section 2</AccordionTrigger>
+        <AccordionTrigger>Components</AccordionTrigger>
         <AccordionContent>
-          Content for section 2. This can be open simultaneously with other sections.
+          Explore our comprehensive collection of reusable UI components.
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-3">
+        <AccordionTrigger>Customization</AccordionTrigger>
+        <AccordionContent>
+          Customize components to match your brand and design requirements.
         </AccordionContent>
       </AccordionItem>
     </Accordion>
   )
-}
-```
-
-### With Default Value
-
-```tsx
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion"
-
-export function AccordionWithDefault() {
-  return (
-    <Accordion type="single" defaultValue="item-1" collapsible className="w-full">
+}`}
+  preview={
+    <Accordion type="multiple" className="w-full">
       <AccordionItem value="item-1">
-        <AccordionTrigger>This item is open by default</AccordionTrigger>
+        <AccordionTrigger>Getting Started</AccordionTrigger>
         <AccordionContent>
-          This content is visible when the component first loads.
+          Learn the basics of our design system and how to integrate it into your project.
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value="item-2">
-        <AccordionTrigger>This item is closed by default</AccordionTrigger>
+        <AccordionTrigger>Components</AccordionTrigger>
         <AccordionContent>
-          This content is hidden when the component first loads.
+          Explore our comprehensive collection of reusable UI components.
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-3">
+        <AccordionTrigger>Customization</AccordionTrigger>
+        <AccordionContent>
+          Customize components to match your brand and design requirements.
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  }
+/>
+
+## Disabled State
+
+Disable specific accordion items or the entire accordion component.
+
+<CodePreview
+  code={`import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from 'krypton-ui'
+
+export default function DisabledAccordion() {
+  return (
+    <Accordion type="single" collapsible className="w-full">
+      <AccordionItem value="item-1">
+        <AccordionTrigger>Available Section</AccordionTrigger>
+        <AccordionContent>
+          This section is available and can be expanded.
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-2" disabled>
+        <AccordionTrigger>Disabled Section</AccordionTrigger>
+        <AccordionContent>
+          This content won't be accessible.
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-3">
+        <AccordionTrigger>Another Available Section</AccordionTrigger>
+        <AccordionContent>
+          This section is also available for interaction.
         </AccordionContent>
       </AccordionItem>
     </Accordion>
   )
-}
-```
+}`}
+  preview={
+    <Accordion type="single" collapsible className="w-full">
+      <AccordionItem value="item-1">
+        <AccordionTrigger>Available Section</AccordionTrigger>
+        <AccordionContent>
+          This section is available and can be expanded.
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-2" disabled>
+        <AccordionTrigger>Disabled Section</AccordionTrigger>
+        <AccordionContent>
+          This content won't be accessible.
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-3">
+        <AccordionTrigger>Another Available Section</AccordionTrigger>
+        <AccordionContent>
+          This section is also available for interaction.
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  }
+/>
+
+## Default Open
+
+Set default open items using the defaultValue prop.
+
+<CodePreview
+  code={`import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from 'krypton-ui'
+
+export default function DefaultOpenAccordion() {
+  return (
+    <Accordion type="single" collapsible defaultValue="item-2" className="w-full">
+      <AccordionItem value="item-1">
+        <AccordionTrigger>First Section</AccordionTrigger>
+        <AccordionContent>
+          This section starts closed.
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-2">
+        <AccordionTrigger>Second Section (Default Open)</AccordionTrigger>
+        <AccordionContent>
+          This section starts open by default.
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-3">
+        <AccordionTrigger>Third Section</AccordionTrigger>
+        <AccordionContent>
+          This section also starts closed.
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  )
+}`}
+  preview={
+    <Accordion type="single" collapsible defaultValue="item-2" className="w-full">
+      <AccordionItem value="item-1">
+        <AccordionTrigger>First Section</AccordionTrigger>
+        <AccordionContent>
+          This section starts closed.
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-2">
+        <AccordionTrigger>Second Section (Default Open)</AccordionTrigger>
+        <AccordionContent>
+          This section starts open by default.
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-3">
+        <AccordionTrigger>Third Section</AccordionTrigger>
+        <AccordionContent>
+          This section also starts closed.
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  }
+/>
 
 ## API Reference
 
@@ -212,13 +328,13 @@ The component uses Tailwind CSS classes and can be customized by:
 ### With Icons
 
 ```tsx
-import { FileText, Settings, User } from "lucide-react"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, LucideIcon } from 'krypton-ui'
 
 <Accordion type="single" collapsible className="w-full">
   <AccordionItem value="profile">
     <AccordionTrigger>
       <div className="flex items-center gap-2">
-        <User className="h-4 w-4" />
+        <LucideIcon name="User" className="h-4 w-4" />
         Profile Settings
       </div>
     </AccordionTrigger>
@@ -229,7 +345,7 @@ import { FileText, Settings, User } from "lucide-react"
   <AccordionItem value="documents">
     <AccordionTrigger>
       <div className="flex items-center gap-2">
-        <FileText className="h-4 w-4" />
+        <LucideIcon name="FileText" className="h-4 w-4" />
         Documents
       </div>
     </AccordionTrigger>
