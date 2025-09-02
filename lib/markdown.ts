@@ -8,15 +8,52 @@ import rehypeSlug from "rehype-slug";
 import rehypeCodeTitles from "rehype-code-titles";
 import { visit } from "unist-util-visit";
 
-// custom components imports
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Pre from "@/components/pre";
 import Note from "@/components/note";
 import { Stepper, StepperItem } from "@/components/ui/stepper";
-import { mdxComponents } from "@/components/mdx-components";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import CodePreview from "@/components/code-preview";
+import * as LucideIcons from "lucide-react";
+import { Label } from "@radix-ui/react-dropdown-menu";
+import { DialogDescription } from "@radix-ui/react-dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
-// add custom components
+const icons = {
+  Eye: LucideIcons.Eye,
+  EyeOff: LucideIcons.EyeOff,
+  Search: LucideIcons.Search,
+  Mail: LucideIcons.Mail,
+  Lock: LucideIcons.Lock,
+  User: LucideIcons.User,
+  ArrowRight: LucideIcons.ArrowRight,
+  Download: LucideIcons.Download,
+  ChevronRight: LucideIcons.ChevronRight,
+  Loader2: LucideIcons.Loader2,
+  Heart: LucideIcons.Heart,
+  ChevronLeft: LucideIcons.ChevronLeft,
+  Settings: LucideIcons.Settings,
+  Plus: LucideIcons.Plus,
+  Edit: LucideIcons.Edit,
+  Trash2: LucideIcons.Trash2,
+};
+
 const components = {
+  ...icons,
   Tabs,
   TabsContent,
   TabsList,
@@ -25,10 +62,23 @@ const components = {
   Note,
   Stepper,
   StepperItem,
-  ...mdxComponents,
+  Input,
+  Button,
+  Label,
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+  CodePreview,
 };
 
-// can be used for other pages like blogs, Guides etc
 async function parseMdx<Frontmatter>(rawMdx: string) {
   return await compileMDX<Frontmatter>({
     source: rawMdx,
