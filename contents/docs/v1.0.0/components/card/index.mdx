@@ -421,11 +421,12 @@ Display notifications and alerts.
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
   Button,
 } from "krypton-ui"
-import { Bell, X } from "lucide-react"
+
 
 export default function Component() {
   return (
@@ -433,11 +434,11 @@ export default function Component() {
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <Bell className="h-4 w-4" />
+            <LucideIcon name="Bell" className="h-4 w-4" />
             <CardTitle className="text-base">Notifications</CardTitle>
           </div>
           <Button variant="ghost" size="sm">
-            <X className="h-4 w-4" />
+            <LucideIcon name="X" className="h-4 w-4" />
           </Button>
         </div>
       </CardHeader>
@@ -475,11 +476,11 @@ export default function Component() {
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <Bell className="h-4 w-4" />
+            <LucideIcon name="Bell" className="h-4 w-4" />
             <CardTitle className="text-base">Notifications</CardTitle>
           </div>
           <Button variant="ghost" size="sm">
-            <X className="h-4 w-4" />
+            <LucideIcon name="X" className="h-4 w-4" />
           </Button>
         </div>
       </CardHeader>
@@ -528,7 +529,6 @@ Display pricing plans and features.
   Button,
   Badge,
 } from "krypton-ui"
-import { Check } from "lucide-react"
 
 export default function Component() {
   const features = [
@@ -556,8 +556,7 @@ export default function Component() {
         <ul className="space-y-3">
           {features.map((feature, index) => (
             <li key={index} className="flex items-center space-x-2">
-              <Check className="h-4 w-4 text-green-500" />
-              <span className="text-sm">{feature}</span>
+              <span className="text-sm">✓ {feature}</span>
             </li>
           ))}
         </ul>
@@ -591,8 +590,7 @@ export default function Component() {
             "Basic analytics",
           ].map((feature, index) => (
             <li key={index} className="flex items-center space-x-2">
-              <Check className="h-4 w-4 text-green-500" />
-              <span className="text-sm">{feature}</span>
+              <span className="text-sm">✓ {feature}</span>
             </li>
           ))}
         </ul>

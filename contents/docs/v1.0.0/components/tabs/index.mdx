@@ -18,12 +18,7 @@ npm install @radix-ui/react-tabs
 ## Import
 
 ```tsx
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui/tabs"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 ```
 
 ## Usage
@@ -31,12 +26,7 @@ import {
 ### Basic Example
 
 ```tsx
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui/tabs"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export function TabsDemo() {
   return (
@@ -62,20 +52,15 @@ export function TabsDemo() {
         </div>
       </TabsContent>
     </Tabs>
-  )
+  );
 }
 ```
 
 ### With Form Content
 
 ```tsx
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui/tabs"
-import { Button } from "@/components/ui/button"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -83,9 +68,9 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 export function TabsWithForms() {
   return (
@@ -141,31 +126,26 @@ export function TabsWithForms() {
         </Card>
       </TabsContent>
     </Tabs>
-  )
+  );
 }
 ```
 
 ### Controlled Tabs
 
 ```tsx
-import { useState } from "react"
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui/tabs"
-import { Button } from "@/components/ui/button"
+import { useState } from "react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Button } from "@/components/ui/button";
 
 export function ControlledTabs() {
-  const [activeTab, setActiveTab] = useState("overview")
+  const [activeTab, setActiveTab] = useState("overview");
 
   const tabs = [
     { value: "overview", label: "Overview" },
     { value: "analytics", label: "Analytics" },
     { value: "reports", label: "Reports" },
     { value: "notifications", label: "Notifications" },
-  ]
+  ];
 
   return (
     <div className="w-full max-w-2xl">
@@ -181,7 +161,7 @@ export function ControlledTabs() {
           </Button>
         ))}
       </div>
-      
+
       <Tabs value={activeTab} onValueChange={setActiveTab}>
         <TabsList className="hidden">
           {tabs.map((tab) => (
@@ -190,16 +170,17 @@ export function ControlledTabs() {
             </TabsTrigger>
           ))}
         </TabsList>
-        
+
         <TabsContent value="overview" className="mt-0">
           <div className="rounded-lg border p-6">
             <h3 className="text-lg font-semibold">Overview</h3>
             <p className="mt-2 text-muted-foreground">
-              Get a high-level view of your dashboard metrics and key performance indicators.
+              Get a high-level view of your dashboard metrics and key
+              performance indicators.
             </p>
           </div>
         </TabsContent>
-        
+
         <TabsContent value="analytics" className="mt-0">
           <div className="rounded-lg border p-6">
             <h3 className="text-lg font-semibold">Analytics</h3>
@@ -208,7 +189,7 @@ export function ControlledTabs() {
             </p>
           </div>
         </TabsContent>
-        
+
         <TabsContent value="reports" className="mt-0">
           <div className="rounded-lg border p-6">
             <h3 className="text-lg font-semibold">Reports</h3>
@@ -217,7 +198,7 @@ export function ControlledTabs() {
             </p>
           </div>
         </TabsContent>
-        
+
         <TabsContent value="notifications" className="mt-0">
           <div className="rounded-lg border p-6">
             <h3 className="text-lg font-semibold">Notifications</h3>
@@ -228,64 +209,65 @@ export function ControlledTabs() {
         </TabsContent>
       </Tabs>
     </div>
-  )
+  );
 }
 ```
 
 ### Vertical Tabs
 
 ```tsx
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui/tabs"
-import { Badge } from "@/components/ui/badge"
-import { Settings, User, Bell, Shield, CreditCard } from "lucide-react"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Badge } from "@/components/ui/badge";
+import { Settings, User, Bell, Shield, CreditCard } from "lucide-react";
 
 export function VerticalTabs() {
   return (
-    <Tabs defaultValue="general" orientation="vertical" className="flex w-full max-w-4xl">
+    <Tabs
+      defaultValue="general"
+      orientation="vertical"
+      className="flex w-full max-w-4xl"
+    >
       <TabsList className="flex h-auto flex-col justify-start space-y-1 bg-transparent p-0">
-        <TabsTrigger 
-          value="general" 
+        <TabsTrigger
+          value="general"
           className="w-full justify-start gap-2 rounded-md px-3 py-2 text-left data-[state=active]:bg-muted"
         >
           <Settings className="h-4 w-4" />
           General
         </TabsTrigger>
-        <TabsTrigger 
-          value="account" 
+        <TabsTrigger
+          value="account"
           className="w-full justify-start gap-2 rounded-md px-3 py-2 text-left data-[state=active]:bg-muted"
         >
           <User className="h-4 w-4" />
           Account
         </TabsTrigger>
-        <TabsTrigger 
-          value="notifications" 
+        <TabsTrigger
+          value="notifications"
           className="w-full justify-start gap-2 rounded-md px-3 py-2 text-left data-[state=active]:bg-muted"
         >
-          <Bell className="h-4 w-4" />
+          <LucideIcon name="Bell" className="w-4 h-4" />
           Notifications
-          <Badge variant="secondary" className="ml-auto">3</Badge>
+          <Badge variant="secondary" className="ml-auto">
+            3
+          </Badge>
         </TabsTrigger>
-        <TabsTrigger 
-          value="security" 
+        <TabsTrigger
+          value="security"
           className="w-full justify-start gap-2 rounded-md px-3 py-2 text-left data-[state=active]:bg-muted"
         >
           <Shield className="h-4 w-4" />
           Security
         </TabsTrigger>
-        <TabsTrigger 
-          value="billing" 
+        <TabsTrigger
+          value="billing"
           className="w-full justify-start gap-2 rounded-md px-3 py-2 text-left data-[state=active]:bg-muted"
         >
           <CreditCard className="h-4 w-4" />
           Billing
         </TabsTrigger>
       </TabsList>
-      
+
       <div className="flex-1 ml-6">
         <TabsContent value="general" className="mt-0">
           <div className="space-y-4">
@@ -300,7 +282,7 @@ export function VerticalTabs() {
             </div>
           </div>
         </TabsContent>
-        
+
         <TabsContent value="account" className="mt-0">
           <div className="space-y-4">
             <div>
@@ -314,7 +296,7 @@ export function VerticalTabs() {
             </div>
           </div>
         </TabsContent>
-        
+
         <TabsContent value="notifications" className="mt-0">
           <div className="space-y-4">
             <div>
@@ -328,7 +310,7 @@ export function VerticalTabs() {
             </div>
           </div>
         </TabsContent>
-        
+
         <TabsContent value="security" className="mt-0">
           <div className="space-y-4">
             <div>
@@ -342,7 +324,7 @@ export function VerticalTabs() {
             </div>
           </div>
         </TabsContent>
-        
+
         <TabsContent value="billing" className="mt-0">
           <div className="space-y-4">
             <div>
@@ -358,29 +340,24 @@ export function VerticalTabs() {
         </TabsContent>
       </div>
     </Tabs>
-  )
+  );
 }
 ```
 
 ### Tabs with Icons
 
 ```tsx
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui/tabs"
-import { 
-  Home, 
-  Search, 
-  Heart, 
-  User, 
+  Home,
+  Search,
+  Heart,
+  User,
   ShoppingCart,
   Star,
   MessageCircle,
-  Settings
-} from "lucide-react"
+  Settings,
+} from "lucide-react";
 
 export function TabsWithIcons() {
   return (
@@ -391,7 +368,7 @@ export function TabsWithIcons() {
           <span className="hidden sm:inline">Home</span>
         </TabsTrigger>
         <TabsTrigger value="search" className="flex items-center gap-2">
-          <Search className="h-4 w-4" />
+          <LucideIcon name="Search" className="h-4 w-4" />
           <span className="hidden sm:inline">Search</span>
         </TabsTrigger>
         <TabsTrigger value="favorites" className="flex items-center gap-2">
@@ -403,7 +380,7 @@ export function TabsWithIcons() {
           <span className="hidden sm:inline">Profile</span>
         </TabsTrigger>
       </TabsList>
-      
+
       <TabsContent value="home" className="mt-6">
         <div className="rounded-lg border p-6">
           <div className="flex items-center gap-2 mb-4">
@@ -411,15 +388,16 @@ export function TabsWithIcons() {
             <h3 className="text-lg font-semibold">Home</h3>
           </div>
           <p className="text-muted-foreground">
-            Welcome to your dashboard. Here you can see an overview of your activity.
+            Welcome to your dashboard. Here you can see an overview of your
+            activity.
           </p>
         </div>
       </TabsContent>
-      
+
       <TabsContent value="search" className="mt-6">
         <div className="rounded-lg border p-6">
           <div className="flex items-center gap-2 mb-4">
-            <Search className="h-5 w-5" />
+            <LucideIcon name="Search" className="h-5 w-5" />
             <h3 className="text-lg font-semibold">Search</h3>
           </div>
           <p className="text-muted-foreground">
@@ -427,7 +405,7 @@ export function TabsWithIcons() {
           </p>
         </div>
       </TabsContent>
-      
+
       <TabsContent value="favorites" className="mt-6">
         <div className="rounded-lg border p-6">
           <div className="flex items-center gap-2 mb-4">
@@ -439,7 +417,7 @@ export function TabsWithIcons() {
           </p>
         </div>
       </TabsContent>
-      
+
       <TabsContent value="profile" className="mt-6">
         <div className="rounded-lg border p-6">
           <div className="flex items-center gap-2 mb-4">
@@ -452,36 +430,31 @@ export function TabsWithIcons() {
         </div>
       </TabsContent>
     </Tabs>
-  )
+  );
 }
 ```
 
 ### Dashboard Tabs
 
 ```tsx
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui/tabs"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { 
-  BarChart3, 
-  TrendingUp, 
-  Users, 
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  BarChart3,
+  TrendingUp,
+  Users,
   DollarSign,
   Activity,
-  Calendar
-} from "lucide-react"
+  Calendar,
+} from "lucide-react";
 
 export function DashboardTabs() {
   return (
@@ -492,17 +465,22 @@ export function DashboardTabs() {
         <TabsTrigger value="reports">Reports</TabsTrigger>
         <TabsTrigger value="notifications">
           Notifications
-          <Badge variant="destructive" className="ml-2 h-5 w-5 rounded-full p-0 text-xs">
+          <Badge
+            variant="destructive"
+            className="ml-2 h-5 w-5 rounded-full p-0 text-xs"
+          >
             3
           </Badge>
         </TabsTrigger>
       </TabsList>
-      
+
       <TabsContent value="overview" className="space-y-4">
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Total Revenue</CardTitle>
+              <CardTitle className="text-sm font-medium">
+                Total Revenue
+              </CardTitle>
               <DollarSign className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
@@ -514,7 +492,9 @@ export function DashboardTabs() {
           </Card>
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Subscriptions</CardTitle>
+              <CardTitle className="text-sm font-medium">
+                Subscriptions
+              </CardTitle>
               <Users className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
@@ -550,7 +530,7 @@ export function DashboardTabs() {
           </Card>
         </div>
       </TabsContent>
-      
+
       <TabsContent value="analytics" className="space-y-4">
         <Card>
           <CardHeader>
@@ -564,12 +544,13 @@ export function DashboardTabs() {
           </CardHeader>
           <CardContent>
             <p className="text-muted-foreground">
-              Analytics content would go here. This could include charts, graphs, and detailed metrics.
+              Analytics content would go here. This could include charts,
+              graphs, and detailed metrics.
             </p>
           </CardContent>
         </Card>
       </TabsContent>
-      
+
       <TabsContent value="reports" className="space-y-4">
         <Card>
           <CardHeader>
@@ -603,14 +584,12 @@ export function DashboardTabs() {
           </CardContent>
         </Card>
       </TabsContent>
-      
+
       <TabsContent value="notifications" className="space-y-4">
         <Card>
           <CardHeader>
             <CardTitle>Notifications</CardTitle>
-            <CardDescription>
-              You have 3 unread notifications.
-            </CardDescription>
+            <CardDescription>You have 3 unread notifications.</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="flex items-start space-x-4">
@@ -630,7 +609,9 @@ export function DashboardTabs() {
             <div className="flex items-start space-x-4">
               <div className="h-2 w-2 rounded-full bg-orange-500 mt-2"></div>
               <div className="space-y-1">
-                <p className="text-sm font-medium">Server maintenance scheduled</p>
+                <p className="text-sm font-medium">
+                  Server maintenance scheduled
+                </p>
                 <p className="text-sm text-muted-foreground">1 hour ago</p>
               </div>
             </div>
@@ -638,21 +619,16 @@ export function DashboardTabs() {
         </Card>
       </TabsContent>
     </Tabs>
-  )
+  );
 }
 ```
 
 ### Mobile-Friendly Tabs
 
 ```tsx
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui/tabs"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { Badge } from "@/components/ui/badge"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Badge } from "@/components/ui/badge";
 
 export function MobileTabs() {
   const tabs = [
@@ -661,15 +637,15 @@ export function MobileTabs() {
     { value: "completed", label: "Completed", count: 8 },
     { value: "cancelled", label: "Cancelled", count: 1 },
     { value: "archived", label: "Archived", count: 0 },
-  ]
+  ];
 
   return (
     <Tabs defaultValue="all" className="w-full">
       <ScrollArea className="w-full">
         <TabsList className="inline-flex h-10 items-center justify-start rounded-md bg-muted p-1 text-muted-foreground w-max">
           {tabs.map((tab) => (
-            <TabsTrigger 
-              key={tab.value} 
+            <TabsTrigger
+              key={tab.value}
               value={tab.value}
               className="inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm"
             >
@@ -683,7 +659,7 @@ export function MobileTabs() {
           ))}
         </TabsList>
       </ScrollArea>
-      
+
       <TabsContent value="all" className="mt-4">
         <div className="space-y-4">
           <h3 className="text-lg font-medium">All Items</h3>
@@ -691,13 +667,15 @@ export function MobileTabs() {
             {Array.from({ length: 12 }, (_, i) => (
               <div key={i} className="rounded-lg border p-4">
                 <h4 className="font-medium">Item {i + 1}</h4>
-                <p className="text-sm text-muted-foreground">Description for item {i + 1}</p>
+                <p className="text-sm text-muted-foreground">
+                  Description for item {i + 1}
+                </p>
               </div>
             ))}
           </div>
         </div>
       </TabsContent>
-      
+
       <TabsContent value="pending" className="mt-4">
         <div className="space-y-4">
           <h3 className="text-lg font-medium">Pending Items</h3>
@@ -708,13 +686,15 @@ export function MobileTabs() {
                   <h4 className="font-medium">Pending Item {i + 1}</h4>
                   <Badge variant="secondary">Pending</Badge>
                 </div>
-                <p className="text-sm text-muted-foreground">This item is pending approval.</p>
+                <p className="text-sm text-muted-foreground">
+                  This item is pending approval.
+                </p>
               </div>
             ))}
           </div>
         </div>
       </TabsContent>
-      
+
       <TabsContent value="completed" className="mt-4">
         <div className="space-y-4">
           <h3 className="text-lg font-medium">Completed Items</h3>
@@ -725,13 +705,15 @@ export function MobileTabs() {
                   <h4 className="font-medium">Completed Item {i + 1}</h4>
                   <Badge variant="default">Completed</Badge>
                 </div>
-                <p className="text-sm text-muted-foreground">This item has been completed.</p>
+                <p className="text-sm text-muted-foreground">
+                  This item has been completed.
+                </p>
               </div>
             ))}
           </div>
         </div>
       </TabsContent>
-      
+
       <TabsContent value="cancelled" className="mt-4">
         <div className="space-y-4">
           <h3 className="text-lg font-medium">Cancelled Items</h3>
@@ -741,12 +723,14 @@ export function MobileTabs() {
                 <h4 className="font-medium">Cancelled Item 1</h4>
                 <Badge variant="destructive">Cancelled</Badge>
               </div>
-              <p className="text-sm text-muted-foreground">This item was cancelled.</p>
+              <p className="text-sm text-muted-foreground">
+                This item was cancelled.
+              </p>
             </div>
           </div>
         </div>
       </TabsContent>
-      
+
       <TabsContent value="archived" className="mt-4">
         <div className="space-y-4">
           <h3 className="text-lg font-medium">Archived Items</h3>
@@ -756,7 +740,7 @@ export function MobileTabs() {
         </div>
       </TabsContent>
     </Tabs>
-  )
+  );
 }
 ```
 
@@ -766,41 +750,43 @@ export function MobileTabs() {
 
 The root tabs container.
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `defaultValue` | `string` | - | The default active tab |
-| `value` | `string` | - | The controlled active tab |
-| `onValueChange` | `(value: string) => void` | - | Callback when tab changes |
-| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | Tab orientation |
-| `dir` | `"ltr" \| "rtl"` | `"ltr"` | Text direction |
-| `activationMode` | `"automatic" \| "manual"` | `"automatic"` | Activation mode |
-| `className` | `string` | - | Additional CSS classes |
-| `children` | `ReactNode` | - | Tab content |
+| Prop             | Type                         | Default        | Description               |
+| ---------------- | ---------------------------- | -------------- | ------------------------- |
+| `defaultValue`   | `string`                     | -              | The default active tab    |
+| `value`          | `string`                     | -              | The controlled active tab |
+| `onValueChange`  | `(value: string) => void`    | -              | Callback when tab changes |
+| `orientation`    | `"horizontal" \| "vertical"` | `"horizontal"` | Tab orientation           |
+| `dir`            | `"ltr" \| "rtl"`             | `"ltr"`        | Text direction            |
+| `activationMode` | `"automatic" \| "manual"`    | `"automatic"`  | Activation mode           |
+| `className`      | `string`                     | -              | Additional CSS classes    |
+| `children`       | `ReactNode`                  | -              | Tab content               |
 
 ### TabsList
 
 Container for tab triggers.
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `className` | `string` | - | Additional CSS classes |
-| `children` | `ReactNode` | - | Tab triggers |
+| Prop        | Type        | Default | Description            |
+| ----------- | ----------- | ------- | ---------------------- |
+| `className` | `string`    | -       | Additional CSS classes |
+| `children`  | `ReactNode` | -       | Tab triggers           |
 
 **Default Styles:**
+
 - `inline-flex h-10 items-center justify-center rounded-md bg-muted p-1 text-muted-foreground` - Layout and styling
 
 ### TabsTrigger
 
 A tab trigger button.
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `value` | `string` | - | The tab value (required) |
-| `disabled` | `boolean` | `false` | Whether the tab is disabled |
-| `className` | `string` | - | Additional CSS classes |
-| `children` | `ReactNode` | - | Trigger content |
+| Prop        | Type        | Default | Description                 |
+| ----------- | ----------- | ------- | --------------------------- |
+| `value`     | `string`    | -       | The tab value (required)    |
+| `disabled`  | `boolean`   | `false` | Whether the tab is disabled |
+| `className` | `string`    | -       | Additional CSS classes      |
+| `children`  | `ReactNode` | -       | Trigger content             |
 
 **Default Styles:**
+
 - `inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium` - Layout and typography
 - `ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2` - Focus and transitions
 - `data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm` - Active state
@@ -810,14 +796,15 @@ A tab trigger button.
 
 Container for tab panel content.
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `value` | `string` | - | The tab value (required) |
-| `forceMount` | `boolean` | `false` | Force mount the content |
-| `className` | `string` | - | Additional CSS classes |
-| `children` | `ReactNode` | - | Panel content |
+| Prop         | Type        | Default | Description              |
+| ------------ | ----------- | ------- | ------------------------ |
+| `value`      | `string`    | -       | The tab value (required) |
+| `forceMount` | `boolean`   | `false` | Force mount the content  |
+| `className`  | `string`    | -       | Additional CSS classes   |
+| `children`   | `ReactNode` | -       | Panel content            |
 
 **Default Styles:**
+
 - `mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2` - Spacing and focus
 
 ## Features
@@ -855,8 +842,8 @@ The component uses Tailwind CSS classes and includes:
 ```tsx
 // Custom tab list styling
 <TabsList className="bg-slate-100 dark:bg-slate-800">
-  <TabsTrigger 
-    value="tab1" 
+  <TabsTrigger
+    value="tab1"
     className="data-[state=active]:bg-white data-[state=active]:text-slate-900"
   >
     Tab 1
@@ -884,7 +871,7 @@ function SettingsPanel() {
       </TabsList>
       {/* Content */}
     </Tabs>
-  )
+  );
 }
 ```
 
@@ -901,7 +888,7 @@ function DashboardNav() {
       </TabsList>
       {/* Content */}
     </Tabs>
-  )
+  );
 }
 ```
 
@@ -942,9 +929,7 @@ Verify proper ARIA attributes and keyboard navigation:
   <TabsList aria-label="Settings tabs">
     <TabsTrigger value="general">General</TabsTrigger>
   </TabsList>
-  <TabsContent value="general">
-    Content
-  </TabsContent>
+  <TabsContent value="general">Content</TabsContent>
 </Tabs>
 ```
 

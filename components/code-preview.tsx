@@ -6,7 +6,6 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { cn } from "@/lib/utils";
 import { Copy, Check, Code2, Eye, Sparkles } from "lucide-react";
-import { useTheme } from "next-themes";
 
 interface CodePreviewProps {
   code: string;

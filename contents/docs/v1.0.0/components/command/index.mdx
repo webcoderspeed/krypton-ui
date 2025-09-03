@@ -78,7 +78,6 @@ export default function Component() {
   CommandSeparator,
   CommandShortcut,
 } from "krypton-ui"
-import { LucideIcon } from "krypton-ui"
 import { useState } from "react"
 
 export default function Component() {
@@ -196,7 +195,7 @@ export default function Component() {
   CommandSeparator,
   CommandShortcut,
 } from "krypton-ui"
-import { LucideIcon } from "krypton-ui"
+
 
 export default function Component() {
   return (
@@ -589,7 +588,7 @@ const [loading, setLoading] = useState(false)
 const search = async (query: string) => {
   setLoading(true)
   try {
-    const response = await fetch(\`/api/search?q=\${query}\`)
+    const response = await fetch(`/api/search?q=${query}`)
     const data = await response.json()
     setResults(data)
   } finally {

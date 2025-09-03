@@ -82,14 +82,14 @@ export default function Component() {
   Input,
   Label,
 } from "krypton-ui"
-import { Plus } from "lucide-react"
+
 
 export default function Component() {
   return (
     <Drawer>
       <DrawerTrigger asChild>
         <Button>
-          <Plus className="mr-2 h-4 w-4" />
+          <LucideIcon name="Plus" className="mr-2 h-4 w-4" />
           Add User
         </Button>
       </DrawerTrigger>
@@ -135,7 +135,7 @@ export default function Component() {
     <Drawer>
       <DrawerTrigger asChild>
         <Button>
-          <Plus className="mr-2 h-4 w-4" />
+          <LucideIcon name="Plus" className="mr-2 h-4 w-4" />
           Add User
         </Button>
       </DrawerTrigger>
@@ -192,14 +192,14 @@ export default function Component() {
   DrawerTitle,
   DrawerTrigger,
 } from "krypton-ui"
-import { Settings, Bell, Moon, Globe } from "lucide-react"
+
 
 export default function Component() {
   return (
     <Drawer>
       <DrawerTrigger asChild>
         <Button variant="outline">
-          <Settings className="mr-2 h-4 w-4" />
+          <LucideIcon name="Settings" className="mr-2 h-4 w-4" />
           Settings
         </Button>
       </DrawerTrigger>
@@ -220,7 +220,7 @@ export default function Component() {
                 </div>
               </div>
               <Button variant="outline" size="sm">
-                <Bell className="h-4 w-4" />
+                <LucideIcon name="Bell" className="h-4 w-4" />
               </Button>
             </div>
             <div className="flex items-center justify-between">
@@ -231,7 +231,7 @@ export default function Component() {
                 </div>
               </div>
               <Button variant="outline" size="sm">
-                <Moon className="h-4 w-4" />
+                <LucideIcon name="Moon" className="h-4 w-4" />
               </Button>
             </div>
             <div className="flex items-center justify-between">
@@ -242,7 +242,7 @@ export default function Component() {
                 </div>
               </div>
               <Button variant="outline" size="sm">
-                <Globe className="h-4 w-4" />
+                <LucideIcon name="Globe" className="h-4 w-4" />
               </Button>
             </div>
           </div>
@@ -261,7 +261,7 @@ export default function Component() {
     <Drawer>
       <DrawerTrigger asChild>
         <Button variant="outline">
-          <Settings className="mr-2 h-4 w-4" />
+          <LucideIcon name="Settings" className="mr-2 h-4 w-4" />
           Settings
         </Button>
       </DrawerTrigger>
@@ -282,7 +282,7 @@ export default function Component() {
                 </div>
               </div>
               <Button variant="outline" size="sm">
-                <Bell className="h-4 w-4" />
+                <LucideIcon name="Bell" className="h-4 w-4" />
               </Button>
             </div>
             <div className="flex items-center justify-between">
@@ -293,7 +293,7 @@ export default function Component() {
                 </div>
               </div>
               <Button variant="outline" size="sm">
-                <Moon className="h-4 w-4" />
+                <LucideIcon name="Moon" className="h-4 w-4" />
               </Button>
             </div>
             <div className="flex items-center justify-between">
@@ -304,7 +304,7 @@ export default function Component() {
                 </div>
               </div>
               <Button variant="outline" size="sm">
-                <Globe className="h-4 w-4" />
+                <LucideIcon name="Globe" className="h-4 w-4" />
               </Button>
             </div>
           </div>
@@ -334,7 +334,7 @@ export default function Component() {
   DrawerTitle,
   DrawerTrigger,
 } from "krypton-ui"
-import { List, MoreHorizontal } from "lucide-react"
+
 
 export default function Component() {
   const items = Array.from({ length: 20 }, (_, i) => \`Item \${i + 1}\`)
@@ -343,7 +343,7 @@ export default function Component() {
     <Drawer>
       <DrawerTrigger asChild>
         <Button variant="outline">
-          <List className="mr-2 h-4 w-4" />
+          <LucideIcon name="List" className="mr-2 h-4 w-4" />
           View List
         </Button>
       </DrawerTrigger>
@@ -363,7 +363,7 @@ export default function Component() {
               >
                 <span>{item}</span>
                 <Button variant="ghost" size="sm">
-                  <MoreHorizontal className="h-4 w-4" />
+                  <LucideIcon name="MoreHorizontal" className="h-4 w-4" />
                 </Button>
               </div>
             ))}
@@ -382,7 +382,7 @@ export default function Component() {
     <Drawer>
       <DrawerTrigger asChild>
         <Button variant="outline">
-          <List className="mr-2 h-4 w-4" />
+          <LucideIcon name="List" className="mr-2 h-4 w-4" />
           View List
         </Button>
       </DrawerTrigger>
@@ -402,7 +402,7 @@ export default function Component() {
               >
                 <span>{item}</span>
                 <Button variant="ghost" size="sm">
-                  <MoreHorizontal className="h-4 w-4" />
+                  <LucideIcon name="MoreHorizontal" className="h-4 w-4" />
                 </Button>
               </div>
             ))}

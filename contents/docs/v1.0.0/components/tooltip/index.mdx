@@ -1,0 +1,341 @@
+---
+title: Tooltip
+description: A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.
+---
+
+# Tooltip
+
+A tooltip is a brief, informative message that appears when a user interacts with an element. Tooltips are usually initiated in one of two ways: through a mouse-hover gesture or through a keyboard-focus event.
+
+## Installation
+
+```bash
+npm install krypton-ui
+```
+
+## Import
+
+```tsx
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from 'krypton-ui'
+```
+
+## Basic Usage
+
+Wrap your application with TooltipProvider and use Tooltip components to add helpful information.
+
+<CodePreview
+  code={`import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from 'krypton-ui'
+import { Button } from 'krypton-ui'
+
+export default function BasicTooltip() {
+  return (
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button variant="outline">Hover me</Button>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>This is a tooltip</p>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
+  )
+}`}
+  preview={
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button variant="outline">Hover me</Button>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>This is a tooltip</p>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
+  }
+/>
+
+## With Icon
+
+Tooltips work great with icon buttons to provide context about the action.
+
+<CodePreview
+  code={`import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from 'krypton-ui'
+import { Button } from 'krypton-ui'
+
+
+export default function TooltipWithIcon() {
+  return (
+    <TooltipProvider>
+      <div className="flex gap-2">
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button variant="outline" size="icon">
+              <LucideIcon name="Plus" className="h-4 w-4" />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Add new item</p>
+          </TooltipContent>
+        </Tooltip>
+        
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button variant="outline" size="icon">
+              <LucideIcon name="Edit" className="h-4 w-4" />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Edit item</p>
+          </TooltipContent>
+        </Tooltip>
+        
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button variant="outline" size="icon">
+              <LucideIcon name="Trash2" className="h-4 w-4" />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Delete item</p>
+          </TooltipContent>
+        </Tooltip>
+      </div>
+    </TooltipProvider>
+  )
+}`}
+  preview={
+    <TooltipProvider>
+      <div className="flex gap-2">
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button variant="outline" size="icon">
+              <LucideIcon name="Plus" className="h-4 w-4" />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Add new item</p>
+          </TooltipContent>
+        </Tooltip>
+        
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button variant="outline" size="icon">
+              <LucideIcon name="Edit" className="h-4 w-4" />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Edit item</p>
+          </TooltipContent>
+        </Tooltip>
+        
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button variant="outline" size="icon">
+              <LucideIcon name="Trash2" className="h-4 w-4" />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Delete item</p>
+          </TooltipContent>
+        </Tooltip>
+      </div>
+    </TooltipProvider>
+  }
+/>
+
+## Positioning
+
+Control the position of the tooltip using the `side` prop.
+
+<CodePreview
+  code={`import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from 'krypton-ui'
+import { Button } from 'krypton-ui'
+
+export default function TooltipPositioning() {
+  return (
+    <TooltipProvider>
+      <div className="flex gap-4 justify-center">
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button variant="outline">Top</Button>
+          </TooltipTrigger>
+          <TooltipContent side="top">
+            <p>Tooltip on top</p>
+          </TooltipContent>
+        </Tooltip>
+        
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button variant="outline">Right</Button>
+          </TooltipTrigger>
+          <TooltipContent side="right">
+            <p>Tooltip on right</p>
+          </TooltipContent>
+        </Tooltip>
+        
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button variant="outline">Bottom</Button>
+          </TooltipTrigger>
+          <TooltipContent side="bottom">
+            <p>Tooltip on bottom</p>
+          </TooltipContent>
+        </Tooltip>
+        
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button variant="outline">Left</Button>
+          </TooltipTrigger>
+          <TooltipContent side="left">
+            <p>Tooltip on left</p>
+          </TooltipContent>
+        </Tooltip>
+      </div>
+    </TooltipProvider>
+  )
+}`}
+  preview={
+    <TooltipProvider>
+      <div className="flex gap-4 justify-center">
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button variant="outline">Top</Button>
+          </TooltipTrigger>
+          <TooltipContent side="top">
+            <p>Tooltip on top</p>
+          </TooltipContent>
+        </Tooltip>
+        
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button variant="outline">Right</Button>
+          </TooltipTrigger>
+          <TooltipContent side="right">
+            <p>Tooltip on right</p>
+          </TooltipContent>
+        </Tooltip>
+        
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button variant="outline">Bottom</Button>
+          </TooltipTrigger>
+          <TooltipContent side="bottom">
+            <p>Tooltip on bottom</p>
+          </TooltipContent>
+        </Tooltip>
+        
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button variant="outline">Left</Button>
+          </TooltipTrigger>
+          <TooltipContent side="left">
+            <p>Tooltip on left</p>
+          </TooltipContent>
+        </Tooltip>
+      </div>
+    </TooltipProvider>
+  }
+/>
+
+## Custom Delay
+
+Control when the tooltip appears and disappears using delay props.
+
+<CodePreview
+  code={`import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from 'krypton-ui'
+import { Button } from 'krypton-ui'
+
+export default function TooltipWithDelay() {
+  return (
+    <TooltipProvider delayDuration={800}>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button variant="outline">Slow tooltip</Button>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>This tooltip appears after 800ms</p>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
+  )
+}`}
+  preview={
+    <TooltipProvider delayDuration={800}>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button variant="outline">Slow tooltip</Button>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>This tooltip appears after 800ms</p>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
+  }
+/>
+
+## API Reference
+
+### TooltipProvider
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| delayDuration | number | 700 | The duration from when the mouse enters the trigger until the tooltip gets opened. |
+| skipDelayDuration | number | 300 | How much time a user has to enter another trigger without incurring a delay again. |
+| disableHoverableContent | boolean | false | When true, trying to hover the content will result in the tooltip closing. |
+
+### Tooltip
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| defaultOpen | boolean | false | The open state of the tooltip when it is initially rendered. |
+| open | boolean | - | The controlled open state of the tooltip. |
+| onOpenChange | function | - | Event handler called when the open state of the tooltip changes. |
+| delayDuration | number | - | Override the duration given to the Provider to customise the open delay for a specific tooltip. |
+| disableHoverableContent | boolean | - | Override the disableHoverableContent given to the Provider. |
+
+### TooltipTrigger
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| asChild | boolean | false | Change the default rendered element for the one passed as a child. |
+
+### TooltipContent
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| side | "top" \| "right" \| "bottom" \| "left" | "top" | The preferred side of the trigger to render against. |
+| sideOffset | number | 0 | The distance in pixels from the trigger. |
+| align | "start" \| "center" \| "end" | "center" | The preferred alignment against the trigger. |
+| alignOffset | number | 0 | An offset in pixels from the "start" or "end" alignment options. |
+| avoidCollisions | boolean | true | When true, overrides the side and align preferences to prevent collisions. |
+| collisionBoundary | Element \| null \| Array<Element \| null> | [] | The element used as the collision boundary. |
+| collisionPadding | number \| Partial<Record<Side, number>> | 0 | The distance in pixels from the boundary edges where collision detection should occur. |
+| arrowPadding | number | 0 | The padding between the arrow and the edges of the content. |
+| sticky | "partial" \| "always" | "partial" | The sticky behavior on the align axis. |
+| hideWhenDetached | boolean | false | Whether to hide the content when the trigger becomes fully occluded. |

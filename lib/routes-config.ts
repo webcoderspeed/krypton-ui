@@ -60,10 +60,6 @@ const v1_0_0_ROUTES: EachRoute[] = [
         "href": "/components/chart"
       },
       {
-        "title": "Checkbox",
-        "href": "/components/checkbox"
-      },
-      {
         "title": "Collapsible",
         "href": "/components/collapsible"
       },
@@ -88,10 +84,6 @@ const v1_0_0_ROUTES: EachRoute[] = [
         "href": "/components/dropdown-menu"
       },
       {
-        "title": "Form",
-        "href": "/components/form"
-      },
-      {
         "title": "Hover Card",
         "href": "/components/hover-card"
       },
@@ -102,34 +94,6 @@ const v1_0_0_ROUTES: EachRoute[] = [
       {
         "title": "Input Otp",
         "href": "/components/input-otp"
-      },
-      {
-        "title": "Label",
-        "href": "/components/label"
-      },
-      {
-        "title": "Menubar",
-        "href": "/components/menubar"
-      },
-      {
-        "title": "Navigation Menu",
-        "href": "/components/navigation-menu"
-      },
-      {
-        "title": "Pagination",
-        "href": "/components/pagination"
-      },
-      {
-        "title": "Popover",
-        "href": "/components/popover"
-      },
-      {
-        "title": "Progress",
-        "href": "/components/progress"
-      },
-      {
-        "title": "Radio Group",
-        "href": "/components/radio-group"
       },
       {
         "title": "Scroll Area",
@@ -148,24 +112,12 @@ const v1_0_0_ROUTES: EachRoute[] = [
         "href": "/components/stepper"
       },
       {
-        "title": "Switch",
-        "href": "/components/switch"
-      },
-      {
         "title": "Table",
         "href": "/components/table"
       },
       {
         "title": "Tabs",
         "href": "/components/tabs"
-      },
-      {
-        "title": "Textarea",
-        "href": "/components/textarea"
-      },
-      {
-        "title": "Toggle",
-        "href": "/components/toggle"
       },
       {
         "title": "Tooltip",

@@ -47,7 +47,6 @@ export default function BasicCalendar() {
       className="rounded-md border"
     />
   }
-/>
 
 ## Date Range Selection
 
@@ -88,7 +87,6 @@ export default function DateRangeCalendar() {
       className="rounded-md border"
     />
   }
-/>
 
 ## Multiple Date Selection
 
@@ -126,7 +124,6 @@ export default function MultipleCalendar() {
       className="rounded-md border"
     />
   }
-/>
 
 ## Disabled Dates
 
@@ -166,7 +163,6 @@ export default function DisabledDatesCalendar() {
       className="rounded-md border"
     />
   }
-/>
 
 ## Min/Max Dates
 
@@ -203,7 +199,6 @@ export default function MinMaxCalendar() {
       className="rounded-md border"
     />
   }
-/>
 
 ## Custom Footer
 
@@ -268,7 +263,6 @@ export default function CustomFooterCalendar() {
       className="rounded-md border"
     />
   }
-/>
 
 ## Dropdown Navigation
 
@@ -304,7 +298,6 @@ export default function DropdownCalendar() {
       className="rounded-md border"
     />
   }
-/>
 
 ## Custom Styling
 
@@ -374,7 +367,6 @@ export default function CustomStyledCalendar() {
       }}
     />
   }
-/>
 
 ## API Reference
 
@@ -384,16 +376,16 @@ The main calendar component.
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| mode | "single" \| "multiple" \| "range" | "single" | The selection mode |
-| selected | Date \| Date[] \| DateRange \| undefined | - | The selected date(s) |
-| onSelect | (date: Date \| Date[] \| DateRange \| undefined) => void | - | Callback when selection changes |
+| mode | "single" &#124; "multiple" &#124; "range" | "single" | The selection mode |
+| selected | Date &#124; Date[] &#124; DateRange &#124; undefined | - | The selected date(s) |
+| onSelect | (date: Date &#124; Date[] &#124; DateRange &#124; undefined) => void | - | Callback when selection changes |
 | defaultMonth | Date | new Date() | The month to display initially |
 | numberOfMonths | number | 1 | Number of months to display |
 | fromDate | Date | - | The earliest date that can be selected |
 | toDate | Date | - | The latest date that can be selected |
-| disabled | Date \| Date[] \| DateRange \| ((date: Date) => boolean) | - | Dates that cannot be selected |
+| disabled | Date &#124; Date[] &#124; DateRange &#124; ((date: Date) => boolean) | - | Dates that cannot be selected |
 | footer | ReactNode | - | Custom footer content |
-| captionLayout | "buttons" \| "dropdown" \| "dropdown-buttons" | "buttons" | Layout for the month/year navigation |
+| captionLayout | "buttons" &#124; "dropdown" &#124; "dropdown-buttons" | "buttons" | Layout for the month/year navigation |
 | fromYear | number | - | The earliest year for dropdown navigation |
 | toYear | number | - | The latest year for dropdown navigation |
 | className | string | - | Additional CSS classes |
@@ -430,7 +422,8 @@ The main calendar component.
 ### Date Picker with Input
 
 ```tsx
-import { Calendar, Button, Popover, PopoverContent, PopoverTrigger, LucideIcon } from 'krypton-ui'
+import { Calendar, Button, Popover, PopoverContent, PopoverTrigger } from 'krypton-ui'
+import { LucideIcon } from '../../../../components/lucide-icon'
 import { format } from 'date-fns'
 
 function DatePicker() {
