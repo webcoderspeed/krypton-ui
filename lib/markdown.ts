@@ -139,6 +139,12 @@ import {
   AccordionMultiple,
   AccordionControlled,
 } from "@/components/playground/accordion";
+import {
+  AlertDemo,
+  AlertDestructive,
+  AlertWithIcon,
+  AlertWithoutIcon,
+} from "@/components/playground/alert";
 
 const components = {
   LucideIcon,
@@ -256,6 +262,10 @@ const components = {
   AccordionDefault,
   AccordionMultiple,
   AccordionControlled,
+  AlertDemo,
+  AlertDestructive,
+  AlertWithIcon,
+  AlertWithoutIcon,
 
 };
 

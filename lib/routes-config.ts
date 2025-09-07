@@ -16,6 +16,10 @@ const v1_0_0_ROUTES: EachRoute[] = [
         "href": "/components/accordion"
       },
       {
+        "title": "Alert",
+        "href": "/components/alert"
+      },
+      {
         "title": "Button",
         "href": "/components/button"
       }
