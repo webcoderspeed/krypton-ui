@@ -13,7 +13,7 @@ import Pre from "@/components/pre";
 import Note from "@/components/note";
 import { Stepper, StepperItem } from "@/components/ui/stepper";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import CodePreview from "@/components/code-preview";
 import { Label } from "@radix-ui/react-dropdown-menu";
 import { DialogDescription } from "@radix-ui/react-dialog";
@@ -123,6 +123,17 @@ import {
   InputOTPSeparator,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
+import {   ButtonDefault,
+  ButtonVariants,
+  ButtonSizes,
+  ButtonWithIcon,
+  ButtonLoading,
+  ButtonAsChild,
+  ButtonDestructive,
+  ButtonOutline,
+  ButtonSecondary,
+  ButtonGhost,
+  ButtonLink, } from "@/components/playground/button";
 
 const components = {
   LucideIcon,
@@ -223,7 +234,21 @@ const components = {
   InputOTP,
   InputOTPGroup,
   InputOTPSeparator,
-  InputOTPSlot
+  InputOTPSlot,
+
+
+    ButtonDefault,
+  ButtonVariants,
+  ButtonSizes,
+  ButtonWithIcon,
+  ButtonLoading,
+  ButtonAsChild,
+  ButtonDestructive,
+  ButtonOutline,
+  ButtonSecondary,
+  ButtonGhost,
+  ButtonLink,
+
 };
 
 async function parseMdx<Frontmatter>(rawMdx: string) {

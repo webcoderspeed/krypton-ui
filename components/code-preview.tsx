@@ -238,7 +238,7 @@ export function CodePreview({
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.3 }}
-              className="min-h-[300px] p-6"
+              className="p-6"
             >
               {renderPreview()}
             </motion.div>
@@ -262,18 +262,15 @@ export function CodePreview({
                   fontSize: "0.875rem",
                   lineHeight: "1.5",
                 }}
-                showLineNumbers={true}
                 lineNumberStyle={{
                   minWidth: "3em",
                   paddingRight: "1em",
-                  color: "hsl(var(--muted-foreground))",
                   userSelect: "none",
                 }}
               >
                 {code}
               </SyntaxHighlighter>
 
-              {/* Copy button for code-only view */}
               {!preview && !title && (
                 <div className="absolute top-4 right-4 flex items-center gap-2">
                   <span className="px-2 py-1 text-xs font-mono bg-muted text-muted-foreground rounded">

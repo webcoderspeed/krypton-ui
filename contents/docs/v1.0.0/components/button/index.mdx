@@ -1,484 +1,300 @@
 ---
 title: Button
-description: A versatile button component built on top of shadcn/ui with multiple variants and sizes for different use cases.
+description: Displays a button or a component that looks like a button.
+component: true
 ---
-
-# Button
-
-A flexible and accessible button component that supports multiple variants, sizes, and states. Built on top of shadcn/ui with full TypeScript support and customizable styling.
 
 ## Installation
 
-```bash
-npm install krypton-ui
-```
+<CodePreview code="npx shadcn-ui@latest add button" language="bash" />
 
 ## Import
 
-```tsx
-import { Button } from 'krypton-ui'
-```
+<CodePreview code="import { Button } from '@/components/ui/button'" language="tsx" />
 
-## Basic Usage
-
-The Button component provides a clean and modern interface for user interactions.
-
-<CodePreview
-  code={`import { Button } from 'krypton-ui'
-
-export default function BasicButton() {
-  return (
-    <Button>
-      Click me
-    </Button>
-  )
-}`}
-  preview={<Button>Click me</Button>}
-/>
-
-## Variants
-
-The Button component supports multiple visual variants to match different contexts and importance levels.
+## Usage
 
 ### Default
 
-The primary button variant for main actions.
+The default button style with primary appearance.
 
-<CodePreview
-  code={`import { Button } from 'krypton-ui'
+<CodePreview 
+  code={`import { Button } from '@/components/ui/button'
 
-export default function DefaultButton() {
+export default function ButtonDefault() {
+  return <Button>Button</Button>
+}`} 
+  language="tsx" 
+  preview={<ButtonDefault />} 
+/>
+
+### Variants
+
+Buttons come in different variants to suit various use cases and design requirements.
+
+<CodePreview 
+  code={`import { Button } from '@/components/ui/button'
+
+export default function ButtonVariants() {
   return (
-    <Button variant="default">
-      Default Button
-    </Button>
+    <div className='flex flex-wrap items-center justify-center gap-4'>
+      <Button variant='default'>Default</Button>
+      <Button variant='destructive'>Destructive</Button>
+      <Button variant='outline'>Outline</Button>
+      <Button variant='secondary'>Secondary</Button>
+      <Button variant='ghost'>Ghost</Button>
+      <Button variant='link'>Link</Button>
+    </div>
   )
-}`}
-  preview={<Button variant="default">Default Button</Button>}
+}`} 
+  language="tsx" 
+  preview={<ButtonVariants />} 
+/>
+
+### Sizes
+
+Buttons are available in multiple sizes to fit different contexts.
+
+<CodePreview 
+  code={`import { Button } from '@/components/ui/button'
+
+export default function ButtonSizes() {
+  return (
+    <div className='flex flex-wrap items-center justify-center gap-4'>
+      <Button size='sm'>Small</Button>
+      <Button size='default'>Default</Button>
+      <Button size='lg'>Large</Button>
+      <Button size='icon'>🔥</Button>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<ButtonSizes />} 
+/>
+
+### With Icon
+
+Buttons can include icons to provide visual context and improve usability.
+
+<CodePreview 
+  code={`import { Button } from '@/components/ui/button'
+import LucideIcon from '@/components/lucide-icon'
+
+export default function ButtonWithIcon() {
+  return (
+    <div className='flex flex-wrap items-center justify-center gap-4'>
+      <Button>
+        <LucideIcon name='Mail' className='mr-2 h-4 w-4' />
+        Login with Email
+      </Button>
+      <Button variant='outline'>
+        <LucideIcon name='Github' className='mr-2 h-4 w-4' />
+        GitHub
+      </Button>
+      <Button size='icon'>
+        <LucideIcon name='Search' className='h-4 w-4' />
+      </Button>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<ButtonWithIcon />} 
+/>
+
+### Loading State
+
+Show loading states with disabled buttons and spinning icons.
+
+<CodePreview 
+  code={`import { Button } from '@/components/ui/button'
+import LucideIcon from '@/components/lucide-icon'
+
+export default function ButtonLoading() {
+  return (
+    <div className='flex flex-wrap items-center justify-center gap-4'>
+      <Button disabled>
+        <LucideIcon name='Loader2' className='mr-2 h-4 w-4 animate-spin' />
+        Please wait
+      </Button>
+      <Button variant='outline' disabled>
+        <LucideIcon name='Loader2' className='mr-2 h-4 w-4 animate-spin' />
+        Loading...
+      </Button>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<ButtonLoading />} 
+/>
+
+### As Child
+
+Use the `asChild` prop to render the button as a different element while maintaining button styling.
+
+<CodePreview 
+  code={`import { Button } from '@/components/ui/button'
+import Link from 'next/link'
+
+export default function ButtonAsChild() {
+  return (
+    <div className='flex flex-wrap items-center justify-center gap-4'>
+      <Button asChild>
+        <Link href='/docs'>Go to Docs</Link>
+      </Button>
+      <Button variant='outline' asChild>
+        <a href='https://github.com' target='_blank' rel='noopener noreferrer'>
+          Visit GitHub
+        </a>
+      </Button>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<ButtonAsChild />} 
 />
 
 ### Destructive
 
-For dangerous or destructive actions like delete operations.
+Use the destructive variant for actions that are potentially harmful or irreversible.
 
-<CodePreview
-  code={`import { Button } from 'krypton-ui'
+<CodePreview 
+  code={`import { Button } from "@/components/ui/button"
 
-export default function DestructiveButton() {
-  return (
-    <Button variant="destructive">
-      Delete Account
-    </Button>
-  )
-}`}
-  preview={<Button variant="destructive">Delete Account</Button>}
+export default function ButtonDestructive() {
+  return <Button variant="destructive">Delete Account</Button>
+}`} 
+  language="tsx" 
+  preview={<ButtonDestructive />} 
 />
 
 ### Outline
 
-A subtle button variant with border styling.
+The outline variant provides a subtle button style with a border.
 
-<CodePreview
-  code={`import { Button } from 'krypton-ui'
+<CodePreview 
+  code={`import { Button } from "@/components/ui/button"
 
-export default function OutlineButton() {
-  return (
-    <Button variant="outline">
-      Outline Button
-    </Button>
-  )
-}`}
-  preview={<Button variant="outline">Outline Button</Button>}
+export default function ButtonOutline() {
+  return <Button variant="outline">Outline Button</Button>
+}`} 
+  language="tsx" 
+  preview={<ButtonOutline />} 
 />
 
 ### Secondary
 
-For secondary actions that are less prominent.
+The secondary variant is perfect for less prominent actions.
 
-<CodePreview
-  code={`import { Button } from 'krypton-ui'
+<CodePreview 
+  code={`import { Button } from "@/components/ui/button"
 
-export default function SecondaryButton() {
-  return (
-    <Button variant="secondary">
-      Secondary Action
-    </Button>
-  )
-}`}
-  preview={<Button variant="secondary">Secondary Action</Button>}
+export default function ButtonSecondary() {
+  return <Button variant="secondary">Secondary Button</Button>
+}`} 
+  language="tsx" 
+  preview={<ButtonSecondary />} 
 />
 
 ### Ghost
 
-Minimal styling for subtle interactions.
+The ghost variant provides a minimal button style without background.
 
-<CodePreview
-  code={`import { Button } from 'krypton-ui'
+<CodePreview 
+  code={`import { Button } from "@/components/ui/button"
 
-export default function GhostButton() {
-  return (
-    <Button variant="ghost">
-      Ghost Button
-    </Button>
-  )
-}`}
-  preview={<Button variant="ghost">Ghost Button</Button>}
+export default function ButtonGhost() {
+  return <Button variant="ghost">Ghost Button</Button>
+}`} 
+  language="tsx" 
+  preview={<ButtonGhost />} 
 />
 
 ### Link
 
-Styled as a link for navigation actions.
+The link variant makes the button appear as a text link.
 
-<CodePreview
-  code={`import { Button } from 'krypton-ui'
+<CodePreview 
+  code={`import { Button } from "@/components/ui/button"
 
-export default function LinkButton() {
-  return (
-    <Button variant="link">
-      Link Button
-    </Button>
-  )
-}`}
-  preview={<Button variant="link">Link Button</Button>}
-/>
-
-## Sizes
-
-Different button sizes for various UI contexts.
-
-<CodePreview
-  code={`import { Button } from 'krypton-ui'
-
-export default function ButtonSizes() {
-  return (
-    <div className="flex items-center gap-4">
-      <Button size="xs">Extra Small</Button>
-      <Button size="sm">Small</Button>
-      <Button size="default">Default</Button>
-      <Button size="lg">Large</Button>
-    </div>
-  )
-}`}
-  preview={
-    <div className="flex items-center gap-4">
-      <Button size="xs">Extra Small</Button>
-      <Button size="sm">Small</Button>
-      <Button size="default">Default</Button>
-      <Button size="lg">Large</Button>
-    </div>
-  }
-/>
-
-## Icon Button
-
-Square buttons perfect for icons.
-
-<CodePreview
-  code={`import { Button } from 'krypton-ui'
-
-
-export default function IconButtons() {
-  return (
-    <div className="flex items-center gap-2">
-      <Button size="icon" variant="default">
-        <LucideIcon name="Search" className="h-4 w-4" />
-      </Button>
-      <Button size="icon" variant="outline">
-        <LucideIcon name="Heart" className="h-4 w-4" />
-      </Button>
-      <Button size="icon" variant="ghost">
-        <LucideIcon name="Settings" className="h-4 w-4" />
-      </Button>
-    </div>
-  )
-}`}
-  preview={
-    <div className="flex items-center gap-2">
-      <Button size="icon" variant="default">
-        <LucideIcon name="Search" className="h-4 w-4" />  
-      </Button>
-      <Button size="icon" variant="outline">
-        <LucideIcon name="Heart" className="h-4 w-4" />
-      </Button>
-      <Button size="icon" variant="ghost">
-        <LucideIcon name="Settings" className="h-4 w-4" />
-      </Button>
-    </div>
-  }
-/>
-
-## With Icons
-
-Buttons with leading or trailing icons.
-
-<CodePreview
-  code={`import { Button, LucideIcon } from 'krypton-ui'
-
-export default function ButtonsWithIcons() {
-  return (
-    <div className="flex flex-col gap-4">
-      <div className="flex items-center gap-2">
-        <Button>
-          <LucideIcon name="Download" className="mr-2 h-4 w-4" />
-          Download
-        </Button>
-        <Button variant="outline">
-          Continue
-          <LucideIcon name="ArrowRight" className="ml-2 h-4 w-4" />
-        </Button>
-      </div>
-      <Button variant="secondary">
-        <LucideIcon name="Plus" className="mr-2 h-4 w-4" />
-        Add Item
-      </Button>
-    </div>
-  )
-}`}
-  preview={
-    <div className="flex flex-col gap-4">
-      <div className="flex items-center gap-2">
-        <Button>
-          <LucideIcon name="Download" className="mr-2 h-4 w-4" />
-          Download
-        </Button>
-        <Button variant="outline">
-          Continue
-          <LucideIcon name="ArrowRight" className="ml-2 h-4 w-4" />
-        </Button>
-      </div>
-      <Button variant="secondary">
-        <LucideIcon name="Plus" className="mr-2 h-4 w-4" />
-        Add Item
-      </Button>
-    </div>
-  }
-/>
-
-## States
-
-Different button states including disabled and loading.
-
-<CodePreview
-  code={`import { Button } from 'krypton-ui'
-
-
-export default function ButtonStates() {
-  return (
-    <div className="flex flex-col gap-4">
-      <div className="flex items-center gap-2">
-        <Button>Normal</Button>
-        <Button disabled>Disabled</Button>
-      </div>
-      <Button disabled>
-        <LucideIcon name="Loader2" className="mr-2 h-4 w-4 animate-spin" />
-        Loading...
-      </Button>
-    </div>
-  )
-}`}
-  preview={
-    <div className="flex flex-col gap-4">
-      <div className="flex items-center gap-2">
-        <Button>Normal</Button>
-        <Button disabled>Disabled</Button>
-      </div>
-      <Button disabled>
-        <LucideIcon name="Loader2" className="mr-2 h-4 w-4 animate-spin" />
-        Loading...
-      </Button>
-    </div>
-  }
-/>
-
-## As Child
-
-Use the `asChild` prop to render the button as a different element while maintaining button styling.
-
-<CodePreview
-  code={`import { Button } from 'krypton-ui'
-
-export default function AsChildButton() {
-  return (
-    <Button asChild>
-      <a href="https://example.com" target="_blank" rel="noopener noreferrer">
-        Visit Website
-      </a>
-    </Button>
-  )
-}`}
-  preview={
-    <Button asChild>
-      <a href="https://example.com" target="_blank" rel="noopener noreferrer">
-        Visit Website
-      </a>
-    </Button>
-  }
-/>
-
-## Custom Styling
-
-Extend the button with custom classes while maintaining the base functionality.
-
-<CodePreview
-  code={`import { Button } from 'krypton-ui'
-
-export default function CustomButton() {
-  return (
-    <div className="flex gap-2">
-      <Button className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600">
-        Gradient Button
-      </Button>
-      <Button variant="outline" className="border-2 border-blue-500 text-blue-500 hover:bg-blue-50">
-        Custom Outline
-      </Button>
-    </div>
-  )
-}`}
-  preview={
-    <div className="flex gap-2">
-      <Button className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600">
-        Gradient Button
-      </Button>
-      <Button variant="outline" className="border-2 border-blue-500 text-blue-500 hover:bg-blue-50">
-        Custom Outline
-      </Button>
-    </div>
-  }
+export default function ButtonLink() {
+  return <Button variant="link">Link Button</Button>
+}`} 
+  language="tsx" 
+  preview={<ButtonLink />} 
 />
 
 ## API Reference
 
-### Button Props
+### Props
 
 The Button component accepts all standard HTML button attributes plus:
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `variant` | `'default' \| 'destructive' \| 'outline' \| 'secondary' \| 'ghost' \| 'link'` | `'default'` | The visual variant of the button |
-| `size` | `'default' \| 'sm' \| 'lg' \| 'icon' \| 'xs'` | `'default'` | The size of the button |
-| `asChild` | `boolean` | `false` | When true, renders as a Slot component for composition |
-| `className` | `string` | - | Additional CSS classes to apply |
+| `variant` | `"default" | "destructive" | "outline" | "secondary" | "ghost" | "link"` | `"default"` | The visual style variant of the button |
+| `size` | `"default" | "sm" | "lg" | "icon"` | `"default"` | The size of the button |
+| `asChild` | `boolean` | `false` | When true, the button will render as its child element |
 | `disabled` | `boolean` | `false` | Whether the button is disabled |
-| `onClick` | `(event: MouseEvent) => void` | - | Click event handler |
+| `className` | `string` | - | Additional CSS classes to apply |
+| `children` | `ReactNode` | - | The content of the button |
 
-### Variants
+### Keyboard Navigation
 
-- **default**: Primary button with solid background
-- **destructive**: Red-themed button for dangerous actions
-- **outline**: Button with border and transparent background
-- **secondary**: Muted button for secondary actions
-- **ghost**: Minimal button with hover effects
-- **link**: Text-only button styled as a link
-
-### Sizes
-
-- **xs**: Extra small button (h-7)
-- **sm**: Small button (h-9)
-- **default**: Standard button (h-10)
-- **lg**: Large button (h-11)
-- **icon**: Square button for icons (h-9 w-9)
+- **Space** or **Enter**: Activates the button
+- **Tab**: Moves focus to the next focusable element
+- **Shift + Tab**: Moves focus to the previous focusable element
 
 ## Accessibility
 
 The Button component follows WAI-ARIA guidelines:
 
-- Supports keyboard navigation with Enter and Space keys
-- Proper focus management with visible focus indicators
-- Screen reader compatible with semantic button element
-- Disabled state properly communicated to assistive technologies
-- Support for `aria-label`, `aria-describedby`, and other ARIA attributes
+- Uses semantic `<button>` element by default
+- Supports keyboard navigation
+- Provides proper focus management
+- Includes appropriate ARIA attributes when disabled
+- Maintains color contrast ratios for accessibility
 
-## Examples
+## Best Practices
+
+1. **Use descriptive labels**: Button text should clearly indicate what action will be performed
+2. **Choose appropriate variants**: Use destructive for harmful actions, outline for secondary actions
+3. **Consider loading states**: Show loading indicators for async operations
+4. **Maintain consistency**: Use the same variant and size for similar actions throughout your app
+5. **Provide adequate spacing**: Ensure buttons have enough space around them for easy interaction
+
+## Examples in Context
 
 ### Form Actions
 
-<CodePreview
-  code={`import { Button } from 'krypton-ui'
-
-export default function FormActions() {
-  return (
-    <div className="flex justify-end gap-2">
-      <Button variant="outline">Cancel</Button>
-      <Button type="submit">Save Changes</Button>
-    </div>
-  )
-}`}
-  preview={
-    <div className="flex justify-end gap-2">
-      <Button variant="outline">Cancel</Button>
-      <Button type="submit">Save Changes</Button>
-    </div>
-  }
-/>
-
-### Card Actions
-
-<CodePreview
-  code={`import { Button } from 'krypton-ui'
-
-
-export default function CardActions() {
-  return (
-    <div className="flex items-center gap-1">
-      <Button size="sm" variant="ghost">
-        <LucideIcon name="Eye" className="h-4 w-4" />
-      </Button>
-      <Button size="sm" variant="ghost">
-        <LucideIcon name="Edit" className="h-4 w-4" />
-      </Button>
-      <Button size="sm" variant="ghost">
-        <LucideIcon name="Trash2" className="h-4 w-4" />
-      </Button>
-    </div>
-  )
-}`}
-  preview={
-    <div className="flex items-center gap-1">
-      <Button size="sm" variant="ghost">
-        <LucideIcon name="Eye" className="h-4 w-4" />
-      </Button>
-      <Button size="sm" variant="ghost">
-        <LucideIcon name="Edit" className="h-4 w-4" />
-      </Button>
-      <Button size="sm" variant="ghost">
-        <LucideIcon name="Trash2" className="h-4 w-4" />
-      </Button>
-    </div>
-  }
-/>
+```tsx
+<div className="flex gap-2">
+  <Button type="submit">Save Changes</Button>
+  <Button variant="outline" type="button">Cancel</Button>
+</div>
+```
 
 ### Navigation
 
-<CodePreview
-  code={`import { Button } from 'krypton-ui'
+```tsx
+<Button asChild>
+  <Link href="/dashboard">Go to Dashboard</Link>
+</Button>
+```
 
+### Confirmation Dialog
 
-export default function Navigation() {
-  return (
-    <div className="flex items-center justify-between">
-      <Button variant="outline">
-                <LucideIcon name="ChevronLeft" className="h-4 w-4" />
-        Previous
-      </Button>
-      <Button>
-        Next
-                <LucideIcon name="ChevronRight" className="h-4 w-4" />
+```tsx
+<div className="flex gap-2">
+  <Button variant="destructive">Delete</Button>
+  <Button variant="outline">Cancel</Button>
+</div>
+```
 
-      </Button>
-    </div>
-  )
-}`}
-  preview={
-    <div className="flex items-center justify-between">
-      <Button variant="outline">
-                <LucideIcon name="ChevronLeft" className="h-4 w-4" />
+## Dependencies
 
-        Previous
-      </Button>
-      <Button>
-        Next
-       <LucideIcon name="ChevronRight" className="h-4 w-4" />
-      </Button>
-    </div>
-  }
-/>
+The Button component depends on:
+
+- `@radix-ui/react-slot` - For the asChild functionality
+- `class-variance-authority` - For variant management
+- `clsx` - For conditional class names
+- `tailwind-merge` - For merging Tailwind classes

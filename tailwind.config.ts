@@ -49,19 +49,9 @@ const config = {
   				foreground: 'hsl(var(--popover-foreground))'
   			},
   			card: {
-  				DEFAULT: 'hsl(var(--card))',
-  				foreground: 'hsl(var(--card-foreground))'
-  			},
-  			sidebar: {
-  				DEFAULT: 'hsl(var(--sidebar-background))',
-  				foreground: 'hsl(var(--sidebar-foreground))',
-  				primary: 'hsl(var(--sidebar-primary))',
-  				'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-  				accent: 'hsl(var(--sidebar-accent))',
-  				'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-  				border: 'hsl(var(--sidebar-border))',
-  				ring: 'hsl(var(--sidebar-ring))'
-  			}
+				DEFAULT: 'hsl(var(--card))',
+				foreground: 'hsl(var(--card-foreground))'
+			}
   		},
   		borderRadius: {
   			lg: 'var(--radius)',
@@ -69,13 +59,9 @@ const config = {
   			sm: 'calc(var(--radius) - 4px)'
   		},
   		fontFamily: {
-  			code: [
-  				'var(--font-geist-mono)'
-  			],
-  			regular: [
-  				'var(--font-geist-sans)'
-  			]
-  		},
+			sans: ['Inter', 'sans-serif'],
+			mono: ['Fira Code', 'monospace']
+		},
   		keyframes: {
   			'accordion-down': {
   				from: {
