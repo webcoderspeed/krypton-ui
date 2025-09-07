@@ -1,0 +1,6 @@
+export { default as BasicCarousel } from './basic-carousel'
+export { default as CarouselWithButtons } from './carousel-with-buttons'
+export { default as VerticalCarousel } from './vertical-carousel'
+export { default as CarouselSizes } from './carousel-sizes'
+export { default as CarouselSpacing } from './carousel-spacing'
+export { default as CarouselApi } from './carousel-api'

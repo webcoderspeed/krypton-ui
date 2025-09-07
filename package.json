@@ -1,6 +1,6 @@
 {
-  "name": "krypton-ui",
-  "version": "1.0.0",
+  "name": "nezuko-ui",
+  "version": "1.0.2",
   "description": "A next-generation design system for Next.js with comprehensive theming, accessibility, and type safety",
   "keywords": [
     "design-system",
@@ -13,17 +13,38 @@
   ],
   "author": "Krypton UI Team",
   "license": "MIT",
-  "private": true,
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./styles.css": "./dist/globals.css"
+  },
+  "files": [
+    "dist",
+    "components/ui",
+    "hooks"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/your-username/krypton-ui.git"
+  },
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run build:lib && npm run build:docs",
+    "build:lib": "tsup",
+    "build:docs": "next build",
     "start": "next start",
     "lint": "next lint",
     "generate-routes": "node scripts/generate-routes.js",
     "prebuild": "npm run generate-routes"
   },
   "dependencies": {
-    "@hookform/resolvers": "^5.2.1",
+    "@hookfo,m/resolvers": "^5.2.1",
     "@radix-ui/react-accordion": "^1.2.12",
     "@radix-ui/react-alert-dialog": "^1.1.15",
     "@radix-ui/react-aspect-ratio": "^1.1.7",
@@ -84,6 +105,18 @@
     "vaul": "^1.1.2",
     "zod": "^4.1.5"
   },
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": false
+    },
+    "react-dom": {
+      "optional": false
+    }
+  },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.14",
     "@types/node": "^20",
@@ -94,6 +127,7 @@
     "eslint-config-next": "^14.2.6",
     "postcss": "^8",
     "tailwindcss": "^3.4.10",
+    "tsup": "^8.5.0",
     "typescript": "^5"
   }
 }

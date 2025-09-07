@@ -78,7 +78,6 @@ Tooltips work great with icon buttons to provide context about the action.
 } from 'krypton-ui'
 import { Button } from 'krypton-ui'
 
-
 export default function TooltipWithIcon() {
   return (
     <TooltipProvider>
@@ -329,13 +328,13 @@ export default function TooltipWithDelay() {
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| side | "top" \| "right" \| "bottom" \| "left" | "top" | The preferred side of the trigger to render against. |
+| side | "top" | "right" | "bottom" | "left" | "top" | The preferred side of the trigger to render against. |
 | sideOffset | number | 0 | The distance in pixels from the trigger. |
-| align | "start" \| "center" \| "end" | "center" | The preferred alignment against the trigger. |
+| align | "start" | "center" | "end" | "center" | The preferred alignment against the trigger. |
 | alignOffset | number | 0 | An offset in pixels from the "start" or "end" alignment options. |
 | avoidCollisions | boolean | true | When true, overrides the side and align preferences to prevent collisions. |
-| collisionBoundary | Element \| null \| Array<Element \| null> | [] | The element used as the collision boundary. |
-| collisionPadding | number \| Partial<Record<Side, number>> | 0 | The distance in pixels from the boundary edges where collision detection should occur. |
+| collisionBoundary | Element | null | Array<Element | null> | [] | The element used as the collision boundary. |
+| collisionPadding | number | Partial<Record<Side, number>> | 0 | The distance in pixels from the boundary edges where collision detection should occur. |
 | arrowPadding | number | 0 | The padding between the arrow and the edges of the content. |
-| sticky | "partial" \| "always" | "partial" | The sticky behavior on the align axis. |
+| sticky | "partial" | "always" | "partial" | The sticky behavior on the align axis. |
 | hideWhenDetached | boolean | false | Whether to hide the content when the trigger becomes fully occluded. |
