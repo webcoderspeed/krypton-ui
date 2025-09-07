@@ -1,0 +1,269 @@
+---
+title: Accordion
+description: A vertically stacked set of interactive headings that each reveal a section of content.
+---
+
+## Installation
+
+```bash
+npx shadcn@latest add accordion
+```
+
+## Usage
+
+```tsx
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
+```
+
+## Examples
+
+### Default
+
+A basic accordion with single item selection.
+
+<CodePreview 
+  code={`import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
+
+export default function AccordionDefault() {
+  return (
+    <Accordion type="single" collapsible className="w-full">
+      <AccordionItem value="item-1">
+        <AccordionTrigger>Is it accessible?</AccordionTrigger>
+        <AccordionContent>
+          Yes. It adheres to the WAI-ARIA design pattern.
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-2">
+        <AccordionTrigger>Is it styled?</AccordionTrigger>
+        <AccordionContent>
+          Yes. It comes with default styles that matches the other
+          components&apos; aesthetic.
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-3">
+        <AccordionTrigger>Is it animated?</AccordionTrigger>
+        <AccordionContent>
+          Yes. It&apos;s animated by default, but you can disable it if you prefer.
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  )
+}`} 
+  language="tsx" 
+  preview={<AccordionDefault />} 
+/>
+
+### Multiple
+
+Allow multiple items to be open at the same time.
+
+<CodePreview 
+  code={`import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
+
+export default function AccordionMultiple() {
+  return (
+    <Accordion type="multiple" className="w-full">
+      <AccordionItem value="item-1">
+        <AccordionTrigger>Can I open multiple items?</AccordionTrigger>
+        <AccordionContent>
+          Yes! This accordion allows multiple items to be open at the same time.
+          You can expand as many sections as you need.
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-2">
+        <AccordionTrigger>How does it work?</AccordionTrigger>
+        <AccordionContent>
+          The accordion is set to type=&quot;multiple&quot; which enables this behavior.
+          Each item can be toggled independently.
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-3">
+        <AccordionTrigger>What are the benefits?</AccordionTrigger>
+        <AccordionContent>
+          Multiple open items allow users to compare content across sections
+          and maintain context while exploring different topics.
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  )
+}`} 
+  language="tsx" 
+  preview={<AccordionMultiple />} 
+/>
+
+### Controlled
+
+Control the accordion state programmatically.
+
+<CodePreview 
+  code={`"use client"
+
+import { useState } from "react"
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
+import { Button } from "@/components/ui/button"
+
+export default function AccordionControlled() {
+  const [value, setValue] = useState<string>("")
+
+  return (
+    <div className="space-y-4">
+      <div className="flex gap-2">
+        <Button 
+          variant="outline" 
+          size="sm"
+          onClick={() => setValue("item-1")}
+        >
+          Open Item 1
+        </Button>
+        <Button 
+          variant="outline" 
+          size="sm"
+          onClick={() => setValue("item-2")}
+        >
+          Open Item 2
+        </Button>
+        <Button 
+          variant="outline" 
+          size="sm"
+          onClick={() => setValue("")}
+        >
+          Close All
+        </Button>
+      </div>
+      
+      <Accordion type="single" value={value} onValueChange={setValue} className="w-full">
+        <AccordionItem value="item-1">
+          <AccordionTrigger>Controlled Item 1</AccordionTrigger>
+          <AccordionContent>
+            This accordion is controlled by external state.
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="item-2">
+          <AccordionTrigger>Controlled Item 2</AccordionTrigger>
+          <AccordionContent>
+            The current value is: {value || "none"}.
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<AccordionControlled />} 
+/>
+
+## API Reference
+
+### Accordion
+
+Built on top of [Radix Accordion](https://www.radix-ui.com/docs/primitives/components/accordion).
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `type` | `"single" \| "multiple"` | - | Determines whether one or multiple items can be opened at the same time. |
+| `collapsible` | `boolean` | `false` | When `type` is `"single"`, allows closing content when clicking trigger of an open item. |
+| `value` | `string` | - | The controlled value of the item to expand when `type` is `"single"`. |
+| `defaultValue` | `string` | - | The value of the item to expand when initially rendered when `type` is `"single"`. |
+| `onValueChange` | `(value: string) => void` | - | Event handler called when the expanded state changes when `type` is `"single"`. |
+| `value` | `string[]` | - | The controlled value of the items to expand when `type` is `"multiple"`. |
+| `defaultValue` | `string[]` | - | The value of the items to expand when initially rendered when `type` is `"multiple"`. |
+| `onValueChange` | `(value: string[]) => void` | - | Event handler called when the expanded state changes when `type` is `"multiple"`. |
+| `disabled` | `boolean` | `false` | When `true`, prevents the user from interacting with the accordion. |
+| `dir` | `"ltr" \| "rtl"` | - | The reading direction of the accordion when applicable. |
+| `orientation` | `"horizontal" \| "vertical"` | `"vertical"` | The orientation of the accordion. |
+
+### AccordionItem
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `value` | `string` | - | A unique value for the item. |
+| `disabled` | `boolean` | `false` | When `true`, prevents the user from interacting with the item. |
+
+### AccordionTrigger
+
+Extends `button` element props.
+
+### AccordionContent
+
+Extends `div` element props.
+
+## Accessibility
+
+- Full keyboard navigation support
+- Follows WAI-ARIA design pattern
+- Screen reader friendly
+- Focus management
+- Supports both single and multiple selection modes
+
+## Examples in Real Applications
+
+### FAQ Section
+
+```tsx
+const faqs = [
+  {
+    question: "What is your return policy?",
+    answer: "We offer a 30-day return policy for all items."
+  },
+  {
+    question: "How long does shipping take?",
+    answer: "Standard shipping takes 3-5 business days."
+  }
+]
+
+return (
+  <Accordion type="single" collapsible>
+    {faqs.map((faq, index) => (
+      <AccordionItem key={index} value={`item-${index}`}>
+        <AccordionTrigger>{faq.question}</AccordionTrigger>
+        <AccordionContent>{faq.answer}</AccordionContent>
+      </AccordionItem>
+    ))}
+  </Accordion>
+)
+```
+
+### Settings Panel
+
+```tsx
+return (
+  <Accordion type="multiple" className="w-full">
+    <AccordionItem value="general">
+      <AccordionTrigger>General Settings</AccordionTrigger>
+      <AccordionContent>
+        <div className="space-y-4">
+          {/* General settings form */}
+        </div>
+      </AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="privacy">
+      <AccordionTrigger>Privacy Settings</AccordionTrigger>
+      <AccordionContent>
+        <div className="space-y-4">
+          {/* Privacy settings form */}
+        </div>
+      </AccordionContent>
+    </AccordionItem>
+  </Accordion>
+)
+```

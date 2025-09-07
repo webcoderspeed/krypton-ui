@@ -12,6 +12,10 @@ const v1_0_0_ROUTES: EachRoute[] = [
     "noLink": true,
     "items": [
       {
+        "title": "Accordion",
+        "href": "/components/accordion"
+      },
+      {
         "title": "Button",
         "href": "/components/button"
       }

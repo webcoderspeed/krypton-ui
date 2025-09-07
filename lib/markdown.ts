@@ -134,6 +134,11 @@ import {   ButtonDefault,
   ButtonSecondary,
   ButtonGhost,
   ButtonLink, } from "@/components/playground/button";
+import {
+  AccordionDefault,
+  AccordionMultiple,
+  AccordionControlled,
+} from "@/components/playground/accordion";
 
 const components = {
   LucideIcon,
@@ -248,6 +253,9 @@ const components = {
   ButtonSecondary,
   ButtonGhost,
   ButtonLink,
+  AccordionDefault,
+  AccordionMultiple,
+  AccordionControlled,
 
 };
 
