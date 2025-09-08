@@ -123,14 +123,17 @@ import {
   InputOTPSeparator,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
+
+// Button playground components
+import ButtonVariants from '@/components/playground/button/button-variants';
+import ButtonSizes from '@/components/playground/button/button-sizes';
+import ButtonWithIcon from '@/components/playground/button/button-with-icon';
+import ButtonLoading from '@/components/playground/button/button-loading';
+import ButtonAsChild from '@/components/playground/button/button-as-child';
+// Existing Button components (keeping for compatibility)
 import {   ButtonDefault,
-  ButtonVariants,
-  ButtonSizes,
-  ButtonWithIcon,
-  ButtonLoading,
-  ButtonAsChild,
-  ButtonDestructive,
-  ButtonOutline,
+   ButtonDestructive,
+   ButtonOutline,
   ButtonSecondary,
   ButtonGhost,
   ButtonLink, } from "@/components/playground/button";
@@ -151,6 +154,21 @@ import {
   AvatarSizes,
   AvatarGroup,
 } from '@/components/playground/avatar'
+import BadgeDemo from '@/components/playground/badge/badge-demo';
+import BadgeVariants from '@/components/playground/badge/badge-variants';
+import BadgeCustom from '@/components/playground/badge/badge-custom';
+import {
+  CardDemo,
+  CardVariants,
+  CardLayouts,
+} from '@/components/playground/card'
+import {
+  InputPlayground,
+  InputWithLabelPlayground,
+  InputWithIconPlayground,
+  SearchInputPlayground,
+  FormInputPlayground,
+} from "@/components/playground/input";
 
 const components = {
   LucideIcon,
@@ -255,16 +273,16 @@ const components = {
 
 
     ButtonDefault,
-  ButtonVariants,
-  ButtonSizes,
-  ButtonWithIcon,
-  ButtonLoading,
-  ButtonAsChild,
   ButtonDestructive,
   ButtonOutline,
   ButtonSecondary,
   ButtonGhost,
   ButtonLink,
+  ButtonVariants,
+  ButtonSizes,
+  ButtonWithIcon,
+  ButtonLoading,
+  ButtonAsChild,
   AccordionDefault,
   AccordionMultiple,
   AccordionControlled,
@@ -276,8 +294,20 @@ const components = {
   AvatarFallbackDemo,
   AvatarSizes,
   AvatarGroup,
+  BadgeDemo,
+    BadgeVariants,
+    BadgeCustom,
 
-};
+   CardDemo,
+     CardVariants,
+   CardLayouts,
+   InputPlayground,
+   InputWithLabelPlayground,
+   InputWithIconPlayground,
+   SearchInputPlayground,
+   FormInputPlayground,
+
+  };
 
 async function parseMdx<Frontmatter>(rawMdx: string) {
   return await compileMDX<Frontmatter>({

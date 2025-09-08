@@ -1,0 +1,282 @@
+---
+title: Badge
+description: Displays a badge or a component that looks like a badge.
+---
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn-ui@latest add badge
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install class-variance-authority
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<CodePreview>
+
+```tsx title="components/ui/badge.tsx"
+import * as React from "react"
+import { cva, type VariantProps } from "class-variance-authority"
+
+import { cn } from "@/lib/utils"
+
+const badgeVariants = cva(
+  "inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+  {
+    variants: {
+      variant: {
+        default:
+          "border-transparent bg-primary text-primary-foreground hover:bg-primary/80",
+        secondary:
+          "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80",
+        destructive:
+          "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
+        outline: "text-foreground",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+    },
+  }
+)
+
+export interface BadgeProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof badgeVariants> {}
+
+function Badge({ className, variant, ...props }: BadgeProps) {
+  return (
+    <div className={cn(badgeVariants({ variant }), className)} {...props} />
+  )
+}
+
+export { Badge, badgeVariants }
+```
+
+</CodePreview>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import { Badge } from "@/components/ui/badge"
+```
+
+```tsx
+<Badge>Badge</Badge>
+```
+
+## Examples
+
+### Default
+
+<CodePreview>
+
+<BadgeDemo />
+
+```tsx
+import { Badge } from "@/components/ui/badge"
+
+export default function BadgeDemo() {
+  return (
+    <div className="flex flex-wrap items-center gap-2">
+      <Badge>Default</Badge>
+      <Badge variant="secondary">Secondary</Badge>
+      <Badge variant="destructive">Destructive</Badge>
+      <Badge variant="outline">Outline</Badge>
+    </div>
+  )
+}
+```
+
+</CodePreview>
+
+### Variants
+
+You can use the `variant` prop to change the appearance of the badge.
+
+<CodePreview>
+
+<BadgeVariants />
+
+```tsx
+import { Badge } from "@/components/ui/badge"
+
+export default function BadgeVariants() {
+  return (
+    <div className="space-y-4">
+      <div className="space-y-2">
+        <h3 className="text-sm font-medium">Default</h3>
+        <div className="flex gap-2">
+          <Badge>Badge</Badge>
+          <Badge>New</Badge>
+          <Badge>Featured</Badge>
+        </div>
+      </div>
+      
+      <div className="space-y-2">
+        <h3 className="text-sm font-medium">Secondary</h3>
+        <div className="flex gap-2">
+          <Badge variant="secondary">Badge</Badge>
+          <Badge variant="secondary">Draft</Badge>
+          <Badge variant="secondary">In Progress</Badge>
+        </div>
+      </div>
+      
+      <div className="space-y-2">
+        <h3 className="text-sm font-medium">Destructive</h3>
+        <div className="flex gap-2">
+          <Badge variant="destructive">Badge</Badge>
+          <Badge variant="destructive">Error</Badge>
+          <Badge variant="destructive">Deleted</Badge>
+        </div>
+      </div>
+      
+      <div className="space-y-2">
+        <h3 className="text-sm font-medium">Outline</h3>
+        <div className="flex gap-2">
+          <Badge variant="outline">Badge</Badge>
+          <Badge variant="outline">Pending</Badge>
+          <Badge variant="outline">Review</Badge>
+        </div>
+      </div>
+    </div>
+  )
+}
+```
+
+</CodePreview>
+
+### Custom Styling
+
+You can customize the badge with custom colors, sizes, and icons.
+
+<CodePreview>
+
+<BadgeCustom />
+
+```tsx
+import { Badge } from "@/components/ui/badge"
+
+export default function BadgeCustom() {
+  return (
+    <div className="space-y-4">
+      <div className="space-y-2">
+        <h3 className="text-sm font-medium">Custom Colors</h3>
+        <div className="flex gap-2">
+          <Badge className="bg-blue-500 text-white hover:bg-blue-600">Blue</Badge>
+          <Badge className="bg-green-500 text-white hover:bg-green-600">Green</Badge>
+          <Badge className="bg-purple-500 text-white hover:bg-purple-600">Purple</Badge>
+          <Badge className="bg-orange-500 text-white hover:bg-orange-600">Orange</Badge>
+        </div>
+      </div>
+      
+      <div className="space-y-2">
+        <h3 className="text-sm font-medium">Custom Sizes</h3>
+        <div className="flex items-center gap-2">
+          <Badge className="text-xs px-2 py-0.5">Small</Badge>
+          <Badge className="text-sm px-3 py-1">Medium</Badge>
+          <Badge className="text-base px-4 py-1.5">Large</Badge>
+        </div>
+      </div>
+      
+      <div className="space-y-2">
+        <h3 className="text-sm font-medium">With Icons</h3>
+        <div className="flex gap-2">
+          <Badge className="gap-1">
+            <span className="w-2 h-2 bg-green-400 rounded-full"></span>
+            Online
+          </Badge>
+          <Badge variant="secondary" className="gap-1">
+            <span className="w-2 h-2 bg-yellow-400 rounded-full"></span>
+            Away
+          </Badge>
+          <Badge variant="destructive" className="gap-1">
+            <span className="w-2 h-2 bg-red-400 rounded-full"></span>
+            Offline
+          </Badge>
+        </div>
+      </div>
+      
+      <div className="space-y-2">
+        <h3 className="text-sm font-medium">Rounded Variants</h3>
+        <div className="flex gap-2">
+          <Badge className="rounded-none">Square</Badge>
+          <Badge className="rounded-sm">Small Rounded</Badge>
+          <Badge className="rounded-md">Medium Rounded</Badge>
+          <Badge className="rounded-full">Pill</Badge>
+        </div>
+      </div>
+    </div>
+  )
+}
+```
+
+</CodePreview>
+
+## API Reference
+
+### Badge
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `variant` | `"default" \| "secondary" \| "destructive" \| "outline"` | `"default"` | The visual style variant of the badge |
+| `className` | `string` | - | Additional CSS classes to apply |
+| `children` | `React.ReactNode` | - | The content to display inside the badge |
+
+### Badge Variants
+
+- **default**: Primary badge with solid background
+- **secondary**: Muted badge with secondary colors
+- **destructive**: Red badge for errors or warnings
+- **outline**: Badge with border and transparent background
+
+## Accessibility
+
+- Badge uses semantic HTML with proper ARIA attributes
+- Supports keyboard navigation and focus management
+- Color combinations meet WCAG contrast requirements
+- Screen reader friendly with proper text content
+
+## Best Practices
+
+1. **Keep text short**: Badges work best with 1-3 words
+2. **Use appropriate variants**: Choose variants that match the semantic meaning
+3. **Consider context**: Ensure badges don't interfere with the main content
+4. **Consistent sizing**: Use consistent badge sizes within the same interface
+5. **Meaningful colors**: Use colors that convey the right information to users
+
+## Common Use Cases
+
+- **Status indicators**: Show the current state of items (active, pending, completed)
+- **Categories**: Label content with categories or tags
+- **Notifications**: Display counts or new item indicators
+- **Labels**: Add descriptive labels to content
+- **Metadata**: Show additional information about items

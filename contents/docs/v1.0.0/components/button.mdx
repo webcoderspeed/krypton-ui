@@ -1,0 +1,360 @@
+---
+title: Button
+description: Displays a button or a component that looks like a button.
+component: true
+---
+
+<ComponentPreview name="ButtonVariants" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn-ui@latest add button
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install @radix-ui/react-slot class-variance-authority
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="button" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import { Button } from "@/components/ui/button"
+```
+
+```tsx
+<Button variant="outline">Button</Button>
+```
+
+## Examples
+
+### Default
+
+<ComponentPreview name="ButtonDefault" />
+
+### Secondary
+
+<ComponentPreview name="ButtonSecondary" />
+
+### Destructive
+
+<ComponentPreview name="ButtonDestructive" />
+
+### Outline
+
+<ComponentPreview name="ButtonOutline" />
+
+### Ghost
+
+<ComponentPreview name="ButtonGhost" />
+
+### Link
+
+<ComponentPreview name="ButtonLink" />
+
+### Icon
+
+<ComponentPreview name="ButtonIcon" />
+
+### With Icon
+
+<ComponentPreview name="ButtonWithIcon" />
+
+### Loading
+
+<ComponentPreview name="ButtonLoading" />
+
+### As Child
+
+<ComponentPreview name="ButtonAsChild" />
+
+### Sizes
+
+<ComponentPreview name="ButtonSizes" />
+
+## Component Props
+
+### Button
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `"default" \| "destructive" \| "outline" \| "secondary" \| "ghost" \| "link"` | `"default"` | The visual style variant of the button |
+| `size` | `"default" \| "sm" \| "lg" \| "icon"` | `"default"` | The size of the button |
+| `asChild` | `boolean` | `false` | Change the default rendered element for the one passed as a child |
+| `disabled` | `boolean` | `false` | When true, prevents the user from interacting with the button |
+| `type` | `"button" \| "submit" \| "reset"` | `"button"` | The type of the button |
+| `onClick` | `(event: MouseEvent) => void` | - | Function called when the button is clicked |
+| `children` | `ReactNode` | - | The content to display inside the button |
+| `className` | `string` | - | Additional CSS classes to apply |
+
+## Styling
+
+### Variants
+
+The Button component comes with several pre-defined variants:
+
+- **default**: Primary button with solid background
+- **destructive**: Red button for destructive actions
+- **outline**: Button with border and transparent background
+- **secondary**: Secondary button with muted background
+- **ghost**: Transparent button that shows background on hover
+- **link**: Text button that looks like a link
+
+### Sizes
+
+Available size options:
+
+- **default**: Standard button size (h-10 px-4 py-2)
+- **sm**: Small button (h-9 px-3)
+- **lg**: Large button (h-11 px-8)
+- **icon**: Square button for icons (h-10 w-10)
+
+### Custom Styling
+
+You can customize the button appearance using CSS classes:
+
+```tsx
+<Button className="bg-blue-500 hover:bg-blue-600 text-white">
+  Custom Button
+</Button>
+```
+
+## Accessibility
+
+The Button component follows WAI-ARIA guidelines:
+
+- Uses semantic `<button>` element by default
+- Supports keyboard navigation (Enter and Space keys)
+- Properly handles focus states
+- Supports `aria-*` attributes for enhanced accessibility
+- Disabled state prevents interaction and updates aria attributes
+
+### Keyboard Support
+
+| Key | Description |
+|-----|-------------|
+| `Enter` | Activates the button |
+| `Space` | Activates the button |
+| `Tab` | Moves focus to the button |
+
+### Screen Reader Support
+
+```tsx
+<Button aria-label="Save document" aria-describedby="save-help">
+  Save
+</Button>
+<div id="save-help">Saves the current document</div>
+```
+
+## Best Practices
+
+### Do's
+
+- Use clear, action-oriented labels
+- Choose appropriate variants for the context
+- Provide adequate spacing between buttons
+- Use loading states for async operations
+- Include icons when they add clarity
+
+### Don'ts
+
+- Don't use too many button variants in one interface
+- Avoid very long button labels
+- Don't use buttons for navigation (use links instead)
+- Avoid using destructive variant for non-destructive actions
+
+### Button Labels
+
+```tsx
+// Good: Clear and action-oriented
+<Button>Save Changes</Button>
+<Button>Delete Account</Button>
+<Button>Download Report</Button>
+
+// Avoid: Vague or unclear
+<Button>OK</Button>
+<Button>Click Here</Button>
+<Button>Submit</Button>
+```
+
+## Common Use Cases
+
+### Form Submission
+
+```tsx
+<form onSubmit={handleSubmit}>
+  <Button type="submit" disabled={isLoading}>
+    {isLoading ? "Saving..." : "Save"}
+  </Button>
+</form>
+```
+
+### Confirmation Dialog
+
+```tsx
+<div className="flex gap-2">
+  <Button variant="outline" onClick={onCancel}>
+    Cancel
+  </Button>
+  <Button variant="destructive" onClick={onConfirm}>
+    Delete
+  </Button>
+</div>
+```
+
+### Navigation Actions
+
+```tsx
+<Button asChild>
+  <Link href="/dashboard">Go to Dashboard</Link>
+</Button>
+```
+
+### Icon Buttons
+
+```tsx
+import { Plus, Download, Settings } from "lucide-react"
+
+<Button size="icon">
+  <Plus className="h-4 w-4" />
+</Button>
+
+<Button variant="outline">
+  <Download className="mr-2 h-4 w-4" />
+  Download
+</Button>
+```
+
+### Loading States
+
+```tsx
+import { Loader2 } from "lucide-react"
+
+<Button disabled={isLoading}>
+  {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+  {isLoading ? "Processing..." : "Submit"}
+</Button>
+```
+
+## Advanced Usage
+
+### Custom Variants
+
+You can extend the button variants using the `buttonVariants` function:
+
+```tsx
+import { buttonVariants } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
+
+const customButtonVariants = cva(
+  buttonVariants(),
+  {
+    variants: {
+      variant: {
+        ...buttonVariants.variants.variant,
+        custom: "bg-purple-500 text-white hover:bg-purple-600",
+      },
+    },
+  }
+)
+```
+
+### Polymorphic Usage
+
+Use `asChild` to render the button as a different element:
+
+```tsx
+<Button asChild>
+  <a href="https://example.com" target="_blank">
+    External Link
+  </a>
+</Button>
+```
+
+### Button Groups
+
+```tsx
+<div className="flex rounded-md shadow-sm" role="group">
+  <Button variant="outline" className="rounded-r-none">
+    Left
+  </Button>
+  <Button variant="outline" className="rounded-none border-l-0">
+    Middle
+  </Button>
+  <Button variant="outline" className="rounded-l-none border-l-0">
+    Right
+  </Button>
+</div>
+```
+
+## Troubleshooting
+
+### Common Issues
+
+**Button not responding to clicks**
+- Check if the button is disabled
+- Ensure onClick handler is properly attached
+- Verify there are no overlapping elements
+
+**Styling not applied**
+- Confirm Tailwind CSS is properly configured
+- Check if custom classes are conflicting
+- Ensure the component is imported correctly
+
+**Focus not visible**
+- Verify focus-visible styles are not overridden
+- Check if outline is disabled in CSS
+- Ensure proper contrast for focus indicators
+
+**Accessibility issues**
+- Add proper aria-labels for icon-only buttons
+- Ensure sufficient color contrast
+- Test with keyboard navigation
+- Verify screen reader compatibility
+
+### Performance Considerations
+
+- Use `React.memo` for buttons that don't change frequently
+- Avoid creating new objects in render for onClick handlers
+- Consider using CSS-in-JS solutions for dynamic styling
+
+```tsx
+// Good: Stable reference
+const handleClick = useCallback(() => {
+  // Handle click
+}, [dependency])
+
+<Button onClick={handleClick}>Click me</Button>
+
+// Avoid: New function on every render
+<Button onClick={() => handleClick()}>Click me</Button>
+```
