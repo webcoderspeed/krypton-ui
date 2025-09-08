@@ -20,6 +20,10 @@ const v1_0_0_ROUTES: EachRoute[] = [
         "href": "/components/alert"
       },
       {
+        "title": "Avatar",
+        "href": "/components/avatar"
+      },
+      {
         "title": "Button",
         "href": "/components/button"
       }

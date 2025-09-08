@@ -1,0 +1,293 @@
+---
+title: Avatar
+description: An image element with a fallback for representing the user.
+---
+
+## Installation
+
+```bash
+npx shadcn@latest add avatar
+```
+
+## Usage
+
+```tsx
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+```
+
+```tsx
+<Avatar>
+  <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+  <AvatarFallback>CN</AvatarFallback>
+</Avatar>
+```
+
+## Examples
+
+### Default
+
+A basic avatar with an image and fallback text.
+
+<CodePreview 
+  code={`import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+
+export default function AvatarDemo() {
+  return (
+    <Avatar>
+      <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+      <AvatarFallback>CN</AvatarFallback>
+    </Avatar>
+  )
+}`} 
+  language="tsx" 
+  preview={<AvatarDemo />} 
+/>
+
+### Fallback
+
+When the image fails to load, the fallback text is displayed.
+
+<CodePreview 
+  code={`import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+
+export default function AvatarFallbackDemo() {
+  return (
+    <Avatar>
+      <AvatarImage src="https://broken-link.jpg" alt="Broken image" />
+      <AvatarFallback>JD</AvatarFallback>
+    </Avatar>
+  )
+}`} 
+  language="tsx" 
+  preview={<AvatarFallbackDemo />} 
+/>
+
+### Sizes
+
+Avatars can be customized to different sizes using className.
+
+<CodePreview 
+  code={`import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+
+export default function AvatarSizes() {
+  return (
+    <div className="flex items-center space-x-4">
+      <Avatar className="h-6 w-6">
+        <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+        <AvatarFallback className="text-xs">CN</AvatarFallback>
+      </Avatar>
+      <Avatar className="h-8 w-8">
+        <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+        <AvatarFallback className="text-sm">CN</AvatarFallback>
+      </Avatar>
+      <Avatar>
+        <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+        <AvatarFallback>CN</AvatarFallback>
+      </Avatar>
+      <Avatar className="h-12 w-12">
+        <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+        <AvatarFallback>CN</AvatarFallback>
+      </Avatar>
+      <Avatar className="h-16 w-16">
+        <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+        <AvatarFallback className="text-lg">CN</AvatarFallback>
+      </Avatar>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<AvatarSizes />} 
+/>
+
+### Group
+
+Multiple avatars can be grouped together with overlapping effect.
+
+<CodePreview 
+  code={`import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+
+export default function AvatarGroup() {
+  return (
+    <div className="flex -space-x-2">
+      <Avatar className="border-2 border-background">
+        <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+        <AvatarFallback>CN</AvatarFallback>
+      </Avatar>
+      <Avatar className="border-2 border-background">
+        <AvatarImage src="https://github.com/vercel.png" alt="@vercel" />
+        <AvatarFallback>VC</AvatarFallback>
+      </Avatar>
+      <Avatar className="border-2 border-background">
+        <AvatarImage src="https://github.com/nextjs.png" alt="@nextjs" />
+        <AvatarFallback>NJ</AvatarFallback>
+      </Avatar>
+      <Avatar className="border-2 border-background">
+        <AvatarFallback>+2</AvatarFallback>
+      </Avatar>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<AvatarGroup />} 
+/>
+
+## API Reference
+
+### Avatar
+
+Built on top of [Radix Avatar](https://www.radix-ui.com/docs/primitives/components/avatar).
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `className` | `string` | - | Additional CSS classes to apply to the avatar container. |
+
+### AvatarImage
+
+Extends `img` element props.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `src` | `string` | - | The image source URL. |
+| `alt` | `string` | - | Alternative text for the image. |
+| `className` | `string` | - | Additional CSS classes to apply to the image. |
+
+### AvatarFallback
+
+Extends `span` element props.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `className` | `string` | - | Additional CSS classes to apply to the fallback. |
+| `delayMs` | `number` | - | Useful for delaying rendering so it only appears for those with slower connections. |
+
+## Accessibility
+
+- Uses semantic image elements with proper alt text
+- Fallback content is announced by screen readers when image fails
+- Proper focus management
+- High contrast support
+- Keyboard accessible when used as interactive elements
+
+## Examples in Real Applications
+
+### User Profile
+
+```tsx
+interface User {
+  id: string
+  name: string
+  email: string
+  avatar?: string
+}
+
+const UserProfile = ({ user }: { user: User }) => {
+  const initials = user.name
+    .split(' ')
+    .map(n => n[0])
+    .join('')
+    .toUpperCase()
+
+  return (
+    <div className="flex items-center space-x-3">
+      <Avatar>
+        <AvatarImage src={user.avatar} alt={user.name} />
+        <AvatarFallback>{initials}</AvatarFallback>
+      </Avatar>
+      <div>
+        <p className="font-medium">{user.name}</p>
+        <p className="text-sm text-muted-foreground">{user.email}</p>
+      </div>
+    </div>
+  )
+}
+```
+
+### Comment System
+
+```tsx
+interface Comment {
+  id: string
+  author: {
+    name: string
+    avatar?: string
+  }
+  content: string
+  timestamp: Date
+}
+
+const CommentItem = ({ comment }: { comment: Comment }) => {
+  const initials = comment.author.name
+    .split(' ')
+    .map(n => n[0])
+    .join('')
+    .toUpperCase()
+
+  return (
+    <div className="flex space-x-3">
+      <Avatar className="h-8 w-8">
+        <AvatarImage src={comment.author.avatar} alt={comment.author.name} />
+        <AvatarFallback className="text-xs">{initials}</AvatarFallback>
+      </Avatar>
+      <div className="flex-1">
+        <div className="flex items-center space-x-2">
+          <span className="font-medium text-sm">{comment.author.name}</span>
+          <span className="text-xs text-muted-foreground">
+            {comment.timestamp.toLocaleDateString()}
+          </span>
+        </div>
+        <p className="text-sm mt-1">{comment.content}</p>
+      </div>
+    </div>
+  )
+}
+```
+
+### Team Members
+
+```tsx
+interface TeamMember {
+  id: string
+  name: string
+  role: string
+  avatar?: string
+  status: 'online' | 'offline' | 'away'
+}
+
+const TeamMemberList = ({ members }: { members: TeamMember[] }) => {
+  const getStatusColor = (status: TeamMember['status']) => {
+    switch (status) {
+      case 'online': return 'bg-green-500'
+      case 'away': return 'bg-yellow-500'
+      case 'offline': return 'bg-gray-500'
+    }
+  }
+
+  return (
+    <div className="space-y-3">
+      {members.map((member) => {
+        const initials = member.name
+          .split(' ')
+          .map(n => n[0])
+          .join('')
+          .toUpperCase()
+
+        return (
+          <div key={member.id} className="flex items-center space-x-3">
+            <div className="relative">
+              <Avatar>
+                <AvatarImage src={member.avatar} alt={member.name} />
+                <AvatarFallback>{initials}</AvatarFallback>
+              </Avatar>
+              <div className={`absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-background ${getStatusColor(member.status)}`} />
+            </div>
+            <div>
+              <p className="font-medium">{member.name}</p>
+              <p className="text-sm text-muted-foreground">{member.role}</p>
+            </div>
+          </div>
+        )
+      })}
+    </div>
+  )
+}
+```

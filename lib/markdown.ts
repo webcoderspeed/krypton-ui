@@ -144,7 +144,13 @@ import {
   AlertDestructive,
   AlertWithIcon,
   AlertWithoutIcon,
-} from "@/components/playground/alert";
+} from '@/components/playground/alert'
+import {
+  AvatarDemo,
+  AvatarFallbackDemo,
+  AvatarSizes,
+  AvatarGroup,
+} from '@/components/playground/avatar'
 
 const components = {
   LucideIcon,
@@ -266,6 +272,10 @@ const components = {
   AlertDestructive,
   AlertWithIcon,
   AlertWithoutIcon,
+  AvatarDemo,
+  AvatarFallbackDemo,
+  AvatarSizes,
+  AvatarGroup,
 
 };
 
