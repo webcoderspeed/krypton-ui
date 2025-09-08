@@ -124,12 +124,38 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 
-// Button playground components
+// Button playground imports
 import ButtonVariants from '@/components/playground/button/button-variants';
 import ButtonSizes from '@/components/playground/button/button-sizes';
 import ButtonWithIcon from '@/components/playground/button/button-with-icon';
 import ButtonLoading from '@/components/playground/button/button-loading';
 import ButtonAsChild from '@/components/playground/button/button-as-child';
+
+// Checkbox playground imports
+import {
+  CheckboxDemo,
+  CheckboxStates,
+  CheckboxControlled,
+  CheckboxForm,
+} from '@/components/playground/checkbox';
+
+// Dialog playground imports
+import DialogDemo from '@/components/playground/dialog/dialog-demo';
+import DialogSizes from '@/components/playground/dialog/dialog-sizes';
+import DialogForm from '@/components/playground/dialog/dialog-form';
+import DialogCustom from '@/components/playground/dialog/dialog-custom';
+
+// Label playground imports
+import LabelDemo from '@/components/playground/label/label-demo'
+import LabelStates from '@/components/playground/label/label-states'
+import LabelForm from '@/components/playground/label/label-form'
+import LabelStyling from '@/components/playground/label/label-styling'
+import SeparatorDemo from '@/components/playground/separator/separator-demo'
+import SeparatorOrientations from '@/components/playground/separator/separator-orientations'
+import SeparatorStyling from '@/components/playground/separator/separator-styling'
+import SeparatorLayouts from '@/components/playground/separator/separator-layouts';
+
+
 // Existing Button components (keeping for compatibility)
 import {   ButtonDefault,
    ButtonDestructive,
@@ -163,11 +189,11 @@ import {
   CardLayouts,
 } from '@/components/playground/card'
 import {
-  InputPlayground,
-  InputWithLabelPlayground,
-  InputWithIconPlayground,
-  SearchInputPlayground,
-  FormInputPlayground,
+  InputDemo,
+  InputWithLabelDemo,
+  InputWithIconDemo,
+  SearchInputDemo,
+  FormInputDemo,
 } from "@/components/playground/input";
 
 const components = {
@@ -283,6 +309,24 @@ const components = {
   ButtonWithIcon,
   ButtonLoading,
   ButtonAsChild,
+  CheckboxDemo,
+  CheckboxStates,
+  CheckboxControlled,
+  CheckboxForm,
+  
+  // Dialog components
+  DialogDemo,
+  DialogSizes,
+  DialogForm,
+  DialogCustom,
+  LabelDemo,
+  LabelStates,
+  LabelForm,
+  LabelStyling,
+  SeparatorDemo,
+  SeparatorOrientations,
+  SeparatorStyling,
+  SeparatorLayouts,
   AccordionDefault,
   AccordionMultiple,
   AccordionControlled,
@@ -301,11 +345,11 @@ const components = {
    CardDemo,
      CardVariants,
    CardLayouts,
-   InputPlayground,
-   InputWithLabelPlayground,
-   InputWithIconPlayground,
-   SearchInputPlayground,
-   FormInputPlayground,
+   InputDemo,
+   InputWithLabelDemo,
+   InputWithIconDemo,
+   SearchInputDemo,
+   FormInputDemo,
 
   };
 

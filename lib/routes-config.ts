@@ -24,8 +24,36 @@ const v1_0_0_ROUTES: EachRoute[] = [
         "href": "/components/avatar"
       },
       {
+        "title": "Badge",
+        "href": "/components/badge"
+      },
+      {
         "title": "Button",
         "href": "/components/button"
+      },
+      {
+        "title": "Card",
+        "href": "/components/card"
+      },
+      {
+        "title": "Checkbox",
+        "href": "/components/checkbox"
+      },
+      {
+        "title": "Dialog",
+        "href": "/components/dialog"
+      },
+      {
+        "title": "Input",
+        "href": "/components/input"
+      },
+      {
+        "title": "Label",
+        "href": "/components/label"
+      },
+      {
+        "title": "Separator",
+        "href": "/components/separator"
       }
     ]
   },

@@ -1,0 +1,291 @@
+---
+title: Label
+description: Renders an accessible label associated with controls.
+---
+
+<LabelDemo />
+
+## Installation
+
+```bash
+npx shadcn-ui@latest add label
+```
+
+## Usage
+
+```tsx
+import { Label } from "@/components/ui/label"
+```
+
+```tsx
+<Label htmlFor="email">Your email address</Label>
+```
+
+## Examples
+
+### Default
+
+A simple label associated with an input field.
+
+<CodePreview 
+  code={`import { Label } from "@/components/ui/label"
+import { Input } from "@/components/ui/input"
+
+export default function LabelDemo() {
+  return (
+    <div className="space-y-2">
+      <Label htmlFor="email">Email</Label>
+      <Input id="email" type="email" placeholder="Enter your email" />
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<LabelDemo />} 
+/>
+
+### Label States
+
+Different label states including required, disabled, and with descriptions.
+
+<CodePreview 
+  code={`import { Label } from "@/components/ui/label"
+import { Input } from "@/components/ui/input"
+
+export default function LabelStates() {
+  return (
+    <div className="space-y-6">
+      <div className="space-y-2">
+        <Label htmlFor="required">Username <span className="text-red-500">*</span></Label>
+        <Input id="required" type="text" placeholder="Required field" />
+      </div>
+      
+      <div className="space-y-2">
+        <Label htmlFor="disabled" className="text-muted-foreground">Disabled Field</Label>
+        <Input id="disabled" type="text" placeholder="Disabled" disabled />
+      </div>
+      
+      <div className="space-y-2">
+        <Label htmlFor="description">Password</Label>
+        <Input id="description" type="password" placeholder="Enter password" aria-describedby="password-help" />
+        <p id="password-help" className="text-sm text-muted-foreground">
+          Must be at least 8 characters long.
+        </p>
+      </div>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<LabelStates />} 
+/>
+
+### Form Example
+
+Labels used in a complete form with validation states.
+
+<CodePreview 
+  code={`import { Label } from "@/components/ui/label"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
+
+export default function LabelForm() {
+  return (
+    <form className="space-y-4">
+      <div className="space-y-2">
+        <Label htmlFor="firstName">First Name <span className="text-red-500">*</span></Label>
+        <Input id="firstName" type="text" placeholder="John" required />
+      </div>
+      
+      <div className="space-y-2">
+        <Label htmlFor="lastName">Last Name <span className="text-red-500">*</span></Label>
+        <Input id="lastName" type="text" placeholder="Doe" required />
+      </div>
+      
+      <div className="space-y-2">
+        <Label htmlFor="formEmail">Email Address</Label>
+        <Input id="formEmail" type="email" placeholder="john.doe@example.com" />
+      </div>
+      
+      <Button type="submit">Submit</Button>
+    </form>
+  )
+}`} 
+  language="tsx" 
+  preview={<LabelForm />} 
+/>
+
+### Styling Variations
+
+Different label sizes, colors, and accessibility features.
+
+<CodePreview 
+  code={`import { Label } from "@/components/ui/label"
+import { Input } from "@/components/ui/input"
+
+export default function LabelStyling() {
+  return (
+    <div className="space-y-6">
+      <div className="space-y-2">
+        <Label htmlFor="small" className="text-xs">Small Label</Label>
+        <Input id="small" type="text" placeholder="Small input" />
+      </div>
+      
+      <div className="space-y-2">
+        <Label htmlFor="default">Default Label</Label>
+        <Input id="default" type="text" placeholder="Default input" />
+      </div>
+      
+      <div className="space-y-2">
+        <Label htmlFor="large" className="text-base font-semibold">Large Label</Label>
+        <Input id="large" type="text" placeholder="Large input" />
+      </div>
+      
+      <div className="space-y-2">
+        <Label htmlFor="primary" className="text-primary">Primary Color</Label>
+        <Input id="primary" type="text" placeholder="Primary themed" />
+      </div>
+      
+      <div className="space-y-2">
+        <Label htmlFor="error" className="text-destructive">Error State</Label>
+        <Input id="error" type="text" placeholder="Error input" className="border-destructive" />
+      </div>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<LabelStyling />} 
+/>
+
+## Manual Installation
+
+1. Install the following dependency:
+
+```bash
+npm install @radix-ui/react-label
+```
+
+2. Copy and paste the following code into your project.
+
+```tsx
+"use client"
+
+import * as React from "react"
+import * as LabelPrimitive from "@radix-ui/react-label"
+import { cva, type VariantProps } from "class-variance-authority"
+
+import { cn } from "@/lib/utils"
+
+const labelVariants = cva(
+  "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+)
+
+const Label = React.forwardRef<
+  React.ElementRef<typeof LabelPrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root> &
+    VariantProps<typeof labelVariants>
+>(({ className, ...props }, ref) => (
+  <LabelPrimitive.Root
+    ref={ref}
+    className={cn(labelVariants(), className)}
+    {...props}
+  />
+))
+Label.displayName = LabelPrimitive.Root.displayName
+
+export { Label }
+```
+
+3. Update the import paths to match your project setup.
+
+## API Reference
+
+### Label
+
+Built on top of [Radix Label](https://www.radix-ui.com/docs/primitives/components/label).
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `htmlFor` | `string` | - | The id of the element the label is associated with |
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | The label content |
+
+## Accessibility
+
+The Label component is built on top of Radix UI's Label primitive, which provides:
+
+- **Proper association**: Uses the `htmlFor` attribute to associate with form controls
+- **Screen reader support**: Announces the label when the associated control receives focus
+- **Click handling**: Clicking the label focuses the associated control
+- **Disabled state**: Automatically handles disabled styling when the associated control is disabled
+
+### Best Practices
+
+1. **Always associate labels**: Use the `htmlFor` attribute to associate labels with form controls
+2. **Required indicators**: Use visual indicators (like asterisks) for required fields
+3. **Error states**: Apply appropriate styling and colors for validation errors
+4. **Descriptive text**: Provide clear, concise label text that describes the expected input
+5. **Additional context**: Use `aria-describedby` for additional help text or instructions
+
+### Example with Accessibility Features
+
+```tsx
+<div className="space-y-2">
+  <Label htmlFor="username">
+    Username <span className="text-red-500">*</span>
+  </Label>
+  <Input
+    id="username"
+    type="text"
+    aria-describedby="username-help"
+    required
+  />
+  <p id="username-help" className="text-sm text-muted-foreground">
+    Choose a unique username between 3-20 characters.
+  </p>
+</div>
+```
+
+## Styling
+
+The Label component uses a simple variant system with the following default styles:
+
+- `text-sm`: Small text size
+- `font-medium`: Medium font weight
+- `leading-none`: Tight line height
+- `peer-disabled:cursor-not-allowed`: Disabled cursor when associated control is disabled
+- `peer-disabled:opacity-70`: Reduced opacity when associated control is disabled
+
+### Custom Styling
+
+You can customize the label appearance by passing additional classes:
+
+```tsx
+<Label htmlFor="field" className="text-lg text-primary">
+  Custom Styled Label
+</Label>
+```
+
+### Color Variants
+
+```tsx
+{/* Primary color */}
+<Label className="text-primary">Primary Label</Label>
+
+{/* Muted color */}
+<Label className="text-muted-foreground">Muted Label</Label>
+
+{/* Error state */}
+<Label className="text-destructive">Error Label</Label>
+```
+
+### Size Variants
+
+```tsx
+{/* Small */}
+<Label className="text-xs">Small Label</Label>
+
+{/* Default */}
+<Label>Default Label</Label>
+
+{/* Large */}
+<Label className="text-base">Large Label</Label>
+```

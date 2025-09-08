@@ -139,26 +139,29 @@ Built on top of [Radix Avatar](https://www.radix-ui.com/docs/primitives/componen
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `className` | `string` | - | Additional CSS classes to apply to the avatar container. |
+| `className` | `string` | - | Additional CSS classes to apply to the avatar container. Can be used to customize size, border, or other styling properties. |
+| `children` | `ReactNode` | - | The avatar content, typically including AvatarImage and AvatarFallback components. |
 
 ### AvatarImage
 
-Extends `img` element props.
+Extends `img` element props. Automatically falls back to AvatarFallback when the image fails to load.
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `src` | `string` | - | The image source URL. |
-| `alt` | `string` | - | Alternative text for the image. |
-| `className` | `string` | - | Additional CSS classes to apply to the image. |
+| `src` | `string` | - | The image source URL. Should be a valid URL pointing to an image resource. |
+| `alt` | `string` | - | Alternative text for the image. Important for accessibility and screen readers. |
+| `className` | `string` | - | Additional CSS classes to apply to the image element. Inherits all standard img element properties. |
+| `onLoadingStatusChange` | `(status: "idle" \| "loading" \| "loaded" \| "error") => void` | - | Callback fired when the loading status changes. Useful for handling loading states. |
 
 ### AvatarFallback
 
-Extends `span` element props.
+Extends `span` element props. Displays when AvatarImage fails to load or is not provided.
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `className` | `string` | - | Additional CSS classes to apply to the fallback. |
-| `delayMs` | `number` | - | Useful for delaying rendering so it only appears for those with slower connections. |
+| `className` | `string` | - | Additional CSS classes to apply to the fallback element. Inherits all standard span element properties. |
+| `children` | `ReactNode` | - | The fallback content, typically initials, an icon, or placeholder text. |
+| `delayMs` | `number` | - | Delay in milliseconds before showing the fallback. Useful for slow connections to avoid flickering. |
 
 ## Accessibility
 

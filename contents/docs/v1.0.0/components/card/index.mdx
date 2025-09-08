@@ -3,46 +3,30 @@ title: Card
 description: A versatile container component for displaying content in a structured format.
 ---
 
-<ComponentPreview name="CardDemo" />
+## Basic Card
+
+Here's a basic example of how to use the Card component:
+
+```tsx
+<Card>
+  <CardHeader>
+    <CardTitle>Card Title</CardTitle>
+    <CardDescription>Card Description</CardDescription>
+  </CardHeader>
+  <CardContent>
+    <p>Card Content</p>
+  </CardContent>
+  <CardFooter>
+    <p>Card Footer</p>
+  </CardFooter>
+</Card>
+```
 
 ## Installation
 
-<Tabs defaultValue="cli">
-
-<TabsList>
-  <TabsTrigger value="cli">CLI</TabsTrigger>
-  <TabsTrigger value="manual">Manual</TabsTrigger>
-</TabsList>
-
-<TabsContent value="cli">
-
 ```bash
-npx shadcn-ui@latest add card
+npx shadcn@latest add card
 ```
-
-</TabsContent>
-
-<TabsContent value="manual">
-
-<Steps>
-
-<Step>Install the following dependencies:</Step>
-
-```bash
-npm install @radix-ui/react-slot
-```
-
-<Step>Copy and paste the following code into your project.</Step>
-
-<ComponentSource name="card" />
-
-<Step>Update the import paths to match your project setup.</Step>
-
-</Steps>
-
-</TabsContent>
-
-</Tabs>
 
 ## Usage
 
@@ -74,21 +58,148 @@ import {
 
 ## Examples
 
+Explore different Card implementations and styling options.
+
+### Card Demo
+
+<CodePreview 
+  code={`import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+
+export default function CardDemo() {
+  return (
+    <Card className="w-[350px]">
+      <CardHeader>
+        <CardTitle>Create project</CardTitle>
+        <CardDescription>Deploy your new project in one-click.</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <form>
+          <div className="grid w-full items-center gap-4">
+            <div className="flex flex-col space-y-1.5">
+              <label htmlFor="name">Name</label>
+              <input
+                id="name"
+                placeholder="Name of your project"
+                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+              />
+            </div>
+            <div className="flex flex-col space-y-1.5">
+              <label htmlFor="framework">Framework</label>
+              <select
+                id="framework"
+                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                <option value="">Select</option>
+                <option value="next">Next.js</option>
+                <option value="sveltekit">SvelteKit</option>
+                <option value="astro">Astro</option>
+                <option value="nuxt">Nuxt.js</option>
+              </select>
+            </div>
+          </div>
+        </form>
+      </CardContent>
+      <CardFooter className="flex justify-between">
+        <Button variant="outline">Cancel</Button>
+        <Button>Deploy</Button>
+      </CardFooter>
+    </Card>
+  )
+}`} 
+  language="tsx" 
+  preview={<CardDemo />} 
+/>
+
 ### Card Variants
 
-<ComponentPreview name="CardVariants" />
+<CodePreview 
+  code={`import { Card, CardContent } from "@/components/ui/card"
+
+export default function CardVariants() {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <Card>
+        <CardContent className="p-6">
+          <h3 className="font-semibold mb-2">Default Card</h3>
+          <p className="text-sm text-muted-foreground">
+            This is a default card with standard styling.
+          </p>
+        </CardContent>
+      </Card>
+      
+      <Card className="shadow-lg">
+        <CardContent className="p-6">
+          <h3 className="font-semibold mb-2">Card with Shadow</h3>
+          <p className="text-sm text-muted-foreground">
+            This card has enhanced shadow for more depth.
+          </p>
+        </CardContent>
+      </Card>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<CardVariants />} 
+/>
 
 ### Card Layouts
 
-<ComponentPreview name="CardLayouts" />
+<CodePreview 
+  code={`import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
-## Components
+export default function CardLayouts() {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <Card>
+        <CardHeader>
+          <CardTitle>Card 1</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="text-sm text-muted-foreground">
+            Content for the first card layout.
+          </p>
+        </CardContent>
+      </Card>
+      
+      <Card>
+        <CardHeader>
+          <CardTitle>Card 2</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="text-sm text-muted-foreground">
+            Content for the second card layout.
+          </p>
+        </CardContent>
+      </Card>
+      
+      <Card>
+        <CardHeader>
+          <CardTitle>Card 3</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="text-sm text-muted-foreground">
+            Content for the third card layout.
+          </p>
+        </CardContent>
+      </Card>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<CardLayouts />} 
+/>
+
+## API Reference
 
 ### Card
-
-The main container component that wraps all card content.
-
-#### Props
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -97,20 +208,12 @@ The main container component that wraps all card content.
 
 ### CardHeader
 
-Container for the card's header content, typically containing title and description.
-
-#### Props
-
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode` | - | Header content |
 
 ### CardTitle
-
-The main title of the card with appropriate typography styling.
-
-#### Props
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -119,20 +222,12 @@ The main title of the card with appropriate typography styling.
 
 ### CardDescription
 
-A subtitle or description text with muted styling.
-
-#### Props
-
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode` | - | Description content |
 
 ### CardContent
-
-The main content area of the card with appropriate padding.
-
-#### Props
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -141,14 +236,12 @@ The main content area of the card with appropriate padding.
 
 ### CardFooter
 
-Container for footer content like actions or additional information.
-
-#### Props
-
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode` | - | Footer content |
+
+
 
 ## Styling
 

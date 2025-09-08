@@ -125,24 +125,27 @@ Built on top of a `div` element with role="alert".
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `variant` | `"default" \| "destructive"` | `"default"` | The visual style variant of the alert. |
-| `className` | `string` | - | Additional CSS classes to apply to the alert. |
+| `variant` | `"default" \| "destructive"` | `"default"` | The visual style variant of the alert. Use "default" for informational alerts and "destructive" for error or warning messages. |
+| `className` | `string` | - | Additional CSS classes to apply to the alert container. Can be used to customize spacing, colors, or other styling. |
+| `children` | `ReactNode` | - | The content of the alert, typically including AlertTitle, AlertDescription, and optional icons. |
 
 ### AlertTitle
 
-Extends `HTMLHeadingElement` props.
+Extends `HTMLHeadingElement` props. Renders as an `h5` element by default.
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `className` | `string` | - | Additional CSS classes to apply to the title. |
+| `className` | `string` | - | Additional CSS classes to apply to the title. Inherits all standard heading element properties. |
+| `children` | `ReactNode` | - | The title text content. Should be concise and descriptive of the alert's purpose. |
 
 ### AlertDescription
 
-Extends `HTMLParagraphElement` props.
+Extends `HTMLParagraphElement` props. Renders as a `p` element.
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `className` | `string` | - | Additional CSS classes to apply to the description. |
+| `className` | `string` | - | Additional CSS classes to apply to the description. Inherits all standard paragraph element properties. |
+| `children` | `ReactNode` | - | The description content. Can include text, links, lists, or other inline elements for detailed information. |
 
 ## Accessibility
 
