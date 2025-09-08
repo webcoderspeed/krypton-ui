@@ -11,7 +11,7 @@ export default function InputWithLabelDemo() {
         placeholder="Enter your email"
       />
       <p className="text-sm text-muted-foreground">
-        We'll never share your email with anyone else.
+        {`We'll never share your email with anyone else.`}
       </p>
     </div>
   );
