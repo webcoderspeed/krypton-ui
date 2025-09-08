@@ -64,18 +64,6 @@ const v1_0_0_ROUTES: EachRoute[] = [
         "href": "/components/checkbox"
       },
       {
-        "title": "Collapsible",
-        "href": "/components/collapsible"
-      },
-      {
-        "title": "Command",
-        "href": "/components/command"
-      },
-      {
-        "title": "Context Menu",
-        "href": "/components/context-menu"
-      },
-      {
         "title": "Dialog",
         "href": "/components/dialog"
       },
@@ -90,32 +78,6 @@ const v1_0_0_ROUTES: EachRoute[] = [
       {
         "title": "Separator",
         "href": "/components/separator"
-      }
-    ]
-  },
-  {
-    "title": "Getting Started",
-    "href": "/getting-started",
-    "noLink": true,
-    "items": [
-      {
-        "title": "Installation",
-        "href": "/getting-started/installation",
-        "noLink": true,
-        "items": [
-          {
-            "title": "React",
-            "href": "/getting-started/installation/react"
-          }
-        ]
-      },
-      {
-        "title": "Introduction",
-        "href": "/getting-started/introduction"
-      },
-      {
-        "title": "Quick Start Guide",
-        "href": "/getting-started/quick-start-guide"
       }
     ]
   }
