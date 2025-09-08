@@ -11,8 +11,8 @@ import {
   DialogTitle,
   DialogTrigger,
   DialogClose,
-} from './dialog'
-import { Button } from './button'
+} from '../../components/ui/dialog'
+import { Button } from '../../components/ui/button'
 
 // Test component for controlled dialog
 function ControlledDialog({ open, onOpenChange }: { open: boolean; onOpenChange: (open: boolean) => void }) {

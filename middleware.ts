@@ -4,6 +4,13 @@ import { availableVersions } from './lib/routes-config';
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   
+  // Redirect /components to /docs/v1.0.0/components
+  if (pathname === '/components' || pathname.startsWith('/components/')) {
+    const defaultVersion = availableVersions[0];
+    const newUrl = new URL(`/docs/${defaultVersion}${pathname}`, request.url);
+    return NextResponse.redirect(newUrl);
+  }
+  
   // Check if the path starts with /docs but doesn't have a version prefix
   if (pathname.startsWith('/docs/') && !pathname.startsWith('/docs/v')) {
     // Extract the path after /docs/

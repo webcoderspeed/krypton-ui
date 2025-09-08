@@ -20,6 +20,14 @@ const v1_0_0_ROUTES: EachRoute[] = [
         "href": "/components/alert"
       },
       {
+        "title": "Alert Dialog",
+        "href": "/components/alert-dialog"
+      },
+      {
+        "title": "Aspect Ratio",
+        "href": "/components/aspect-ratio"
+      },
+      {
         "title": "Avatar",
         "href": "/components/avatar"
       },
@@ -28,16 +36,44 @@ const v1_0_0_ROUTES: EachRoute[] = [
         "href": "/components/badge"
       },
       {
+        "title": "Breadcrumb",
+        "href": "/components/breadcrumb"
+      },
+      {
         "title": "Button",
         "href": "/components/button"
+      },
+      {
+        "title": "Calendar",
+        "href": "/components/calendar"
       },
       {
         "title": "Card",
         "href": "/components/card"
       },
       {
+        "title": "Carousel",
+        "href": "/components/carousel"
+      },
+      {
+        "title": "Chart",
+        "href": "/components/chart"
+      },
+      {
         "title": "Checkbox",
         "href": "/components/checkbox"
+      },
+      {
+        "title": "Collapsible",
+        "href": "/components/collapsible"
+      },
+      {
+        "title": "Command",
+        "href": "/components/command"
+      },
+      {
+        "title": "Context Menu",
+        "href": "/components/context-menu"
       },
       {
         "title": "Dialog",

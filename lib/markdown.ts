@@ -132,12 +132,53 @@ import ButtonLoading from '@/components/playground/button/button-loading';
 import ButtonAsChild from '@/components/playground/button/button-as-child';
 
 // Checkbox playground imports
+import { CheckboxDemo, CheckboxStates, CheckboxControlled, CheckboxForm } from '@/components/playground/checkbox'
+import { AlertDialogDemo, AlertDialogDestructive, AlertDialogConfirmation } from '@/components/playground/alert-dialog';
 import {
-  CheckboxDemo,
-  CheckboxStates,
-  CheckboxControlled,
-  CheckboxForm,
-} from '@/components/playground/checkbox';
+  AspectRatioDemo,
+  AspectRatioVideo,
+  AspectRatioSquare,
+} from "@/components/playground/aspect-ratio"
+import {
+  BreadcrumbDemo,
+  BreadcrumbEllipsisDemo,
+  BreadcrumbCustomSeparator,
+} from "@/components/playground/breadcrumb"
+import {
+  CalendarDemo,
+  CalendarRange,
+  CalendarMultiple,
+  CalendarCustom,
+} from "@/components/playground/calendar"
+import {
+  CarouselDemo,
+  CarouselSize,
+  CarouselOrientation,
+  CarouselApi,
+} from "@/components/playground/carousel"
+import {
+  ChartDemo,
+  ChartLine,
+  ChartPie,
+  ChartArea,
+} from "@/components/playground/chart"
+import {
+  CollapsibleDemo,
+  CollapsibleNested,
+  CollapsibleFAQ,
+  CollapsibleAnimated,
+} from "@/components/playground/collapsible"
+import {
+  CommandDemo,
+  CommandDialogDemo,
+  CommandSearch,
+  CommandPalette,
+} from "@/components/playground/command"
+import {
+  ContextMenuDemo,
+  ContextMenuCheckbox,
+  ContextMenuSubmenu,
+} from "@/components/playground/context-menu"
 
 // Dialog playground imports
 import DialogDemo from '@/components/playground/dialog/dialog-demo';
@@ -314,6 +355,51 @@ const components = {
   CheckboxControlled,
   CheckboxForm,
   
+  // Alert Dialog components
+  AlertDialogDemo,
+  AlertDialogDestructive,
+  AlertDialogConfirmation,
+  
+  // Aspect Ratio components
+  AspectRatioDemo,
+  AspectRatioVideo,
+  AspectRatioSquare,
+  
+  // Breadcrumb components
+  BreadcrumbDemo,
+  BreadcrumbEllipsisDemo,
+  BreadcrumbCustomSeparator,
+  
+  // Calendar components
+  CalendarDemo,
+  CalendarRange,
+  CalendarMultiple,
+  CalendarCustom,
+  
+  // Carousel components
+  CarouselDemo,
+  CarouselSize,
+  CarouselOrientation,
+  CarouselApi,
+  // Chart
+  ChartDemo,
+  ChartLine,
+  ChartPie,
+  ChartArea,
+  // Collapsible
+  CollapsibleDemo,
+  CollapsibleNested,
+  CollapsibleFAQ,
+  CollapsibleAnimated,
+  // Command
+  CommandDemo,
+  CommandDialogDemo,
+  CommandSearch,
+  CommandPalette,
+  // Context Menu
+  ContextMenuDemo,
+  ContextMenuCheckbox,
+  ContextMenuSubmenu,
   // Dialog components
   DialogDemo,
   DialogSizes,

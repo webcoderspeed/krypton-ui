@@ -185,33 +185,35 @@ return (
 ### Status Messages
 
 ```tsx
-const statusMessages = {
-  success: {
-    icon: CheckCircle,
-    title: "Success",
-    message: "Operation completed successfully.",
-    variant: "default" as const
-  },
-  error: {
-    icon: AlertCircle,
-    title: "Error",
-    message: "Something went wrong. Please try again.",
-    variant: "destructive" as const
-  },
-  info: {
-    icon: Info,
-    title: "Information",
-    message: "Here's some important information.",
-    variant: "default" as const
-  }
-}
-
+// Example with success status
 return (
-  <Alert variant={statusMessages[status].variant}>
-    <statusMessages[status].icon className="h-4 w-4" />
-    <AlertTitle>{statusMessages[status].title}</AlertTitle>
+  <Alert variant="default">
+    <LucideIcon name="CheckCircle" className="h-4 w-4" />
+    <AlertTitle>Success</AlertTitle>
     <AlertDescription>
-      {statusMessages[status].message}
+      Operation completed successfully.
+    </AlertDescription>
+  </Alert>
+)
+
+// Example with error status
+return (
+  <Alert variant="destructive">
+    <LucideIcon name="AlertCircle" className="h-4 w-4" />
+    <AlertTitle>Error</AlertTitle>
+    <AlertDescription>
+      Something went wrong. Please try again.
+    </AlertDescription>
+  </Alert>
+)
+
+// Example with info status
+return (
+  <Alert variant="default">
+    <LucideIcon name="Info" className="h-4 w-4" />
+    <AlertTitle>Information</AlertTitle>
+    <AlertDescription>
+      Here's some important information.
     </AlertDescription>
   </Alert>
 )

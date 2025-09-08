@@ -1,0 +1,853 @@
+---
+title: Context Menu
+description: Displays a menu to the user — such as a set of actions or functions — triggered by a right click.
+component: true
+---
+
+import { ContextMenuDemo } from "@/components/playground/context-menu"
+import { ContextMenuCheckbox } from "@/components/playground/context-menu/context-menu-checkbox"
+import { ContextMenuSubmenu } from "@/components/playground/context-menu/context-menu-submenu"
+
+<CodePreview 
+  code={`"use client"
+
+import {
+  ContextMenu,
+  ContextMenuCheckboxItem,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuLabel,
+  ContextMenuRadioGroup,
+  ContextMenuRadioItem,
+  ContextMenuSeparator,
+  ContextMenuShortcut,
+  ContextMenuSub,
+  ContextMenuSubContent,
+  ContextMenuSubTrigger,
+  ContextMenuTrigger,
+} from "@/components/ui/context-menu"
+
+export function ContextMenuDemo() {
+  return (
+    <ContextMenu>
+      <ContextMenuTrigger className="flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm">
+        Right click here
+      </ContextMenuTrigger>
+      <ContextMenuContent className="w-64">
+        <ContextMenuItem inset>
+          Back
+          <ContextMenuShortcut>⌘[</ContextMenuShortcut>
+        </ContextMenuItem>
+        <ContextMenuItem inset disabled>
+          Forward
+          <ContextMenuShortcut>⌘]</ContextMenuShortcut>
+        </ContextMenuItem>
+        <ContextMenuItem inset>
+          Reload
+          <ContextMenuShortcut>⌘R</ContextMenuShortcut>
+        </ContextMenuItem>
+        <ContextMenuSub>
+          <ContextMenuSubTrigger inset>More Tools</ContextMenuSubTrigger>
+          <ContextMenuSubContent className="w-48">
+            <ContextMenuItem>
+              Save Page As...
+              <ContextMenuShortcut>⇧⌘S</ContextMenuShortcut>
+            </ContextMenuItem>
+            <ContextMenuItem>Create Shortcut...</ContextMenuItem>
+            <ContextMenuItem>Name Window...</ContextMenuItem>
+            <ContextMenuSeparator />
+            <ContextMenuItem>Developer Tools</ContextMenuItem>
+          </ContextMenuSubContent>
+        </ContextMenuSub>
+        <ContextMenuSeparator />
+        <ContextMenuCheckboxItem checked>
+          Show Bookmarks Bar
+          <ContextMenuShortcut>⌘⇧B</ContextMenuShortcut>
+        </ContextMenuCheckboxItem>
+        <ContextMenuCheckboxItem>Show Full URLs</ContextMenuCheckboxItem>
+        <ContextMenuSeparator />
+        <ContextMenuRadioGroup value="pedro">
+          <ContextMenuLabel inset>People</ContextMenuLabel>
+          <ContextMenuSeparator />
+          <ContextMenuRadioItem value="pedro">
+            Pedro Duarte
+          </ContextMenuRadioItem>
+          <ContextMenuRadioItem value="colm">Colm Tuite</ContextMenuRadioItem>
+        </ContextMenuRadioGroup>
+      </ContextMenuContent>
+    </ContextMenu>
+  )
+}`} 
+  language="tsx" 
+  preview={<ContextMenuDemo />} 
+/>
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn-ui@latest add context-menu
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+1. Install the following dependency:
+
+```bash
+npm install @radix-ui/react-context-menu
+```
+
+2. Copy and paste the following code into your project.
+
+```tsx
+"use client"
+
+import * as React from "react"
+import * as ContextMenuPrimitive from "@radix-ui/react-context-menu"
+import { Check, ChevronRight, Circle } from "lucide-react"
+
+import { cn } from "@/lib/utils"
+
+const ContextMenu = ContextMenuPrimitive.Root
+
+const ContextMenuTrigger = ContextMenuPrimitive.Trigger
+
+const ContextMenuGroup = ContextMenuPrimitive.Group
+
+const ContextMenuPortal = ContextMenuPrimitive.Portal
+
+const ContextMenuSub = ContextMenuPrimitive.Sub
+
+const ContextMenuRadioGroup = ContextMenuPrimitive.RadioGroup
+
+const ContextMenuSubTrigger = React.forwardRef<
+  React.ElementRef<typeof ContextMenuPrimitive.SubTrigger>,
+  React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.SubTrigger> & {
+    inset?: boolean
+  }
+>(({ className, inset, children, ...props }, ref) => (
+  <ContextMenuPrimitive.SubTrigger
+    ref={ref}
+    className={cn(
+      "flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[state=open]:bg-accent data-[state=open]:text-accent-foreground",
+      inset && "pl-8",
+      className
+    )}
+    {...props}
+  >
+    {children}
+    <ChevronRight className="ml-auto h-4 w-4" />
+  </ContextMenuPrimitive.SubTrigger>
+))
+ContextMenuSubTrigger.displayName = ContextMenuPrimitive.SubTrigger.displayName
+
+const ContextMenuSubContent = React.forwardRef<
+  React.ElementRef<typeof ContextMenuPrimitive.SubContent>,
+  React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.SubContent>
+>(({ className, ...props }, ref) => (
+  <ContextMenuPrimitive.SubContent
+    ref={ref}
+    className={cn(
+      "z-50 min-w-[8rem] overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
+      className
+    )}
+    {...props}
+  />
+))
+ContextMenuSubContent.displayName = ContextMenuPrimitive.SubContent.displayName
+
+const ContextMenuContent = React.forwardRef<
+  React.ElementRef<typeof ContextMenuPrimitive.Content>,
+  React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Content>
+>(({ className, ...props }, ref) => (
+  <ContextMenuPrimitive.Portal>
+    <ContextMenuPrimitive.Content
+      ref={ref}
+      className={cn(
+        "z-50 min-w-[8rem] overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
+        className
+      )}
+      {...props}
+    />
+  </ContextMenuPrimitive.Portal>
+))
+ContextMenuContent.displayName = ContextMenuPrimitive.Content.displayName
+
+const ContextMenuItem = React.forwardRef<
+  React.ElementRef<typeof ContextMenuPrimitive.Item>,
+  React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Item> & {
+    inset?: boolean
+  }
+>(({ className, inset, ...props }, ref) => (
+  <ContextMenuPrimitive.Item
+    ref={ref}
+    className={cn(
+      "relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+      inset && "pl-8",
+      className
+    )}
+    {...props}
+  />
+))
+ContextMenuItem.displayName = ContextMenuPrimitive.Item.displayName
+
+const ContextMenuCheckboxItem = React.forwardRef<
+  React.ElementRef<typeof ContextMenuPrimitive.CheckboxItem>,
+  React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.CheckboxItem>
+>(({ className, children, checked, ...props }, ref) => (
+  <ContextMenuPrimitive.CheckboxItem
+    ref={ref}
+    className={cn(
+      "relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+      className
+    )}
+    checked={checked}
+    {...props}
+  >
+    <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
+      <ContextMenuPrimitive.ItemIndicator>
+        <Check className="h-4 w-4" />
+      </ContextMenuPrimitive.ItemIndicator>
+    </span>
+    {children}
+  </ContextMenuPrimitive.CheckboxItem>
+))
+ContextMenuCheckboxItem.displayName =
+  ContextMenuPrimitive.CheckboxItem.displayName
+
+const ContextMenuRadioItem = React.forwardRef<
+  React.ElementRef<typeof ContextMenuPrimitive.RadioItem>,
+  React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.RadioItem>
+>(({ className, children, ...props }, ref) => (
+  <ContextMenuPrimitive.RadioItem
+    ref={ref}
+    className={cn(
+      "relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+      className
+    )}
+    {...props}
+  >
+    <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
+      <ContextMenuPrimitive.ItemIndicator>
+        <Circle className="h-2 w-2 fill-current" />
+      </ContextMenuPrimitive.ItemIndicator>
+    </span>
+    {children}
+  </ContextMenuPrimitive.RadioItem>
+))
+ContextMenuRadioItem.displayName = ContextMenuPrimitive.RadioItem.displayName
+
+const ContextMenuLabel = React.forwardRef<
+  React.ElementRef<typeof ContextMenuPrimitive.Label>,
+  React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Label> & {
+    inset?: boolean
+  }
+>(({ className, inset, ...props }, ref) => (
+  <ContextMenuPrimitive.Label
+    ref={ref}
+    className={cn(
+      "px-2 py-1.5 text-sm font-semibold text-foreground",
+      inset && "pl-8",
+      className
+    )}
+    {...props}
+  />
+))
+ContextMenuLabel.displayName = ContextMenuPrimitive.Label.displayName
+
+const ContextMenuSeparator = React.forwardRef<
+  React.ElementRef<typeof ContextMenuPrimitive.Separator>,
+  React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Separator>
+>(({ className, ...props }, ref) => (
+  <ContextMenuPrimitive.Separator
+    ref={ref}
+    className={cn("-mx-1 my-1 h-px bg-border", className)}
+    {...props}
+  />
+))
+ContextMenuSeparator.displayName = ContextMenuPrimitive.Separator.displayName
+
+const ContextMenuShortcut = ({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLSpanElement>) => {
+  return (
+    <span
+      className={cn(
+        "ml-auto text-xs tracking-widest text-muted-foreground",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+ContextMenuShortcut.displayName = "ContextMenuShortcut"
+
+export {
+  ContextMenu,
+  ContextMenuTrigger,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuCheckboxItem,
+  ContextMenuRadioItem,
+  ContextMenuLabel,
+  ContextMenuSeparator,
+  ContextMenuShortcut,
+  ContextMenuGroup,
+  ContextMenuPortal,
+  ContextMenuSub,
+  ContextMenuSubContent,
+  ContextMenuSubTrigger,
+  ContextMenuRadioGroup,
+}
+```
+
+3. Update the import paths to match your project setup.
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuTrigger,
+} from "@/components/ui/context-menu"
+```
+
+```tsx
+<ContextMenu>
+  <ContextMenuTrigger>Right click</ContextMenuTrigger>
+  <ContextMenuContent>
+    <ContextMenuItem>Profile</ContextMenuItem>
+    <ContextMenuItem>Billing</ContextMenuItem>
+    <ContextMenuItem>Team</ContextMenuItem>
+    <ContextMenuItem>Subscription</ContextMenuItem>
+  </ContextMenuContent>
+</ContextMenu>
+```
+
+## Examples
+
+### Checkboxes and Radio Groups
+
+<CodePreview 
+  code={`"use client"
+
+import React, { useState } from "react"
+import { Check, Circle, Square } from "lucide-react"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import {
+  ContextMenu,
+  ContextMenuCheckboxItem,
+  ContextMenuContent,
+  ContextMenuLabel,
+  ContextMenuSeparator,
+  ContextMenuTrigger,
+} from "@/components/ui/context-menu"
+
+const initialSettings = {
+  showBookmarks: true,
+  showFullUrls: false,
+  showIcons: true,
+  enableNotifications: false,
+  autoSave: true,
+  darkMode: false,
+  compactView: true,
+  showLineNumbers: false,
+}
+
+export function ContextMenuCheckbox() {
+  const [settings, setSettings] = useState(initialSettings)
+
+  const handleSettingChange = (key: keyof typeof settings) => {
+    setSettings(prev => ({
+      ...prev,
+      [key]: !prev[key]
+    }))
+  }
+
+  return (
+    <Card className="w-full max-w-md">
+      <CardHeader>
+        <CardTitle>Context Menu with Checkboxes</CardTitle>
+        <CardDescription>
+          Right-click the area below to see checkbox items in the context menu.
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <ContextMenu>
+          <ContextMenuTrigger className="flex h-32 w-full items-center justify-center rounded-md border border-dashed text-sm">
+            Right-click here
+          </ContextMenuTrigger>
+          <ContextMenuContent className="w-64">
+            <ContextMenuLabel>View Options</ContextMenuLabel>
+            <ContextMenuSeparator />
+            <ContextMenuCheckboxItem
+              checked={settings.showBookmarks}
+              onCheckedChange={() => handleSettingChange('showBookmarks')}
+            >
+              Show Bookmarks
+            </ContextMenuCheckboxItem>
+            <ContextMenuCheckboxItem
+              checked={settings.showFullUrls}
+              onCheckedChange={() => handleSettingChange('showFullUrls')}
+            >
+              Show Full URLs
+            </ContextMenuCheckboxItem>
+            <ContextMenuCheckboxItem
+              checked={settings.showIcons}
+              onCheckedChange={() => handleSettingChange('showIcons')}
+            >
+              Show Icons
+            </ContextMenuCheckboxItem>
+            <ContextMenuSeparator />
+            <ContextMenuLabel>Preferences</ContextMenuLabel>
+            <ContextMenuSeparator />
+            <ContextMenuCheckboxItem
+              checked={settings.enableNotifications}
+              onCheckedChange={() => handleSettingChange('enableNotifications')}
+            >
+              Enable Notifications
+            </ContextMenuCheckboxItem>
+            <ContextMenuCheckboxItem
+              checked={settings.autoSave}
+              onCheckedChange={() => handleSettingChange('autoSave')}
+            >
+              Auto Save
+            </ContextMenuCheckboxItem>
+            <ContextMenuCheckboxItem
+              checked={settings.darkMode}
+              onCheckedChange={() => handleSettingChange('darkMode')}
+            >
+              Dark Mode
+            </ContextMenuCheckboxItem>
+            <ContextMenuSeparator />
+            <ContextMenuLabel>Editor</ContextMenuLabel>
+            <ContextMenuSeparator />
+            <ContextMenuCheckboxItem
+              checked={settings.compactView}
+              onCheckedChange={() => handleSettingChange('compactView')}
+            >
+              Compact View
+            </ContextMenuCheckboxItem>
+            <ContextMenuCheckboxItem
+              checked={settings.showLineNumbers}
+              onCheckedChange={() => handleSettingChange('showLineNumbers')}
+            >
+              Show Line Numbers
+            </ContextMenuCheckboxItem>
+          </ContextMenuContent>
+        </ContextMenu>
+        
+        <div className="mt-4 space-y-2">
+          <h4 className="text-sm font-medium">Current Settings:</h4>
+          <div className="grid grid-cols-2 gap-2 text-xs">
+            {Object.entries(settings).map(([key, value]) => (
+              <div key={key} className="flex items-center space-x-2">
+                {value ? (
+                  <Check className="h-3 w-3 text-green-500" />
+                ) : (
+                  <Circle className="h-3 w-3 text-gray-400" />
+                )}
+                <span className={value ? "text-foreground" : "text-muted-foreground"}>
+                  {key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  )
+}`}
+  preview={<ContextMenuCheckbox />}
+/>
+
+### Submenus
+
+<CodePreview 
+  code={`"use client"
+
+import React from "react"
+import {
+  Copy,
+  Cut,
+  Paste,
+  Download,
+  Share,
+  Edit,
+  Trash2,
+  Star,
+  Archive,
+  Tag,
+  Folder,
+  FileText,
+  Image,
+  Video,
+  Music,
+  ChevronRight,
+} from "lucide-react"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuLabel,
+  ContextMenuSeparator,
+  ContextMenuShortcut,
+  ContextMenuSub,
+  ContextMenuSubContent,
+  ContextMenuSubTrigger,
+  ContextMenuTrigger,
+} from "@/components/ui/context-menu"
+
+const fileActions = {
+  copy: () => console.log("Copy"),
+  cut: () => console.log("Cut"),
+  paste: () => console.log("Paste"),
+  download: () => console.log("Download"),
+  share: () => console.log("Share"),
+  edit: () => console.log("Edit"),
+  delete: () => console.log("Delete"),
+  star: () => console.log("Star"),
+  archive: () => console.log("Archive"),
+  tag: (color: string) => console.log("Tag with " + color),
+  moveTo: (folder: string) => console.log("Move to " + folder),
+  copyTo: (folder: string) => console.log("Copy to " + folder),
+  openWith: (app: string) => console.log("Open with " + app),
+}
+
+const tagColors = [
+  { name: "Red", color: "bg-red-500" },
+  { name: "Orange", color: "bg-orange-500" },
+  { name: "Yellow", color: "bg-yellow-500" },
+  { name: "Green", color: "bg-green-500" },
+  { name: "Blue", color: "bg-blue-500" },
+  { name: "Purple", color: "bg-purple-500" },
+]
+
+const folders = [
+  { name: "Documents", icon: Folder },
+  { name: "Downloads", icon: Folder },
+  { name: "Pictures", icon: Folder },
+  { name: "Projects", icon: Folder },
+  { name: "Archive", icon: Archive },
+]
+
+const applications = [
+  { name: "Text Editor", icon: FileText },
+  { name: "Image Viewer", icon: Image },
+  { name: "Video Player", icon: Video },
+  { name: "Music Player", icon: Music },
+]
+
+export function ContextMenuSubmenu() {
+  return (
+    <Card className="w-full max-w-md">
+      <CardHeader>
+        <CardTitle>Context Menu with Submenus</CardTitle>
+        <CardDescription>
+          Right-click the file item below to see nested submenus.
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <ContextMenu>
+          <ContextMenuTrigger className="flex h-20 w-full items-center justify-center rounded-md border border-dashed text-sm">
+            <div className="flex items-center space-x-2">
+              <FileText className="h-4 w-4" />
+              <span>document.pdf</span>
+            </div>
+          </ContextMenuTrigger>
+          <ContextMenuContent className="w-64">
+            <ContextMenuItem onClick={fileActions.copy}>
+              <Copy className="mr-2 h-4 w-4" />
+              Copy
+              <ContextMenuShortcut>⌘C</ContextMenuShortcut>
+            </ContextMenuItem>
+            <ContextMenuItem onClick={fileActions.cut}>
+              <Cut className="mr-2 h-4 w-4" />
+              Cut
+              <ContextMenuShortcut>⌘X</ContextMenuShortcut>
+            </ContextMenuItem>
+            <ContextMenuItem onClick={fileActions.paste}>
+              <Paste className="mr-2 h-4 w-4" />
+              Paste
+              <ContextMenuShortcut>⌘V</ContextMenuShortcut>
+            </ContextMenuItem>
+            <ContextMenuSeparator />
+            
+            <ContextMenuSub>
+              <ContextMenuSubTrigger>
+                <Tag className="mr-2 h-4 w-4" />
+                Add Tag
+                <ChevronRight className="ml-auto h-4 w-4" />
+              </ContextMenuSubTrigger>
+              <ContextMenuSubContent>
+                {tagColors.map((tag) => (
+                  <ContextMenuItem
+                    key={tag.name}
+                    onClick={() => fileActions.tag(tag.name)}
+                  >
+                    <div className={`mr-2 h-3 w-3 rounded-full ${tag.color}`} />
+                    {tag.name}
+                  </ContextMenuItem>
+                ))}
+                <ContextMenuSeparator />
+                <ContextMenuItem>
+                  <Tag className="mr-2 h-4 w-4" />
+                  Custom Tag...
+                </ContextMenuItem>
+              </ContextMenuSubContent>
+            </ContextMenuSub>
+            
+            <ContextMenuSub>
+              <ContextMenuSubTrigger>
+                <Folder className="mr-2 h-4 w-4" />
+                Move to
+                <ChevronRight className="ml-auto h-4 w-4" />
+              </ContextMenuSubTrigger>
+              <ContextMenuSubContent>
+                {folders.map((folder) => {
+                  const Icon = folder.icon
+                  return (
+                    <ContextMenuItem
+                      key={folder.name}
+                      onClick={() => fileActions.moveTo(folder.name)}
+                    >
+                      <Icon className="mr-2 h-4 w-4" />
+                      {folder.name}
+                    </ContextMenuItem>
+                  )
+                })}
+                <ContextMenuSeparator />
+                <ContextMenuItem>
+                  <Folder className="mr-2 h-4 w-4" />
+                  Choose Folder...
+                </ContextMenuItem>
+              </ContextMenuSubContent>
+            </ContextMenuSub>
+            
+            <ContextMenuSub>
+              <ContextMenuSubTrigger>
+                <Copy className="mr-2 h-4 w-4" />
+                Copy to
+                <ChevronRight className="ml-auto h-4 w-4" />
+              </ContextMenuSubTrigger>
+              <ContextMenuSubContent>
+                {folders.map((folder) => {
+                  const Icon = folder.icon
+                  return (
+                    <ContextMenuItem
+                      key={folder.name}
+                      onClick={() => fileActions.copyTo(folder.name)}
+                    >
+                      <Icon className="mr-2 h-4 w-4" />
+                      {folder.name}
+                    </ContextMenuItem>
+                  )
+                })}
+                <ContextMenuSeparator />
+                <ContextMenuItem>
+                  <Folder className="mr-2 h-4 w-4" />
+                  Choose Folder...
+                </ContextMenuItem>
+              </ContextMenuSubContent>
+            </ContextMenuSub>
+            
+            <ContextMenuSeparator />
+            
+            <ContextMenuSub>
+              <ContextMenuSubTrigger>
+                <Edit className="mr-2 h-4 w-4" />
+                Open with
+                <ChevronRight className="ml-auto h-4 w-4" />
+              </ContextMenuSubTrigger>
+              <ContextMenuSubContent>
+                {applications.map((app) => {
+                  const Icon = app.icon
+                  return (
+                    <ContextMenuItem
+                      key={app.name}
+                      onClick={() => fileActions.openWith(app.name)}
+                    >
+                      <Icon className="mr-2 h-4 w-4" />
+                      {app.name}
+                    </ContextMenuItem>
+                  )
+                })}
+                <ContextMenuSeparator />
+                <ContextMenuItem>
+                  <Edit className="mr-2 h-4 w-4" />
+                  Choose Application...
+                </ContextMenuItem>
+              </ContextMenuSubContent>
+            </ContextMenuSub>
+            
+            <ContextMenuSeparator />
+            
+            <ContextMenuItem onClick={fileActions.download}>
+              <Download className="mr-2 h-4 w-4" />
+              Download
+            </ContextMenuItem>
+            <ContextMenuItem onClick={fileActions.share}>
+              <Share className="mr-2 h-4 w-4" />
+              Share
+            </ContextMenuItem>
+            <ContextMenuItem onClick={fileActions.star}>
+              <Star className="mr-2 h-4 w-4" />
+              Add to Favorites
+            </ContextMenuItem>
+            
+            <ContextMenuSeparator />
+            
+            <ContextMenuItem onClick={fileActions.delete} className="text-red-600">
+              <Trash2 className="mr-2 h-4 w-4" />
+              Delete
+              <ContextMenuShortcut>⌫</ContextMenuShortcut>
+            </ContextMenuItem>
+          </ContextMenuContent>
+        </ContextMenu>
+        
+        <div className="mt-4">
+          <p className="text-xs text-muted-foreground">
+            This example shows nested submenus for organizing related actions like tagging, 
+            moving files, and opening with different applications.
+          </p>
+        </div>
+      </CardContent>
+    </Card>
+  )
+}`}
+  preview={<ContextMenuSubmenu />}
+/>
+
+## API Reference
+
+### ContextMenu
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | The trigger and content elements |
+| `onOpenChange` | `(open: boolean) => void` | - | Callback when the menu open state changes |
+| `modal` | `boolean` | `true` | Whether the menu is modal |
+
+### ContextMenuTrigger
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | The element that triggers the context menu |
+| `disabled` | `boolean` | `false` | Whether the trigger is disabled |
+
+### ContextMenuContent
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | The menu items |
+| `className` | `string` | - | Additional CSS classes |
+| `sideOffset` | `number` | `4` | Offset from the trigger |
+| `alignOffset` | `number` | `0` | Alignment offset |
+
+### ContextMenuItem
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | The item content |
+| `disabled` | `boolean` | `false` | Whether the item is disabled |
+| `onSelect` | `(event: Event) => void` | - | Callback when the item is selected |
+| `inset` | `boolean` | `false` | Whether to add left padding |
+
+### ContextMenuCheckboxItem
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | The item content |
+| `checked` | `boolean \| 'indeterminate'` | - | The checked state |
+| `onCheckedChange` | `(checked: boolean) => void` | - | Callback when checked state changes |
+| `disabled` | `boolean` | `false` | Whether the item is disabled |
+
+### ContextMenuRadioItem
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | The item content |
+| `value` | `string` | - | The value of the radio item |
+| `disabled` | `boolean` | `false` | Whether the item is disabled |
+
+### ContextMenuRadioGroup
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | The radio items |
+| `value` | `string` | - | The selected value |
+| `onValueChange` | `(value: string) => void` | - | Callback when value changes |
+
+## Data Attributes
+
+### ContextMenuContent
+
+- `data-state`: "open" | "closed"
+- `data-side`: "top" | "right" | "bottom" | "left"
+- `data-align`: "start" | "center" | "end"
+
+### ContextMenuItem
+
+- `data-disabled`: Present when disabled
+- `data-highlighted`: Present when highlighted
+
+### ContextMenuCheckboxItem
+
+- `data-state`: "checked" | "unchecked" | "indeterminate"
+- `data-disabled`: Present when disabled
+
+### ContextMenuRadioItem
+
+- `data-state`: "checked" | "unchecked"
+- `data-disabled`: Present when disabled
+
+## Accessibility
+
+### Keyboard Navigation
+
+| Key | Description |
+|-----|-------------|
+| `Space` | Activates the focused item |
+| `Enter` | Activates the focused item |
+| `ArrowDown` | Moves focus to the next item |
+| `ArrowUp` | Moves focus to the previous item |
+| `ArrowRight` | Opens a submenu or moves focus to the next item in a submenu |
+| `ArrowLeft` | Closes a submenu or moves focus to the previous item in a submenu |
+| `Escape` | Closes the context menu |
+| `A-Z` | Moves focus to the next item that starts with the typed character |
+
+### ARIA Attributes
+
+- Uses `role="menu"` for the menu container
+- Uses `role="menuitem"` for menu items
+- Uses `role="menuitemcheckbox"` for checkbox items
+- Uses `role="menuitemradio"` for radio items
+- Uses `aria-expanded` to indicate submenu state
+- Uses `aria-checked` for checkbox and radio items
+- Uses `aria-disabled` for disabled items
+
+## Notes
+
+- The context menu is triggered by right-clicking on the trigger element
+- On touch devices, the context menu can be triggered by long-pressing
+- The menu automatically positions itself to stay within the viewport
+- Submenus open on hover and can be navigated with keyboard
+- The component is built on top of Radix UI's Context Menu primitive
