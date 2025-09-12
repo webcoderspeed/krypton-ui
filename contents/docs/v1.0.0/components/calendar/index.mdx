@@ -1,0 +1,328 @@
+---
+title: Calendar
+description: A date picker component built on top of react-day-picker.
+---
+
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
+import { Stepper, StepperItem } from "@/components/ui/stepper"
+
+<CodePreview 
+  code={`"use client"
+
+import * as React from "react"
+import { Calendar } from "@/components/ui/calendar"
+
+export default function CalendarDemo() {
+  const [date, setDate] = React.useState<Date | undefined>(new Date())
+
+  return (
+    <Calendar
+      mode="single"
+      selected={date}
+      onSelect={setDate}
+      className="rounded-md border"
+    />
+  )
+}`} 
+  language="tsx" 
+  preview={<CalendarDemo />} 
+/>
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx krypton-ui@latest add calendar
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Stepper>
+
+<StepperItem>
+
+Install the following dependencies:
+
+```bash
+npm install react-day-picker lucide-react
+```
+
+</StepperItem>
+
+<StepperItem>
+
+Copy and paste the following code into your project.
+
+```tsx
+"use client"
+
+import * as React from "react"
+import {
+  ChevronDownIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+} from "lucide-react"
+import { DayButton, DayPicker, getDefaultClassNames } from "react-day-picker"
+
+import { cn } from "@/lib/utils"
+import { Button, buttonVariants } from "@/components/ui/button"
+
+function Calendar({
+  className,
+  classNames,
+  showOutsideDays = true,
+  captionLayout = "label",
+  buttonVariant = "ghost",
+  formatters,
+  components,
+  ...props
+}: React.ComponentProps<typeof DayPicker> & {
+  buttonVariant?: React.ComponentProps<typeof Button>["variant"]
+}) {
+  const defaultClassNames = getDefaultClassNames()
+
+  return (
+    <DayPicker
+      showOutsideDays={showOutsideDays}
+      className={cn(
+        "bg-background group/calendar p-3 [--cell-size:2rem] [[data-slot=card-content]_&]:bg-transparent [[data-slot=popover-content]_&]:bg-transparent",
+        String.raw`rtl:**:[.rdp-button\_next>svg]:rotate-180`,
+        String.raw`rtl:**:[.rdp-button\_previous>svg]:rotate-180`,
+        className
+      )}
+      captionLayout={captionLayout}
+      formatters={{
+        formatMonthDropdown: (date) =>
+          date.toLocaleString("default", { month: "short" }),
+        ...formatters,
+      }}
+      classNames={{
+        // ... (truncated for brevity)
+      }}
+      components={{
+        // ... (truncated for brevity)
+      }}
+      {...props}
+    />
+  )
+}
+
+export { Calendar }
+```
+
+</StepperItem>
+
+<StepperItem>
+
+Update the import paths to match your project setup.
+
+</StepperItem>
+
+</Stepper>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import { Calendar } from "@/components/ui/calendar"
+```
+
+```tsx
+const [date, setDate] = React.useState<Date | undefined>(new Date())
+
+return (
+  <Calendar
+    mode="single"
+    selected={date}
+    onSelect={setDate}
+    className="rounded-md border"
+  />
+)
+```
+
+## Examples
+
+### Default
+
+A basic calendar with single date selection.
+
+<CodePreview 
+  code={`"use client"
+
+import * as React from "react"
+import { Calendar } from "@/components/ui/calendar"
+
+export default function CalendarDemo() {
+  const [date, setDate] = React.useState<Date | undefined>(new Date())
+
+  return (
+    <Calendar
+      mode="single"
+      selected={date}
+      onSelect={setDate}
+      className="rounded-md border"
+    />
+  )
+}`} 
+  language="tsx" 
+  preview={<CalendarDemo />} 
+/>
+
+### Date Range
+
+Select a range of dates with start and end dates.
+
+<CodePreview 
+  code={`"use client"
+
+import * as React from "react"
+import { Calendar } from "@/components/ui/calendar"
+import { DateRange } from "react-day-picker"
+
+export default function CalendarRange() {
+  const [date, setDate] = React.useState<DateRange | undefined>({
+    from: new Date(2024, 0, 20),
+    to: new Date(2024, 0, 25),
+  })
+
+  return (
+    <Calendar
+      mode="range"
+      defaultMonth={date?.from}
+      selected={date}
+      onSelect={setDate}
+      numberOfMonths={2}
+      className="rounded-md border"
+    />
+  )
+}`} 
+  language="tsx" 
+  preview={<CalendarRange />} 
+/>
+
+### Multiple Dates
+
+Select multiple individual dates.
+
+<CodePreview 
+  code={`"use client"
+
+import * as React from "react"
+import { Calendar } from "@/components/ui/calendar"
+
+export default function CalendarMultiple() {
+  const [dates, setDates] = React.useState<Date[] | undefined>([
+    new Date(2024, 0, 15),
+    new Date(2024, 0, 20),
+    new Date(2024, 0, 25),
+  ])
+
+  return (
+    <div className="space-y-4">
+      <Calendar
+        mode="multiple"
+        selected={dates}
+        onSelect={setDates}
+        className="rounded-md border"
+      />
+      {dates && dates.length > 0 && (
+        <div className="text-sm text-muted-foreground">
+          Selected {dates.length} date{dates.length > 1 ? 's' : ''}
+        </div>
+      )}
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<CalendarMultiple />} 
+/>
+
+### Custom Configuration
+
+Customize the calendar with disabled dates and different styling options.
+
+<CodePreview 
+  code={`"use client"
+
+import * as React from "react"
+import { Calendar } from "@/components/ui/calendar"
+
+export default function CalendarCustom() {
+  const [date, setDate] = React.useState<Date | undefined>(new Date())
+
+  // Disable weekends
+  const disabledDays = [
+    { dayOfWeek: [0, 6] }, // Sunday and Saturday
+    { before: new Date() }, // Past dates
+  ]
+
+  return (
+    <div className="space-y-4">
+      <div className="text-sm text-muted-foreground">
+        Weekends and past dates are disabled
+      </div>
+      <Calendar
+        mode="single"
+        selected={date}
+        onSelect={setDate}
+        disabled={disabledDays}
+        buttonVariant="outline"
+        captionLayout="dropdown"
+        className="rounded-md border"
+        fromYear={2020}
+        toYear={2030}
+      />
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<CalendarCustom />} 
+/>
+
+## API Reference
+
+### Calendar
+
+The Calendar component extends all props from `react-day-picker`'s `DayPicker` component with additional customization options.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `buttonVariant` | `"default" \| "destructive" \| "outline" \| "secondary" \| "ghost" \| "link"` | `"ghost"` | The variant of the navigation buttons |
+| `captionLayout` | `"label" \| "dropdown" \| "dropdown-months" \| "dropdown-years"` | `"label"` | The layout of the month/year caption |
+| `showOutsideDays` | `boolean` | `true` | Whether to show days outside the current month |
+| `mode` | `"single" \| "multiple" \| "range"` | - | The selection mode |
+| `selected` | `Date \| Date[] \| DateRange` | - | The selected date(s) |
+| `onSelect` | `function` | - | Callback when date selection changes |
+| `disabled` | `Matcher \| Matcher[]` | - | Dates to disable |
+| `fromYear` | `number` | - | The earliest year to show in dropdown |
+| `toYear` | `number` | - | The latest year to show in dropdown |
+| `numberOfMonths` | `number` | `1` | Number of months to display |
+
+## Accessibility
+
+- Uses semantic HTML elements for proper screen reader support
+- Keyboard navigation with arrow keys, Enter, and Space
+- Focus management and visual focus indicators
+- ARIA labels and descriptions for dates and navigation
+- Supports RTL layouts
+
+## Notes
+
+- Built on top of `react-day-picker` for robust date handling
+- Supports internationalization and localization
+- Customizable styling through CSS classes and variants
+- Works with form libraries like React Hook Form
+- Responsive design with mobile-friendly touch targets

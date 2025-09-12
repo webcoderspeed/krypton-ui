@@ -123,14 +123,84 @@ import {
   InputOTPSeparator,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
+
+// Button playground imports
+import ButtonVariants from '@/components/playground/button/button-variants';
+import ButtonSizes from '@/components/playground/button/button-sizes';
+import ButtonWithIcon from '@/components/playground/button/button-with-icon';
+import ButtonLoading from '@/components/playground/button/button-loading';
+import ButtonAsChild from '@/components/playground/button/button-as-child';
+
+// Checkbox playground imports
+import { CheckboxDemo, CheckboxStates, CheckboxControlled, CheckboxForm } from '@/components/playground/checkbox'
+import { AlertDialogDemo, AlertDialogDestructive, AlertDialogConfirmation } from '@/components/playground/alert-dialog';
+import {
+  AspectRatioDemo,
+  AspectRatioVideo,
+  AspectRatioSquare,
+} from "@/components/playground/aspect-ratio"
+import {
+  BreadcrumbDemo,
+  BreadcrumbEllipsisDemo,
+  BreadcrumbCustomSeparator,
+} from "@/components/playground/breadcrumb"
+import {
+  CalendarDemo,
+  CalendarRange,
+  CalendarMultiple,
+  CalendarCustom,
+} from "@/components/playground/calendar"
+import {
+  CarouselDemo,
+  CarouselSize,
+  CarouselOrientation,
+  CarouselApi,
+} from "@/components/playground/carousel"
+import {
+  ChartDemo,
+  ChartLine,
+  ChartPie,
+  ChartArea,
+} from "@/components/playground/chart"
+import {
+  CollapsibleDemo,
+  CollapsibleNested,
+  CollapsibleFAQ,
+  CollapsibleAnimated,
+} from "@/components/playground/collapsible"
+import {
+  CommandDemo,
+  CommandDialogDemo,
+  CommandSearch,
+  CommandPalette,
+} from "@/components/playground/command"
+import {
+  ContextMenuDemo,
+  ContextMenuCheckbox,
+  ContextMenuSubmenu,
+} from "@/components/playground/context-menu"
+
+// Dialog playground imports
+import DialogDemo from '@/components/playground/dialog/dialog-demo';
+import DialogSizes from '@/components/playground/dialog/dialog-sizes';
+import DialogForm from '@/components/playground/dialog/dialog-form';
+import DialogCustom from '@/components/playground/dialog/dialog-custom';
+
+// Label playground imports
+import LabelDemo from '@/components/playground/label/label-demo'
+import LabelStates from '@/components/playground/label/label-states'
+import LabelForm from '@/components/playground/label/label-form'
+import LabelStyling from '@/components/playground/label/label-styling'
+import SeparatorDemo from '@/components/playground/separator/separator-demo'
+import SeparatorOrientations from '@/components/playground/separator/separator-orientations'
+import SeparatorStyling from '@/components/playground/separator/separator-styling'
+import SeparatorLayouts from '@/components/playground/separator/separator-layouts';
+
+
+// Existing Button components (keeping for compatibility)
 import {   ButtonDefault,
-  ButtonVariants,
-  ButtonSizes,
-  ButtonWithIcon,
-  ButtonLoading,
-  ButtonAsChild,
-  ButtonDestructive,
-  ButtonOutline,
+   ButtonDestructive,
+   ButtonOutline,
   ButtonSecondary,
   ButtonGhost,
   ButtonLink, } from "@/components/playground/button";
@@ -144,7 +214,28 @@ import {
   AlertDestructive,
   AlertWithIcon,
   AlertWithoutIcon,
-} from "@/components/playground/alert";
+} from '@/components/playground/alert'
+import {
+  AvatarDemo,
+  AvatarFallbackDemo,
+  AvatarSizes,
+  AvatarGroup,
+} from '@/components/playground/avatar'
+import BadgeDemo from '@/components/playground/badge/badge-demo';
+import BadgeVariants from '@/components/playground/badge/badge-variants';
+import BadgeCustom from '@/components/playground/badge/badge-custom';
+import {
+  CardDemo,
+  CardVariants,
+  CardLayouts,
+} from '@/components/playground/card'
+import {
+  InputDemo,
+  InputWithLabelDemo,
+  InputWithIconDemo,
+  SearchInputDemo,
+  FormInputDemo,
+} from "@/components/playground/input";
 
 const components = {
   LucideIcon,
@@ -249,16 +340,79 @@ const components = {
 
 
     ButtonDefault,
-  ButtonVariants,
-  ButtonSizes,
-  ButtonWithIcon,
-  ButtonLoading,
-  ButtonAsChild,
   ButtonDestructive,
   ButtonOutline,
   ButtonSecondary,
   ButtonGhost,
   ButtonLink,
+  ButtonVariants,
+  ButtonSizes,
+  ButtonWithIcon,
+  ButtonLoading,
+  ButtonAsChild,
+  CheckboxDemo,
+  CheckboxStates,
+  CheckboxControlled,
+  CheckboxForm,
+  
+  // Alert Dialog components
+  AlertDialogDemo,
+  AlertDialogDestructive,
+  AlertDialogConfirmation,
+  
+  // Aspect Ratio components
+  AspectRatioDemo,
+  AspectRatioVideo,
+  AspectRatioSquare,
+  
+  // Breadcrumb components
+  BreadcrumbDemo,
+  BreadcrumbEllipsisDemo,
+  BreadcrumbCustomSeparator,
+  
+  // Calendar components
+  CalendarDemo,
+  CalendarRange,
+  CalendarMultiple,
+  CalendarCustom,
+  
+  // Carousel components
+  CarouselDemo,
+  CarouselSize,
+  CarouselOrientation,
+  CarouselApi,
+  // Chart
+  ChartDemo,
+  ChartLine,
+  ChartPie,
+  ChartArea,
+  // Collapsible
+  CollapsibleDemo,
+  CollapsibleNested,
+  CollapsibleFAQ,
+  CollapsibleAnimated,
+  // Command
+  CommandDemo,
+  CommandDialogDemo,
+  CommandSearch,
+  CommandPalette,
+  // Context Menu
+  ContextMenuDemo,
+  ContextMenuCheckbox,
+  ContextMenuSubmenu,
+  // Dialog components
+  DialogDemo,
+  DialogSizes,
+  DialogForm,
+  DialogCustom,
+  LabelDemo,
+  LabelStates,
+  LabelForm,
+  LabelStyling,
+  SeparatorDemo,
+  SeparatorOrientations,
+  SeparatorStyling,
+  SeparatorLayouts,
   AccordionDefault,
   AccordionMultiple,
   AccordionControlled,
@@ -266,8 +420,24 @@ const components = {
   AlertDestructive,
   AlertWithIcon,
   AlertWithoutIcon,
+  AvatarDemo,
+  AvatarFallbackDemo,
+  AvatarSizes,
+  AvatarGroup,
+  BadgeDemo,
+    BadgeVariants,
+    BadgeCustom,
 
-};
+   CardDemo,
+     CardVariants,
+   CardLayouts,
+   InputDemo,
+   InputWithLabelDemo,
+   InputWithIconDemo,
+   SearchInputDemo,
+   FormInputDemo,
+
+  };
 
 async function parseMdx<Frontmatter>(rawMdx: string) {
   return await compileMDX<Frontmatter>({

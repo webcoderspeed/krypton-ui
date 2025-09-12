@@ -20,34 +20,64 @@ const v1_0_0_ROUTES: EachRoute[] = [
         "href": "/components/alert"
       },
       {
+        "title": "Alert Dialog",
+        "href": "/components/alert-dialog"
+      },
+      {
+        "title": "Aspect Ratio",
+        "href": "/components/aspect-ratio"
+      },
+      {
+        "title": "Avatar",
+        "href": "/components/avatar"
+      },
+      {
+        "title": "Badge",
+        "href": "/components/badge"
+      },
+      {
+        "title": "Breadcrumb",
+        "href": "/components/breadcrumb"
+      },
+      {
         "title": "Button",
         "href": "/components/button"
-      }
-    ]
-  },
-  {
-    "title": "Getting Started",
-    "href": "/getting-started",
-    "noLink": true,
-    "items": [
-      {
-        "title": "Installation",
-        "href": "/getting-started/installation",
-        "noLink": true,
-        "items": [
-          {
-            "title": "React",
-            "href": "/getting-started/installation/react"
-          }
-        ]
       },
       {
-        "title": "Introduction",
-        "href": "/getting-started/introduction"
+        "title": "Calendar",
+        "href": "/components/calendar"
       },
       {
-        "title": "Quick Start Guide",
-        "href": "/getting-started/quick-start-guide"
+        "title": "Card",
+        "href": "/components/card"
+      },
+      {
+        "title": "Carousel",
+        "href": "/components/carousel"
+      },
+      {
+        "title": "Chart",
+        "href": "/components/chart"
+      },
+      {
+        "title": "Checkbox",
+        "href": "/components/checkbox"
+      },
+      {
+        "title": "Dialog",
+        "href": "/components/dialog"
+      },
+      {
+        "title": "Input",
+        "href": "/components/input"
+      },
+      {
+        "title": "Label",
+        "href": "/components/label"
+      },
+      {
+        "title": "Separator",
+        "href": "/components/separator"
       }
     ]
   }

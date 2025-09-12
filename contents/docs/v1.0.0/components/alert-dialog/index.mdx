@@ -1,0 +1,317 @@
+---
+title: Alert Dialog
+description: A modal dialog that interrupts the user with important content and expects a response.
+component: true
+---
+
+```tsx
+<AlertDialog>
+  <AlertDialogTrigger asChild>
+    <Button variant="outline">Show Dialog</Button>
+  </AlertDialogTrigger>
+  <AlertDialogContent>
+    <AlertDialogHeader>
+      <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+      <AlertDialogDescription>
+        This action cannot be undone. This will permanently delete your
+        account and remove your data from our servers.
+      </AlertDialogDescription>
+    </AlertDialogHeader>
+    <AlertDialogFooter>
+      <AlertDialogCancel>Cancel</AlertDialogCancel>
+      <AlertDialogAction>Continue</AlertDialogAction>
+    </AlertDialogFooter>
+  </AlertDialogContent>
+</AlertDialog>
+```
+
+## Installation
+
+```bash
+npx shadcn@latest add alert-dialog
+```
+
+## Usage
+
+```tsx
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+```
+
+```tsx
+<AlertDialog>
+  <AlertDialogTrigger>Open</AlertDialogTrigger>
+  <AlertDialogContent>
+    <AlertDialogHeader>
+      <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+      <AlertDialogDescription>
+        This action cannot be undone. This will permanently delete your account
+        and remove your data from our servers.
+      </AlertDialogDescription>
+    </AlertDialogHeader>
+    <AlertDialogFooter>
+      <AlertDialogCancel>Cancel</AlertDialogCancel>
+      <AlertDialogAction>Continue</AlertDialogAction>
+    </AlertDialogFooter>
+  </AlertDialogContent>
+</AlertDialog>
+```
+
+## Examples
+
+Explore different Alert Dialog implementations and use cases.
+
+### Default
+
+<CodePreview
+  code={`<AlertDialog>
+  <AlertDialogTrigger asChild>
+    <Button variant="outline">Show Dialog</Button>
+  </AlertDialogTrigger>
+  <AlertDialogContent>
+    <AlertDialogHeader>
+      <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+      <AlertDialogDescription>
+        This action cannot be undone. This will permanently delete your
+        account and remove your data from our servers.
+      </AlertDialogDescription>
+    </AlertDialogHeader>
+    <AlertDialogFooter>
+      <AlertDialogCancel>Cancel</AlertDialogCancel>
+      <AlertDialogAction>Continue</AlertDialogAction>
+    </AlertDialogFooter>
+  </AlertDialogContent>
+</AlertDialog>`}
+  language="tsx"
+  preview={<AlertDialogDemo />}
+/>
+
+### Destructive Action
+
+Use destructive styling for dangerous actions like deleting data.
+
+<CodePreview
+  code={`<AlertDialog>
+  <AlertDialogTrigger asChild>
+    <Button variant="destructive">Delete Account</Button>
+  </AlertDialogTrigger>
+  <AlertDialogContent>
+    <AlertDialogHeader>
+      <AlertDialogTitle>Delete Account</AlertDialogTitle>
+      <AlertDialogDescription>
+        This will permanently delete your account and all associated data.
+        This action cannot be undone.
+      </AlertDialogDescription>
+    </AlertDialogHeader>
+    <AlertDialogFooter>
+      <AlertDialogCancel>Cancel</AlertDialogCancel>
+      <AlertDialogAction className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
+        Delete Account
+      </AlertDialogAction>
+    </AlertDialogFooter>
+  </AlertDialogContent>
+</AlertDialog>`}
+  language="tsx"
+  preview={<AlertDialogDestructive />}
+/>
+
+### Confirmation Dialog
+
+Use for confirming user actions or saving changes.
+
+<CodePreview
+  code={`<AlertDialog>
+  <AlertDialogTrigger asChild>
+    <Button>Save Changes</Button>
+  </AlertDialogTrigger>
+  <AlertDialogContent>
+    <AlertDialogHeader>
+      <AlertDialogTitle>Save Changes?</AlertDialogTitle>
+      <AlertDialogDescription>
+        You have unsaved changes. Do you want to save them before leaving?
+      </AlertDialogDescription>
+    </AlertDialogHeader>
+    <AlertDialogFooter>
+      <AlertDialogCancel>Don't Save</AlertDialogCancel>
+      <AlertDialogAction>Save Changes</AlertDialogAction>
+    </AlertDialogFooter>
+  </AlertDialogContent>
+</AlertDialog>`}
+  language="tsx"
+  preview={<AlertDialogConfirmation />}
+/>
+
+## API Reference
+
+### AlertDialog
+
+Built on top of [Radix Alert Dialog](https://www.radix-ui.com/docs/primitives/components/alert-dialog).
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `children` | `ReactNode` | - | The content of the alert dialog |
+| `defaultOpen` | `boolean` | `false` | The open state of the dialog when it is initially rendered. |
+| `open` | `boolean` | `undefined` | The controlled open state of the dialog. |
+| `onOpenChange` | `(open: boolean) => void` | `undefined` | Event handler called when the open state changes. |
+
+### AlertDialogTrigger
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `children` | `ReactNode` | - | The trigger element |
+| `asChild` | `boolean` | `false` | Change the default rendered element for the one passed as a child. |
+
+### AlertDialogContent
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `children` | `ReactNode` | - | The content of the alert dialog |
+| `className` | `string` | `undefined` | Additional CSS classes to apply to the dialog content. |
+| `onOpenAutoFocus` | `(event: Event) => void` | `undefined` | Event handler called when focus moves into the component. |
+| `onCloseAutoFocus` | `(event: Event) => void` | `undefined` | Event handler called when focus moves to the trigger after closing. |
+| `onEscapeKeyDown` | `(event: KeyboardEvent) => void` | `undefined` | Event handler called when the escape key is down. |
+| `onPointerDownOutside` | `(event: PointerDownOutsideEvent) => void` | `undefined` | Event handler called when a pointer event occurs outside the bounds. |
+
+### AlertDialogHeader
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `children` | `ReactNode` | - | The header content |
+| `className` | `string` | `undefined` | Additional CSS classes to apply to the dialog header. |
+
+### AlertDialogFooter
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `children` | `ReactNode` | - | The footer content |
+| `className` | `string` | `undefined` | Additional CSS classes to apply to the dialog footer. |
+
+### AlertDialogTitle
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `children` | `ReactNode` | - | The title content |
+| `className` | `string` | `undefined` | Additional CSS classes to apply to the dialog title. |
+
+### AlertDialogDescription
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `children` | `ReactNode` | - | The description content |
+| `className` | `string` | `undefined` | Additional CSS classes to apply to the dialog description. |
+
+### AlertDialogAction
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `children` | `ReactNode` | - | The action button content |
+| `className` | `string` | `undefined` | Additional CSS classes to apply to the action button. |
+| `onClick` | `() => void` | `undefined` | Event handler called when the action button is clicked. |
+
+### AlertDialogCancel
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `children` | `ReactNode` | - | The cancel button content |
+| `className` | `string` | `undefined` | Additional CSS classes to apply to the cancel button. |
+| `onClick` | `() => void` | `undefined` | Event handler called when the cancel button is clicked. |
+
+## Styling
+
+The alert dialog component uses Tailwind CSS classes for styling. You can customize the appearance by:
+
+1. **Modifying the component**: Edit the alert dialog component file to change default styles
+2. **Using className prop**: Pass additional Tailwind classes to any alert dialog component
+3. **CSS variables**: Customize using CSS custom properties
+
+### Action Button Variants
+
+```tsx
+// Default action button
+<AlertDialogAction>Continue</AlertDialogAction>
+
+// Destructive action button
+<AlertDialogAction className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
+  Delete
+</AlertDialogAction>
+
+// Success action button
+<AlertDialogAction className="bg-green-600 hover:bg-green-700">
+  Confirm
+</AlertDialogAction>
+```
+
+### Custom Styling
+
+```css
+.alert-dialog-content {
+  --alert-dialog-border-radius: 0.5rem;
+  --alert-dialog-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+  --alert-dialog-backdrop: rgb(0 0 0 / 0.8);
+}
+```
+
+## Accessibility
+
+The alert dialog component follows WAI-ARIA guidelines:
+
+- Uses proper ARIA attributes for screen readers
+- Supports keyboard navigation
+- Traps focus within the dialog when open
+- Provides focus management when opening and closing
+- Supports escape key to close
+- Cannot be dismissed by clicking outside (by design)
+- Requires explicit user action (Cancel or Action button)
+
+### Keyboard Interactions
+
+| Key | Description |
+| --- | --- |
+| `Space` | Opens the alert dialog when focus is on the trigger |
+| `Enter` | Opens the alert dialog when focus is on the trigger |
+| `Tab` | Moves focus to the next focusable element within the dialog |
+| `Shift + Tab` | Moves focus to the previous focusable element within the dialog |
+| `Escape` | Closes the dialog and moves focus to the trigger |
+
+## Best Practices
+
+### Do's
+
+- Use alert dialogs for critical actions that require user confirmation
+- Always provide both Cancel and Action buttons
+- Use clear, descriptive titles and descriptions
+- Use destructive styling for dangerous actions
+- Keep content concise and focused
+- Provide clear action button labels
+
+### Don'ts
+
+- Don't use alert dialogs for non-critical information
+- Don't use alert dialogs for complex forms or workflows
+- Don't make alert dialogs dismissible by clicking outside
+- Don't use vague button labels like "OK" or "Yes"
+- Don't nest alert dialogs within other dialogs
+- Don't use alert dialogs for success messages (use toast instead)
+
+### When to Use Alert Dialog vs Dialog
+
+**Use Alert Dialog when:**
+- The action is destructive or irreversible
+- User confirmation is required
+- The action has significant consequences
+- You need to interrupt the user's workflow
+
+**Use Dialog when:**
+- Collecting user input
+- Displaying detailed information
+- Creating or editing content
+- The action is not destructive

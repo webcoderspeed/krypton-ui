@@ -1,0 +1,156 @@
+---
+title: Aspect Ratio
+description: Displays content within a desired ratio.
+component: true
+---
+
+```tsx
+<AspectRatio ratio={16 / 9} className="bg-muted">
+  <img
+    src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80"
+    alt="Photo by Drew Beamer"
+    className="rounded-md object-cover h-full w-full"
+  />
+</AspectRatio>
+```
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx nezuko-ui@latest add aspect-ratio
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+1. Install the following dependencies:
+
+```bash
+npm install @radix-ui/react-aspect-ratio
+```
+
+2. Copy and paste the following code into your project.
+
+```tsx
+"use client"
+
+import * as AspectRatioPrimitive from "@radix-ui/react-aspect-ratio"
+
+const AspectRatio = AspectRatioPrimitive.Root
+
+export { AspectRatio }
+```
+
+3. Update the import paths to match your project setup.
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import { AspectRatio } from "@/components/ui/aspect-ratio"
+```
+
+```tsx
+<AspectRatio ratio={16 / 9}>
+  <img src="..." alt="Image" className="rounded-md object-cover" />
+</AspectRatio>
+```
+
+## Examples
+
+### Image
+
+<CodePreview
+  code={`<AspectRatio ratio={16 / 9} className="bg-muted">
+  <img
+    src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80"
+    alt="Photo by Drew Beamer"
+    className="rounded-md object-cover h-full w-full"
+  />
+</AspectRatio>`}
+  language="tsx"
+  preview={<AspectRatioDemo />}
+/>
+
+### Video
+
+<CodePreview
+  code={`<AspectRatio ratio={16 / 9} className="bg-muted">
+  <iframe
+    src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+    title="YouTube video player"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+    className="rounded-md h-full w-full"
+  />
+</AspectRatio>`}
+  language="tsx"
+  preview={<AspectRatioVideo />}
+/>
+
+### Square
+
+<CodePreview
+  code={`<AspectRatio ratio={1} className="bg-muted">
+  <img
+    src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400&dpr=2&q=80"
+    alt="Avatar"
+    className="rounded-md object-cover h-full w-full"
+  />
+</AspectRatio>`}
+  language="tsx"
+  preview={<AspectRatioSquare />}
+/>
+
+## API Reference
+
+### AspectRatio
+
+Built on top of [Radix Aspect Ratio](https://www.radix-ui.com/primitives/docs/components/aspect-ratio).
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `ratio` | `number` | `1` | The desired ratio |
+| `asChild` | `boolean` | `false` | Change the default rendered element for the one passed as a child |
+
+## Styling
+
+The AspectRatio component can be styled using Tailwind CSS classes:
+
+```tsx
+<AspectRatio ratio={16 / 9} className="bg-muted rounded-lg overflow-hidden">
+  <img src="..." alt="..." className="object-cover w-full h-full" />
+</AspectRatio>
+```
+
+## Accessibility
+
+The AspectRatio component maintains the aspect ratio of its content while being fully accessible. When used with images, ensure proper `alt` attributes are provided.
+
+## Common Ratios
+
+- **16:9** - Standard widescreen (1.78)
+- **4:3** - Traditional TV/monitor (1.33)
+- **1:1** - Square (1)
+- **3:2** - Classic photography (1.5)
+- **21:9** - Ultra-wide (2.33)
+
+## Best Practices
+
+- Use appropriate ratios for your content type
+- Ensure images have proper `object-fit` classes
+- Consider responsive behavior with container sizing
+- Provide meaningful alt text for images
+- Test with various content sizes and types

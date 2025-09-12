@@ -1,0 +1,259 @@
+---
+title: Separator
+description: Visually or semantically separates content.
+component: true
+---
+
+<SeparatorDemo />
+
+## Installation
+
+```bash
+npx shadcn@latest add separator
+```
+
+## Usage
+
+```tsx
+import { Separator } from "@/components/ui/separator"
+```
+
+```tsx
+<div>
+  <div className="space-y-1">
+    <h4 className="text-sm font-medium leading-none">Radix Primitives</h4>
+    <p className="text-sm text-muted-foreground">
+      An open-source UI component library.
+    </p>
+  </div>
+  <Separator className="my-4" />
+  <div className="flex h-5 items-center space-x-4 text-sm">
+    <div>Blog</div>
+    <Separator orientation="vertical" />
+    <div>Docs</div>
+    <Separator orientation="vertical" />
+    <div>Source</div>
+  </div>
+</div>
+```
+
+## Examples
+
+### Default
+
+A basic horizontal separator to divide content sections.
+
+<CodePreview 
+  code={`import { Separator } from "@/components/ui/separator"
+
+export default function SeparatorDemo() {
+  return (
+    <div>
+      <div className="space-y-1">
+        <h4 className="text-sm font-medium leading-none">Radix Primitives</h4>
+        <p className="text-sm text-muted-foreground">
+          An open-source UI component library.
+        </p>
+      </div>
+      <Separator className="my-4" />
+      <div className="flex h-5 items-center space-x-4 text-sm">
+        <div>Blog</div>
+        <Separator orientation="vertical" />
+        <div>Docs</div>
+        <Separator orientation="vertical" />
+        <div>Source</div>
+      </div>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<SeparatorDemo />} 
+/>
+
+### Orientations
+
+Separators can be horizontal or vertical depending on the layout needs.
+
+<CodePreview 
+  code={`import { Separator } from "@/components/ui/separator"
+
+export default function SeparatorOrientations() {
+  return (
+    <div className="space-y-6">
+      <div>
+        <h4 className="text-sm font-medium mb-2">Horizontal Separator</h4>
+        <div className="space-y-2">
+          <p className="text-sm">Content above</p>
+          <Separator />
+          <p className="text-sm">Content below</p>
+        </div>
+      </div>
+      
+      <div>
+        <h4 className="text-sm font-medium mb-2">Vertical Separator</h4>
+        <div className="flex items-center space-x-4 text-sm">
+          <span>Left</span>
+          <Separator orientation="vertical" className="h-4" />
+          <span>Center</span>
+          <Separator orientation="vertical" className="h-4" />
+          <span>Right</span>
+        </div>
+      </div>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<SeparatorOrientations />} 
+/>
+
+### Styling
+
+Customize the separator appearance with different colors and thickness.
+
+<CodePreview 
+  code={`import { Separator } from "@/components/ui/separator"
+
+export default function SeparatorStyling() {
+  return (
+    <div className="space-y-6">
+      <div>
+        <h4 className="text-sm font-medium mb-2">Default</h4>
+        <Separator />
+      </div>
+      
+      <div>
+        <h4 className="text-sm font-medium mb-2">Thick</h4>
+        <Separator className="h-[2px]" />
+      </div>
+      
+      <div>
+        <h4 className="text-sm font-medium mb-2">Primary Color</h4>
+        <Separator className="bg-primary" />
+      </div>
+      
+      <div>
+        <h4 className="text-sm font-medium mb-2">Gradient</h4>
+        <Separator className="bg-gradient-to-r from-transparent via-border to-transparent" />
+      </div>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<SeparatorStyling />} 
+/>
+
+## API Reference
+
+### Separator
+
+Built on top of [Radix Separator](https://www.radix-ui.com/docs/primitives/components/separator).
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | The orientation of the separator. |
+| `decorative` | `boolean` | `true` | Whether the separator is decorative or semantic. |
+| `className` | `string` | `-` | Additional CSS classes to apply to the separator. |
+
+## Accessibility
+
+### Keyboard Navigation
+
+- The separator is not focusable and does not participate in keyboard navigation.
+- When `decorative={false}`, the separator has semantic meaning and is announced by screen readers.
+
+### Screen Reader Support
+
+- By default, the separator is decorative (`decorative={true}`) and is ignored by screen readers.
+- Set `decorative={false}` to make the separator semantic and announce it to screen readers.
+- Use appropriate ARIA labels when the separator has semantic meaning.
+
+### Best Practices
+
+- Use horizontal separators to divide content sections vertically.
+- Use vertical separators to divide inline content horizontally.
+- Ensure sufficient color contrast for the separator line.
+- Consider the semantic meaning when choosing between decorative and semantic separators.
+
+## Styling
+
+### Default Styles
+
+The separator comes with default styles that can be customized:
+
+- **Background**: Uses the `border` color from your theme
+- **Horizontal**: 1px height, full width
+- **Vertical**: 1px width, full height
+- **Shrink**: Prevents the separator from growing
+
+### Customization
+
+```tsx
+// Custom color
+<Separator className="bg-primary" />
+
+// Custom thickness
+<Separator className="h-[2px]" />
+<Separator orientation="vertical" className="w-[2px]" />
+
+// Custom spacing
+<Separator className="my-8" />
+
+// Gradient separator
+<Separator className="bg-gradient-to-r from-transparent via-border to-transparent" />
+
+// Dashed style
+<Separator className="border-dashed border-t border-border bg-transparent h-0" />
+```
+
+### Design Tokens
+
+The separator uses the following design tokens:
+
+- `border`: Default separator color
+- `primary`: For accent separators
+- `muted`: For subtle separators
+- `destructive`: For error state separators
+
+### Common Patterns
+
+#### Navigation Menu
+
+```tsx
+<div className="flex items-center space-x-4">
+  <Button variant="ghost">Home</Button>
+  <Separator orientation="vertical" className="h-4" />
+  <Button variant="ghost">About</Button>
+  <Separator orientation="vertical" className="h-4" />
+  <Button variant="ghost">Contact</Button>
+</div>
+```
+
+#### Content Sections
+
+```tsx
+<div className="space-y-4">
+  <section>
+    <h2>Introduction</h2>
+    <p>Content here...</p>
+  </section>
+  <Separator />
+  <section>
+    <h2>Main Content</h2>
+    <p>Content here...</p>
+  </section>
+</div>
+```
+
+#### Sidebar Layout
+
+```tsx
+<div className="flex">
+  <main className="flex-1 p-4">
+    Main content
+  </main>
+  <Separator orientation="vertical" />
+  <aside className="w-64 p-4">
+    Sidebar content
+  </aside>
+</div>
+```

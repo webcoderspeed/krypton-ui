@@ -1,6 +1,8 @@
-import { render, screen, fireEvent } from '@testing-library/react'
-import { Button } from '@/components/ui/button'
-import { describe, it, expect, vi } from 'vitest'
+import React from 'react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { Button } from '@/components/ui/button';
+import { describe, it, expect, vi } from 'vitest';
 
 describe('Button Component', () => {
   it('renders correctly with default props', () => {
@@ -38,14 +40,43 @@ describe('Button Component', () => {
     expect(screen.getByRole('button')).toHaveClass('h-10', 'w-10')
   })
 
-  it('handles click events', () => {
-    const handleClick = vi.fn()
-    render(<Button onClick={handleClick}>Click me</Button>)
+  it('handles click events', async () => {
+    const handleClick = vi.fn();
+    const user = userEvent.setup();
+    render(<Button onClick={handleClick}>Click me</Button>);
     
-    const button = screen.getByRole('button')
-    fireEvent.click(button)
+    const button = screen.getByRole('button');
+    await user.click(button);
     
-    expect(handleClick).toHaveBeenCalledTimes(1)
+    expect(handleClick).toHaveBeenCalledTimes(1);
+  });
+
+  it('handles keyboard interactions', async () => {
+    const handleClick = vi.fn();
+    const user = userEvent.setup();
+    render(<Button onClick={handleClick}>Keyboard test</Button>);
+    
+    const button = screen.getByRole('button');
+    button.focus();
+    
+    // Test Enter key
+    await user.keyboard('{Enter}');
+    expect(handleClick).toHaveBeenCalledTimes(1);
+    
+    // Test Space key
+    await user.keyboard(' ');
+    expect(handleClick).toHaveBeenCalledTimes(2);
+  });
+
+  it('prevents interaction when disabled', async () => {
+    const handleClick = vi.fn();
+    const user = userEvent.setup();
+    render(<Button disabled onClick={handleClick}>Disabled</Button>);
+    
+    const button = screen.getByRole('button');
+    await user.click(button);
+    
+    expect(handleClick).not.toHaveBeenCalled();
   })
 
   it('is disabled when disabled prop is true', () => {
@@ -110,10 +141,91 @@ describe('Button Component', () => {
   })
 
   it('maintains focus styles', () => {
-    render(<Button>Focus test</Button>)
-    const button = screen.getByRole('button')
+    render(<Button>Focus test</Button>);
+    const button = screen.getByRole('button');
     
-    expect(button).toHaveClass('focus-visible:outline-none')
-    expect(button).toHaveClass('focus-visible:ring-2')
+    expect(button).toHaveClass('focus-visible:outline-none');
+    expect(button).toHaveClass('focus-visible:ring-2');
+  });
+
+  it('handles form submission', async () => {
+    const handleSubmit = vi.fn((e) => e.preventDefault());
+    const user = userEvent.setup();
+    
+    render(
+      <form onSubmit={handleSubmit}>
+        <Button type="submit">Submit</Button>
+      </form>
+    );
+    
+    const button = screen.getByRole('button');
+    await user.click(button);
+    
+    expect(handleSubmit).toHaveBeenCalledTimes(1);
+  });
+
+  it('handles focus and blur events', async () => {
+    const handleFocus = vi.fn();
+    const handleBlur = vi.fn();
+    const user = userEvent.setup();
+    
+    render(
+      <div>
+        <Button onFocus={handleFocus} onBlur={handleBlur}>Focus me</Button>
+        <Button>Other button</Button>
+      </div>
+    );
+    
+    const button = screen.getByRole('button', { name: 'Focus me' });
+    const otherButton = screen.getByRole('button', { name: 'Other button' });
+    
+    await user.click(button);
+    expect(handleFocus).toHaveBeenCalledTimes(1);
+    
+    await user.click(otherButton);
+    expect(handleBlur).toHaveBeenCalledTimes(1);
+  });
+
+  it('supports complex children', () => {
+    render(
+      <Button>
+        <span>Icon</span>
+        <span>Text</span>
+      </Button>
+    );
+    
+    const button = screen.getByRole('button');
+    expect(button).toHaveTextContent('IconText');
+    expect(button.children).toHaveLength(2);
+  });
+
+  it('handles rapid clicks', async () => {
+    const handleClick = vi.fn();
+    const user = userEvent.setup();
+    
+    render(<Button onClick={handleClick}>Rapid click</Button>);
+    
+    const button = screen.getByRole('button');
+    
+    // Click multiple times rapidly
+    await user.click(button);
+    await user.click(button);
+    await user.click(button);
+    
+    expect(handleClick).toHaveBeenCalledTimes(3);
+  });
+
+  it('maintains button type attribute', () => {
+    const { rerender } = render(<Button type="button">Default</Button>);
+    let button = screen.getByRole('button') as HTMLButtonElement;
+    expect(button.type).toBe('button');
+    
+    rerender(<Button type="submit">Submit</Button>);
+    button = screen.getByRole('button') as HTMLButtonElement;
+    expect(button.type).toBe('submit');
+    
+    rerender(<Button type="reset">Reset</Button>);
+    button = screen.getByRole('button') as HTMLButtonElement;
+    expect(button.type).toBe('reset');
   })
 })
