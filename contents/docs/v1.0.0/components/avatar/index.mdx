@@ -1,0 +1,134 @@
+---
+title: Avatar
+description: An image element with a fallback for representing the user.
+component: true
+---
+
+## Installation
+
+<CodePreview code="npx shadcn-ui@latest add avatar" language="bash" />
+
+## Import
+
+<CodePreview code="import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'" language="tsx" />
+
+## Usage
+
+### Default
+
+A basic avatar with an image and fallback text.
+
+<CodePreview 
+  code={`import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+
+export default function AvatarDefault() {
+  return (
+    <Avatar>
+      <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+      <AvatarFallback>CN</AvatarFallback>
+    </Avatar>
+  )
+}`} 
+  language="tsx" 
+  preview={<AvatarDefault />} 
+/>
+
+### Sizes
+
+Avatars are available in multiple sizes to fit different contexts.
+
+<CodePreview 
+  code={`import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+
+export default function AvatarSizes() {
+  return (
+    <div className="flex items-center space-x-4">
+      <Avatar className="h-6 w-6">
+        <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+        <AvatarFallback className="text-xs">CN</AvatarFallback>
+      </Avatar>
+      <Avatar className="h-8 w-8">
+        <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+        <AvatarFallback className="text-xs">CN</AvatarFallback>
+      </Avatar>
+      <Avatar>
+        <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+        <AvatarFallback>CN</AvatarFallback>
+      </Avatar>
+      <Avatar className="h-12 w-12">
+        <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+        <AvatarFallback>CN</AvatarFallback>
+      </Avatar>
+      <Avatar className="h-16 w-16">
+        <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+        <AvatarFallback className="text-lg">CN</AvatarFallback>
+      </Avatar>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<AvatarSizes />} 
+/>
+
+### Fallback
+
+Avatars with various fallback scenarios when images fail to load.
+
+<CodePreview 
+  code={`import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+
+export default function AvatarFallback() {
+  return (
+    <div className="flex items-center space-x-4">
+      <Avatar>
+        <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+        <AvatarFallback>CN</AvatarFallback>
+      </Avatar>
+      <Avatar>
+        <AvatarImage src="/broken-image.jpg" alt="Broken" />
+        <AvatarFallback>BK</AvatarFallback>
+      </Avatar>
+      <Avatar>
+        <AvatarFallback>JD</AvatarFallback>
+      </Avatar>
+      <Avatar>
+        <AvatarFallback className="bg-blue-500 text-white">AB</AvatarFallback>
+      </Avatar>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<AvatarFallback />} 
+/>
+
+### Group
+
+Display multiple avatars in a group with overlapping layout.
+
+<CodePreview 
+  code={`import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+
+export default function AvatarGroup() {
+  return (
+    <div className="flex -space-x-2">
+      <Avatar className="border-2 border-background">
+        <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+        <AvatarFallback>CN</AvatarFallback>
+      </Avatar>
+      <Avatar className="border-2 border-background">
+        <AvatarImage src="https://github.com/vercel.png" alt="@vercel" />
+        <AvatarFallback>VC</AvatarFallback>
+      </Avatar>
+      <Avatar className="border-2 border-background">
+        <AvatarImage src="https://github.com/nextjs.png" alt="@nextjs" />
+        <AvatarFallback>NX</AvatarFallback>
+      </Avatar>
+      <Avatar className="border-2 border-background">
+        <AvatarFallback>+2</AvatarFallback>
+      </Avatar>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<AvatarGroup />} 
+/>

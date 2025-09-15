@@ -123,7 +123,8 @@ import {
   InputOTPSeparator,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
-import {   ButtonDefault,
+import {
+  ButtonDefault,
   ButtonVariants,
   ButtonSizes,
   ButtonWithIcon,
@@ -133,7 +134,8 @@ import {   ButtonDefault,
   ButtonOutline,
   ButtonSecondary,
   ButtonGhost,
-  ButtonLink, } from "@/components/playground/button";
+  ButtonLink,
+} from "@/components/playground/button";
 import {
   AccordionDefault,
   AccordionMultiple,
@@ -176,6 +178,21 @@ import {
   InputTypes,
   InputForm,
 } from "@/components/playground/input";
+import {
+  AlertDialogDefault,
+  AlertDialogDestructive,
+  AlertDialogCustom,
+} from "@/components/playground/alert-dialog";
+import {
+  AspectRatioDefault,
+  AspectRatioVariants,
+  AspectRatioVideo,
+} from "@/components/playground/aspect-ratio";
+import {
+  AvatarDefault,
+  AvatarSizes,
+  AvatarGroup,
+} from "@/components/playground/avatar";
 
 const components = {
   LucideIcon,
@@ -277,9 +294,7 @@ const components = {
   InputOTPGroup,
   InputOTPSeparator,
   InputOTPSlot,
-
-
-    ButtonDefault,
+  ButtonDefault,
   ButtonVariants,
   ButtonSizes,
   ButtonWithIcon,
@@ -318,6 +333,15 @@ const components = {
   InputWithIcons,
   InputTypes,
   InputForm,
+  AlertDialogDefault,
+  AlertDialogDestructive,
+  AlertDialogCustom,
+  AspectRatioDefault,
+  AspectRatioVariants,
+  AspectRatioVideo,
+  AvatarDefault,
+  AvatarSizes,
+  AvatarGroup,
 
 };
 

@@ -1,0 +1,158 @@
+---
+title: Alert Dialog
+description: A modal dialog that interrupts the user with important content and expects a response.
+component: true
+---
+
+## Installation
+
+<CodePreview code="npx shadcn-ui@latest add alert-dialog" language="bash" />
+
+## Import
+
+<CodePreview code="import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog'" language="tsx" />
+
+## Usage
+
+### Default
+
+A basic alert dialog with a trigger button and confirmation actions.
+
+<CodePreview 
+  code={`import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+import { Button } from "@/components/ui/button"
+
+export default function AlertDialogDefault() {
+  return (
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <Button variant="outline">Show Dialog</Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+          <AlertDialogDescription>
+            This action cannot be undone. This will permanently delete your
+            account and remove your data from our servers.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction>Continue</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  )
+}`} 
+  language="tsx" 
+  preview={<AlertDialogDefault />} 
+/>
+
+### Destructive
+
+Use the destructive variant for actions that are potentially harmful or irreversible.
+
+<CodePreview 
+  code={`import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+import { Button } from "@/components/ui/button"
+
+export default function AlertDialogDestructive() {
+  return (
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <Button variant="destructive">Delete Account</Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Delete Account</AlertDialogTitle>
+          <AlertDialogDescription>
+            This action cannot be undone. This will permanently delete your
+            account and remove all of your data from our servers.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
+            Delete Account
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  )
+}`} 
+  language="tsx" 
+  preview={<AlertDialogDestructive />} 
+/>
+
+### Custom
+
+Customize the alert dialog with icons and different styling.
+
+<CodePreview 
+  code={`import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+import { Button } from "@/components/ui/button"
+import LucideIcon from "@/components/lucide-icon"
+
+export default function AlertDialogCustom() {
+  return (
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <Button variant="outline">
+          <LucideIcon name="AlertTriangle" className="mr-2 h-4 w-4" />
+          Show Warning
+        </Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <div className="flex items-center gap-2">
+            <LucideIcon name="AlertTriangle" className="h-5 w-5 text-amber-500" />
+            <AlertDialogTitle>Warning</AlertDialogTitle>
+          </div>
+          <AlertDialogDescription>
+            You are about to perform an action that may have consequences.
+            Please review your decision carefully before proceeding.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Go Back</AlertDialogCancel>
+          <AlertDialogAction className="bg-amber-500 text-white hover:bg-amber-600">
+            I Understand
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  )
+}`} 
+  language="tsx" 
+  preview={<AlertDialogCustom />} 
+/>

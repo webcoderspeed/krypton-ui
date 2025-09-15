@@ -1,0 +1,102 @@
+---
+title: Aspect Ratio
+description: Displays content within a desired ratio.
+component: true
+---
+
+## Installation
+
+<CodePreview code="npx shadcn-ui@latest add aspect-ratio" language="bash" />
+
+## Import
+
+<CodePreview code="import { AspectRatio } from '@/components/ui/aspect-ratio'" language="tsx" />
+
+## Usage
+
+### Default
+
+A basic aspect ratio container with 16:9 ratio displaying an image.
+
+<CodePreview 
+  code={`import { AspectRatio } from "@/components/ui/aspect-ratio"
+import Image from "next/image"
+
+export default function AspectRatioDefault() {
+  return (
+    <div className="w-[450px]">
+      <AspectRatio ratio={16 / 9}>
+        <Image
+          src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80"
+          alt="Photo by Drew Beamer"
+          fill
+          className="rounded-md object-cover"
+        />
+      </AspectRatio>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<AspectRatioDefault />} 
+/>
+
+### Variants
+
+Aspect ratio containers with different ratios for various use cases.
+
+<CodePreview 
+  code={`import { AspectRatio } from "@/components/ui/aspect-ratio"
+
+export default function AspectRatioVariants() {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl">
+      <div>
+        <p className="text-sm font-medium mb-2">16:9 (Widescreen)</p>
+        <AspectRatio ratio={16 / 9} className="bg-muted rounded-md flex items-center justify-center">
+          <span className="text-muted-foreground">16:9</span>
+        </AspectRatio>
+      </div>
+      <div>
+        <p className="text-sm font-medium mb-2">4:3 (Standard)</p>
+        <AspectRatio ratio={4 / 3} className="bg-muted rounded-md flex items-center justify-center">
+          <span className="text-muted-foreground">4:3</span>
+        </AspectRatio>
+      </div>
+      <div>
+        <p className="text-sm font-medium mb-2">1:1 (Square)</p>
+        <AspectRatio ratio={1 / 1} className="bg-muted rounded-md flex items-center justify-center">
+          <span className="text-muted-foreground">1:1</span>
+        </AspectRatio>
+      </div>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<AspectRatioVariants />} 
+/>
+
+### Video
+
+Use aspect ratio for embedding videos with consistent dimensions.
+
+<CodePreview 
+  code={`import { AspectRatio } from "@/components/ui/aspect-ratio"
+
+export default function AspectRatioVideo() {
+  return (
+    <div className="w-full max-w-2xl">
+      <AspectRatio ratio={16 / 9}>
+        <iframe
+          src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          className="w-full h-full rounded-md"
+        />
+      </AspectRatio>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<AspectRatioVideo />} 
+/>
