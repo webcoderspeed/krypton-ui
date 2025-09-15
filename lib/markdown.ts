@@ -145,6 +145,37 @@ import {
   AlertWithIcon,
   AlertWithoutIcon,
 } from "@/components/playground/alert";
+import {
+  CalendarDefault,
+  CalendarRange,
+  CalendarMultiple,
+  CalendarDisabled,
+} from "@/components/playground/calendar";
+import {
+  CardDefault,
+  CardWithForm,
+  CardSimple,
+  CardGrid,
+} from "@/components/playground/card";
+import {
+  CarouselDefault,
+  CarouselMultiple,
+  CarouselVertical,
+  CarouselApi,
+} from "@/components/playground/carousel";
+import {
+  CheckboxDefault,
+  CheckboxDisabled,
+  CheckboxWithText,
+  CheckboxForm,
+} from "@/components/playground/checkbox";
+import {
+  InputDefault,
+  InputDisabled,
+  InputWithIcons,
+  InputTypes,
+  InputForm,
+} from "@/components/playground/input";
 
 const components = {
   LucideIcon,
@@ -266,6 +297,27 @@ const components = {
   AlertDestructive,
   AlertWithIcon,
   AlertWithoutIcon,
+  CalendarDefault,
+  CalendarRange,
+  CalendarMultiple,
+  CalendarDisabled,
+  CardDefault,
+  CardWithForm,
+  CardSimple,
+  CardGrid,
+  CarouselDefault,
+  CarouselMultiple,
+  CarouselVertical,
+  CarouselApi,
+  CheckboxDefault,
+  CheckboxDisabled,
+  CheckboxWithText,
+  CheckboxForm,
+  InputDefault,
+  InputDisabled,
+  InputWithIcons,
+  InputTypes,
+  InputForm,
 
 };
 

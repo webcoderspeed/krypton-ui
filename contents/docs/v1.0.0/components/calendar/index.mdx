@@ -1,0 +1,227 @@
+---
+title: Calendar
+description: A date field component that allows users to enter and edit date.
+component: true
+---
+
+## Installation
+
+<CodePreview code="npx shadcn-ui@latest add calendar" language="bash" />
+
+## Import
+
+<CodePreview code="import { Calendar } from '@/components/ui/calendar'" language="tsx" />
+
+## Usage
+
+### Default
+
+The default calendar allows users to select a single date.
+
+<CodePreview 
+  code={`import { Calendar } from '@/components/ui/calendar'
+import { useState } from 'react'
+
+export default function CalendarDefault() {
+  const [date, setDate] = useState<Date | undefined>(new Date())
+
+  return (
+    <Calendar
+      mode="single"
+      selected={date}
+      onSelect={setDate}
+      className="rounded-md border"
+    />
+  )
+}`} 
+  language="tsx" 
+  preview={<CalendarDefault />} 
+/>
+
+### Date Range Selection
+
+Allow users to select a range of dates with start and end dates.
+
+<CodePreview 
+  code={`import { Calendar } from '@/components/ui/calendar'
+import { useState } from 'react'
+import type { DateRange } from 'react-day-picker'
+
+export default function CalendarRange() {
+  const [date, setDate] = useState<DateRange | undefined>({
+    from: new Date(2022, 0, 20),
+    to: addDays(new Date(2022, 0, 20), 20),
+  })
+
+  return (
+    <Calendar
+      mode="range"
+      defaultMonth={date?.from}
+      selected={date}
+      onSelect={setDate}
+      numberOfMonths={2}
+      className="rounded-md border"
+    />
+  )
+}`} 
+  language="tsx" 
+  preview={<CalendarRange />} 
+/>
+
+### Multiple Date Selection
+
+Enable selection of multiple individual dates.
+
+<CodePreview 
+  code={`import { Calendar } from '@/components/ui/calendar'
+import { useState } from 'react'
+
+export default function CalendarMultiple() {
+  const [dates, setDates] = useState<Date[] | undefined>([
+    new Date(2022, 5, 11),
+    new Date(2022, 5, 12),
+    new Date(2022, 5, 13),
+  ])
+
+  return (
+    <Calendar
+      mode="multiple"
+      selected={dates}
+      onSelect={setDates}
+      className="rounded-md border"
+    />
+  )
+}`} 
+  language="tsx" 
+  preview={<CalendarMultiple />} 
+/>
+
+### Disabled Dates
+
+Disable specific dates or date ranges to prevent selection.
+
+<CodePreview 
+  code={`import { Calendar } from '@/components/ui/calendar'
+import { useState } from 'react'
+
+export default function CalendarDisabled() {
+  const [date, setDate] = useState<Date | undefined>()
+
+  return (
+    <Calendar
+      mode="single"
+      selected={date}
+      onSelect={setDate}
+      disabled={(date) =>
+        date > new Date() || date < new Date('1900-01-01')
+      }
+      initialFocus
+      className="rounded-md border"
+    />
+  )
+}`} 
+  language="tsx" 
+  preview={<CalendarDisabled />} 
+/>
+
+## API Reference
+
+### Props
+
+The Calendar component accepts all react-day-picker props plus:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `mode` | `"single" | "multiple" | "range"` | `"single"` | The selection mode of the calendar |
+| `selected` | `Date | Date[] | DateRange` | - | The selected date(s) |
+| `onSelect` | `function` | - | Callback fired when date selection changes |
+| `disabled` | `boolean | function | Date | Date[]` | `false` | Dates that should be disabled |
+| `numberOfMonths` | `number` | `1` | Number of months to display |
+| `defaultMonth` | `Date` | - | The month to display initially |
+| `className` | `string` | - | Additional CSS classes to apply |
+| `initialFocus` | `boolean` | `false` | Whether to focus the calendar on mount |
+
+### Keyboard Navigation
+
+- **Arrow Keys**: Navigate between dates
+- **Enter** or **Space**: Select the focused date
+- **Page Up/Down**: Navigate between months
+- **Home/End**: Navigate to start/end of week
+- **Tab**: Move focus to next focusable element
+
+## Accessibility
+
+The Calendar component follows WAI-ARIA guidelines:
+
+- Uses semantic HTML with proper ARIA labels
+- Supports full keyboard navigation
+- Provides screen reader announcements for date changes
+- Maintains focus management
+- Includes proper role and state attributes
+
+## Best Practices
+
+1. **Provide clear labels**: Use descriptive labels for date inputs
+2. **Handle edge cases**: Consider timezone handling and date validation
+3. **Use appropriate modes**: Choose single, multiple, or range based on use case
+4. **Disable invalid dates**: Prevent selection of unavailable dates
+5. **Consider mobile experience**: Ensure touch-friendly interaction
+
+## Examples in Context
+
+### Date Picker Form Field
+
+```tsx
+<div className="grid w-full max-w-sm items-center gap-1.5">
+  <Label htmlFor="date">Pick a date</Label>
+  <Popover>
+    <PopoverTrigger asChild>
+      <Button variant="outline">
+        {date ? format(date, "PPP") : "Pick a date"}
+      </Button>
+    </PopoverTrigger>
+    <PopoverContent className="w-auto p-0">
+      <Calendar
+        mode="single"
+        selected={date}
+        onSelect={setDate}
+        initialFocus
+      />
+    </PopoverContent>
+  </Popover>
+</div>
+```
+
+### Event Booking
+
+```tsx
+<Calendar
+  mode="range"
+  selected={dateRange}
+  onSelect={setDateRange}
+  disabled={(date) => date < new Date()}
+  numberOfMonths={2}
+/>
+```
+
+### Availability Calendar
+
+```tsx
+<Calendar
+  mode="multiple"
+  selected={availableDates}
+  onSelect={setAvailableDates}
+  disabled={bookedDates}
+/>
+```
+
+## Dependencies
+
+The Calendar component depends on:
+
+- `react-day-picker` - Core calendar functionality
+- `date-fns` - Date manipulation utilities
+- `lucide-react` - Icons for navigation
+- `class-variance-authority` - For variant management
+- `clsx` - For conditional class names
+- `tailwind-merge` - For merging Tailwind classes

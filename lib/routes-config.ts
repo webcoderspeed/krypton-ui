@@ -22,6 +22,26 @@ const v1_0_0_ROUTES: EachRoute[] = [
       {
         "title": "Button",
         "href": "/components/button"
+      },
+      {
+        "title": "Calendar",
+        "href": "/components/calendar"
+      },
+      {
+        "title": "Card",
+        "href": "/components/card"
+      },
+      {
+        "title": "Carousel",
+        "href": "/components/carousel"
+      },
+      {
+        "title": "Checkbox",
+        "href": "/components/checkbox"
+      },
+      {
+        "title": "Input",
+        "href": "/components/input"
       }
     ]
   },

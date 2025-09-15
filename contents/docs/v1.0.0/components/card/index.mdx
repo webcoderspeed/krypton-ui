@@ -1,0 +1,335 @@
+---
+title: Card
+description: Displays a card with header, content, and footer.
+component: true
+---
+
+## Installation
+
+<CodePreview code="npx shadcn-ui@latest add card" language="bash" />
+
+## Import
+
+<CodePreview code="import { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent } from '@/components/ui/card'" language="tsx" />
+
+## Usage
+
+### Default
+
+A simple card with basic content structure.
+
+<CodePreview 
+  code={`import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
+
+export default function CardDefault() {
+  return (
+    <Card className="w-[350px]">
+      <CardHeader>
+        <CardTitle>Card Title</CardTitle>
+        <CardDescription>Card Description</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <p>Card Content</p>
+      </CardContent>
+      <CardFooter>
+        <p>Card Footer</p>
+      </CardFooter>
+    </Card>
+  )
+}`} 
+  language="tsx" 
+  preview={<CardDefault />} 
+/>
+
+### With Form
+
+A card containing form elements for user input.
+
+<CodePreview 
+  code={`import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Button } from '@/components/ui/button'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+
+export default function CardWithForm() {
+  return (
+    <Card className="w-[350px]">
+      <CardHeader>
+        <CardTitle>Create project</CardTitle>
+        <CardDescription>Deploy your new project in one-click.</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <form>
+          <div className="grid w-full items-center gap-4">
+            <div className="flex flex-col space-y-1.5">
+              <Label htmlFor="name">Name</Label>
+              <Input id="name" placeholder="Name of your project" />
+            </div>
+            <div className="flex flex-col space-y-1.5">
+              <Label htmlFor="framework">Framework</Label>
+              <Select>
+                <SelectTrigger id="framework">
+                  <SelectValue placeholder="Select" />
+                </SelectTrigger>
+                <SelectContent position="popper">
+                  <SelectItem value="next">Next.js</SelectItem>
+                  <SelectItem value="sveltekit">SvelteKit</SelectItem>
+                  <SelectItem value="astro">Astro</SelectItem>
+                  <SelectItem value="nuxt">Nuxt.js</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+        </form>
+      </CardContent>
+      <CardFooter className="flex justify-between">
+        <Button variant="outline">Cancel</Button>
+        <Button>Deploy</Button>
+      </CardFooter>
+    </Card>
+  )
+}`} 
+  language="tsx" 
+  preview={<CardWithForm />} 
+/>
+
+### Simple Card
+
+A minimal card with just content, no header or footer.
+
+<CodePreview 
+  code={`import { Card, CardContent } from '@/components/ui/card'
+
+export default function CardSimple() {
+  return (
+    <Card className="w-[350px]">
+      <CardContent className="pt-6">
+        <div className="text-center">
+          <h3 className="text-lg font-semibold">Simple Card</h3>
+          <p className="text-sm text-muted-foreground mt-2">
+            This is a simple card with minimal content.
+          </p>
+        </div>
+      </CardContent>
+    </Card>
+  )
+}`} 
+  language="tsx" 
+  preview={<CardSimple />} 
+/>
+
+### Card Grid
+
+Multiple cards arranged in a responsive grid layout.
+
+<CodePreview 
+  code={`import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
+
+export default function CardGrid() {
+  const cards = [
+    {
+      title: "Analytics",
+      description: "View your analytics dashboard",
+      content: "Track your website performance and user engagement."
+    },
+    {
+      title: "Reports",
+      description: "Generate detailed reports",
+      content: "Create comprehensive reports for your business."
+    },
+    {
+      title: "Notifications",
+      description: "Manage your notifications",
+      content: "Stay updated with real-time notifications."
+    },
+    {
+      title: "Settings",
+      description: "Configure your preferences",
+      content: "Customize your application settings."
+    }
+  ]
+
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-4xl">
+      {cards.map((card, index) => (
+        <Card key={index}>
+          <CardHeader>
+            <CardTitle>{card.title}</CardTitle>
+            <CardDescription>{card.description}</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p>{card.content}</p>
+          </CardContent>
+        </Card>
+      ))}
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<CardGrid />} 
+/>
+
+## API Reference
+
+### Card
+
+The root card container component.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes to apply |
+| `children` | `ReactNode` | - | The content of the card |
+
+### CardHeader
+
+Container for the card's header content.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes to apply |
+| `children` | `ReactNode` | - | The header content |
+
+### CardTitle
+
+The main title of the card.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes to apply |
+| `children` | `ReactNode` | - | The title content |
+
+### CardDescription
+
+A description or subtitle for the card.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes to apply |
+| `children` | `ReactNode` | - | The description content |
+
+### CardContent
+
+The main content area of the card.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes to apply |
+| `children` | `ReactNode` | - | The main content |
+
+### CardFooter
+
+Container for the card's footer content.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes to apply |
+| `children` | `ReactNode` | - | The footer content |
+
+## Accessibility
+
+The Card component follows accessibility best practices:
+
+- Uses semantic HTML structure
+- Maintains proper heading hierarchy
+- Supports keyboard navigation when interactive
+- Provides adequate color contrast
+- Works well with screen readers
+
+## Best Practices
+
+1. **Use semantic structure**: Include CardHeader, CardContent, and CardFooter for better organization
+2. **Maintain consistency**: Use consistent spacing and styling across cards
+3. **Consider responsive design**: Ensure cards work well on different screen sizes
+4. **Limit content**: Keep card content concise and focused
+5. **Use appropriate actions**: Place primary actions in the footer
+
+## Examples in Context
+
+### Product Card
+
+```tsx
+<Card>
+  <CardHeader>
+    <CardTitle>Product Name</CardTitle>
+    <CardDescription>$99.99</CardDescription>
+  </CardHeader>
+  <CardContent>
+    <img src="/product.jpg" alt="Product" className="w-full h-48 object-cover" />
+    <p className="mt-2">Product description goes here.</p>
+  </CardContent>
+  <CardFooter>
+    <Button className="w-full">Add to Cart</Button>
+  </CardFooter>
+</Card>
+```
+
+### User Profile Card
+
+```tsx
+<Card>
+  <CardHeader>
+    <div className="flex items-center space-x-4">
+      <Avatar>
+        <AvatarImage src="/avatar.jpg" />
+        <AvatarFallback>JD</AvatarFallback>
+      </Avatar>
+      <div>
+        <CardTitle>John Doe</CardTitle>
+        <CardDescription>Software Engineer</CardDescription>
+      </div>
+    </div>
+  </CardHeader>
+  <CardContent>
+    <p>Passionate about creating amazing user experiences.</p>
+  </CardContent>
+  <CardFooter>
+    <Button variant="outline">View Profile</Button>
+  </CardFooter>
+</Card>
+```
+
+### Statistics Card
+
+```tsx
+<Card>
+  <CardHeader>
+    <CardTitle>Total Revenue</CardTitle>
+  </CardHeader>
+  <CardContent>
+    <div className="text-2xl font-bold">$45,231.89</div>
+    <p className="text-xs text-muted-foreground">
+      +20.1% from last month
+    </p>
+  </CardContent>
+</Card>
+```
+
+## Dependencies
+
+The Card component depends on:
+
+- `React` - Core React functionality
+- `class-variance-authority` - For variant management
+- `clsx` - For conditional class names
+- `tailwind-merge` - For merging Tailwind classes
