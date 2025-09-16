@@ -192,6 +192,7 @@ import {
   AvatarDefault,
   AvatarSizes,
   AvatarGroup,
+  AvatarFallbackDemo,
 } from "@/components/playground/avatar";
 
 const components = {
@@ -342,7 +343,7 @@ const components = {
   AvatarDefault,
   AvatarSizes,
   AvatarGroup,
-
+AvatarFallbackDemo
 };
 
 async function parseMdx<Frontmatter>(rawMdx: string) {
