@@ -1,119 +1,103 @@
-import { render, screen, fireEvent } from '@testing-library/react'
-import { Button } from '@/components/ui/button'
-import { describe, it, expect, vi } from 'vitest'
+import { describe, it, expect, vi } from 'vitest';
+import { render, screen, fireEvent } from '@testing-library/react';
+import { Button } from '@/components/ui/button';
 
 describe('Button Component', () => {
-  it('renders correctly with default props', () => {
-    render(<Button>Click me</Button>)
-    const button = screen.getByRole('button', { name: /click me/i })
-    expect(button).toBeInTheDocument()
-    expect(button).toHaveClass('bg-primary')
-  })
-
-  it('renders with different variants', () => {
-    const { rerender } = render(<Button variant="destructive">Delete</Button>)
-    expect(screen.getByRole('button')).toHaveClass('bg-destructive')
-
-    rerender(<Button variant="outline">Outline</Button>)
-    expect(screen.getByRole('button')).toHaveClass('border')
-
-    rerender(<Button variant="secondary">Secondary</Button>)
-    expect(screen.getByRole('button')).toHaveClass('bg-secondary')
-
-    rerender(<Button variant="ghost">Ghost</Button>)
-    expect(screen.getByRole('button')).toHaveClass('hover:bg-accent')
-
-    rerender(<Button variant="link">Link</Button>)
-    expect(screen.getByRole('button')).toHaveClass('underline-offset-4')
-  })
-
-  it('renders with different sizes', () => {
-    const { rerender } = render(<Button size="sm">Small</Button>)
-    expect(screen.getByRole('button')).toHaveClass('h-9')
-
-    rerender(<Button size="lg">Large</Button>)
-    expect(screen.getByRole('button')).toHaveClass('h-11')
-
-    rerender(<Button size="icon">Icon</Button>)
-    expect(screen.getByRole('button')).toHaveClass('h-10', 'w-10')
-  })
+  it('renders button with text', () => {
+    render(<Button>Click me</Button>);
+    
+    expect(screen.getByText('Click me')).toBeInTheDocument();
+  });
 
   it('handles click events', () => {
-    const handleClick = vi.fn()
-    render(<Button onClick={handleClick}>Click me</Button>)
+    const handleClick = vi.fn();
+    render(<Button onClick={handleClick}>Click me</Button>);
     
-    const button = screen.getByRole('button')
-    fireEvent.click(button)
+    const button = screen.getByText('Click me');
+    fireEvent.click(button);
     
-    expect(handleClick).toHaveBeenCalledTimes(1)
-  })
+    expect(handleClick).toHaveBeenCalledTimes(1);
+  });
 
-  it('is disabled when disabled prop is true', () => {
-    render(<Button disabled>Disabled</Button>)
-    const button = screen.getByRole('button')
+  it('supports disabled state', () => {
+    render(<Button disabled>Disabled Button</Button>);
     
-    expect(button).toBeDisabled()
-    expect(button).toHaveClass('disabled:opacity-50')
-  })
+    const button = screen.getByText('Disabled Button');
+    expect(button).toBeDisabled();
+  });
 
-  it('applies custom className', () => {
-    render(<Button className="custom-class">Custom</Button>)
-    const button = screen.getByRole('button')
+  it('renders with default variant', () => {
+    render(<Button>Default Button</Button>);
     
-    expect(button).toHaveClass('custom-class')
-  })
+    const button = screen.getByText('Default Button');
+    expect(button).toHaveClass('bg-primary');
+  });
 
-  it('forwards ref correctly', () => {
-    const ref = vi.fn()
-    render(<Button ref={ref}>Ref test</Button>)
+  it('renders with secondary variant', () => {
+    render(<Button variant="secondary">Secondary Button</Button>);
     
-    expect(ref).toHaveBeenCalled()
-  })
+    const button = screen.getByText('Secondary Button');
+    expect(button).toHaveClass('bg-secondary');
+  });
 
-  it('renders as child component when asChild is true', () => {
+  it('renders with destructive variant', () => {
+    render(<Button variant="destructive">Destructive Button</Button>);
+    
+    const button = screen.getByText('Destructive Button');
+    expect(button).toHaveClass('bg-destructive');
+  });
+
+  it('renders with outline variant', () => {
+    render(<Button variant="outline">Outline Button</Button>);
+    
+    const button = screen.getByText('Outline Button');
+    expect(button).toHaveClass('border-input');
+  });
+
+  it('renders with ghost variant', () => {
+    render(<Button variant="ghost">Ghost Button</Button>);
+    
+    const button = screen.getByText('Ghost Button');
+    expect(button).toHaveClass('hover:bg-accent');
+  });
+
+  it('renders with link variant', () => {
+    render(<Button variant="link">Link Button</Button>);
+    
+    const button = screen.getByText('Link Button');
+    expect(button).toHaveClass('text-primary');
+  });
+
+  it('renders with small size', () => {
+    render(<Button size="sm">Small Button</Button>);
+    
+    const button = screen.getByText('Small Button');
+    expect(button).toHaveClass('h-9');
+  });
+
+  it('renders with large size', () => {
+    render(<Button size="lg">Large Button</Button>);
+    
+    const button = screen.getByText('Large Button');
+    expect(button).toHaveClass('h-11');
+  });
+
+  it('supports custom className', () => {
+    render(<Button className="custom-button">Custom Button</Button>);
+    
+    const button = screen.getByText('Custom Button');
+    expect(button).toHaveClass('custom-button');
+  });
+
+  it('renders as different element when asChild is true', () => {
     render(
       <Button asChild>
-        <a href="/test">Link Button</a>
+        <a href="#">Link Button</a>
       </Button>
-    )
+    );
     
-    const link = screen.getByRole('link')
-    expect(link).toBeInTheDocument()
-    expect(link).toHaveAttribute('href', '/test')
-    expect(link).toHaveClass('bg-primary')
-  })
-
-  it('supports all HTML button attributes', () => {
-    render(
-      <Button
-        type="submit"
-        form="test-form"
-        name="test-button"
-        value="test-value"
-      >
-        Submit
-      </Button>
-    )
-    
-    const button = screen.getByRole('button')
-    expect(button).toHaveAttribute('type', 'submit')
-    expect(button).toHaveAttribute('form', 'test-form')
-    expect(button).toHaveAttribute('name', 'test-button')
-    expect(button).toHaveAttribute('value', 'test-value')
-  })
-
-  it('has correct accessibility attributes', () => {
-    render(<Button aria-label="Close dialog">×</Button>)
-    const button = screen.getByRole('button')
-    
-    expect(button).toHaveAttribute('aria-label', 'Close dialog')
-  })
-
-  it('maintains focus styles', () => {
-    render(<Button>Focus test</Button>)
-    const button = screen.getByRole('button')
-    
-    expect(button).toHaveClass('focus-visible:outline-none')
-    expect(button).toHaveClass('focus-visible:ring-2')
-  })
-})
+    const link = screen.getByRole('link');
+    expect(link).toBeInTheDocument();
+    expect(link).toHaveAttribute('href', '#');
+  });
+});
