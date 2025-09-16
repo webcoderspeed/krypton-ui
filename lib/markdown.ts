@@ -179,6 +179,12 @@ import {
   InputForm,
 } from "@/components/playground/input";
 import {
+  BadgeDefault,
+  BadgeVariants,
+  BadgeSizes,
+  BadgeWithIcon,
+} from "@/components/playground/badge";
+import {
   AlertDialogDefault,
   AlertDialogDestructive,
   AlertDialogCustom,
@@ -342,6 +348,10 @@ const components = {
   InputWithIcons,
   InputTypes,
   InputForm,
+  BadgeDefault,
+  BadgeVariants,
+  BadgeSizes,
+  BadgeWithIcon,
   AlertDialogDefault,
   AlertDialogDestructive,
   AlertDialogCustom,

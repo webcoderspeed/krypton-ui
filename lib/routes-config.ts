@@ -32,6 +32,10 @@ const v1_0_0_ROUTES: EachRoute[] = [
         "href": "/components/avatar"
       },
       {
+        "title": "Badge",
+        "href": "/components/badge"
+      },
+      {
         "title": "Button",
         "href": "/components/button"
       },

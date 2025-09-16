@@ -1,0 +1,132 @@
+---
+title: Badge
+description: Displays a badge or a component that looks like a badge.
+---
+
+## Installation
+
+```bash
+npx krypton-ui@latest add badge
+```
+
+## Usage
+
+```tsx
+import { Badge } from "@/components/ui/badge"
+```
+
+```tsx
+<Badge>Badge</Badge>
+```
+
+## Examples
+
+### Default
+
+A simple badge with default styling.
+
+<CodePreview>
+
+```tsx
+<BadgeDefault />
+```
+
+</CodePreview>
+
+### Variants
+
+Badge comes with different variants for different use cases.
+
+<CodePreview>
+
+```tsx
+<BadgeVariants />
+```
+
+</CodePreview>
+
+### Sizes
+
+Badges can be displayed in different sizes.
+
+<CodePreview>
+
+```tsx
+<BadgeSizes />
+```
+
+</CodePreview>
+
+### With Icon
+
+Badges can include icons to provide additional context.
+
+<CodePreview>
+
+```tsx
+<BadgeWithIcon />
+```
+
+</CodePreview>
+
+## API Reference
+
+### Badge
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `variant` | `"default" \| "secondary" \| "destructive" \| "outline"` | `"default"` | The visual style variant of the badge |
+| `className` | `string` | - | Additional CSS classes to apply |
+| `children` | `ReactNode` | - | The content to display inside the badge |
+
+### Badge Variants
+
+- **default**: Primary badge with solid background
+- **secondary**: Muted badge with secondary styling
+- **destructive**: Red badge for warnings or errors
+- **outline**: Badge with border and transparent background
+
+## Accessibility
+
+- Badge uses semantic HTML elements
+- Supports screen readers with proper text content
+- Color is not the only way to convey information
+- Icons include appropriate aria-labels when needed
+
+## Examples in Context
+
+### Status Indicators
+
+Badges are commonly used to show status or state:
+
+```tsx
+<div className="flex items-center gap-2">
+  <span>Order Status:</span>
+  <Badge variant="secondary">Processing</Badge>
+</div>
+```
+
+### Notification Count
+
+Badges can display counts or numbers:
+
+```tsx
+<div className="relative">
+  <Button>Messages</Button>
+  <Badge className="absolute -top-2 -right-2 h-5 w-5 rounded-full p-0 text-xs">
+    3
+  </Badge>
+</div>
+```
+
+### Category Tags
+
+Use badges to categorize or tag content:
+
+```tsx
+<div className="flex flex-wrap gap-1">
+  <Badge variant="outline">React</Badge>
+  <Badge variant="outline">TypeScript</Badge>
+  <Badge variant="outline">UI</Badge>
+</div>
+```
