@@ -193,7 +193,8 @@ import {
   BreadcrumbDefault,
   BreadcrumbCustomSeparator,
   BreadcrumbWithEllipsis,
-  BreadcrumbWithDropdown,
+ BreadcrumbWithDropdown,
+  BreadcrumbWithIcons,
 } from "@/components/playground/breadcrumb";
 import {
   AlertDialogDefault,
@@ -390,6 +391,7 @@ const components = {
   AvatarWithStatusDemo,
   AvatarCustomShapes,
   UserProfileCard,
+  BreadcrumbWithIcons,
 };
 
 async function parseMdx<Frontmatter>(rawMdx: string) {
