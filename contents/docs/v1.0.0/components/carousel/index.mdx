@@ -1,0 +1,387 @@
+---
+title: Carousel
+description: A carousel component for cycling through elements.
+component: true
+---
+
+## Installation
+
+<CodePreview code="npx shadcn-ui@latest add carousel" language="bash" />
+
+## Import
+
+<CodePreview code="import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'" language="tsx" />
+
+## Usage
+
+### Default
+
+A basic carousel with navigation controls.
+
+<CodePreview 
+  code={`import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/components/ui/carousel'
+import { Card, CardContent } from '@/components/ui/card'
+
+export default function CarouselDefault() {
+  return (
+    <Carousel className="w-full max-w-xs">
+      <CarouselContent>
+        {Array.from({ length: 5 }).map((_, index) => (
+          <CarouselItem key={index}>
+            <div className="p-1">
+              <Card>
+                <CardContent className="flex aspect-square items-center justify-center p-6">
+                  <span className="text-4xl font-semibold">{index + 1}</span>
+                </CardContent>
+              </Card>
+            </div>
+          </CarouselItem>
+        ))}
+      </CarouselContent>
+      <CarouselPrevious />
+      <CarouselNext />
+    </Carousel>
+  )
+}`} 
+  language="tsx" 
+  preview={<CarouselDefault />} 
+/>
+
+### Multiple Items
+
+Show multiple items at once with responsive breakpoints.
+
+<CodePreview 
+  code={`import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/components/ui/carousel'
+import { Card, CardContent } from '@/components/ui/card'
+
+export default function CarouselMultiple() {
+  return (
+    <Carousel
+      opts={{
+        align: "start",
+      }}
+      className="w-full max-w-sm"
+    >
+      <CarouselContent>
+        {Array.from({ length: 10 }).map((_, index) => (
+          <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+            <div className="p-1">
+              <Card>
+                <CardContent className="flex aspect-square items-center justify-center p-6">
+                  <span className="text-3xl font-semibold">{index + 1}</span>
+                </CardContent>
+              </Card>
+            </div>
+          </CarouselItem>
+        ))}
+      </CarouselContent>
+      <CarouselPrevious />
+      <CarouselNext />
+    </Carousel>
+  )
+}`} 
+  language="tsx" 
+  preview={<CarouselMultiple />} 
+/>
+
+### Vertical Orientation
+
+A vertical carousel for different layout needs.
+
+<CodePreview 
+  code={`import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/components/ui/carousel'
+import { Card, CardContent } from '@/components/ui/card'
+
+export default function CarouselVertical() {
+  return (
+    <Carousel
+      opts={{
+        align: "start",
+      }}
+      orientation="vertical"
+      className="w-full max-w-xs"
+    >
+      <CarouselContent className="-mt-1 h-[200px]">
+        {Array.from({ length: 5 }).map((_, index) => (
+          <CarouselItem key={index} className="pt-1 md:basis-1/2">
+            <div className="p-1">
+              <Card>
+                <CardContent className="flex items-center justify-center p-6">
+                  <span className="text-3xl font-semibold">{index + 1}</span>
+                </CardContent>
+              </Card>
+            </div>
+          </CarouselItem>
+        ))}
+      </CarouselContent>
+      <CarouselPrevious />
+      <CarouselNext />
+    </Carousel>
+  )
+}`} 
+  language="tsx" 
+  preview={<CarouselVertical />} 
+/>
+
+### With API
+
+Access carousel API for programmatic control.
+
+<CodePreview 
+  code={`import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/components/ui/carousel'
+import { Card, CardContent } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { useEffect, useState } from 'react'
+import type { CarouselApi } from '@/components/ui/carousel'
+
+export default function CarouselApi() {
+  const [api, setApi] = useState<CarouselApi>()
+  const [current, setCurrent] = useState(0)
+  const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    if (!api) {
+      return
+    }
+
+    setCount(api.scrollSnapList().length)
+    setCurrent(api.selectedScrollSnap() + 1)
+
+    api.on("select", () => {
+      setCurrent(api.selectedScrollSnap() + 1)
+    })
+  }, [api])
+
+  return (
+    <div className="mx-auto max-w-xs">
+      <Carousel setApi={setApi} className="w-full max-w-xs">
+        <CarouselContent>
+          {Array.from({ length: 5 }).map((_, index) => (
+            <CarouselItem key={index}>
+              <Card>
+                <CardContent className="flex aspect-square items-center justify-center p-6">
+                  <span className="text-4xl font-semibold">{index + 1}</span>
+                </CardContent>
+              </Card>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselPrevious />
+        <CarouselNext />
+      </Carousel>
+      <div className="py-2 text-center text-sm text-muted-foreground">
+        Slide {current} of {count}
+      </div>
+      <div className="flex justify-center gap-2 mt-2">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => api?.scrollPrev()}
+        >
+          Previous
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => api?.scrollNext()}
+        >
+          Next
+        </Button>
+      </div>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<CarouselApi />} 
+/>
+
+## API Reference
+
+### Carousel
+
+The root carousel container component.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `orientation` | `"horizontal" | "vertical"` | `"horizontal"` | The orientation of the carousel |
+| `opts` | `EmblaOptionsType` | - | Options to pass to the underlying Embla carousel |
+| `setApi` | `(api: CarouselApi) => void` | - | Callback to get the carousel API instance |
+| `plugins` | `EmblaPluginType[]` | - | Plugins to add to the carousel |
+| `className` | `string` | - | Additional CSS classes to apply |
+| `children` | `ReactNode` | - | The carousel content |
+
+### CarouselContent
+
+Container for carousel items.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes to apply |
+| `children` | `ReactNode` | - | The carousel items |
+
+### CarouselItem
+
+Individual carousel item wrapper.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes to apply |
+| `children` | `ReactNode` | - | The item content |
+
+### CarouselPrevious
+
+Previous navigation button.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes to apply |
+| `variant` | `ButtonVariant` | `"outline"` | Button variant |
+| `size` | `ButtonSize` | `"icon"` | Button size |
+
+### CarouselNext
+
+Next navigation button.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes to apply |
+| `variant` | `ButtonVariant` | `"outline"` | Button variant |
+| `size` | `ButtonSize` | `"icon"` | Button size |
+
+### Keyboard Navigation
+
+- **Arrow Keys**: Navigate between slides (when focused)
+- **Tab**: Move focus to navigation buttons
+- **Enter** or **Space**: Activate focused navigation button
+
+## Accessibility
+
+The Carousel component follows accessibility best practices:
+
+- Uses semantic HTML with proper ARIA labels
+- Supports keyboard navigation
+- Provides screen reader announcements
+- Maintains focus management
+- Includes proper role and state attributes
+- Respects reduced motion preferences
+
+## Best Practices
+
+1. **Provide navigation**: Always include previous/next buttons for accessibility
+2. **Consider autoplay carefully**: Use autoplay sparingly and provide pause controls
+3. **Optimize for touch**: Ensure smooth touch/swipe interactions on mobile
+4. **Limit content**: Keep carousel items focused and not overwhelming
+5. **Provide indicators**: Show current position for longer carousels
+
+## Examples in Context
+
+### Image Gallery
+
+```tsx
+<Carousel className="w-full max-w-lg">
+  <CarouselContent>
+    {images.map((image, index) => (
+      <CarouselItem key={index}>
+        <div className="p-1">
+          <img
+            src={image.src}
+            alt={image.alt}
+            className="w-full h-64 object-cover rounded-lg"
+          />
+        </div>
+      </CarouselItem>
+    ))}
+  </CarouselContent>
+  <CarouselPrevious />
+  <CarouselNext />
+</Carousel>
+```
+
+### Product Showcase
+
+```tsx
+<Carousel
+  opts={{
+    align: "start",
+    loop: true,
+  }}
+  className="w-full max-w-4xl"
+>
+  <CarouselContent>
+    {products.map((product, index) => (
+      <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+        <Card>
+          <CardContent className="p-4">
+            <img src={product.image} alt={product.name} />
+            <h3 className="font-semibold mt-2">{product.name}</h3>
+            <p className="text-sm text-muted-foreground">{product.price}</p>
+          </CardContent>
+        </Card>
+      </CarouselItem>
+    ))}
+  </CarouselContent>
+  <CarouselPrevious />
+  <CarouselNext />
+</Carousel>
+```
+
+### Testimonials
+
+```tsx
+<Carousel className="w-full max-w-2xl">
+  <CarouselContent>
+    {testimonials.map((testimonial, index) => (
+      <CarouselItem key={index}>
+        <Card>
+          <CardContent className="p-6 text-center">
+            <blockquote className="text-lg italic">
+              "{testimonial.quote}"
+            </blockquote>
+            <cite className="mt-4 block font-semibold">
+              {testimonial.author}
+            </cite>
+          </CardContent>
+        </Card>
+      </CarouselItem>
+    ))}
+  </CarouselContent>
+  <CarouselPrevious />
+  <CarouselNext />
+</Carousel>
+```
+
+## Dependencies
+
+The Carousel component depends on:
+
+- `embla-carousel-react` - Core carousel functionality
+- `lucide-react` - Icons for navigation buttons
+- `React` - Core React functionality
+- `class-variance-authority` - For variant management
+- `clsx` - For conditional class names
+- `tailwind-merge` - For merging Tailwind classes

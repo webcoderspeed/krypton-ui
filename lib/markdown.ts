@@ -123,7 +123,8 @@ import {
   InputOTPSeparator,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
-import {   ButtonDefault,
+import {
+  ButtonDefault,
   ButtonVariants,
   ButtonSizes,
   ButtonWithIcon,
@@ -133,7 +134,8 @@ import {   ButtonDefault,
   ButtonOutline,
   ButtonSecondary,
   ButtonGhost,
-  ButtonLink, } from "@/components/playground/button";
+  ButtonLink,
+} from "@/components/playground/button";
 import {
   AccordionDefault,
   AccordionMultiple,
@@ -145,6 +147,61 @@ import {
   AlertWithIcon,
   AlertWithoutIcon,
 } from "@/components/playground/alert";
+import {
+  CalendarDefault,
+  CalendarRange,
+  CalendarMultiple,
+  CalendarDisabled,
+} from "@/components/playground/calendar";
+import {
+  CardDefault,
+  CardWithForm,
+  CardSimple,
+  CardGrid,
+} from "@/components/playground/card";
+import {
+  CarouselDefault,
+  CarouselMultiple,
+  CarouselVertical,
+  CarouselApi,
+} from "@/components/playground/carousel";
+import {
+  CheckboxDefault,
+  CheckboxDisabled,
+  CheckboxWithText,
+  CheckboxForm,
+} from "@/components/playground/checkbox";
+import {
+  InputDefault,
+  InputDisabled,
+  InputWithIcons,
+  InputTypes,
+  InputForm,
+} from "@/components/playground/input";
+import {
+  AlertDialogDefault,
+  AlertDialogDestructive,
+  AlertDialogCustom,
+  AlertDialogControlled,
+} from "@/components/playground/alert-dialog";
+import {
+  AspectRatioDefault,
+  AspectRatioVariants,
+  AspectRatioVideo,
+  AspectRatioDifferent,
+  AspectRatioCards,
+  AspectRatioResponsive,
+  AspectRatioCustom,
+} from "@/components/playground/aspect-ratio";
+import {
+  AvatarDefault,
+  AvatarSizes,
+  AvatarFallbackDemo,
+  AvatarGroup,
+  AvatarWithStatusDemo,
+  AvatarCustomShapes,
+  UserProfileCard,
+} from "@/components/playground/avatar";
 
 const components = {
   LucideIcon,
@@ -246,9 +303,7 @@ const components = {
   InputOTPGroup,
   InputOTPSeparator,
   InputOTPSlot,
-
-
-    ButtonDefault,
+  ButtonDefault,
   ButtonVariants,
   ButtonSizes,
   ButtonWithIcon,
@@ -266,7 +321,45 @@ const components = {
   AlertDestructive,
   AlertWithIcon,
   AlertWithoutIcon,
-
+  CalendarDefault,
+  CalendarRange,
+  CalendarMultiple,
+  CalendarDisabled,
+  CardDefault,
+  CardWithForm,
+  CardSimple,
+  CardGrid,
+  CarouselDefault,
+  CarouselMultiple,
+  CarouselVertical,
+  CarouselApi,
+  CheckboxDefault,
+  CheckboxDisabled,
+  CheckboxWithText,
+  CheckboxForm,
+  InputDefault,
+  InputDisabled,
+  InputWithIcons,
+  InputTypes,
+  InputForm,
+  AlertDialogDefault,
+  AlertDialogDestructive,
+  AlertDialogCustom,
+  AlertDialogControlled,
+  AspectRatioDefault,
+  AspectRatioVariants,
+  AspectRatioVideo,
+  AspectRatioDifferent,
+  AspectRatioCards,
+  AspectRatioResponsive,
+  AspectRatioCustom,
+  AvatarDefault,
+  AvatarSizes,
+  AvatarGroup,
+  AvatarFallbackDemo,
+  AvatarWithStatusDemo,
+  AvatarCustomShapes,
+  UserProfileCard,
 };
 
 async function parseMdx<Frontmatter>(rawMdx: string) {

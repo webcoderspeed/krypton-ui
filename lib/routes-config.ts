@@ -20,8 +20,40 @@ const v1_0_0_ROUTES: EachRoute[] = [
         "href": "/components/alert"
       },
       {
+        "title": "Alert Dialog",
+        "href": "/components/alert-dialog"
+      },
+      {
+        "title": "Aspect Ratio",
+        "href": "/components/aspect-ratio"
+      },
+      {
+        "title": "Avatar",
+        "href": "/components/avatar"
+      },
+      {
         "title": "Button",
         "href": "/components/button"
+      },
+      {
+        "title": "Calendar",
+        "href": "/components/calendar"
+      },
+      {
+        "title": "Card",
+        "href": "/components/card"
+      },
+      {
+        "title": "Carousel",
+        "href": "/components/carousel"
+      },
+      {
+        "title": "Checkbox",
+        "href": "/components/checkbox"
+      },
+      {
+        "title": "Input",
+        "href": "/components/input"
       }
     ]
   },

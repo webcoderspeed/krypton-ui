@@ -1,0 +1,402 @@
+---
+title: Input
+description: Displays a form input field or a component that looks like an input field.
+component: true
+---
+
+## Installation
+
+<CodePreview code="npx shadcn-ui@latest add input" language="bash" />
+
+## Import
+
+<CodePreview code="import { Input } from '@/components/ui/input'" language="tsx" />
+
+## Usage
+
+### Default
+
+A basic input field for text entry.
+
+<CodePreview 
+  code={`import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+
+export default function InputDefault() {
+  return (
+    <div className="grid w-full max-w-sm items-center gap-1.5">
+      <Label htmlFor="email">Email</Label>
+      <Input type="email" id="email" placeholder="Email" />
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<InputDefault />} 
+/>
+
+### Disabled
+
+An input field in disabled state that cannot be interacted with.
+
+<CodePreview 
+  code={`import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+
+export default function InputDisabled() {
+  return (
+    <div className="grid w-full max-w-sm items-center gap-1.5">
+      <Label htmlFor="email-disabled">Email</Label>
+      <Input type="email" id="email-disabled" placeholder="Email" disabled />
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<InputDisabled />} 
+/>
+
+### With Icons
+
+Input fields enhanced with icons for better user experience.
+
+<CodePreview 
+  code={`import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Mail, Search, Eye, EyeOff } from 'lucide-react'
+import { useState } from 'react'
+
+export default function InputWithIcons() {
+  const [showPassword, setShowPassword] = useState(false)
+
+  return (
+    <div className="space-y-4 w-full max-w-sm">
+      {/* Email with icon */}
+      <div className="grid w-full items-center gap-1.5">
+        <Label htmlFor="email-icon">Email</Label>
+        <div className="relative">
+          <Mail className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+          <Input
+            id="email-icon"
+            type="email"
+            placeholder="Email"
+            className="pl-8"
+          />
+        </div>
+      </div>
+
+      {/* Search with icon */}
+      <div className="grid w-full items-center gap-1.5">
+        <Label htmlFor="search">Search</Label>
+        <div className="relative">
+          <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+          <Input
+            id="search"
+            type="search"
+            placeholder="Search..."
+            className="pl-8"
+          />
+        </div>
+      </div>
+
+      {/* Password with toggle */}
+      <div className="grid w-full items-center gap-1.5">
+        <Label htmlFor="password">Password</Label>
+        <div className="relative">
+          <Input
+            id="password"
+            type={showPassword ? "text" : "password"}
+            placeholder="Password"
+            className="pr-8"
+          />
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-2 top-2.5 h-4 w-4 text-muted-foreground hover:text-foreground"
+          >
+            {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<InputWithIcons />} 
+/>
+
+### Form Integration
+
+Input fields integrated with form handling and validation.
+
+<CodePreview 
+  code={`import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Button } from '@/components/ui/button'
+import { useState } from 'react'
+
+export default function InputForm() {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    message: ''
+  })
+  const [errors, setErrors] = useState<Record<string, string>>({})
+
+  const handleInputChange = (field: string, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }))
+    // Clear error when user starts typing
+    if (errors[field]) {
+      setErrors(prev => ({ ...prev, [field]: '' }))
+    }
+  }
+
+  const validateForm = () => {
+    const newErrors: Record<string, string> = {}
+    
+    if (!formData.firstName.trim()) {
+      newErrors.firstName = 'First name is required'
+    }
+    if (!formData.lastName.trim()) {
+      newErrors.lastName = 'Last name is required'
+    }
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required'
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = 'Email is invalid'
+    }
+    
+    setErrors(newErrors)
+    return Object.keys(newErrors).length === 0
+  }
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (validateForm()) {
+      console.log('Form submitted:', formData)
+    }
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-4 w-full max-w-sm">
+      <div className="grid grid-cols-2 gap-4">
+        <div className="grid w-full items-center gap-1.5">
+          <Label htmlFor="firstName">First Name *</Label>
+          <Input
+            id="firstName"
+            type="text"
+            placeholder="John"
+            value={formData.firstName}
+            onChange={(e) => handleInputChange('firstName', e.target.value)}
+            className={errors.firstName ? 'border-red-500' : ''}
+          />
+          {errors.firstName && (
+            <p className="text-sm text-red-500">{errors.firstName}</p>
+          )}
+        </div>
+        
+        <div className="grid w-full items-center gap-1.5">
+          <Label htmlFor="lastName">Last Name *</Label>
+          <Input
+            id="lastName"
+            type="text"
+            placeholder="Doe"
+            value={formData.lastName}
+            onChange={(e) => handleInputChange('lastName', e.target.value)}
+            className={errors.lastName ? 'border-red-500' : ''}
+          />
+          {errors.lastName && (
+            <p className="text-sm text-red-500">{errors.lastName}</p>
+          )}
+        </div>
+      </div>
+      
+      <div className="grid w-full items-center gap-1.5">
+        <Label htmlFor="email-form">Email *</Label>
+        <Input
+          id="email-form"
+          type="email"
+          placeholder="john@example.com"
+          value={formData.email}
+          onChange={(e) => handleInputChange('email', e.target.value)}
+          className={errors.email ? 'border-red-500' : ''}
+        />
+        {errors.email && (
+          <p className="text-sm text-red-500">{errors.email}</p>
+        )}
+      </div>
+      
+      <div className="grid w-full items-center gap-1.5">
+        <Label htmlFor="phone">Phone</Label>
+        <Input
+          id="phone"
+          type="tel"
+          placeholder="+1 (555) 123-4567"
+          value={formData.phone}
+          onChange={(e) => handleInputChange('phone', e.target.value)}
+        />
+      </div>
+      
+      <Button type="submit" className="w-full">
+        Submit
+      </Button>
+    </form>
+  )
+}`} 
+  language="tsx" 
+  preview={<InputForm />} 
+/>
+
+## API Reference
+
+### Props
+
+The Input component accepts all standard HTML input attributes plus:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `type` | `string` | `"text"` | The type of input (text, email, password, etc.) |
+| `placeholder` | `string` | - | Placeholder text to display |
+| `value` | `string` | - | The controlled value of the input |
+| `defaultValue` | `string` | - | The default value (uncontrolled) |
+| `onChange` | `(event: ChangeEvent<HTMLInputElement>) => void` | - | Callback fired when the value changes |
+| `disabled` | `boolean` | `false` | Whether the input is disabled |
+| `required` | `boolean` | `false` | Whether the input is required |
+| `readOnly` | `boolean` | `false` | Whether the input is read-only |
+| `name` | `string` | - | The name attribute for form submission |
+| `id` | `string` | - | The id attribute for accessibility |
+| `className` | `string` | - | Additional CSS classes to apply |
+| `autoComplete` | `string` | - | Autocomplete attribute for browsers |
+| `autoFocus` | `boolean` | `false` | Whether to focus the input on mount |
+
+### Input Types
+
+Supported input types include:
+
+- `text` - Basic text input
+- `email` - Email address input with validation
+- `password` - Password input with hidden text
+- `number` - Numeric input
+- `tel` - Telephone number input
+- `url` - URL input with validation
+- `search` - Search input
+- `date` - Date picker input
+- `time` - Time picker input
+- `datetime-local` - Date and time input
+
+### Keyboard Navigation
+
+- **Tab**: Moves focus to the next focusable element
+- **Shift + Tab**: Moves focus to the previous focusable element
+- **Enter**: Submits the form (if inside a form)
+- **Escape**: Clears the input (browser dependent)
+
+## Accessibility
+
+The Input component follows accessibility best practices:
+
+- Uses semantic HTML input elements
+- Supports proper labeling with `htmlFor` and `id`
+- Provides keyboard navigation
+- Maintains proper focus management
+- Supports screen reader announcements
+- Includes appropriate ARIA attributes when needed
+- Maintains color contrast ratios
+
+## Best Practices
+
+1. **Always provide labels**: Use clear, descriptive labels for all inputs
+2. **Use appropriate input types**: Choose the right type for better UX and validation
+3. **Provide helpful placeholders**: Use placeholders to show expected format
+4. **Implement proper validation**: Show clear error messages and validation states
+5. **Consider autocomplete**: Use autocomplete attributes for better UX
+6. **Group related inputs**: Use fieldsets for related input groups
+
+## Examples in Context
+
+### Login Form
+
+```tsx
+<form className="space-y-4">
+  <div className="grid w-full items-center gap-1.5">
+    <Label htmlFor="login-email">Email</Label>
+    <Input
+      id="login-email"
+      type="email"
+      placeholder="Enter your email"
+      autoComplete="email"
+      required
+    />
+  </div>
+  
+  <div className="grid w-full items-center gap-1.5">
+    <Label htmlFor="login-password">Password</Label>
+    <Input
+      id="login-password"
+      type="password"
+      placeholder="Enter your password"
+      autoComplete="current-password"
+      required
+    />
+  </div>
+  
+  <Button type="submit" className="w-full">
+    Sign In
+  </Button>
+</form>
+```
+
+### Search Bar
+
+```tsx
+<div className="relative max-w-md">
+  <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+  <Input
+    type="search"
+    placeholder="Search products..."
+    className="pl-8"
+    onChange={(e) => handleSearch(e.target.value)}
+  />
+</div>
+```
+
+### Contact Form
+
+```tsx
+<form className="space-y-4">
+  <div className="grid grid-cols-2 gap-4">
+    <div>
+      <Label htmlFor="first-name">First Name</Label>
+      <Input id="first-name" placeholder="John" required />
+    </div>
+    <div>
+      <Label htmlFor="last-name">Last Name</Label>
+      <Input id="last-name" placeholder="Doe" required />
+    </div>
+  </div>
+  
+  <div>
+    <Label htmlFor="email">Email</Label>
+    <Input id="email" type="email" placeholder="john@example.com" required />
+  </div>
+  
+  <div>
+    <Label htmlFor="phone">Phone</Label>
+    <Input id="phone" type="tel" placeholder="+1 (555) 123-4567" />
+  </div>
+  
+  <div>
+    <Label htmlFor="company">Company</Label>
+    <Input id="company" placeholder="Acme Inc." />
+  </div>
+</form>
+```
+
+## Dependencies
+
+The Input component depends on:
+
+- `React` - Core React functionality
+- `class-variance-authority` - For variant management
+- `clsx` - For conditional class names
+- `tailwind-merge` - For merging Tailwind classes

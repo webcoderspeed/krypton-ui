@@ -1,0 +1,313 @@
+---
+title: Checkbox
+description: A control that allows the user to toggle between checked and not checked.
+component: true
+---
+
+## Installation
+
+<CodePreview code="npx shadcn-ui@latest add checkbox" language="bash" />
+
+## Import
+
+<CodePreview code="import { Checkbox } from '@/components/ui/checkbox'" language="tsx" />
+
+## Usage
+
+### Default
+
+A simple checkbox with basic functionality.
+
+<CodePreview 
+  code={`import { Checkbox } from '@/components/ui/checkbox'
+
+export default function CheckboxDefault() {
+  return (
+    <div className="flex items-center space-x-2">
+      <Checkbox id="terms" />
+      <label
+        htmlFor="terms"
+        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+      >
+        Accept terms and conditions
+      </label>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<CheckboxDefault />} 
+/>
+
+### Disabled
+
+A checkbox in disabled state that cannot be interacted with.
+
+<CodePreview 
+  code={`import { Checkbox } from '@/components/ui/checkbox'
+
+export default function CheckboxDisabled() {
+  return (
+    <div className="flex items-center space-x-2">
+      <Checkbox id="terms2" disabled />
+      <label
+        htmlFor="terms2"
+        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+      >
+        Accept terms and conditions
+      </label>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<CheckboxDisabled />} 
+/>
+
+### With Text
+
+Checkbox with accompanying text and description.
+
+<CodePreview 
+  code={`import { Checkbox } from '@/components/ui/checkbox'
+
+export default function CheckboxWithText() {
+  return (
+    <div className="items-top flex space-x-2">
+      <Checkbox id="terms1" />
+      <div className="grid gap-1.5 leading-none">
+        <label
+          htmlFor="terms1"
+          className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+        >
+          Accept terms and conditions
+        </label>
+        <p className="text-sm text-muted-foreground">
+          You agree to our Terms of Service and Privacy Policy.
+        </p>
+      </div>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<CheckboxWithText />} 
+/>
+
+### Form Integration
+
+Checkbox integrated with form handling and validation.
+
+<CodePreview 
+  code={`import { Checkbox } from '@/components/ui/checkbox'
+import { Button } from '@/components/ui/button'
+import { useState } from 'react'
+
+export default function CheckboxForm() {
+  const [isChecked, setIsChecked] = useState(false)
+  const [preferences, setPreferences] = useState({
+    marketing: false,
+    analytics: false,
+    functional: true,
+  })
+
+  const handlePreferenceChange = (key: string, checked: boolean) => {
+    setPreferences(prev => ({ ...prev, [key]: checked }))
+  }
+
+  const handleSubmit = () => {
+    console.log('Form submitted:', { isChecked, preferences })
+  }
+
+  return (
+    <div className="space-y-4">
+      <div className="flex items-center space-x-2">
+        <Checkbox 
+          id="newsletter" 
+          checked={isChecked}
+          onCheckedChange={setIsChecked}
+        />
+        <label htmlFor="newsletter" className="text-sm font-medium">
+          Subscribe to newsletter
+        </label>
+      </div>
+      
+      <div className="space-y-2">
+        <p className="text-sm font-medium">Cookie Preferences:</p>
+        
+        <div className="flex items-center space-x-2">
+          <Checkbox 
+            id="marketing"
+            checked={preferences.marketing}
+            onCheckedChange={(checked) => handlePreferenceChange('marketing', checked as boolean)}
+          />
+          <label htmlFor="marketing" className="text-sm">
+            Marketing cookies
+          </label>
+        </div>
+        
+        <div className="flex items-center space-x-2">
+          <Checkbox 
+            id="analytics"
+            checked={preferences.analytics}
+            onCheckedChange={(checked) => handlePreferenceChange('analytics', checked as boolean)}
+          />
+          <label htmlFor="analytics" className="text-sm">
+            Analytics cookies
+          </label>
+        </div>
+        
+        <div className="flex items-center space-x-2">
+          <Checkbox 
+            id="functional"
+            checked={preferences.functional}
+            onCheckedChange={(checked) => handlePreferenceChange('functional', checked as boolean)}
+          />
+          <label htmlFor="functional" className="text-sm">
+            Functional cookies (required)
+          </label>
+        </div>
+      </div>
+      
+      <Button onClick={handleSubmit} className="w-full">
+        Save Preferences
+      </Button>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<CheckboxForm />} 
+/>
+
+## API Reference
+
+### Props
+
+The Checkbox component accepts all Radix UI Checkbox props plus:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `checked` | `boolean | "indeterminate"` | - | The controlled checked state of the checkbox |
+| `defaultChecked` | `boolean` | `false` | The default checked state (uncontrolled) |
+| `onCheckedChange` | `(checked: boolean | "indeterminate") => void` | - | Callback fired when the checked state changes |
+| `disabled` | `boolean` | `false` | Whether the checkbox is disabled |
+| `required` | `boolean` | `false` | Whether the checkbox is required |
+| `name` | `string` | - | The name attribute for form submission |
+| `value` | `string` | `"on"` | The value attribute for form submission |
+| `id` | `string` | - | The id attribute for accessibility |
+| `className` | `string` | - | Additional CSS classes to apply |
+
+### States
+
+- **Unchecked**: Default state, checkbox is not selected
+- **Checked**: Checkbox is selected
+- **Indeterminate**: Partially checked state (useful for parent checkboxes)
+- **Disabled**: Checkbox cannot be interacted with
+
+### Keyboard Navigation
+
+- **Space**: Toggles the checkbox state
+- **Tab**: Moves focus to the next focusable element
+- **Shift + Tab**: Moves focus to the previous focusable element
+
+## Accessibility
+
+The Checkbox component follows WAI-ARIA guidelines:
+
+- Uses semantic checkbox input with proper ARIA attributes
+- Supports keyboard navigation
+- Provides proper focus management
+- Associates labels correctly with `htmlFor` and `id`
+- Announces state changes to screen readers
+- Maintains proper color contrast ratios
+
+## Best Practices
+
+1. **Always provide labels**: Use clear, descriptive labels for checkboxes
+2. **Group related checkboxes**: Use fieldsets for related checkbox groups
+3. **Consider indeterminate state**: Use for parent checkboxes controlling child checkboxes
+4. **Provide clear feedback**: Show validation states and error messages
+5. **Use consistent spacing**: Maintain consistent spacing between checkboxes and labels
+
+## Examples in Context
+
+### Settings Panel
+
+```tsx
+<div className="space-y-4">
+  <h3 className="text-lg font-semibold">Notification Settings</h3>
+  
+  <div className="space-y-2">
+    <div className="flex items-center space-x-2">
+      <Checkbox id="email-notifications" />
+      <label htmlFor="email-notifications">Email notifications</label>
+    </div>
+    
+    <div className="flex items-center space-x-2">
+      <Checkbox id="push-notifications" />
+      <label htmlFor="push-notifications">Push notifications</label>
+    </div>
+    
+    <div className="flex items-center space-x-2">
+      <Checkbox id="sms-notifications" />
+      <label htmlFor="sms-notifications">SMS notifications</label>
+    </div>
+  </div>
+</div>
+```
+
+### Todo List
+
+```tsx
+<div className="space-y-2">
+  {todos.map((todo) => (
+    <div key={todo.id} className="flex items-center space-x-2">
+      <Checkbox
+        id={`todo-${todo.id}`}
+        checked={todo.completed}
+        onCheckedChange={(checked) => toggleTodo(todo.id, checked)}
+      />
+      <label
+        htmlFor={`todo-${todo.id}`}
+        className={`text-sm ${todo.completed ? 'line-through text-muted-foreground' : ''}`}
+      >
+        {todo.text}
+      </label>
+    </div>
+  ))}
+</div>
+```
+
+### Terms and Conditions
+
+```tsx
+<div className="space-y-4">
+  <div className="flex items-start space-x-2">
+    <Checkbox id="terms" required />
+    <div className="grid gap-1.5 leading-none">
+      <label htmlFor="terms" className="text-sm font-medium">
+        I agree to the Terms and Conditions *
+      </label>
+      <p className="text-xs text-muted-foreground">
+        By checking this box, you agree to our{' '}
+        <a href="/terms" className="underline">Terms of Service</a> and{' '}
+        <a href="/privacy" className="underline">Privacy Policy</a>.
+      </p>
+    </div>
+  </div>
+  
+  <div className="flex items-center space-x-2">
+    <Checkbox id="marketing" />
+    <label htmlFor="marketing" className="text-sm">
+      I want to receive marketing emails
+    </label>
+  </div>
+</div>
+```
+
+## Dependencies
+
+The Checkbox component depends on:
+
+- `@radix-ui/react-checkbox` - Core checkbox functionality
+- `lucide-react` - Check icon
+- `class-variance-authority` - For variant management
+- `clsx` - For conditional class names
+- `tailwind-merge` - For merging Tailwind classes

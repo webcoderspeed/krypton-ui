@@ -1,0 +1,368 @@
+---
+title: Alert Dialog
+description: A modal dialog that interrupts the user with important content and expects a response.
+component: true
+---
+
+## Installation
+
+<CodePreview code="npx shadcn-ui@latest add alert-dialog" language="bash" />
+
+## Import
+
+<CodePreview code="import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog'" language="tsx" />
+
+## Usage
+
+### Default
+
+A basic alert dialog with confirmation and cancel actions.
+
+<CodePreview 
+  code={`import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog'
+import { Button } from '@/components/ui/button'
+
+export default function AlertDialogDefault() {
+  return (
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <Button variant="outline">Show Dialog</Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+          <AlertDialogDescription>
+            This action cannot be undone. This will permanently delete your
+            account and remove your data from our servers.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction>Continue</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  )
+}`} 
+  language="tsx" 
+  preview={<AlertDialogDefault />} 
+/>
+
+### Destructive Action
+
+Use the destructive variant for dangerous actions like deletion.
+
+<CodePreview 
+  code={`import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog'
+import { Button } from '@/components/ui/button'
+
+export default function AlertDialogDestructive() {
+  return (
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <Button variant="destructive">Delete Account</Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Delete Account</AlertDialogTitle>
+          <AlertDialogDescription>
+            This will permanently delete your account and all associated data.
+            This action cannot be undone.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
+            Delete Account
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  )
+}`} 
+  language="tsx" 
+  preview={<AlertDialogDestructive />} 
+/>
+
+### Custom Content
+
+Customize the dialog content with additional elements and styling.
+
+<CodePreview 
+  code={`import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog'
+import { Button } from '@/components/ui/button'
+import LucideIcon from '@/components/lucide-icon'
+
+export default function AlertDialogCustom() {
+  return (
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <Button variant="outline">
+          <LucideIcon name="AlertTriangle" className="mr-2 h-4 w-4" />
+          Show Warning
+        </Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <div className="flex items-center gap-2">
+            <LucideIcon name="AlertTriangle" className="h-5 w-5 text-yellow-500" />
+            <AlertDialogTitle>Warning: Unsaved Changes</AlertDialogTitle>
+          </div>
+          <AlertDialogDescription>
+            You have unsaved changes that will be lost if you continue.
+            Are you sure you want to leave this page?
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <div className="my-4 p-4 bg-yellow-50 border border-yellow-200 rounded-md">
+          <p className="text-sm text-yellow-800">
+            <strong>Tip:</strong> You can save your changes by clicking the "Save" button
+            in the top right corner.
+          </p>
+        </div>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Stay on Page</AlertDialogCancel>
+          <AlertDialogAction>Leave Without Saving</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  )
+}`} 
+  language="tsx" 
+  preview={<AlertDialogCustom />} 
+/>
+
+### Controlled
+
+Control the dialog state programmatically.
+
+<CodePreview 
+  code={`"use client"
+
+import { useState } from "react"
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog'
+import { Button } from '@/components/ui/button'
+
+export default function AlertDialogControlled() {
+  const [open, setOpen] = useState(false)
+  const [result, setResult] = useState<string | null>(null)
+
+  const handleAction = () => {
+    setResult("Action confirmed")
+    setOpen(false)
+  }
+
+  const handleCancel = () => {
+    setResult("Action cancelled")
+    setOpen(false)
+  }
+
+  return (
+    <div className="space-y-4">
+      <div className="flex gap-2">
+        <Button onClick={() => setOpen(true)}>Open Dialog</Button>
+        <Button variant="outline" onClick={() => setResult(null)}>Clear Result</Button>
+      </div>
+      
+      {result && (
+        <div className="p-3 bg-muted rounded-md">
+          <p className="text-sm">Result: {result}</p>
+        </div>
+      )}
+
+      <AlertDialog open={open} onOpenChange={setOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Controlled Dialog</AlertDialogTitle>
+            <AlertDialogDescription>
+              This dialog is controlled by external state. The result will be displayed above.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel onClick={handleCancel}>Cancel</AlertDialogCancel>
+            <AlertDialogAction onClick={handleAction}>Confirm</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<AlertDialogControlled />} 
+/>
+
+## API Reference
+
+### AlertDialog
+
+Built on top of [Radix Dialog](https://www.radix-ui.com/docs/primitives/components/dialog).
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `open` | `boolean` | - | The controlled open state of the dialog. |
+| `defaultOpen` | `boolean` | `false` | The open state of the dialog when it is initially rendered. |
+| `onOpenChange` | `(open: boolean) => void` | - | Event handler called when the open state changes. |
+
+### AlertDialogTrigger
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `asChild` | `boolean` | `false` | Change the default rendered element for the one passed as a child. |
+
+### AlertDialogContent
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `forceMount` | `boolean` | - | Used to force mounting when more control is needed. |
+| `onOpenAutoFocus` | `(event: Event) => void` | - | Event handler called when focus moves into the component. |
+| `onCloseAutoFocus` | `(event: Event) => void` | - | Event handler called when focus moves to the trigger after closing. |
+| `onEscapeKeyDown` | `(event: KeyboardEvent) => void` | - | Event handler called when the escape key is down. |
+
+### AlertDialogAction
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `asChild` | `boolean` | `false` | Change the default rendered element for the one passed as a child. |
+
+### AlertDialogCancel
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `asChild` | `boolean` | `false` | Change the default rendered element for the one passed as a child. |
+
+### Destructive
+
+Use the destructive variant for actions that are potentially harmful or irreversible.
+
+<CodePreview 
+  code={`import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+import { Button } from "@/components/ui/button"
+
+export default function AlertDialogDestructive() {
+  return (
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <Button variant="destructive">Delete Account</Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Delete Account</AlertDialogTitle>
+          <AlertDialogDescription>
+            This action cannot be undone. This will permanently delete your
+            account and remove all of your data from our servers.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
+            Delete Account
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  )
+}`} 
+  language="tsx" 
+  preview={<AlertDialogDestructive />} 
+/>
+
+### Custom
+
+Customize the alert dialog with icons and different styling.
+
+<CodePreview 
+  code={`import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+import { Button } from "@/components/ui/button"
+import LucideIcon from "@/components/lucide-icon"
+
+export default function AlertDialogCustom() {
+  return (
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <Button variant="outline">
+          <LucideIcon name="AlertTriangle" className="mr-2 h-4 w-4" />
+          Show Warning
+        </Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <div className="flex items-center gap-2">
+            <LucideIcon name="AlertTriangle" className="h-5 w-5 text-amber-500" />
+            <AlertDialogTitle>Warning</AlertDialogTitle>
+          </div>
+          <AlertDialogDescription>
+            You are about to perform an action that may have consequences.
+            Please review your decision carefully before proceeding.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Go Back</AlertDialogCancel>
+          <AlertDialogAction className="bg-amber-500 text-white hover:bg-amber-600">
+            I Understand
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  )
+}`} 
+  language="tsx" 
+  preview={<AlertDialogCustom />} 
+/>
