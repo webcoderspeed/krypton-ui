@@ -179,6 +179,24 @@ import {
   InputForm,
 } from "@/components/playground/input";
 import {
+  BadgeDefault,
+  BadgeSecondary,
+  BadgeDestructive,
+  BadgeOutline,
+  BadgeVariants,
+  BadgeSizes,
+  BadgeWithIcon,
+  BadgeWithIcons,
+  StatusIndicators,
+} from "@/components/playground/badge";
+import {
+  BreadcrumbDefault,
+  BreadcrumbCustomSeparator,
+  BreadcrumbWithEllipsis,
+  BreadcrumbWithDropdown,
+  BreadcrumbWithIcons
+} from "@/components/playground/breadcrumb";
+import {
   AlertDialogDefault,
   AlertDialogDestructive,
   AlertDialogCustom,
@@ -342,6 +360,19 @@ const components = {
   InputWithIcons,
   InputTypes,
   InputForm,
+  BadgeDefault,
+  BadgeSecondary,
+  BadgeDestructive,
+  BadgeOutline,
+  BadgeVariants,
+  BadgeSizes,
+  BadgeWithIcon,
+  BadgeWithIcons,
+  StatusIndicators,
+  BreadcrumbDefault,
+  BreadcrumbCustomSeparator,
+  BreadcrumbWithEllipsis,
+  BreadcrumbWithDropdown,
   AlertDialogDefault,
   AlertDialogDestructive,
   AlertDialogCustom,
@@ -360,6 +391,7 @@ const components = {
   AvatarWithStatusDemo,
   AvatarCustomShapes,
   UserProfileCard,
+  BreadcrumbWithIcons
 };
 
 async function parseMdx<Frontmatter>(rawMdx: string) {
