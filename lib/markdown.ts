@@ -182,17 +182,25 @@ import {
   AlertDialogDefault,
   AlertDialogDestructive,
   AlertDialogCustom,
+  AlertDialogControlled,
 } from "@/components/playground/alert-dialog";
 import {
   AspectRatioDefault,
   AspectRatioVariants,
   AspectRatioVideo,
+  AspectRatioDifferent,
+  AspectRatioCards,
+  AspectRatioResponsive,
+  AspectRatioCustom,
 } from "@/components/playground/aspect-ratio";
 import {
   AvatarDefault,
   AvatarSizes,
-  AvatarGroup,
   AvatarFallbackDemo,
+  AvatarGroup,
+  AvatarWithStatusDemo,
+  AvatarCustomShapes,
+  UserProfileCard,
 } from "@/components/playground/avatar";
 
 const components = {
@@ -337,13 +345,21 @@ const components = {
   AlertDialogDefault,
   AlertDialogDestructive,
   AlertDialogCustom,
+  AlertDialogControlled,
   AspectRatioDefault,
   AspectRatioVariants,
   AspectRatioVideo,
+  AspectRatioDifferent,
+  AspectRatioCards,
+  AspectRatioResponsive,
+  AspectRatioCustom,
   AvatarDefault,
   AvatarSizes,
   AvatarGroup,
-AvatarFallbackDemo
+  AvatarFallbackDemo,
+  AvatarWithStatusDemo,
+  AvatarCustomShapes,
+  UserProfileCard,
 };
 
 async function parseMdx<Frontmatter>(rawMdx: string) {
