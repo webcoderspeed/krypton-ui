@@ -1,132 +1,170 @@
 ---
 title: Badge
 description: Displays a badge or a component that looks like a badge.
+component: true
 ---
 
 ## Installation
 
-```bash
-npx krypton-ui@latest add badge
-```
+<CodePreview code="npx krypton-ui@latest add badge" language="bash" />
+
+## Import
+
+<CodePreview code="import { Badge } from '@/components/ui/badge'" language="tsx" />
 
 ## Usage
-
-```tsx
-import { Badge } from "@/components/ui/badge"
-```
-
-```tsx
-<Badge>Badge</Badge>
-```
-
-## Examples
 
 ### Default
 
 A simple badge with default styling.
 
-<CodePreview>
+<CodePreview 
+  code={`import { Badge } from '@/components/ui/badge'
 
-```tsx
-<BadgeDefault />
-```
+export default function BadgeDefault() {
+  return <Badge>Badge</Badge>
+}`} 
+  language="tsx" 
+  preview={<BadgeDefault />} 
+/>
 
-</CodePreview>
+### Secondary
 
-### Variants
+Badge with secondary variant styling.
 
-Badge comes with different variants for different use cases.
+<CodePreview 
+  code={`import { Badge } from '@/components/ui/badge'
 
-<CodePreview>
+export default function BadgeSecondary() {
+  return <Badge variant="secondary">Secondary</Badge>
+}`} 
+  language="tsx" 
+  preview={<BadgeSecondary />} 
+/>
 
-```tsx
-<BadgeVariants />
-```
+### Destructive
 
-</CodePreview>
+Badge with destructive variant for warnings or errors.
 
-### Sizes
+<CodePreview 
+  code={`import { Badge } from '@/components/ui/badge'
 
-Badges can be displayed in different sizes.
+export default function BadgeDestructive() {
+  return <Badge variant="destructive">Destructive</Badge>
+}`} 
+  language="tsx" 
+  preview={<BadgeDestructive />} 
+/>
 
-<CodePreview>
+### Outline
 
-```tsx
-<BadgeSizes />
-```
+Badge with outline variant for subtle emphasis.
 
-</CodePreview>
+<CodePreview 
+  code={`import { Badge } from '@/components/ui/badge'
 
-### With Icon
+export default function BadgeOutline() {
+  return <Badge variant="outline">Outline</Badge>
+}`} 
+  language="tsx" 
+  preview={<BadgeOutline />} 
+/>
 
-Badges can include icons to provide additional context.
+### All Variants
 
-<CodePreview>
+Display all badge variants together.
 
-```tsx
-<BadgeWithIcon />
-```
+<CodePreview 
+  code={`import { Badge } from '@/components/ui/badge'
 
-</CodePreview>
+export default function BadgeVariants() {
+  return (
+    <div className="flex items-center space-x-2">
+      <Badge variant="default">Default</Badge>
+      <Badge variant="secondary">Secondary</Badge>
+      <Badge variant="destructive">Destructive</Badge>
+      <Badge variant="outline">Outline</Badge>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<BadgeVariants />} 
+/>
+
+### With Icons
+
+Badges with icons for enhanced visual communication.
+
+<CodePreview 
+  code={`import { Badge } from '@/components/ui/badge'
+import { CheckCircle, AlertCircle, XCircle, Clock } from 'lucide-react'
+
+export default function BadgeWithIcons() {
+  return (
+    <div className="flex items-center space-x-2">
+      <Badge variant="default" className="flex items-center gap-1">
+        <CheckCircle className="h-3 w-3" />
+        Success
+      </Badge>
+      <Badge variant="secondary" className="flex items-center gap-1">
+        <Clock className="h-3 w-3" />
+        Pending
+      </Badge>
+      <Badge variant="destructive" className="flex items-center gap-1">
+        <XCircle className="h-3 w-3" />
+        Error
+      </Badge>
+      <Badge variant="outline" className="flex items-center gap-1">
+        <AlertCircle className="h-3 w-3" />
+        Warning
+      </Badge>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<BadgeWithIcons />} 
+/>
 
 ## API Reference
 
 ### Badge
 
+Built with class-variance-authority for consistent styling variants.
+
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `variant` | `"default" \| "secondary" \| "destructive" \| "outline"` | `"default"` | The visual style variant of the badge |
-| `className` | `string` | - | Additional CSS classes to apply |
-| `children` | `ReactNode` | - | The content to display inside the badge |
+| `variant` | `"default" \| "secondary" \| "destructive" \| "outline"` | `"default"` | The visual style variant of the badge. |
+| `className` | `string` | - | Additional CSS classes to apply to the badge. |
 
-### Badge Variants
-
-- **default**: Primary badge with solid background
-- **secondary**: Muted badge with secondary styling
-- **destructive**: Red badge for warnings or errors
-- **outline**: Badge with border and transparent background
-
-## Accessibility
-
-- Badge uses semantic HTML elements
-- Supports screen readers with proper text content
-- Color is not the only way to convey information
-- Icons include appropriate aria-labels when needed
-
-## Examples in Context
+## Examples
 
 ### Status Indicators
 
-Badges are commonly used to show status or state:
+<CodePreview 
+  code={`import { Badge } from '@/components/ui/badge'
 
-```tsx
-<div className="flex items-center gap-2">
-  <span>Order Status:</span>
-  <Badge variant="secondary">Processing</Badge>
-</div>
-```
-
-### Notification Count
-
-Badges can display counts or numbers:
-
-```tsx
-<div className="relative">
-  <Button>Messages</Button>
-  <Badge className="absolute -top-2 -right-2 h-5 w-5 rounded-full p-0 text-xs">
-    3
-  </Badge>
-</div>
-```
-
-### Category Tags
-
-Use badges to categorize or tag content:
-
-```tsx
-<div className="flex flex-wrap gap-1">
-  <Badge variant="outline">React</Badge>
-  <Badge variant="outline">TypeScript</Badge>
-  <Badge variant="outline">UI</Badge>
-</div>
-```
+export default function StatusIndicators() {
+  return (
+    <div className="space-y-4">
+      <div className="flex items-center space-x-2">
+        <span className="text-sm font-medium">Order Status:</span>
+        <Badge variant="default">Processing</Badge>
+      </div>
+      <div className="flex items-center space-x-2">
+        <span className="text-sm font-medium">Payment:</span>
+        <Badge variant="secondary">Pending</Badge>
+      </div>
+      <div className="flex items-center space-x-2">
+        <span className="text-sm font-medium">Delivery:</span>
+        <Badge variant="destructive">Failed</Badge>
+      </div>
+      <div className="flex items-center space-x-2">
+        <span className="text-sm font-medium">Review:</span>
+        <Badge variant="outline">Draft</Badge>
+      </div>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<StatusIndicators />} 
+/>

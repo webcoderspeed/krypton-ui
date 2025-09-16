@@ -1,4 +1,9 @@
 export { default as BadgeDefault } from "./badge-default";
+export { default as BadgeSecondary } from "./badge-secondary";
+export { default as BadgeDestructive } from "./badge-destructive";
+export { default as BadgeOutline } from "./badge-outline";
 export { default as BadgeVariants } from "./badge-variants";
 export { default as BadgeSizes } from "./badge-sizes";
 export { default as BadgeWithIcon } from "./badge-with-icon";
+export { default as BadgeWithIcons } from "./badge-with-icons";
+export { default as StatusIndicators } from "./status-indicators";

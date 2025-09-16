@@ -1,0 +1,294 @@
+---
+title: Breadcrumb
+description: Displays the path to the current resource using a hierarchy of links.
+component: true
+---
+
+## Installation
+
+<CodePreview code="npx krypton-ui@latest add breadcrumb" language="bash" />
+
+## Import
+
+<CodePreview code="import { Breadcrumb, BreadcrumbEllipsis, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/components/ui/breadcrumb'" language="tsx" />
+
+## Usage
+
+### Default
+
+A simple breadcrumb with default styling.
+
+<CodePreview 
+  code={`import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from '@/components/ui/breadcrumb'
+
+export default function BreadcrumbDefault() {
+  return (
+    <Breadcrumb>
+      <BreadcrumbList>
+        <BreadcrumbItem>
+          <BreadcrumbLink href="/">Home</BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator />
+        <BreadcrumbItem>
+          <BreadcrumbLink href="/components">Components</BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator />
+        <BreadcrumbItem>
+          <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
+        </BreadcrumbItem>
+      </BreadcrumbList>
+    </Breadcrumb>
+  )
+}`} 
+  language="tsx" 
+  preview={<BreadcrumbDefault />} 
+/>
+
+### Custom Separator
+
+Breadcrumb with custom separator styling.
+
+<CodePreview 
+  code={`import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from '@/components/ui/breadcrumb'
+import { ChevronRight } from 'lucide-react'
+
+export default function BreadcrumbCustomSeparator() {
+  return (
+    <Breadcrumb>
+      <BreadcrumbList>
+        <BreadcrumbItem>
+          <BreadcrumbLink href="/">Home</BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator>
+          <ChevronRight className="h-4 w-4" />
+        </BreadcrumbSeparator>
+        <BreadcrumbItem>
+          <BreadcrumbLink href="/components">Components</BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator>
+          <ChevronRight className="h-4 w-4" />
+        </BreadcrumbSeparator>
+        <BreadcrumbItem>
+          <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
+        </BreadcrumbItem>
+      </BreadcrumbList>
+    </Breadcrumb>
+  )
+}`} 
+  language="tsx" 
+  preview={<BreadcrumbCustomSeparator />} 
+/>
+
+### With Ellipsis
+
+Breadcrumb with ellipsis to handle long paths.
+
+<CodePreview 
+  code={`import {
+  Breadcrumb,
+  BreadcrumbEllipsis,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from '@/components/ui/breadcrumb'
+
+export default function BreadcrumbWithEllipsis() {
+  return (
+    <Breadcrumb>
+      <BreadcrumbList>
+        <BreadcrumbItem>
+          <BreadcrumbLink href="/">Home</BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator />
+        <BreadcrumbItem>
+          <BreadcrumbEllipsis />
+        </BreadcrumbItem>
+        <BreadcrumbSeparator />
+        <BreadcrumbItem>
+          <BreadcrumbLink href="/components">Components</BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator />
+        <BreadcrumbItem>
+          <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
+        </BreadcrumbItem>
+      </BreadcrumbList>
+    </Breadcrumb>
+  )
+}`} 
+  language="tsx" 
+  preview={<BreadcrumbWithEllipsis />} 
+/>
+
+### With Dropdown
+
+Breadcrumb with dropdown menu for collapsed items.
+
+<CodePreview 
+  code={`import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from '@/components/ui/breadcrumb'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
+import { ChevronDown } from 'lucide-react'
+
+export default function BreadcrumbWithDropdown() {
+  return (
+    <Breadcrumb>
+      <BreadcrumbList>
+        <BreadcrumbItem>
+          <BreadcrumbLink href="/">Home</BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator />
+        <BreadcrumbItem>
+          <DropdownMenu>
+            <DropdownMenuTrigger className="flex items-center gap-1">
+              Components
+              <ChevronDown className="h-4 w-4" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="start">
+              <DropdownMenuItem>
+                <BreadcrumbLink href="/docs/primitives/accordion">
+                  Accordion
+                </BreadcrumbLink>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <BreadcrumbLink href="/docs/primitives/alert-dialog">
+                  Alert Dialog
+                </BreadcrumbLink>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <BreadcrumbLink href="/docs/primitives/hover-card">
+                  Hover Card
+                </BreadcrumbLink>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator />
+        <BreadcrumbItem>
+          <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
+        </BreadcrumbItem>
+      </BreadcrumbList>
+    </Breadcrumb>
+  )
+}`} 
+  language="tsx" 
+  preview={<BreadcrumbWithDropdown />} 
+/>
+
+## API Reference
+
+### Breadcrumb
+
+Built on top of semantic navigation elements for accessibility.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `className` | `string` | - | Additional CSS classes to apply to the breadcrumb container. |
+
+### BreadcrumbList
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `className` | `string` | - | Additional CSS classes to apply to the breadcrumb list. |
+
+### BreadcrumbItem
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `className` | `string` | - | Additional CSS classes to apply to the breadcrumb item. |
+
+### BreadcrumbLink
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `href` | `string` | - | The URL to navigate to when the link is clicked. |
+| `className` | `string` | - | Additional CSS classes to apply to the breadcrumb link. |
+
+### BreadcrumbPage
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `className` | `string` | - | Additional CSS classes to apply to the current page indicator. |
+
+### BreadcrumbSeparator
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `className` | `string` | - | Additional CSS classes to apply to the separator. |
+
+### BreadcrumbEllipsis
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `className` | `string` | - | Additional CSS classes to apply to the ellipsis indicator. |
+
+## Examples
+
+### Navigation with Icons
+
+<CodePreview 
+  code={`import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from '@/components/ui/breadcrumb'
+import { Home, ChevronRight } from 'lucide-react'
+
+export default function BreadcrumbWithIcons() {
+  return (
+    <Breadcrumb>
+      <BreadcrumbList>
+        <BreadcrumbItem>
+          <BreadcrumbLink href="/" className="flex items-center gap-1">
+            <Home className="h-4 w-4" />
+            Home
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator>
+          <ChevronRight className="h-4 w-4" />
+        </BreadcrumbSeparator>
+        <BreadcrumbItem>
+          <BreadcrumbLink href="/products">Products</BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator>
+          <ChevronRight className="h-4 w-4" />
+        </BreadcrumbSeparator>
+        <BreadcrumbItem>
+          <BreadcrumbPage>Laptop</BreadcrumbPage>
+        </BreadcrumbItem>
+      </BreadcrumbList>
+    </Breadcrumb>
+  )
+}`} 
+  language="tsx" 
+  preview={<BreadcrumbWithIcons />} 
+/>

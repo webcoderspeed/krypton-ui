@@ -180,10 +180,21 @@ import {
 } from "@/components/playground/input";
 import {
   BadgeDefault,
+  BadgeSecondary,
+  BadgeDestructive,
+  BadgeOutline,
   BadgeVariants,
   BadgeSizes,
   BadgeWithIcon,
+  BadgeWithIcons,
+  StatusIndicators,
 } from "@/components/playground/badge";
+import {
+  BreadcrumbDefault,
+  BreadcrumbCustomSeparator,
+  BreadcrumbWithEllipsis,
+  BreadcrumbWithDropdown,
+} from "@/components/playground/breadcrumb";
 import {
   AlertDialogDefault,
   AlertDialogDestructive,
@@ -349,9 +360,18 @@ const components = {
   InputTypes,
   InputForm,
   BadgeDefault,
+  BadgeSecondary,
+  BadgeDestructive,
+  BadgeOutline,
   BadgeVariants,
   BadgeSizes,
   BadgeWithIcon,
+  BadgeWithIcons,
+  StatusIndicators,
+  BreadcrumbDefault,
+  BreadcrumbCustomSeparator,
+  BreadcrumbWithEllipsis,
+  BreadcrumbWithDropdown,
   AlertDialogDefault,
   AlertDialogDestructive,
   AlertDialogCustom,
