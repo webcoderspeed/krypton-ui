@@ -232,6 +232,18 @@ import {
   CollapsibleDashboardStats,
   CollapsibleChat,
 } from "@/components/playground/collapsible";
+import {
+  CommandBasic,
+  CommandDialogExample,
+  CommandMenu,
+  CommandSearchable,
+  CommandActions,
+  CommandLoading,
+  CommandKeyboard,
+  CommandStyled,
+  CommandNested,
+  CommandAdvanced,
+} from "@/components/playground/command";
 
 const components = {
   LucideIcon,
@@ -414,6 +426,16 @@ const components = {
   CollapsibleProductDetails,
   CollapsibleDashboardStats,
   CollapsibleChat,
+  CommandBasic,
+  CommandDialogExample,
+  CommandMenu,
+  CommandSearchable,
+  CommandActions,
+  CommandLoading,
+  CommandKeyboard,
+  CommandStyled,
+  CommandNested,
+  CommandAdvanced,
 };
 
 async function parseMdx<Frontmatter>(rawMdx: string) {

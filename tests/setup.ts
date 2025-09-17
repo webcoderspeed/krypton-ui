@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { expect, afterEach } from 'vitest'
+import { expect, afterEach, vi } from 'vitest'
 import { cleanup } from '@testing-library/react'
 import * as matchers from '@testing-library/jest-dom/matchers'
 
@@ -41,3 +41,12 @@ Object.defineProperty(window, 'matchMedia', {
     dispatchEvent: () => {},
   }),
 })
+
+// Mock scrollIntoView
+Element.prototype.scrollIntoView = vi.fn()
+
+// Mock HTMLElement methods
+HTMLElement.prototype.scrollIntoView = vi.fn()
+HTMLElement.prototype.hasPointerCapture = vi.fn()
+HTMLElement.prototype.releasePointerCapture = vi.fn()
+HTMLElement.prototype.setPointerCapture = vi.fn()

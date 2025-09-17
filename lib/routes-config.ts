@@ -64,6 +64,10 @@ const v1_0_0_ROUTES: EachRoute[] = [
         "href": "/components/collapsible"
       },
       {
+        "title": "Command",
+        "href": "/components/command"
+      },
+      {
         "title": "Input",
         "href": "/components/input"
       }
