@@ -263,6 +263,18 @@ import {
   TaskCreationDialog,
   PaymentDialog,
 } from "@/components/playground/dialog";
+import {
+  TabsDefault,
+  TabsWithForm,
+  TabsVertical,
+  TabsWithIcons,
+  TabsControlled,
+  TabsWithBadges,
+  TabsDashboard,
+  TabsLoading,
+  TabsDisabled,
+  TabsCustomStyling,
+} from "@/components/playground/tabs";
 
 const components = {
   LucideIcon,
@@ -470,6 +482,16 @@ const components = {
   ImageGalleryDialog,
   TaskCreationDialog,
   PaymentDialog,
+  TabsDefault,
+  TabsWithForm,
+  TabsVertical,
+  TabsWithIcons,
+  TabsControlled,
+  TabsWithBadges,
+  TabsDashboard,
+  TabsLoading,
+  TabsDisabled,
+  TabsCustomStyling,
 };
 
 async function parseMdx<Frontmatter>(rawMdx: string) {
