@@ -60,6 +60,10 @@ const v1_0_0_ROUTES: EachRoute[] = [
         "href": "/components/checkbox"
       },
       {
+        "title": "Collapsible",
+        "href": "/components/collapsible"
+      },
+      {
         "title": "Input",
         "href": "/components/input"
       }

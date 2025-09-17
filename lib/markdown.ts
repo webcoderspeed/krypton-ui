@@ -220,6 +220,18 @@ import {
   AvatarCustomShapes,
   UserProfileCard,
 } from "@/components/playground/avatar";
+import {
+  CollapsibleDefault,
+  CollapsibleControlled,
+  CollapsibleNested,
+  CollapsibleFAQ,
+  CollapsibleShoppingCart,
+  CollapsibleNotifications,
+  CollapsibleSidebar,
+  CollapsibleProductDetails,
+  CollapsibleDashboardStats,
+  CollapsibleChat,
+} from "@/components/playground/collapsible";
 
 const components = {
   LucideIcon,
@@ -392,6 +404,16 @@ const components = {
   AvatarCustomShapes,
   UserProfileCard,
   BreadcrumbWithIcons,
+  CollapsibleDefault,
+  CollapsibleControlled,
+  CollapsibleNested,
+  CollapsibleFAQ,
+  CollapsibleShoppingCart,
+  CollapsibleNotifications,
+  CollapsibleSidebar,
+  CollapsibleProductDetails,
+  CollapsibleDashboardStats,
+  CollapsibleChat,
 };
 
 async function parseMdx<Frontmatter>(rawMdx: string) {
