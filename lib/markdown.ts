@@ -244,6 +244,13 @@ import {
   CommandNested,
   CommandAdvanced,
 } from "@/components/playground/command";
+import {
+  ContextMenuBasic,
+  ContextMenuCheckbox,
+  ContextMenuSubmenu,
+  ContextMenuFile,
+  ContextMenuTable,
+} from "@/components/playground/context-menu";
 
 const components = {
   LucideIcon,
@@ -436,6 +443,11 @@ const components = {
   CommandStyled,
   CommandNested,
   CommandAdvanced,
+  ContextMenuBasic,
+  ContextMenuCheckbox,
+  ContextMenuSubmenu,
+  ContextMenuFile,
+  ContextMenuTable,
 };
 
 async function parseMdx<Frontmatter>(rawMdx: string) {

@@ -1,0 +1,692 @@
+---
+title: Context Menu
+description: Displays a menu to the user — such as a set of actions or functions — triggered by a right click.
+component: true
+---
+
+## Installation
+
+<CodePreview code="npx shadcn-ui@latest add context-menu" language="bash" />
+
+## Import
+
+<CodePreview code="import { ContextMenu, ContextMenuTrigger, ContextMenuContent, ContextMenuItem } from '@/components/ui/context-menu'" language="tsx" />
+
+## Usage
+
+### Basic
+
+A simple context menu with basic menu items and keyboard shortcuts.
+
+<CodePreview 
+  code={`import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuTrigger,
+  ContextMenuSeparator,
+  ContextMenuShortcut,
+} from "@/components/ui/context-menu";
+import { Card } from "@/components/ui/card";
+
+export default function ContextMenuBasic() {
+  return (
+    <div className="flex items-center justify-center p-8">
+      <ContextMenu>
+        <ContextMenuTrigger asChild>
+          <Card className="w-64 h-32 flex items-center justify-center cursor-pointer border-dashed border-2 hover:border-primary transition-colors">
+            <p className="text-sm text-muted-foreground">
+              Right click here to open context menu
+            </p>
+          </Card>
+        </ContextMenuTrigger>
+        <ContextMenuContent className="w-64">
+          <ContextMenuItem>
+            Profile
+            <ContextMenuShortcut>⇧⌘P</ContextMenuShortcut>
+          </ContextMenuItem>
+          <ContextMenuItem>
+            Billing
+            <ContextMenuShortcut>⌘B</ContextMenuShortcut>
+          </ContextMenuItem>
+          <ContextMenuItem>
+            Settings
+            <ContextMenuShortcut>⌘S</ContextMenuShortcut>
+          </ContextMenuItem>
+          <ContextMenuSeparator />
+          <ContextMenuItem>
+            Keyboard shortcuts
+            <ContextMenuShortcut>⌘K</ContextMenuShortcut>
+          </ContextMenuItem>
+        </ContextMenuContent>
+      </ContextMenu>
+    </div>
+  );
+}`} 
+  language="tsx" 
+  preview={<ContextMenuBasic />} 
+/>
+
+### Checkbox Items
+
+Context menu with checkbox and radio items for toggleable options.
+
+<CodePreview 
+  code={`import { useState } from "react";
+import {
+  ContextMenu,
+  ContextMenuCheckboxItem,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuLabel,
+  ContextMenuRadioGroup,
+  ContextMenuRadioItem,
+  ContextMenuSeparator,
+  ContextMenuShortcut,
+  ContextMenuTrigger,
+} from "@/components/ui/context-menu";
+import { Card } from "@/components/ui/card";
+
+export default function ContextMenuCheckbox() {
+  const [showBookmarks, setShowBookmarks] = useState(true);
+  const [showUrls, setShowUrls] = useState(false);
+  const [person, setPerson] = useState("pedro");
+
+  return (
+    <div className="flex items-center justify-center p-8">
+      <ContextMenu>
+        <ContextMenuTrigger asChild>
+          <Card className="w-64 h-32 flex items-center justify-center cursor-pointer border-dashed border-2 hover:border-primary transition-colors">
+            <p className="text-sm text-muted-foreground">
+              Right click for checkbox menu
+            </p>
+          </Card>
+        </ContextMenuTrigger>
+        <ContextMenuContent className="w-64">
+          <ContextMenuItem>
+            Back
+            <ContextMenuShortcut>⌘[</ContextMenuShortcut>
+          </ContextMenuItem>
+          <ContextMenuItem disabled>
+            Forward
+            <ContextMenuShortcut>⌘]</ContextMenuShortcut>
+          </ContextMenuItem>
+          <ContextMenuItem>
+            Reload
+            <ContextMenuShortcut>⌘R</ContextMenuShortcut>
+          </ContextMenuItem>
+          <ContextMenuSeparator />
+          <ContextMenuCheckboxItem
+            checked={showBookmarks}
+            onCheckedChange={setShowBookmarks}
+          >
+            Show Bookmarks Bar
+            <ContextMenuShortcut>⌘⇧B</ContextMenuShortcut>
+          </ContextMenuCheckboxItem>
+          <ContextMenuCheckboxItem
+            checked={showUrls}
+            onCheckedChange={setShowUrls}
+          >
+            Show Full URLs
+          </ContextMenuCheckboxItem>
+          <ContextMenuSeparator />
+          <ContextMenuLabel>People</ContextMenuLabel>
+          <ContextMenuSeparator />
+          <ContextMenuRadioGroup value={person} onValueChange={setPerson}>
+            <ContextMenuRadioItem value="pedro">
+              Pedro Duarte
+            </ContextMenuRadioItem>
+            <ContextMenuRadioItem value="colm">
+              Colm Tuite
+            </ContextMenuRadioItem>
+          </ContextMenuRadioGroup>
+        </ContextMenuContent>
+      </ContextMenu>
+    </div>
+  );
+}`} 
+  language="tsx" 
+  preview={<ContextMenuCheckbox />} 
+/>
+
+### Submenu
+
+Context menu with nested submenus for organizing related actions.
+
+<CodePreview 
+  code={`import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuSeparator,
+  ContextMenuShortcut,
+  ContextMenuSub,
+  ContextMenuSubContent,
+  ContextMenuSubTrigger,
+  ContextMenuTrigger,
+} from "@/components/ui/context-menu";
+import { Card } from "@/components/ui/card";
+import {
+  Mail,
+  MessageSquare,
+  PlusCircle,
+  Settings,
+  User,
+  UserPlus,
+  Users,
+} from "lucide-react";
+
+export default function ContextMenuSubmenu() {
+  return (
+    <div className="flex items-center justify-center p-8">
+      <ContextMenu>
+        <ContextMenuTrigger asChild>
+          <Card className="w-64 h-32 flex items-center justify-center cursor-pointer border-dashed border-2 hover:border-primary transition-colors">
+            <p className="text-sm text-muted-foreground">
+              Right click for submenu
+            </p>
+          </Card>
+        </ContextMenuTrigger>
+        <ContextMenuContent className="w-64">
+          <ContextMenuItem>
+            <User className="mr-2 h-4 w-4" />
+            Profile
+            <ContextMenuShortcut>⇧⌘P</ContextMenuShortcut>
+          </ContextMenuItem>
+          <ContextMenuItem>
+            <Settings className="mr-2 h-4 w-4" />
+            Settings
+            <ContextMenuShortcut>⌘,</ContextMenuShortcut>
+          </ContextMenuItem>
+          <ContextMenuSeparator />
+          <ContextMenuSub>
+            <ContextMenuSubTrigger>
+              <UserPlus className="mr-2 h-4 w-4" />
+              Invite users
+            </ContextMenuSubTrigger>
+            <ContextMenuSubContent className="w-48">
+              <ContextMenuItem>
+                <Mail className="mr-2 h-4 w-4" />
+                Email
+              </ContextMenuItem>
+              <ContextMenuItem>
+                <MessageSquare className="mr-2 h-4 w-4" />
+                Message
+              </ContextMenuItem>
+              <ContextMenuSeparator />
+              <ContextMenuItem>
+                <PlusCircle className="mr-2 h-4 w-4" />
+                More...
+              </ContextMenuItem>
+            </ContextMenuSubContent>
+          </ContextMenuSub>
+          <ContextMenuSub>
+            <ContextMenuSubTrigger>
+              <Users className="mr-2 h-4 w-4" />
+              Team
+            </ContextMenuSubTrigger>
+            <ContextMenuSubContent className="w-48">
+              <ContextMenuItem>
+                <User className="mr-2 h-4 w-4" />
+                View Team
+              </ContextMenuItem>
+              <ContextMenuItem>
+                <UserPlus className="mr-2 h-4 w-4" />
+                Add Member
+              </ContextMenuItem>
+              <ContextMenuItem>
+                <Settings className="mr-2 h-4 w-4" />
+                Team Settings
+              </ContextMenuItem>
+            </ContextMenuSubContent>
+          </ContextMenuSub>
+        </ContextMenuContent>
+      </ContextMenu>
+    </div>
+  );
+}`} 
+  language="tsx" 
+  preview={<ContextMenuSubmenu />} 
+/>
+
+### File Operations
+
+Context menu for file operations with icons and destructive actions.
+
+<CodePreview 
+  code={`import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuSeparator,
+  ContextMenuShortcut,
+  ContextMenuTrigger,
+} from "@/components/ui/context-menu";
+import { Card } from "@/components/ui/card";
+import {
+  Copy,
+  Download,
+  Edit,
+  Eye,
+  FileText,
+  Share,
+  Trash2,
+} from "lucide-react";
+
+export default function ContextMenuFile() {
+  return (
+    <div className="flex items-center justify-center p-8">
+      <ContextMenu>
+        <ContextMenuTrigger asChild>
+          <Card className="w-64 h-40 flex flex-col items-center justify-center cursor-pointer border hover:border-primary transition-colors p-4">
+            <FileText className="h-12 w-12 text-muted-foreground mb-2" />
+            <p className="text-sm font-medium">Document.pdf</p>
+            <p className="text-xs text-muted-foreground">Right click for options</p>
+          </Card>
+        </ContextMenuTrigger>
+        <ContextMenuContent className="w-64">
+          <ContextMenuItem>
+            <Eye className="mr-2 h-4 w-4" />
+            Open
+            <ContextMenuShortcut>⌘O</ContextMenuShortcut>
+          </ContextMenuItem>
+          <ContextMenuItem>
+            <Edit className="mr-2 h-4 w-4" />
+            Edit
+            <ContextMenuShortcut>⌘E</ContextMenuShortcut>
+          </ContextMenuItem>
+          <ContextMenuSeparator />
+          <ContextMenuItem>
+            <Copy className="mr-2 h-4 w-4" />
+            Copy
+            <ContextMenuShortcut>⌘C</ContextMenuShortcut>
+          </ContextMenuItem>
+          <ContextMenuItem>
+            <Share className="mr-2 h-4 w-4" />
+            Share
+            <ContextMenuShortcut>⌘⇧S</ContextMenuShortcut>
+          </ContextMenuItem>
+          <ContextMenuItem>
+            <Download className="mr-2 h-4 w-4" />
+            Download
+            <ContextMenuShortcut>⌘D</ContextMenuShortcut>
+          </ContextMenuItem>
+          <ContextMenuSeparator />
+          <ContextMenuItem className="text-red-600">
+            <Trash2 className="mr-2 h-4 w-4" />
+            Delete
+            <ContextMenuShortcut>⌘⌫</ContextMenuShortcut>
+          </ContextMenuItem>
+        </ContextMenuContent>
+      </ContextMenu>
+    </div>
+  );
+}`} 
+  language="tsx" 
+  preview={<ContextMenuFile />} 
+/>
+
+### Table Context Menu
+
+Context menu integrated with table rows for data management.
+
+<CodePreview 
+  code={`import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuSeparator,
+  ContextMenuShortcut,
+  ContextMenuTrigger,
+} from "@/components/ui/context-menu";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import {
+  Copy,
+  Edit,
+  MoreHorizontal,
+  Trash2,
+  User,
+} from "lucide-react";
+
+const users = [
+  {
+    id: "1",
+    name: "John Doe",
+    email: "john@example.com",
+    role: "Admin",
+  },
+  {
+    id: "2",
+    name: "Jane Smith",
+    email: "jane@example.com",
+    role: "User",
+  },
+  {
+    id: "3",
+    name: "Bob Johnson",
+    email: "bob@example.com",
+    role: "Editor",
+  },
+];
+
+export default function ContextMenuTable() {
+  return (
+    <div className="p-8">
+      <div className="rounded-md border">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Name</TableHead>
+              <TableHead>Email</TableHead>
+              <TableHead>Role</TableHead>
+              <TableHead className="w-[100px]">Actions</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {users.map((user) => (
+              <ContextMenu key={user.id}>
+                <ContextMenuTrigger asChild>
+                  <TableRow className="cursor-pointer">
+                    <TableCell className="font-medium">{user.name}</TableCell>
+                    <TableCell>{user.email}</TableCell>
+                    <TableCell>{user.role}</TableCell>
+                    <TableCell>
+                      <MoreHorizontal className="h-4 w-4" />
+                    </TableCell>
+                  </TableRow>
+                </ContextMenuTrigger>
+                <ContextMenuContent className="w-64">
+                  <ContextMenuItem>
+                    <User className="mr-2 h-4 w-4" />
+                    View Profile
+                  </ContextMenuItem>
+                  <ContextMenuItem>
+                    <Edit className="mr-2 h-4 w-4" />
+                    Edit User
+                    <ContextMenuShortcut>⌘E</ContextMenuShortcut>
+                  </ContextMenuItem>
+                  <ContextMenuItem>
+                    <Copy className="mr-2 h-4 w-4" />
+                    Copy Email
+                    <ContextMenuShortcut>⌘C</ContextMenuShortcut>
+                  </ContextMenuItem>
+                  <ContextMenuSeparator />
+                  <ContextMenuItem className="text-red-600">
+                    <Trash2 className="mr-2 h-4 w-4" />
+                    Delete User
+                    <ContextMenuShortcut>⌘⌫</ContextMenuShortcut>
+                  </ContextMenuItem>
+                </ContextMenuContent>
+              </ContextMenu>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+      <p className="text-sm text-muted-foreground mt-4">
+        Right click on any row to see context menu
+      </p>
+    </div>
+  );
+}`} 
+  language="tsx" 
+  preview={<ContextMenuTable />} 
+/>
+
+## API Reference
+
+### ContextMenu
+
+The root container for the context menu.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | The trigger and content components |
+| `onOpenChange` | `(open: boolean) => void` | - | Callback when the menu open state changes |
+| `modal` | `boolean` | `true` | Whether the menu should be modal |
+
+### ContextMenuTrigger
+
+The element that triggers the context menu on right click.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `asChild` | `boolean` | `false` | Render as child element |
+| `children` | `ReactNode` | - | The trigger element |
+| `disabled` | `boolean` | `false` | Whether the trigger is disabled |
+
+### ContextMenuContent
+
+The container for the menu items.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | The menu items |
+| `sideOffset` | `number` | `4` | Offset from the trigger |
+| `alignOffset` | `number` | `0` | Alignment offset |
+| `avoidCollisions` | `boolean` | `true` | Whether to avoid collisions |
+
+### ContextMenuItem
+
+A menu item that can be activated.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | The item content |
+| `disabled` | `boolean` | `false` | Whether the item is disabled |
+| `onSelect` | `(event: Event) => void` | - | Callback when item is selected |
+| `inset` | `boolean` | `false` | Whether to add left padding |
+
+### ContextMenuCheckboxItem
+
+A menu item with a checkbox.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | The item content |
+| `checked` | `boolean \| 'indeterminate'` | `false` | The checked state |
+| `onCheckedChange` | `(checked: boolean) => void` | - | Callback when checked state changes |
+| `disabled` | `boolean` | `false` | Whether the item is disabled |
+
+### ContextMenuRadioItem
+
+A menu item with a radio button.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | The item content |
+| `value` | `string` | - | The value of the radio item |
+| `disabled` | `boolean` | `false` | Whether the item is disabled |
+
+### ContextMenuRadioGroup
+
+A group of radio items.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | - | The selected value |
+| `onValueChange` | `(value: string) => void` | - | Callback when value changes |
+| `children` | `ReactNode` | - | The radio items |
+
+### ContextMenuLabel
+
+A label for grouping menu items.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | The label content |
+| `inset` | `boolean` | `false` | Whether to add left padding |
+
+### ContextMenuSeparator
+
+A visual separator between menu items.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+### ContextMenuShortcut
+
+Displays keyboard shortcuts in menu items.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | The shortcut text |
+
+### ContextMenuSub
+
+Container for submenu functionality.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | SubTrigger and SubContent |
+| `onOpenChange` | `(open: boolean) => void` | - | Callback when submenu open state changes |
+
+### ContextMenuSubTrigger
+
+Trigger for opening a submenu.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | The trigger content |
+| `inset` | `boolean` | `false` | Whether to add left padding |
+| `disabled` | `boolean` | `false` | Whether the trigger is disabled |
+
+### ContextMenuSubContent
+
+Container for submenu items.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | The submenu items |
+| `sideOffset` | `number` | `2` | Offset from the trigger |
+| `alignOffset` | `number` | `-5` | Alignment offset |
+
+## Keyboard Navigation
+
+The Context Menu component supports full keyboard navigation:
+
+- **Right Click / Menu Key**: Open context menu
+- **Escape**: Close menu
+- **Arrow Keys**: Navigate between items
+- **Enter / Space**: Activate item
+- **Tab**: Navigate to next focusable element
+- **Shift + Tab**: Navigate to previous focusable element
+- **Arrow Right**: Open submenu (when available)
+- **Arrow Left**: Close submenu
+
+## Accessibility
+
+The Context Menu component follows WAI-ARIA guidelines:
+
+- Uses proper ARIA roles and attributes
+- Supports keyboard navigation
+- Manages focus correctly
+- Provides screen reader announcements
+- Supports high contrast mode
+- Respects reduced motion preferences
+
+### ARIA Attributes
+
+- `role="menu"` on menu content
+- `role="menuitem"` on menu items
+- `role="menuitemcheckbox"` on checkbox items
+- `role="menuitemradio"` on radio items
+- `aria-expanded` on submenu triggers
+- `aria-checked` on checkbox and radio items
+- `aria-disabled` on disabled items
+
+## Best Practices
+
+1. **Use meaningful labels**: Provide clear, descriptive text for menu items
+2. **Group related actions**: Use separators and labels to organize menu items
+3. **Include keyboard shortcuts**: Show shortcuts for frequently used actions
+4. **Limit menu depth**: Avoid deeply nested submenus for better usability
+5. **Use icons consistently**: Include icons for visual clarity when appropriate
+6. **Handle destructive actions**: Use visual cues (like red text) for dangerous actions
+7. **Provide feedback**: Show loading states or confirmations for actions
+8. **Consider mobile**: Context menus may not work well on touch devices
+
+## Examples in Context
+
+### Image Gallery
+
+```tsx
+<ContextMenu>
+  <ContextMenuTrigger>
+    <img src="/image.jpg" alt="Gallery image" />
+  </ContextMenuTrigger>
+  <ContextMenuContent>
+    <ContextMenuItem>View Full Size</ContextMenuItem>
+    <ContextMenuItem>Download</ContextMenuItem>
+    <ContextMenuItem>Share</ContextMenuItem>
+    <ContextMenuSeparator />
+    <ContextMenuItem>Set as Wallpaper</ContextMenuItem>
+  </ContextMenuContent>
+</ContextMenu>
+```
+
+### Code Editor
+
+```tsx
+<ContextMenu>
+  <ContextMenuTrigger>
+    <pre><code>{codeContent}</code></pre>
+  </ContextMenuTrigger>
+  <ContextMenuContent>
+    <ContextMenuItem>Cut</ContextMenuItem>
+    <ContextMenuItem>Copy</ContextMenuItem>
+    <ContextMenuItem>Paste</ContextMenuItem>
+    <ContextMenuSeparator />
+    <ContextMenuItem>Format Document</ContextMenuItem>
+    <ContextMenuItem>Go to Definition</ContextMenuItem>
+  </ContextMenuContent>
+</ContextMenu>
+```
+
+### File Explorer
+
+```tsx
+<ContextMenu>
+  <ContextMenuTrigger>
+    <div className="file-item">
+      <FileIcon />
+      <span>document.txt</span>
+    </div>
+  </ContextMenuTrigger>
+  <ContextMenuContent>
+    <ContextMenuItem>Open</ContextMenuItem>
+    <ContextMenuItem>Open With...</ContextMenuItem>
+    <ContextMenuSeparator />
+    <ContextMenuItem>Cut</ContextMenuItem>
+    <ContextMenuItem>Copy</ContextMenuItem>
+    <ContextMenuItem>Rename</ContextMenuItem>
+    <ContextMenuSeparator />
+    <ContextMenuItem>Properties</ContextMenuItem>
+  </ContextMenuContent>
+</ContextMenu>
+```
+
+## Dependencies
+
+The Context Menu component depends on:
+
+- `@radix-ui/react-context-menu` - Core context menu functionality
+- `lucide-react` - Icons for indicators and examples
+- `class-variance-authority` - For variant management
+- `clsx` - For conditional class names
+- `tailwind-merge` - For merging Tailwind classes
