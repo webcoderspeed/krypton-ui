@@ -251,6 +251,18 @@ import {
   ContextMenuFile,
   ContextMenuTable,
 } from "@/components/playground/context-menu";
+import {
+  BasicDialog,
+  FormDialog,
+  ConfirmationDialog,
+  CustomSizeDialog,
+  UserProfileDialog,
+  ProductDetailsDialog,
+  SettingsDialog,
+  ImageGalleryDialog,
+  TaskCreationDialog,
+  PaymentDialog,
+} from "@/components/playground/dialog";
 
 const components = {
   LucideIcon,
@@ -448,6 +460,16 @@ const components = {
   ContextMenuSubmenu,
   ContextMenuFile,
   ContextMenuTable,
+  BasicDialog,
+  FormDialog,
+  ConfirmationDialog,
+  CustomSizeDialog,
+  UserProfileDialog,
+  ProductDetailsDialog,
+  SettingsDialog,
+  ImageGalleryDialog,
+  TaskCreationDialog,
+  PaymentDialog,
 };
 
 async function parseMdx<Frontmatter>(rawMdx: string) {

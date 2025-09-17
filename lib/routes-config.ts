@@ -68,6 +68,14 @@ const v1_0_0_ROUTES: EachRoute[] = [
         "href": "/components/command"
       },
       {
+        "title": "Context Menu",
+        "href": "/components/context-menu"
+      },
+      {
+        "title": "Dialog",
+        "href": "/components/dialog"
+      },
+      {
         "title": "Input",
         "href": "/components/input"
       }
