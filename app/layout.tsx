@@ -8,8 +8,8 @@ import "./globals.css";
 import VersionContextWrapper from "@/components/version-context-wrapper";
 
 export const metadata: Metadata = {
-  title: "Krypton-UI - Next-Generation Design System",
-  metadataBase: new URL("https://krypton-ui.vercel.app/"),
+  title: "Nova-UI - Next-Generation Design System",
+  metadataBase: new URL("https://nova-ui.vercel.app/"),
   description:
     "A next-generation design system for Next.js with comprehensive theming, accessibility, and type safety. Built with performance and developer experience in mind.",
 };

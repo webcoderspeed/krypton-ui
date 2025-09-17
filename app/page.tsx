@@ -25,7 +25,7 @@ export default function Home() {
         <h1 className="text-4xl font-bold tracking-tight sm:text-6xl lg:text-7xl mb-6">
           Build with{" "}
           <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-            Krypton-UI
+            Nova-UI
           </span>
         </h1>
         
@@ -37,7 +37,7 @@ export default function Home() {
         <div className="flex flex-col sm:flex-row items-center gap-4 mb-8">
           <GetStarted />
           <Link
-            href="https://github.com/krypton-ui/krypton-ui"
+            href="https://github.com/nova-ui/nova-ui"
             target="_blank"
             className={buttonVariants({
               variant: "outline",
@@ -53,7 +53,7 @@ export default function Home() {
         <div className="flex items-center gap-2 text-sm text-muted-foreground">
           <TerminalIcon className="h-4 w-4" />
           <code className="bg-muted px-2 py-1 rounded text-xs font-mono">
-            npm install krypton-ui
+            npm install nova-ui
           </code>
         </div>
       </section>
@@ -62,7 +62,7 @@ export default function Home() {
       <section className="py-16 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Why Choose Krypton-UI?</h2>
+            <h2 className="text-3xl font-bold mb-4">Why Choose Nova-UI?</h2>
             <p className="text-lg text-muted-foreground max-w-[600px] mx-auto">
               Built for modern development workflows with performance and accessibility at its core.
             </p>

@@ -14,23 +14,23 @@ Since this is a private UI library hosted on BitBucket, follow these steps to in
 #### Method 1: SSH Installation (Recommended)
 
 ```bash
-npm install git+ssh://git@bitbucket.org/your-username/krypton-ui.git
+npm install git+ssh://git@bitbucket.org/your-username/nova-ui.git
 ```
 
 #### Method 2: HTTPS Installation
 
 ```bash
-npm install git+https://bitbucket.org/your-username/krypton-ui.git
+npm install git+https://bitbucket.org/your-username/nova-ui.git
 ```
 
 #### Method 3: Specific Branch/Tag Installation
 
 ```bash
 # Install from specific branch
-npm install git+ssh://git@bitbucket.org/your-username/krypton-ui.git#branch-name
+npm install git+ssh://git@bitbucket.org/your-username/nova-ui.git#branch-name
 
 # Install from specific tag
-npm install git+ssh://git@bitbucket.org/your-username/krypton-ui.git#v1.0.0
+npm install git+ssh://git@bitbucket.org/your-username/nova-ui.git#v1.0.0
 ```
 
 ### Usage
@@ -41,13 +41,13 @@ After installation, you can import components like this:
 
 ```typescript
 // Import individual components
-import { Button, Card, Input } from 'krypton-ui';
+import { Button, Card, Input } from 'nova-ui';
 
 // Import utilities
-import { cn } from 'krypton-ui';
+import { cn } from 'nova-ui';
 
 // Import hooks
-import { useMobile } from 'krypton-ui';
+import { useMobile } from 'nova-ui';
 ```
 
 #### Import Styles
@@ -56,14 +56,14 @@ Add the CSS file to your main CSS file or import it in your app:
 
 ```css
 /* In your main CSS file */
-@import 'krypton-ui/styles.css';
+@import 'nova-ui/styles.css';
 ```
 
 Or import it in your JavaScript/TypeScript entry file:
 
 ```tsx
 // In your main.tsx or App.tsx
-import 'krypton-ui/styles.css';
+import 'nova-ui/styles.css';
 ```
 
 ### Required Peer Dependencies
@@ -110,7 +110,7 @@ Add the Krypton UI path to your `tailwind.config.js`:
 module.exports = {
   content: [
     // ... your existing paths
-    './node_modules/krypton-ui/**/*.{js,ts,jsx,tsx}',
+    './node_modules/nova-ui/**/*.{js,ts,jsx,tsx}',
   ],
   // ... rest of your config
 }
@@ -123,7 +123,7 @@ The library is built with TypeScript and includes type definitions. No additiona
 ### Updating the Library
 
 ```bash
-npm update krypton-ui
+npm update nova-ui
 ```
 
 ### Troubleshooting
