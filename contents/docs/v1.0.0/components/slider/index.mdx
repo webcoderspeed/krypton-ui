@@ -1,0 +1,557 @@
+---
+title: Slider
+description: An input where the user selects a value from within a given range with keyboard navigation and accessibility support.
+---
+
+## Import
+
+```tsx
+import { Slider } from "@/components/ui/slider"
+```
+
+## Usage
+
+## Examples
+
+### Default
+
+A basic slider component for selecting a single value.
+
+<CodePreview 
+  code={`"use client"
+
+import { useState } from "react"
+import { Slider } from "@/components/ui/slider"
+
+export default function SliderDefault() {
+  const [value, setValue] = useState([50])
+
+  return (
+    <div className="w-full max-w-sm space-y-4">
+      <div className="space-y-2">
+        <label className="text-sm font-medium">Value: {value[0]}</label>
+        <Slider
+          value={value}
+          onValueChange={setValue}
+          max={100}
+          min={0}
+          step={1}
+          className="w-full"
+        />
+      </div>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<SliderDefault />} 
+/>
+
+### Range Slider
+
+Use multiple values to create a range slider with dual handles.
+
+<CodePreview 
+  code={`"use client"
+
+import { useState } from "react"
+import { Slider } from "@/components/ui/slider"
+
+export default function SliderRange() {
+  const [value, setValue] = useState([25, 75])
+
+  return (
+    <div className="w-full max-w-sm space-y-4">
+      <div className="space-y-2">
+        <label className="text-sm font-medium">
+          Range: {value[0]} - {value[1]}
+        </label>
+        <Slider
+          value={value}
+          onValueChange={setValue}
+          max={100}
+          min={0}
+          step={1}
+          className="w-full"
+        />
+      </div>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<SliderRange />} 
+/>
+
+### Step Slider
+
+Control the granularity of values with the step prop.
+
+<CodePreview 
+  code={`"use client"
+
+import { useState } from "react"
+import { Slider } from "@/components/ui/slider"
+
+export default function SliderStep() {
+  const [value, setValue] = useState([20])
+
+  return (
+    <div className="w-full max-w-sm space-y-4">
+      <div className="space-y-2">
+        <label className="text-sm font-medium">Value: {value[0]}%</label>
+        <Slider
+          value={value}
+          onValueChange={setValue}
+          max={100}
+          min={0}
+          step={10}
+          className="w-full"
+        />
+        <div className="text-xs text-muted-foreground">
+          Step: 10 (values: 0, 10, 20, 30, ...)
+        </div>
+      </div>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<SliderStep />} 
+/>
+
+### Disabled
+
+A disabled slider that cannot be interacted with.
+
+<CodePreview 
+  code={`import { Slider } from "@/components/ui/slider"
+
+export default function SliderDisabled() {
+  return (
+    <div className="w-full max-w-sm space-y-4">
+      <div className="space-y-2">
+        <label className="text-sm font-medium">Value: 60 (Disabled)</label>
+        <Slider
+          value={[60]}
+          max={100}
+          min={0}
+          step={1}
+          disabled
+          className="w-full"
+        />
+      </div>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<SliderDisabled />} 
+/>
+
+## Real-World Examples
+
+### Volume Control
+
+A common use case for sliders in media applications with icon feedback.
+
+<CodePreview 
+  code={`"use client"
+
+import { useState } from "react"
+import { Slider } from "@/components/ui/slider"
+import { Volume2, VolumeX, Volume1 } from "lucide-react"
+
+export default function SliderVolume() {
+  const [volume, setVolume] = useState([75])
+
+  const getVolumeIcon = () => {
+    if (volume[0] === 0) return VolumeX
+    if (volume[0] < 50) return Volume1
+    return Volume2
+  }
+
+  const VolumeIcon = getVolumeIcon()
+
+  return (
+    <div className="w-full max-w-sm space-y-4">
+      <div className="space-y-2">
+        <div className="flex items-center gap-2">
+          <VolumeIcon className="h-4 w-4" />
+          <label className="text-sm font-medium">Volume: {volume[0]}%</label>
+        </div>
+        <Slider
+          value={volume}
+          onValueChange={setVolume}
+          max={100}
+          min={0}
+          step={1}
+          className="w-full"
+        />
+      </div>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<SliderVolume />} 
+/>
+
+### Price Range Filter
+
+Perfect for e-commerce filtering interfaces with formatted currency display.
+
+<CodePreview 
+  code={`"use client"
+
+import { useState } from "react"
+import { Slider } from "@/components/ui/slider"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+
+export default function SliderPriceRange() {
+  const [priceRange, setPriceRange] = useState([100, 500])
+
+  return (
+    <Card className="w-full max-w-sm">
+      <CardHeader>
+        <CardTitle className="text-lg">Price Filter</CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        <div className="space-y-2">
+          <div className="flex justify-between text-sm font-medium">
+            <span>$\{priceRange[0]}</span>
+            <span>$\{priceRange[1]}</span>
+          </div>
+          <Slider
+            value={priceRange}
+            onValueChange={setPriceRange}
+            max={1000}
+            min={0}
+            step={10}
+            className="w-full"
+          />
+          <div className="text-xs text-muted-foreground text-center">
+            Price range: $\{priceRange[0]} - $\{priceRange[1]}
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  )
+}`} 
+  language="tsx" 
+  preview={<SliderPriceRange />} 
+/>
+
+### Brightness Control
+
+System settings style slider with visual feedback and icons.
+
+<CodePreview 
+  code={`"use client"
+
+import { useState } from "react"
+import { Slider } from "@/components/ui/slider"
+import { Sun, Moon } from "lucide-react"
+
+export default function SliderBrightness() {
+  const [brightness, setBrightness] = useState([60])
+
+  return (
+    <div className="w-full max-w-sm space-y-4">
+      <div className="space-y-2">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Moon className="h-4 w-4" />
+            <label className="text-sm font-medium">Brightness</label>
+            <Sun className="h-4 w-4" />
+          </div>
+          <span className="text-sm text-muted-foreground">{brightness[0]}%</span>
+        </div>
+        <Slider
+          value={brightness}
+          onValueChange={setBrightness}
+          max={100}
+          min={0}
+          step={5}
+          className="w-full"
+        />
+        <div 
+          className="h-8 rounded border"
+          style={{
+            background: \`linear-gradient(to right, #000000, #ffffff \${brightness[0]}%)\`
+          }}
+        />
+      </div>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<SliderBrightness />} 
+/>
+
+### Temperature Control
+
+Smart home thermostat interface with color-coded feedback.
+
+<CodePreview 
+  code={`"use client"
+
+import { useState } from "react"
+import { Slider } from "@/components/ui/slider"
+import { Thermometer } from "lucide-react"
+
+export default function SliderTemperature() {
+  const [temperature, setTemperature] = useState([22])
+
+  const getTemperatureColor = (temp: number) => {
+    if (temp < 16) return "text-blue-500"
+    if (temp < 20) return "text-cyan-500"
+    if (temp < 24) return "text-green-500"
+    if (temp < 28) return "text-yellow-500"
+    return "text-red-500"
+  }
+
+  const getBackgroundColor = (temp: number) => {
+    if (temp < 16) return "from-blue-100 to-blue-200"
+    if (temp < 20) return "from-cyan-100 to-cyan-200"
+    if (temp < 24) return "from-green-100 to-green-200"
+    if (temp < 28) return "from-yellow-100 to-yellow-200"
+    return "from-red-100 to-red-200"
+  }
+
+  return (
+    <div className="w-full max-w-sm space-y-4">
+      <div className={\`space-y-2 p-4 rounded-lg bg-gradient-to-r \${getBackgroundColor(temperature[0])}\`}>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Thermometer className={\`h-4 w-4 \${getTemperatureColor(temperature[0])}\`} />
+            <label className="text-sm font-medium">Temperature</label>
+          </div>
+          <span className={\`text-lg font-bold \${getTemperatureColor(temperature[0])}\`}>
+            {temperature[0]}°C
+          </span>
+        </div>
+        <Slider
+          value={temperature}
+          onValueChange={setTemperature}
+          max={35}
+          min={10}
+          step={1}
+          className="w-full"
+        />
+      </div>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<SliderTemperature />} 
+/>
+
+### Media Player Progress
+
+Interactive progress bar for media playback control with play/pause functionality.
+
+<CodePreview 
+  code={`"use client"
+
+import { useState, useEffect } from "react"
+import { Slider } from "@/components/ui/slider"
+import { Button } from "@/components/ui/button"
+import { Play, Pause, SkipBack, SkipForward } from "lucide-react"
+
+export default function SliderProgress() {
+  const [progress, setProgress] = useState([0])
+  const [isPlaying, setIsPlaying] = useState(false)
+  const [duration] = useState(180) // 3 minutes
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout
+    if (isPlaying && progress[0] < duration) {
+      interval = setInterval(() => {
+        setProgress(prev => [Math.min(prev[0] + 1, duration)])
+      }, 1000)
+    }
+    return () => clearInterval(interval)
+  }, [isPlaying, progress, duration])
+
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60)
+    const secs = seconds % 60
+    return \`\${mins}:\${secs.toString().padStart(2, '0')}\`
+  }
+
+  const handlePlayPause = () => {
+    setIsPlaying(!isPlaying)
+  }
+
+  const handleSkipBack = () => {
+    setProgress([Math.max(progress[0] - 10, 0)])
+  }
+
+  const handleSkipForward = () => {
+    setProgress([Math.min(progress[0] + 10, duration)])
+  }
+
+  return (
+    <div className="w-full max-w-sm space-y-4 p-4 border rounded-lg">
+      <div className="text-center">
+        <h3 className="font-medium">Now Playing</h3>
+        <p className="text-sm text-muted-foreground">Sample Track</p>
+      </div>
+      
+      <div className="space-y-2">
+        <Slider
+          value={progress}
+          onValueChange={setProgress}
+          max={duration}
+          min={0}
+          step={1}
+          className="w-full"
+        />
+        <div className="flex justify-between text-xs text-muted-foreground">
+          <span>{formatTime(progress[0])}</span>
+          <span>{formatTime(duration)}</span>
+        </div>
+      </div>
+
+      <div className="flex items-center justify-center gap-2">
+        <Button variant="outline" size="icon" onClick={handleSkipBack}>
+          <SkipBack className="h-4 w-4" />
+        </Button>
+        <Button size="icon" onClick={handlePlayPause}>
+          {isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
+        </Button>
+        <Button variant="outline" size="icon" onClick={handleSkipForward}>
+          <SkipForward className="h-4 w-4" />
+        </Button>
+      </div>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<SliderProgress />} 
+/>
+
+## API Reference
+
+### Props
+
+The Slider component accepts all props from Radix UI Slider primitive.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `value` | `number[]` | `undefined` | The controlled value of the slider. |
+| `defaultValue` | `number[]` | `undefined` | The default value when uncontrolled. |
+| `onValueChange` | `(value: number[]) => void` | `undefined` | Callback fired when the value changes. |
+| `onValueCommit` | `(value: number[]) => void` | `undefined` | Callback fired when the user stops dragging. |
+| `min` | `number` | `0` | The minimum value of the slider. |
+| `max` | `number` | `100` | The maximum value of the slider. |
+| `step` | `number` | `1` | The step increment of the slider. |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | The orientation of the slider. |
+| `disabled` | `boolean` | `false` | Whether the slider is disabled. |
+| `inverted` | `boolean` | `false` | Whether the slider is inverted. |
+| `className` | `string` | `undefined` | Additional CSS classes. |
+
+### Keyboard Navigation
+
+| Key | Description |
+| --- | --- |
+| `ArrowLeft` / `ArrowDown` | Decrease the value by one step |
+| `ArrowRight` / `ArrowUp` | Increase the value by one step |
+| `PageDown` | Decrease the value by 10 steps |
+| `PageUp` | Increase the value by 10 steps |
+| `Home` | Set to minimum value |
+| `End` | Set to maximum value |
+
+## Accessibility
+
+- Uses semantic HTML elements and ARIA attributes
+- Supports keyboard navigation
+- Screen reader compatible with proper labeling
+- Focus management follows WAI-ARIA guidelines
+- Supports both horizontal and vertical orientations
+
+## Best Practices
+
+### Do's
+- Always provide clear labels for sliders
+- Use appropriate min, max, and step values for your use case
+- Consider adding visual indicators for important values
+- Provide immediate feedback when values change
+- Use range sliders for filtering scenarios
+
+### Don'ts
+- Don't use sliders for precise numeric input
+- Avoid very large ranges without appropriate step values
+- Don't forget to handle edge cases (min/max values)
+- Avoid using sliders for binary choices (use Switch instead)
+
+## Examples in Context
+
+### Settings Panel
+
+```tsx
+import { Slider } from "@/components/ui/slider"
+import { Label } from "@/components/ui/label"
+
+function SettingsPanel() {
+  const [volume, setVolume] = useState([75])
+  const [brightness, setBrightness] = useState([60])
+
+  return (
+    <div className="space-y-6">
+      <div className="space-y-2">
+        <Label>Volume</Label>
+        <Slider
+          value={volume}
+          onValueChange={setVolume}
+          max={100}
+          step={1}
+        />
+      </div>
+      <div className="space-y-2">
+        <Label>Brightness</Label>
+        <Slider
+          value={brightness}
+          onValueChange={setBrightness}
+          max={100}
+          step={5}
+        />
+      </div>
+    </div>
+  )
+}
+```
+
+### Filter Component
+
+```tsx
+import { Slider } from "@/components/ui/slider"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+
+function PriceFilter() {
+  const [priceRange, setPriceRange] = useState([0, 1000])
+
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Price Range</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <Slider
+          value={priceRange}
+          onValueChange={setPriceRange}
+          max={1000}
+          min={0}
+          step={10}
+        />
+        <div className="flex justify-between mt-2">
+          <span>${priceRange[0]}</span>
+          <span>${priceRange[1]}</span>
+        </div>
+      </CardContent>
+    </Card>
+  )
+}
+```
+
+## Dependencies
+
+- `@radix-ui/react-slider` - Provides the accessible slider primitive
+- `class-variance-authority` - For component styling variants
+- `clsx` - For conditional CSS classes

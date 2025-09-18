@@ -88,6 +88,10 @@ const v1_0_0_ROUTES: EachRoute[] = [
         "href": "/components/select"
       },
       {
+        "title": "Slider",
+        "href": "/components/slider"
+      },
+      {
         "title": "Tabs",
         "href": "/components/tabs"
       }

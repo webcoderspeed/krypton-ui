@@ -305,6 +305,18 @@ import {
   LoadingStates,
   StepProgress,
 } from "@/components/playground/progress";
+import { Slider } from "@/components/ui/slider";
+import {
+  SliderDefault,
+  SliderRange,
+  SliderStep,
+  SliderDisabled,
+  SliderVolume,
+  SliderPriceRange,
+  SliderBrightness,
+  SliderTemperature,
+  SliderProgress,
+} from "@/components/playground/slider";
 
 const components = {
   LucideIcon,
@@ -548,6 +560,16 @@ const components = {
   ProjectProgress,
   LoadingStates,
   StepProgress,
+  Slider,
+  SliderDefault,
+  SliderRange,
+  SliderStep,
+  SliderDisabled,
+  SliderVolume,
+  SliderPriceRange,
+  SliderBrightness,
+  SliderTemperature,
+  SliderProgress,
 };
 async function parseMdx<Frontmatter>(rawMdx: string) {
   return await compileMDX<Frontmatter>({
