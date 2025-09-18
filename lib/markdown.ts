@@ -348,6 +348,19 @@ import {
   TooltipDataVisualization,
   TooltipAccessibility,
 } from "@/components/playground/tooltip";
+import {
+  HoverCardDefault,
+  HoverCardPositions,
+  HoverCardDelays,
+  HoverCardCustomContent,
+  HoverCardUserProfile,
+  HoverCardRepository,
+  HoverCardProductShowcase,
+  HoverCardTeamMembers,
+  HoverCardAnalytics,
+  HoverCardNotifications,
+  HoverCardSocialMedia,
+} from "@/components/playground/hover-card";
 
 const components = {
   LucideIcon,
@@ -626,6 +639,17 @@ const components = {
   TooltipNavigationMenu,
   TooltipDataVisualization,
   TooltipAccessibility,
+  HoverCardDefault,
+  HoverCardPositions,
+  HoverCardDelays,
+  HoverCardCustomContent,
+  HoverCardUserProfile,
+  HoverCardRepository,
+  HoverCardProductShowcase,
+  HoverCardTeamMembers,
+  HoverCardAnalytics,
+  HoverCardNotifications,
+  HoverCardSocialMedia,
 };
 async function parseMdx<Frontmatter>(rawMdx: string) {
   return await compileMDX<Frontmatter>({

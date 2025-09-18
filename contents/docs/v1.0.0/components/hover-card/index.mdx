@@ -1,0 +1,821 @@
+---
+title: Hover Card
+description: For sighted users to preview content available behind a link.
+component: true
+---
+
+## Import
+
+<CodePreview code="import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card'" language="tsx" />
+
+## Usage
+
+### Default
+
+A basic hover card with simple content.
+
+<CodePreview 
+  code={`import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card"
+import { Button } from "@/components/ui/button"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { CalendarDays } from "lucide-react"
+
+export default function HoverCardDefault() {
+  return (
+    <HoverCard>
+      <HoverCardTrigger asChild>
+        <Button variant="link">@nextjs</Button>
+      </HoverCardTrigger>
+      <HoverCardContent className="w-80">
+        <div className="flex justify-between space-x-4">
+          <Avatar>
+            <AvatarImage src="https://github.com/vercel.png" />
+            <AvatarFallback>VC</AvatarFallback>
+          </Avatar>
+          <div className="space-y-1">
+            <h4 className="text-sm font-semibold">@nextjs</h4>
+            <p className="text-sm">
+              The React Framework – created and maintained by @vercel.
+            </p>
+            <div className="flex items-center pt-2">
+              <CalendarDays className="mr-2 h-4 w-4 opacity-70" />{" "}
+              <span className="text-xs text-muted-foreground">
+                Joined December 2021
+              </span>
+            </div>
+          </div>
+        </div>
+      </HoverCardContent>
+    </HoverCard>
+  )
+}`} 
+  language="tsx" 
+  preview={<HoverCardDefault />} 
+/>
+
+### Positions
+
+Control hover card positioning with the `side` prop.
+
+<CodePreview 
+  code={`import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card"
+import { Button } from "@/components/ui/button"
+
+export default function HoverCardPositions() {
+  return (
+    <div className="flex flex-wrap gap-4 justify-center">
+      <HoverCard>
+        <HoverCardTrigger asChild>
+          <Button variant="outline">Top</Button>
+        </HoverCardTrigger>
+        <HoverCardContent side="top">
+          <p>Hover card on top</p>
+        </HoverCardContent>
+      </HoverCard>
+
+      <HoverCard>
+        <HoverCardTrigger asChild>
+          <Button variant="outline">Left</Button>
+        </HoverCardTrigger>
+        <HoverCardContent side="left">
+          <p>Hover card on left</p>
+        </HoverCardContent>
+      </HoverCard>
+
+      <HoverCard>
+        <HoverCardTrigger asChild>
+          <Button variant="outline">Right</Button>
+        </HoverCardTrigger>
+        <HoverCardContent side="right">
+          <p>Hover card on right</p>
+        </HoverCardContent>
+      </HoverCard>
+
+      <HoverCard>
+        <HoverCardTrigger asChild>
+          <Button variant="outline">Bottom</Button>
+        </HoverCardTrigger>
+        <HoverCardContent side="bottom">
+          <p>Hover card on bottom</p>
+        </HoverCardContent>
+      </HoverCard>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<HoverCardPositions />} 
+/>
+
+### Delays
+
+Configure hover card delays for better user experience.
+
+<CodePreview 
+  code={`import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card"
+import { Button } from "@/components/ui/button"
+
+export default function HoverCardDelays() {
+  return (
+    <div className="flex flex-wrap gap-4 justify-center">
+      <HoverCard openDelay={0} closeDelay={0}>
+        <HoverCardTrigger asChild>
+          <Button variant="outline">No Delay</Button>
+        </HoverCardTrigger>
+        <HoverCardContent>
+          <p>Appears immediately</p>
+        </HoverCardContent>
+      </HoverCard>
+
+      <HoverCard openDelay={500} closeDelay={150}>
+        <HoverCardTrigger asChild>
+          <Button variant="outline">500ms Delay</Button>
+        </HoverCardTrigger>
+        <HoverCardContent>
+          <p>Appears after 500ms</p>
+        </HoverCardContent>
+      </HoverCard>
+
+      <HoverCard openDelay={1000} closeDelay={300}>
+        <HoverCardTrigger asChild>
+          <Button variant="outline">1000ms Delay</Button>
+        </HoverCardTrigger>
+        <HoverCardContent>
+          <p>Appears after 1 second</p>
+        </HoverCardContent>
+      </HoverCard>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<HoverCardDelays />} 
+/>
+
+### Custom Content
+
+Rich content with multiple elements and interactive components.
+
+<CodePreview 
+  code={`import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card"
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Separator } from "@/components/ui/separator"
+import { 
+  Star, 
+  GitFork, 
+  Eye, 
+  ExternalLink,
+  Calendar,
+  MapPin,
+  Link as LinkIcon
+} from "lucide-react"
+
+export default function HoverCardCustomContent() {
+  return (
+    <div className="flex flex-wrap gap-8 justify-center">
+      <HoverCard>
+        <HoverCardTrigger asChild>
+          <Button variant="link" className="text-blue-600">
+            shadcn/ui
+          </Button>
+        </HoverCardTrigger>
+        <HoverCardContent className="w-96">
+          <div className="space-y-4">
+            <div className="flex items-start justify-between">
+              <div className="space-y-1">
+                <h4 className="text-sm font-semibold">shadcn/ui</h4>
+                <p className="text-sm text-muted-foreground">
+                  Beautifully designed components built with Radix UI and Tailwind CSS.
+                </p>
+              </div>
+              <Badge variant="secondary">Public</Badge>
+            </div>
+            
+            <div className="flex items-center space-x-4 text-sm text-muted-foreground">
+              <div className="flex items-center gap-1">
+                <Star className="h-4 w-4" />
+                <span>45.2k</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <GitFork className="h-4 w-4" />
+                <span>2.8k</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <Eye className="h-4 w-4" />
+                <span>1.2k</span>
+              </div>
+            </div>
+
+            <Separator />
+
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
+                <span className="text-sm">TypeScript</span>
+              </div>
+              <Button size="sm" variant="outline" className="h-8">
+                <ExternalLink className="h-3 w-3 mr-1" />
+                View
+              </Button>
+            </div>
+          </div>
+        </HoverCardContent>
+      </HoverCard>
+
+      <HoverCard>
+        <HoverCardTrigger asChild>
+          <Button variant="link">@sarah_dev</Button>
+        </HoverCardTrigger>
+        <HoverCardContent className="w-80">
+          <div className="flex justify-between space-x-4">
+            <Avatar>
+              <AvatarImage src="https://i.pravatar.cc/80?img=1" />
+              <AvatarFallback>SJ</AvatarFallback>
+            </Avatar>
+            <div className="space-y-1">
+              <h4 className="text-sm font-semibold">Sarah Johnson</h4>
+              <p className="text-sm">
+                Full-stack developer passionate about React and TypeScript.
+              </p>
+              <div className="flex items-center pt-2">
+                <MapPin className="mr-2 h-4 w-4 opacity-70" />
+                <span className="text-xs text-muted-foreground">
+                  San Francisco, CA
+                </span>
+              </div>
+              <div className="flex items-center pt-1">
+                <Calendar className="mr-2 h-4 w-4 opacity-70" />
+                <span className="text-xs text-muted-foreground">
+                  Joined March 2020
+                </span>
+              </div>
+            </div>
+          </div>
+        </HoverCardContent>
+      </HoverCard>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<HoverCardCustomContent />} 
+/>
+
+## Real-World Examples
+
+### User Profile Cards
+
+Perfect for displaying user information in social applications.
+
+<CodePreview 
+  code={`import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card"
+import { Button } from "@/components/ui/button"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Badge } from "@/components/ui/badge"
+import { 
+  MapPin, 
+  Link as LinkIcon, 
+  Calendar,
+  Users,
+  UserPlus
+} from "lucide-react"
+
+export default function HoverCardUserProfile() {
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center gap-4">
+        <span className="text-sm font-medium">Team Members:</span>
+        <div className="flex gap-2">
+          <HoverCard>
+            <HoverCardTrigger asChild>
+              <Button variant="ghost" size="sm" className="h-8 px-2">
+                <Avatar className="w-6 h-6 mr-2">
+                  <AvatarImage src="https://i.pravatar.cc/80?img=1" />
+                  <AvatarFallback>SJ</AvatarFallback>
+                </Avatar>
+                @sarah_dev
+              </Button>
+            </HoverCardTrigger>
+            <HoverCardContent className="w-80">
+              <div className="space-y-4">
+                <div className="flex items-start space-x-4">
+                  <Avatar className="w-16 h-16">
+                    <AvatarImage src="https://i.pravatar.cc/80?img=1" />
+                    <AvatarFallback>SJ</AvatarFallback>
+                  </Avatar>
+                  <div className="space-y-1 flex-1">
+                    <div className="flex items-center gap-2">
+                      <h4 className="text-sm font-semibold">Sarah Johnson</h4>
+                      <Badge variant="secondary">Team Lead</Badge>
+                    </div>
+                    <p className="text-sm text-muted-foreground">@sarah_dev</p>
+                  </div>
+                </div>
+
+                <p className="text-sm">
+                  Full-stack developer passionate about React and TypeScript. Building the future one component at a time.
+                </p>
+
+                <div className="space-y-2 text-sm text-muted-foreground">
+                  <div className="flex items-center gap-2">
+                    <MapPin className="h-4 w-4" />
+                    <span>San Francisco, CA</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <LinkIcon className="h-4 w-4" />
+                    <span className="text-blue-600">sarahdev.com</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Calendar className="h-4 w-4" />
+                    <span>Joined March 2020</span>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-4 text-sm">
+                  <div className="flex items-center gap-1">
+                    <span className="font-semibold">567</span>
+                    <span className="text-muted-foreground">Following</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <span className="font-semibold">1.2k</span>
+                    <span className="text-muted-foreground">Followers</span>
+                  </div>
+                </div>
+
+                <Button size="sm" className="w-full">
+                  <UserPlus className="h-4 w-4 mr-1" />
+                  Follow
+                </Button>
+              </div>
+            </HoverCardContent>
+          </HoverCard>
+
+          <HoverCard>
+            <HoverCardTrigger asChild>
+              <Button variant="ghost" size="sm" className="h-8 px-2">
+                <Avatar className="w-6 h-6 mr-2">
+                  <AvatarImage src="https://i.pravatar.cc/80?img=2" />
+                  <AvatarFallback>AC</AvatarFallback>
+                </Avatar>
+                @alex_design
+              </Button>
+            </HoverCardTrigger>
+            <HoverCardContent className="w-80">
+              <div className="space-y-4">
+                <div className="flex items-start space-x-4">
+                  <Avatar className="w-16 h-16">
+                    <AvatarImage src="https://i.pravatar.cc/80?img=2" />
+                    <AvatarFallback>AC</AvatarFallback>
+                  </Avatar>
+                  <div className="space-y-1 flex-1">
+                    <div className="flex items-center gap-2">
+                      <h4 className="text-sm font-semibold">Alex Chen</h4>
+                      <Badge variant="outline">Designer</Badge>
+                    </div>
+                    <p className="text-sm text-muted-foreground">@alex_design</p>
+                  </div>
+                </div>
+
+                <p className="text-sm">
+                  UI/UX Designer & Frontend Developer. Creating beautiful and accessible user experiences.
+                </p>
+
+                <div className="space-y-2 text-sm text-muted-foreground">
+                  <div className="flex items-center gap-2">
+                    <MapPin className="h-4 w-4" />
+                    <span>New York, NY</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <LinkIcon className="h-4 w-4" />
+                    <span className="text-blue-600">alexchen.design</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Calendar className="h-4 w-4" />
+                    <span>Joined January 2019</span>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-4 text-sm">
+                  <div className="flex items-center gap-1">
+                    <span className="font-semibold">432</span>
+                    <span className="text-muted-foreground">Following</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <span className="font-semibold">2.9k</span>
+                    <span className="text-muted-foreground">Followers</span>
+                  </div>
+                </div>
+
+                <Button size="sm" variant="outline" className="w-full">
+                  Following
+                </Button>
+              </div>
+            </HoverCardContent>
+          </HoverCard>
+        </div>
+      </div>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<HoverCardUserProfile />} 
+/>
+
+### Repository Information
+
+Display detailed repository information for links.
+
+<CodePreview 
+  code={`import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card"
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+import { Separator } from "@/components/ui/separator"
+import { 
+  Star, 
+  GitFork, 
+  Eye, 
+  ExternalLink,
+  Calendar,
+  Code
+} from "lucide-react"
+
+export default function HoverCardRepository() {
+  return (
+    <div className="space-y-6">
+      <div className="space-y-2">
+        <h3 className="text-sm font-medium">Popular Repositories</h3>
+        <div className="flex flex-wrap gap-4">
+          <HoverCard>
+            <HoverCardTrigger asChild>
+              <Button variant="link" className="text-blue-600 p-0 h-auto">
+                shadcn/ui
+              </Button>
+            </HoverCardTrigger>
+            <HoverCardContent className="w-96">
+              <div className="space-y-4">
+                <div className="flex items-start justify-between">
+                  <div className="space-y-1">
+                    <h4 className="text-sm font-semibold">shadcn/ui</h4>
+                    <p className="text-sm text-muted-foreground">
+                      Beautifully designed components built with Radix UI and Tailwind CSS.
+                    </p>
+                  </div>
+                  <Badge variant="secondary">Public</Badge>
+                </div>
+                
+                <div className="flex items-center space-x-4 text-sm text-muted-foreground">
+                  <div className="flex items-center gap-1">
+                    <Star className="h-4 w-4" />
+                    <span>45.2k</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <GitFork className="h-4 w-4" />
+                    <span>2.8k</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <Eye className="h-4 w-4" />
+                    <span>1.2k</span>
+                  </div>
+                </div>
+
+                <Separator />
+
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
+                    <span className="text-sm">TypeScript</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                    <Calendar className="h-3 w-3" />
+                    <span>Updated 2 days ago</span>
+                  </div>
+                </div>
+
+                <Button size="sm" variant="outline" className="w-full">
+                  <ExternalLink className="h-3 w-3 mr-1" />
+                  View Repository
+                </Button>
+              </div>
+            </HoverCardContent>
+          </HoverCard>
+
+          <HoverCard>
+            <HoverCardTrigger asChild>
+              <Button variant="link" className="text-blue-600 p-0 h-auto">
+                vercel/next.js
+              </Button>
+            </HoverCardTrigger>
+            <HoverCardContent className="w-96">
+              <div className="space-y-4">
+                <div className="flex items-start justify-between">
+                  <div className="space-y-1">
+                    <h4 className="text-sm font-semibold">vercel/next.js</h4>
+                    <p className="text-sm text-muted-foreground">
+                      The React Framework for the Web. Used by some of the world&apos;s largest companies.
+                    </p>
+                  </div>
+                  <Badge variant="secondary">Public</Badge>
+                </div>
+                
+                <div className="flex items-center space-x-4 text-sm text-muted-foreground">
+                  <div className="flex items-center gap-1">
+                    <Star className="h-4 w-4" />
+                    <span>120k</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <GitFork className="h-4 w-4" />
+                    <span>25.8k</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <Eye className="h-4 w-4" />
+                    <span>2.1k</span>
+                  </div>
+                </div>
+
+                <Separator />
+
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                    <span className="text-sm">JavaScript</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                    <Calendar className="h-3 w-3" />
+                    <span>Updated 1 hour ago</span>
+                  </div>
+                </div>
+
+                <Button size="sm" variant="outline" className="w-full">
+                  <ExternalLink className="h-3 w-3 mr-1" />
+                  View Repository
+                </Button>
+              </div>
+            </HoverCardContent>
+          </HoverCard>
+        </div>
+      </div>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<HoverCardRepository />} 
+/>
+
+### Product Preview
+
+Show product details and quick actions for e-commerce.
+
+<CodePreview 
+  code={`import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card"
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+import { 
+  Star, 
+  Heart,
+  ShoppingCart,
+  Truck,
+  Shield
+} from "lucide-react"
+
+export default function HoverCardProductShowcase() {
+  return (
+    <div className="space-y-6">
+      <div className="space-y-2">
+        <h3 className="text-sm font-medium">Featured Products</h3>
+        <div className="grid grid-cols-2 gap-4 max-w-md">
+          <HoverCard>
+            <HoverCardTrigger asChild>
+              <div className="cursor-pointer group">
+                <div className="relative overflow-hidden rounded-lg border bg-card">
+                  <img 
+                    src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=200&h=150&fit=crop&crop=center" 
+                    alt="Headphones"
+                    className="w-full h-32 object-cover group-hover:scale-105 transition-transform duration-200"
+                  />
+                  <div className="p-3">
+                    <h3 className="font-semibold text-sm mb-1">Wireless Headphones</h3>
+                    <div className="flex items-center gap-2">
+                      <span className="text-lg font-bold">$199</span>
+                      <span className="text-sm text-muted-foreground line-through">$249</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </HoverCardTrigger>
+            <HoverCardContent className="w-80">
+              <div className="space-y-4">
+                <div className="flex gap-4">
+                  <img 
+                    src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=80&h=80&fit=crop&crop=center" 
+                    alt="Headphones"
+                    className="w-20 h-20 rounded-lg object-cover"
+                  />
+                  <div className="flex-1 space-y-2">
+                    <div className="flex items-start justify-between">
+                      <h4 className="font-semibold text-sm">Premium Wireless Headphones</h4>
+                      <Badge variant="destructive" className="text-xs">20% OFF</Badge>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-xl font-bold">$199.99</span>
+                      <span className="text-sm text-muted-foreground line-through">$249.99</span>
+                    </div>
+                  </div>
+                </div>
+
+                <p className="text-sm text-muted-foreground">
+                  High-quality wireless headphones with noise cancellation and 30-hour battery life.
+                </p>
+
+                <div className="flex items-center gap-1">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                  ))}
+                  <span className="text-sm text-muted-foreground ml-2">(4.8) 2,341 reviews</span>
+                </div>
+
+                <div className="space-y-2 text-sm">
+                  <div className="flex items-center gap-2 text-green-600">
+                    <Truck className="h-4 w-4" />
+                    <span>Free shipping</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-blue-600">
+                    <Shield className="h-4 w-4" />
+                    <span>2-year warranty</span>
+                  </div>
+                </div>
+
+                <div className="flex gap-2">
+                  <Button className="flex-1">
+                    <ShoppingCart className="h-4 w-4 mr-2" />
+                    Add to Cart
+                  </Button>
+                  <Button variant="outline" size="icon">
+                    <Heart className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+            </HoverCardContent>
+          </HoverCard>
+
+          <HoverCard>
+            <HoverCardTrigger asChild>
+              <div className="cursor-pointer group">
+                <div className="relative overflow-hidden rounded-lg border bg-card">
+                  <img 
+                    src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=200&h=150&fit=crop&crop=center" 
+                    alt="Smart Watch"
+                    className="w-full h-32 object-cover group-hover:scale-105 transition-transform duration-200"
+                  />
+                  <div className="p-3">
+                    <h3 className="font-semibold text-sm mb-1">Smart Watch</h3>
+                    <div className="flex items-center gap-2">
+                      <span className="text-lg font-bold">$299</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </HoverCardTrigger>
+            <HoverCardContent className="w-80">
+              <div className="space-y-4">
+                <div className="flex gap-4">
+                  <img 
+                    src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=80&h=80&fit=crop&crop=center" 
+                    alt="Smart Watch"
+                    className="w-20 h-20 rounded-lg object-cover"
+                  />
+                  <div className="flex-1 space-y-2">
+                    <div className="flex items-start justify-between">
+                      <h4 className="font-semibold text-sm">Smart Fitness Watch</h4>
+                      <Badge variant="secondary" className="text-xs">New</Badge>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-xl font-bold">$299.99</span>
+                    </div>
+                  </div>
+                </div>
+
+                <p className="text-sm text-muted-foreground">
+                  Advanced fitness tracking with heart rate monitor, GPS, and water resistance.
+                </p>
+
+                <div className="flex items-center gap-1">
+                  {[...Array(4)].map((_, i) => (
+                    <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                  ))}
+                  <Star className="h-4 w-4 text-gray-300" />
+                  <span className="text-sm text-muted-foreground ml-2">(4.6) 1,876 reviews</span>
+                </div>
+
+                <div className="space-y-2 text-sm">
+                  <div className="flex items-center gap-2 text-green-600">
+                    <Truck className="h-4 w-4" />
+                    <span>Free shipping</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-blue-600">
+                    <Shield className="h-4 w-4" />
+                    <span>1-year warranty</span>
+                  </div>
+                </div>
+
+                <div className="flex gap-2">
+                  <Button className="flex-1">
+                    <ShoppingCart className="h-4 w-4 mr-2" />
+                    Add to Cart
+                  </Button>
+                  <Button variant="outline" size="icon">
+                    <Heart className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+            </HoverCardContent>
+          </HoverCard>
+        </div>
+      </div>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<HoverCardProductShowcase />} 
+/>
+
+## API Reference
+
+### HoverCard
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `openDelay` | `number` | `700` | The duration from when the mouse enters the trigger until the hover card opens. |
+| `closeDelay` | `number` | `300` | The duration from when the mouse leaves the trigger until the hover card closes. |
+
+### HoverCardTrigger
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `asChild` | `boolean` | `false` | Change the default rendered element for the one passed as a child. |
+
+### HoverCardContent
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `side` | `"top" \| "right" \| "bottom" \| "left"` | `"bottom"` | The preferred side of the trigger to render against. |
+| `sideOffset` | `number` | `4` | The distance in pixels from the trigger. |
+| `align` | `"start" \| "center" \| "end"` | `"center"` | The preferred alignment against the trigger. |
+| `alignOffset` | `number` | `0` | An offset in pixels from the "start" or "end" alignment options. |
+| `avoidCollisions` | `boolean` | `true` | When true, overrides the side and align preferences to prevent collisions. |
+| `collisionBoundary` | `Element \| null \| Array<Element \| null>` | `[]` | The element used as the collision boundary. |
+| `collisionPadding` | `number \| Partial<Record<Side, number>>` | `0` | The distance in pixels from the boundary edges where collision detection should occur. |
+| `arrowPadding` | `number` | `0` | The padding between the arrow and the edges of the content. |
+| `sticky` | `"partial" \| "always"` | `"partial"` | The sticky behavior on the align axis. |
+| `hideWhenDetached` | `boolean` | `false` | Whether to hide the content when the trigger becomes fully occluded. |
+
+## Accessibility
+
+- Uses `aria-expanded` to indicate the open/closed state
+- Supports keyboard navigation
+- Automatically manages focus
+- Screen reader compatible
+
+## Best Practices
+
+1. **Use for supplementary information** - Hover cards should provide additional context, not essential information
+2. **Keep content concise** - Avoid overwhelming users with too much information
+3. **Consider mobile users** - Hover cards don't work on touch devices, provide alternative access methods
+4. **Appropriate delays** - Use reasonable open/close delays to prevent accidental triggers
+5. **Accessible alternatives** - Ensure critical information is available through other means
+
+## Examples in Action
+
+The hover card component is perfect for:
+
+- **User profiles** - Show detailed user information when hovering over usernames or avatars
+- **Link previews** - Display rich previews of external links or internal pages
+- **Product information** - Show detailed product specs and images in e-commerce applications
+- **Repository details** - Display GitHub repository information with stats and descriptions
+- **Team member cards** - Show team member details in about pages or team directories
