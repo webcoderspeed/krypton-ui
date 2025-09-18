@@ -1,0 +1,932 @@
+---
+title: Progress
+description: Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.
+component: true
+---
+
+## Import
+
+<CodePreview code="import { Progress } from '@/components/ui/progress'" language="tsx" />
+
+## Usage
+
+### Default
+
+The default progress bar showing completion percentage.
+
+<CodePreview 
+  code={`import { Progress } from '@/components/ui/progress'
+
+export default function ProgressDefault() {
+  return (
+    <div className="space-y-4">
+      <div className="space-y-2">
+        <h4 className="text-sm font-medium">Default Progress</h4>
+        <Progress value={33} className="w-full" />
+        <p className="text-xs text-muted-foreground">33% complete</p>
+      </div>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<ProgressDefault />} 
+/>
+
+### Sizes
+
+Progress bars are available in multiple sizes to fit different contexts.
+
+<CodePreview 
+  code={`import { Progress } from '@/components/ui/progress'
+
+export default function ProgressSizes() {
+  return (
+    <div className="space-y-6">
+      <div className="space-y-2">
+        <h4 className="text-sm font-medium">Small Progress</h4>
+        <Progress value={25} className="w-full h-2" />
+        <p className="text-xs text-muted-foreground">25% complete</p>
+      </div>
+      
+      <div className="space-y-2">
+        <h4 className="text-sm font-medium">Default Progress</h4>
+        <Progress value={50} className="w-full h-4" />
+        <p className="text-xs text-muted-foreground">50% complete</p>
+      </div>
+      
+      <div className="space-y-2">
+        <h4 className="text-sm font-medium">Large Progress</h4>
+        <Progress value={75} className="w-full h-6" />
+        <p className="text-xs text-muted-foreground">75% complete</p>
+      </div>
+      
+      <div className="space-y-2">
+        <h4 className="text-sm font-medium">Extra Large Progress</h4>
+        <Progress value={90} className="w-full h-8" />
+        <p className="text-xs text-muted-foreground">90% complete</p>
+      </div>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<ProgressSizes />} 
+/>
+
+### Animated
+
+Interactive progress bar with animation controls.
+
+<CodePreview 
+  code={`import React, { useState, useEffect } from 'react'
+import { Progress } from '@/components/ui/progress'
+import { Button } from '@/components/ui/button'
+
+export default function ProgressAnimated() {
+  const [progress, setProgress] = useState(0)
+  const [isRunning, setIsRunning] = useState(false)
+
+  useEffect(() => {
+    if (!isRunning) return
+
+    const timer = setInterval(() => {
+      setProgress(prev => {
+        if (prev >= 100) {
+          setIsRunning(false)
+          return 100
+        }
+        return prev + 1
+      })
+    }, 50)
+
+    return () => clearInterval(timer)
+  }, [isRunning])
+
+  const startProgress = () => {
+    setIsRunning(true)
+  }
+
+  const pauseProgress = () => {
+    setIsRunning(false)
+  }
+
+  const resetProgress = () => {
+    setProgress(0)
+    setIsRunning(false)
+  }
+
+  return (
+    <div className="space-y-4">
+      <div className="space-y-2">
+        <h4 className="text-sm font-medium">Animated Progress</h4>
+        <Progress value={progress} className="w-full" />
+        <p className="text-xs text-muted-foreground">{progress}% complete</p>
+      </div>
+      
+      <div className="flex gap-2">
+        <Button onClick={startProgress} disabled={isRunning || progress === 100} size="sm">
+          Start
+        </Button>
+        <Button onClick={pauseProgress} disabled={!isRunning} variant="outline" size="sm">
+          Pause
+        </Button>
+        <Button onClick={resetProgress} variant="outline" size="sm">
+          Reset
+        </Button>
+      </div>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<ProgressAnimated />} 
+/>
+
+### Colors
+
+Progress bars with different color variants for various states and contexts.
+
+<CodePreview 
+  code={`import { Progress } from '@/components/ui/progress'
+
+export default function ProgressColors() {
+  return (
+    <div className="space-y-6">
+      <div className="space-y-2">
+        <h4 className="text-sm font-medium">Default (Primary)</h4>
+        <Progress value={60} className="w-full" />
+      </div>
+      
+      <div className="space-y-2">
+        <h4 className="text-sm font-medium">Success (Green)</h4>
+        <Progress 
+          value={80} 
+          className="w-full [&>div]:bg-green-500" 
+        />
+      </div>
+      
+      <div className="space-y-2">
+        <h4 className="text-sm font-medium">Warning (Yellow)</h4>
+        <Progress 
+          value={45} 
+          className="w-full [&>div]:bg-yellow-500" 
+        />
+      </div>
+      
+      <div className="space-y-2">
+        <h4 className="text-sm font-medium">Danger (Red)</h4>
+        <Progress 
+          value={25} 
+          className="w-full [&>div]:bg-red-500" 
+        />
+      </div>
+      
+      <div className="space-y-2">
+        <h4 className="text-sm font-medium">Info (Blue)</h4>
+        <Progress 
+          value={70} 
+          className="w-full [&>div]:bg-blue-500" 
+        />
+      </div>
+      
+      <div className="space-y-2">
+        <h4 className="text-sm font-medium">Purple Gradient</h4>
+        <Progress 
+          value={85} 
+          className="w-full [&>div]:bg-gradient-to-r [&>div]:from-purple-500 [&>div]:to-pink-500" 
+        />
+      </div>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<ProgressColors />} 
+/>
+
+## Real-World Examples
+
+### File Upload Progress
+
+A practical file upload interface with multiple files and progress tracking.
+
+<CodePreview 
+  code={`import React, { useState, useEffect } from 'react'
+import { Progress } from '@/components/ui/progress'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Upload, CheckCircle, XCircle, File } from 'lucide-react'
+
+interface FileUpload {
+  id: string
+  name: string
+  size: string
+  progress: number
+  status: 'uploading' | 'completed' | 'error'
+}
+
+export default function FileUploadProgress() {
+  const [files, setFiles] = useState<FileUpload[]>([
+    { id: '1', name: 'document.pdf', size: '2.4 MB', progress: 0, status: 'uploading' },
+    { id: '2', name: 'image.jpg', size: '1.8 MB', progress: 0, status: 'uploading' },
+    { id: '3', name: 'presentation.pptx', size: '5.2 MB', progress: 0, status: 'uploading' }
+  ])
+
+  const [isUploading, setIsUploading] = useState(false)
+
+  const startUpload = () => {
+    setIsUploading(true)
+    
+    files.forEach((file, index) => {
+      const timer = setInterval(() => {
+        setFiles(prev => prev.map(f => {
+          if (f.id === file.id) {
+            const newProgress = Math.min(f.progress + Math.random() * 10, 100)
+            const newStatus = newProgress === 100 ? 'completed' : 'uploading'
+            
+            if (newProgress === 100) {
+              clearInterval(timer)
+            }
+            
+            return { ...f, progress: newProgress, status: newStatus }
+          }
+          return f
+        }))
+      }, 200 + index * 100)
+    })
+  }
+
+  const resetFiles = () => {
+    setFiles(prev => prev.map(f => ({ ...f, progress: 0, status: 'uploading' as const })))
+    setIsUploading(false)
+  }
+
+  const overallProgress = files.reduce((acc, file) => acc + file.progress, 0) / files.length
+
+  return (
+    <Card className="w-full max-w-md">
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2">
+          <Upload className="h-5 w-5" />
+          File Upload
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        <div className="space-y-2">
+          <div className="flex justify-between text-sm">
+            <span>Overall Progress</span>
+            <span>{Math.round(overallProgress)}%</span>
+          </div>
+          <Progress value={overallProgress} className="w-full" />
+        </div>
+        
+        <div className="space-y-3">
+          {files.map((file) => (
+            <div key={file.id} className="space-y-2">
+              <div className="flex items-center justify-between text-sm">
+                <div className="flex items-center gap-2">
+                  <File className="h-4 w-4" />
+                  <span className="font-medium">{file.name}</span>
+                  {file.status === 'completed' && (
+                    <CheckCircle className="h-4 w-4 text-green-500" />
+                  )}
+                  {file.status === 'error' && (
+                    <XCircle className="h-4 w-4 text-red-500" />
+                  )}
+                </div>
+                <span className="text-muted-foreground">{file.size}</span>
+              </div>
+              <Progress 
+                value={file.progress} 
+                className={cn(
+                  "w-full h-2",
+                  file.status === 'completed' && "[&>div]:bg-green-500",
+                  file.status === 'error' && "[&>div]:bg-red-500"
+                )}
+              />
+              <div className="text-xs text-muted-foreground">
+                {Math.round(file.progress)}% complete
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        <div className="flex gap-2">
+          <Button onClick={startUpload} disabled={isUploading} size="sm">
+            Start Upload
+          </Button>
+          <Button onClick={resetFiles} variant="outline" size="sm">
+            Reset
+          </Button>
+        </div>
+      </CardContent>
+    </Card>
+  )
+}`} 
+  language="tsx" 
+  preview={<FileUploadProgress />} 
+/>
+
+### Skills Progress
+
+Display technical skills with progress indicators and categories.
+
+<CodePreview 
+  code={`import { Progress } from '@/components/ui/progress'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+
+interface Skill {
+  name: string
+  level: number
+  category: string
+  color: string
+}
+
+export default function SkillProgress() {
+  const skills: Skill[] = [
+    { name: "React", level: 90, category: "Frontend", color: "bg-blue-500" },
+    { name: "TypeScript", level: 85, category: "Language", color: "bg-blue-600" },
+    { name: "Node.js", level: 80, category: "Backend", color: "bg-green-500" },
+    { name: "Python", level: 75, category: "Language", color: "bg-yellow-500" },
+    { name: "PostgreSQL", level: 70, category: "Database", color: "bg-purple-500" },
+    { name: "Docker", level: 65, category: "DevOps", color: "bg-cyan-500" }
+  ]
+
+  const averageSkill = skills.reduce((acc, skill) => acc + skill.level, 0) / skills.length
+
+  return (
+    <Card className="w-full max-w-lg">
+      <CardHeader>
+        <CardTitle>Technical Skills</CardTitle>
+        <div className="space-y-2">
+          <div className="flex justify-between text-sm">
+            <span>Overall Proficiency</span>
+            <span>{Math.round(averageSkill)}%</span>
+          </div>
+          <Progress value={averageSkill} className="w-full" />
+        </div>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        {skills.map((skill, index) => (
+          <div key={index} className="space-y-2">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <span className="font-medium">{skill.name}</span>
+                <Badge variant="secondary" className="text-xs">
+                  {skill.category}
+                </Badge>
+              </div>
+              <span className="text-sm text-muted-foreground">{skill.level}%</span>
+            </div>
+            <Progress 
+              value={skill.level} 
+              className={cn("w-full", \`[&>div]:\${skill.color}\`)}
+            />
+          </div>
+        ))}
+      </CardContent>
+    </Card>
+  )
+}`} 
+  language="tsx" 
+  preview={<SkillProgress />} 
+/>
+
+### Project Dashboard
+
+A comprehensive project management dashboard with progress tracking.
+
+<CodePreview 
+  code={`import { Progress } from '@/components/ui/progress'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Calendar, Users, Target } from 'lucide-react'
+
+interface Project {
+  id: string
+  name: string
+  progress: number
+  status: 'on-track' | 'at-risk' | 'delayed' | 'completed'
+  dueDate: string
+  tasksCompleted: number
+  totalTasks: number
+  team: Array<{ name: string; avatar: string }>
+}
+
+export default function ProjectProgress() {
+  const projects: Project[] = [
+    {
+      id: '1',
+      name: 'E-commerce Platform',
+      progress: 85,
+      status: 'on-track',
+      dueDate: '2024-02-15',
+      tasksCompleted: 34,
+      totalTasks: 40,
+      team: [
+        { name: 'Alice', avatar: '/avatars/alice.jpg' },
+        { name: 'Bob', avatar: '/avatars/bob.jpg' },
+        { name: 'Carol', avatar: '/avatars/carol.jpg' }
+      ]
+    },
+    {
+      id: '2',
+      name: 'Mobile App Redesign',
+      progress: 60,
+      status: 'at-risk',
+      dueDate: '2024-02-20',
+      tasksCompleted: 18,
+      totalTasks: 30,
+      team: [
+        { name: 'David', avatar: '/avatars/david.jpg' },
+        { name: 'Eve', avatar: '/avatars/eve.jpg' }
+      ]
+    },
+    {
+      id: '3',
+      name: 'API Documentation',
+      progress: 30,
+      status: 'delayed',
+      dueDate: '2024-01-30',
+      tasksCompleted: 6,
+      totalTasks: 20,
+      team: [
+        { name: 'Frank', avatar: '/avatars/frank.jpg' }
+      ]
+    }
+  ]
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'on-track': return 'bg-green-500'
+      case 'at-risk': return 'bg-yellow-500'
+      case 'delayed': return 'bg-red-500'
+      case 'completed': return 'bg-blue-500'
+      default: return 'bg-gray-500'
+    }
+  }
+
+  const getStatusVariant = (status: string) => {
+    switch (status) {
+      case 'on-track': return 'default'
+      case 'at-risk': return 'secondary'
+      case 'delayed': return 'destructive'
+      case 'completed': return 'default'
+      default: return 'secondary'
+    }
+  }
+
+  return (
+    <div className="space-y-4">
+      <h3 className="text-lg font-semibold">Project Dashboard</h3>
+      {projects.map((project) => (
+        <Card key={project.id}>
+          <CardHeader className="pb-3">
+            <div className="flex items-center justify-between">
+              <CardTitle className="text-base">{project.name}</CardTitle>
+              <Badge variant={getStatusVariant(project.status)}>
+                {project.status.replace('-', ' ')}
+              </Badge>
+            </div>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="space-y-2">
+              <div className="flex justify-between text-sm">
+                <span>Progress</span>
+                <span>{project.progress}%</span>
+              </div>
+              <Progress 
+                value={project.progress} 
+                className={cn("w-full", \`[&>div]:\${getStatusColor(project.status)}\`)}
+              />
+            </div>
+            
+            <div className="grid grid-cols-3 gap-4 text-sm">
+              <div className="flex items-center gap-2">
+                <Target className="h-4 w-4 text-muted-foreground" />
+                <span>{project.tasksCompleted}/{project.totalTasks} tasks</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Calendar className="h-4 w-4 text-muted-foreground" />
+                <span>{project.dueDate}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Users className="h-4 w-4 text-muted-foreground" />
+                <div className="flex -space-x-2">
+                  {project.team.map((member, index) => (
+                    <Avatar key={index} className="h-6 w-6 border-2 border-background">
+                      <AvatarImage src={member.avatar} alt={member.name} />
+                      <AvatarFallback className="text-xs">
+                        {member.name.charAt(0)}
+                      </AvatarFallback>
+                    </Avatar>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      ))}
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<ProjectProgress />} 
+/>
+
+### Loading States
+
+Different loading processes with progress indicators.
+
+<CodePreview 
+  code={`import React, { useState, useEffect } from 'react'
+import { Progress } from '@/components/ui/progress'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Loader2, Download, Database, Wifi } from 'lucide-react'
+
+interface LoadingProcess {
+  id: string
+  name: string
+  icon: React.ReactNode
+  progress: number
+  isActive: boolean
+  description: string
+}
+
+export default function LoadingStates() {
+  const [processes, setProcesses] = useState<LoadingProcess[]>([
+    {
+      id: 'download',
+      name: 'Downloading Files',
+      icon: <Download className="h-4 w-4" />,
+      progress: 0,
+      isActive: false,
+      description: 'Downloading application files...'
+    },
+    {
+      id: 'database',
+      name: 'Database Migration',
+      icon: <Database className="h-4 w-4" />,
+      progress: 0,
+      isActive: false,
+      description: 'Running database migrations...'
+    },
+    {
+      id: 'network',
+      name: 'Network Setup',
+      icon: <Wifi className="h-4 w-4" />,
+      progress: 0,
+      isActive: false,
+      description: 'Configuring network connections...'
+    }
+  ])
+
+  const startProcess = (processId: string) => {
+    setProcesses(prev => prev.map(p => 
+      p.id === processId ? { ...p, isActive: true, progress: 0 } : p
+    ))
+
+    const timer = setInterval(() => {
+      setProcesses(prev => prev.map(p => {
+        if (p.id === processId && p.isActive) {
+          const newProgress = Math.min(p.progress + Math.random() * 5, 100)
+          if (newProgress >= 100) {
+            clearInterval(timer)
+            return { ...p, progress: 100, isActive: false }
+          }
+          return { ...p, progress: newProgress }
+        }
+        return p
+      }))
+    }, 100)
+  }
+
+  const resetAll = () => {
+    setProcesses(prev => prev.map(p => ({ ...p, progress: 0, isActive: false })))
+  }
+
+  return (
+    <Card className="w-full max-w-md">
+      <CardHeader>
+        <CardTitle>System Loading</CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        {processes.map((process) => (
+          <div key={process.id} className="space-y-2">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                {process.isActive ? (
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                ) : (
+                  process.icon
+                )}
+                <span className="font-medium">{process.name}</span>
+              </div>
+              <span className="text-sm text-muted-foreground">
+                {Math.round(process.progress)}%
+              </span>
+            </div>
+            <Progress 
+              value={process.progress} 
+              className={cn(
+                "w-full h-2",
+                process.progress === 100 && "[&>div]:bg-green-500"
+              )}
+            />
+            <p className="text-xs text-muted-foreground">
+              {process.description}
+            </p>
+          </div>
+        ))}
+        
+        <div className="flex gap-2 pt-2">
+          <Button 
+            onClick={() => startProcess('download')} 
+            disabled={processes[0].isActive}
+            size="sm"
+          >
+            Start Download
+          </Button>
+          <Button 
+            onClick={() => startProcess('database')} 
+            disabled={processes[1].isActive}
+            size="sm"
+            variant="outline"
+          >
+            Start Migration
+          </Button>
+          <Button onClick={resetAll} variant="outline" size="sm">
+            Reset
+          </Button>
+        </div>
+      </CardContent>
+    </Card>
+  )
+}`} 
+  language="tsx" 
+  preview={<LoadingStates />} 
+/>
+
+### Step Progress
+
+Multi-step wizard with progress tracking and navigation.
+
+<CodePreview 
+  code={`import React, { useState } from 'react'
+import { Progress } from '@/components/ui/progress'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { CheckCircle, Circle, ArrowRight, ArrowLeft } from 'lucide-react'
+
+interface Step {
+  id: number
+  title: string
+  description: string
+  completed: boolean
+}
+
+export default function StepProgress() {
+  const [currentStep, setCurrentStep] = useState(1)
+  const [steps, setSteps] = useState<Step[]>([
+    {
+      id: 1,
+      title: "Account Information",
+      description: "Enter your basic details",
+      completed: false
+    },
+    {
+      id: 2,
+      title: "Verification",
+      description: "Verify your email and phone",
+      completed: false
+    },
+    {
+      id: 3,
+      title: "Preferences",
+      description: "Set your preferences",
+      completed: false
+    },
+    {
+      id: 4,
+      title: "Payment",
+      description: "Add payment method",
+      completed: false
+    },
+    {
+      id: 5,
+      title: "Confirmation",
+      description: "Review and confirm",
+      completed: false
+    }
+  ])
+
+  const totalSteps = steps.length
+  const completedSteps = steps.filter(step => step.completed).length
+  const progressPercentage = (completedSteps / totalSteps) * 100
+
+  const handleNext = () => {
+    if (currentStep <= totalSteps) {
+      setSteps(prev => prev.map(step => 
+        step.id === currentStep ? { ...step, completed: true } : step
+      ))
+      setCurrentStep(prev => Math.min(prev + 1, totalSteps + 1))
+    }
+  }
+
+  const handlePrevious = () => {
+    if (currentStep > 1) {
+      setCurrentStep(prev => prev - 1)
+      setSteps(prev => prev.map(step => 
+        step.id === currentStep - 1 ? { ...step, completed: false } : step
+      ))
+    }
+  }
+
+  const getStepStatus = (step: Step) => {
+    if (step.completed) return "completed"
+    if (step.id === currentStep) return "current"
+    if (step.id < currentStep) return "available"
+    return "upcoming"
+  }
+
+  return (
+    <Card className="w-full max-w-2xl">
+      <CardHeader>
+        <CardTitle>Setup Wizard</CardTitle>
+        <div className="space-y-2">
+          <div className="flex justify-between text-sm">
+            <span>Overall Progress</span>
+            <span>{completedSteps}/{totalSteps} completed</span>
+          </div>
+          <Progress value={progressPercentage} className="w-full" />
+        </div>
+      </CardHeader>
+      <CardContent className="space-y-6">
+        <div className="space-y-4">
+          {steps.map((step) => {
+            const status = getStepStatus(step)
+            return (
+              <div key={step.id} className="flex items-center gap-4">
+                <div className="flex items-center justify-center">
+                  {status === "completed" ? (
+                    <CheckCircle className="h-6 w-6 text-green-500" />
+                  ) : (
+                    <div className={\`h-6 w-6 rounded-full border-2 flex items-center justify-center text-sm font-medium \${
+                      status === "current"
+                        ? "border-blue-500 bg-blue-500 text-white"
+                        : status === "available"
+                        ? "border-blue-500 text-blue-500"
+                        : "border-gray-300 text-gray-400"
+                    }\`}>
+                      {step.id}
+                    </div>
+                  )}
+                </div>
+                
+                <div className="flex-1">
+                  <h4 className={\`font-medium \${
+                    status === "upcoming" ? "text-gray-400" : "text-gray-900"
+                  }\`}>
+                    {step.title}
+                  </h4>
+                  <p className={\`text-sm \${
+                    status === "upcoming" ? "text-gray-400" : "text-gray-600"
+                  }\`}>
+                    {step.description}
+                  </p>
+                </div>
+                
+                {status === "current" && (
+                  <div className="text-blue-500 text-sm font-medium">
+                    Current
+                  </div>
+                )}
+              </div>
+            )
+          })}
+        </div>
+        
+        <div className="flex justify-between pt-4 border-t">
+          <Button
+            onClick={handlePrevious}
+            disabled={currentStep === 1}
+            variant="outline"
+            className="flex items-center gap-2"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            Previous
+          </Button>
+          
+          <Button
+            onClick={handleNext}
+            disabled={currentStep > totalSteps}
+            className="flex items-center gap-2"
+          >
+            {currentStep === totalSteps ? "Complete" : "Next"}
+            <ArrowRight className="h-4 w-4" />
+          </Button>
+        </div>
+      </CardContent>
+    </Card>
+  )
+}`} 
+  language="tsx" 
+  preview={<StepProgress />} 
+/>
+
+## API Reference
+
+### Props
+
+The Progress component accepts all standard HTML div attributes plus:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `number` | `0` | The progress value (0-100) |
+| `max` | `number` | `100` | The maximum value |
+| `className` | `string` | - | Additional CSS classes to apply |
+| `children` | `ReactNode` | - | Optional content to display inside the progress bar |
+
+### Styling
+
+The Progress component can be customized using Tailwind CSS classes:
+
+```tsx
+// Size variations
+<Progress value={50} className="h-2" />  // Small
+<Progress value={50} className="h-4" />  // Default
+<Progress value={50} className="h-6" />  // Large
+
+// Color variations
+<Progress value={50} className="[&>div]:bg-green-500" />  // Green
+<Progress value={50} className="[&>div]:bg-red-500" />    // Red
+<Progress value={50} className="[&>div]:bg-blue-500" />   // Blue
+
+// Background variations
+<Progress value={50} className="bg-gray-200" />           // Light background
+<Progress value={50} className="bg-gray-800" />           // Dark background
+```
+
+## Accessibility
+
+The Progress component follows WAI-ARIA guidelines:
+
+- Uses semantic `role="progressbar"` attribute
+- Includes `aria-valuenow`, `aria-valuemin`, and `aria-valuemax` attributes
+- Supports screen readers with proper labeling
+- Maintains visual contrast for accessibility
+- Provides keyboard navigation support when interactive
+
+## Best Practices
+
+1. **Provide context**: Always include labels or descriptions to explain what the progress represents
+2. **Use appropriate colors**: Use semantic colors (green for success, red for errors, yellow for warnings)
+3. **Show percentage**: Display the actual percentage or completion status when helpful
+4. **Animate smoothly**: Use CSS transitions for smooth progress updates
+5. **Handle edge cases**: Ensure progress never exceeds 100% or goes below 0%
+6. **Provide feedback**: Include loading states and completion indicators
+7. **Consider performance**: Avoid updating progress too frequently to prevent performance issues
+
+## Examples in Context
+
+### Form Validation Progress
+
+```tsx
+<div className="space-y-2">
+  <label>Form Completion</label>
+  <Progress value={validationProgress} />
+  <p className="text-sm text-muted-foreground">
+    {completedFields}/{totalFields} fields completed
+  </p>
+</div>
+```
+
+### Download Progress
+
+```tsx
+<div className="flex items-center gap-2">
+  <Progress value={downloadProgress} className="flex-1" />
+  <span className="text-sm">{downloadProgress}%</span>
+</div>
+```
+
+### Skill Level Indicator
+
+```tsx
+<div className="space-y-1">
+  <div className="flex justify-between">
+    <span>React</span>
+    <span>Expert</span>
+  </div>
+  <Progress value={90} className="[&>div]:bg-blue-500" />
+</div>
+```
+
+## Dependencies
+
+The Progress component depends on:
+
+- `@radix-ui/react-progress` - The underlying progress primitive
+- `class-variance-authority` - For variant management
+- `clsx` - For conditional class names
+- `tailwind-merge` - For merging Tailwind classes

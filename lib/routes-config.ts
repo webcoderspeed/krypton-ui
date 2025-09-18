@@ -80,6 +80,10 @@ const v1_0_0_ROUTES: EachRoute[] = [
         "href": "/components/input"
       },
       {
+        "title": "Progress",
+        "href": "/components/progress"
+      },
+      {
         "title": "Select",
         "href": "/components/select"
       },

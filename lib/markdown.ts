@@ -97,6 +97,7 @@ import {
   CommandSeparator,
   CommandShortcut,
 } from "@/components/ui/command";
+import { Progress } from "@/components/ui/progress";
 import {
   ChartContainer,
   ChartTooltip,
@@ -293,6 +294,17 @@ import {
   MultipleSelectsForm,
   SearchableSelect,
 } from "@/components/playground/select";
+import {
+  ProgressDefault,
+  ProgressSizes,
+  ProgressAnimated,
+  ProgressColors,
+  FileUploadProgress,
+  SkillProgress,
+  ProjectProgress,
+  LoadingStates,
+  StepProgress,
+} from "@/components/playground/progress";
 
 const components = {
   LucideIcon,
@@ -526,6 +538,16 @@ const components = {
   CustomStyledSelect,
   MultipleSelectsForm,
   SearchableSelect,
+  Progress,
+  ProgressDefault,
+  ProgressSizes,
+  ProgressAnimated,
+  ProgressColors,
+  FileUploadProgress,
+  SkillProgress,
+  ProjectProgress,
+  LoadingStates,
+  StepProgress,
 };
 async function parseMdx<Frontmatter>(rawMdx: string) {
   return await compileMDX<Frontmatter>({
