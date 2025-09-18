@@ -97,6 +97,22 @@ import {
   CommandSeparator,
   CommandShortcut,
 } from "@/components/ui/command";
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuPortal,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { Progress } from "@/components/ui/progress";
 import {
   Popover,
@@ -401,6 +417,18 @@ import {
   PopoverNotificationSettings,
   PopoverQuickActions,
 } from "@/components/playground/popover";
+import {
+  DropdownMenuDefault,
+  DropdownMenuCheckboxes,
+  DropdownMenuRadioGroupDemo,
+  DropdownMenuSubDemo,
+  DropdownMenuUserProfile,
+  DropdownMenuActions,
+  DropdownMenuSettings,
+  DropdownMenuFileOperations,
+  DropdownMenuSortFilter,
+  DropdownMenuContext,
+} from "@/components/playground/dropdown-menu";
 
 const components = {
   LucideIcon,
@@ -722,6 +750,30 @@ const components = {
   PopoverShareMenu,
   PopoverNotificationSettings,
   PopoverQuickActions,
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuPortal,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+  DropdownMenuDefault,
+  DropdownMenuCheckboxes,
+  DropdownMenuRadioGroupDemo,
+  DropdownMenuSubDemo,
+  DropdownMenuUserProfile,
+  DropdownMenuActions,
+  DropdownMenuSettings,
+  DropdownMenuFileOperations,
+  DropdownMenuSortFilter,
+  DropdownMenuContext,
 };
 async function parseMdx<Frontmatter>(rawMdx: string) {
   return await compileMDX<Frontmatter>({
