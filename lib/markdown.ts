@@ -275,6 +275,24 @@ import {
   TabsDisabled,
   TabsCustomStyling,
 } from "@/components/playground/tabs";
+import {
+  SelectDefault,
+  SelectDisabled,
+  SelectGrouped,
+  SelectControlled,
+  SelectCountrySelector,
+  SelectUserRole,
+  SelectThemeSelector,
+  SelectProductFilter,
+  SelectTimezone,
+  SelectLanguage,
+  SelectWithForm,
+    SelectWithGroups,
+    SettingsPanel,
+    CustomStyledSelect,
+  MultipleSelectsForm,
+  SearchableSelect,
+} from "@/components/playground/select";
 
 const components = {
   LucideIcon,
@@ -492,8 +510,23 @@ const components = {
   TabsLoading,
   TabsDisabled,
   TabsCustomStyling,
+  SelectDefault,
+  SelectDisabled,
+  SelectGrouped,
+  SelectControlled,
+  SelectCountrySelector,
+  SelectUserRole,
+  SelectThemeSelector,
+  SelectProductFilter,
+  SelectTimezone,
+  SelectLanguage,
+  SelectWithForm,
+ SelectWithGroups,
+  SettingsPanel,
+  CustomStyledSelect,
+  MultipleSelectsForm,
+  SearchableSelect,
 };
-
 async function parseMdx<Frontmatter>(rawMdx: string) {
   return await compileMDX<Frontmatter>({
     source: rawMdx,
