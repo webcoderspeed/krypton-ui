@@ -84,6 +84,10 @@ const v1_0_0_ROUTES: EachRoute[] = [
         "href": "/components/dropdown-menu"
       },
       {
+        "title": "Form",
+        "href": "/components/form"
+      },
+      {
         "title": "Hover Card",
         "href": "/components/hover-card"
       },
