@@ -330,6 +330,24 @@ import {
   SwitchDashboardWidgets,
   SwitchAccessibility,
 } from "@/components/playground/switch";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import {
+  TooltipDefault,
+  TooltipPositions,
+  TooltipDelays,
+  TooltipDisabled,
+  TooltipIconButtons,
+  TooltipFormHelp,
+  TooltipStatusIndicators,
+  TooltipNavigationMenu,
+  TooltipDataVisualization,
+  TooltipAccessibility,
+} from "@/components/playground/tooltip";
 
 const components = {
   LucideIcon,
@@ -594,6 +612,20 @@ const components = {
   SwitchDeviceSettings,
   SwitchDashboardWidgets,
   SwitchAccessibility,
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+  TooltipDefault,
+  TooltipPositions,
+  TooltipDelays,
+  TooltipDisabled,
+  TooltipIconButtons,
+  TooltipFormHelp,
+  TooltipStatusIndicators,
+  TooltipNavigationMenu,
+  TooltipDataVisualization,
+  TooltipAccessibility,
 };
 async function parseMdx<Frontmatter>(rawMdx: string) {
   return await compileMDX<Frontmatter>({

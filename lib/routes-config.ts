@@ -98,6 +98,10 @@ const v1_0_0_ROUTES: EachRoute[] = [
       {
         "title": "Tabs",
         "href": "/components/tabs"
+      },
+      {
+        "title": "Tooltip",
+        "href": "/components/tooltip"
       }
     ]
   },

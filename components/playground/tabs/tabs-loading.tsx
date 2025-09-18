@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Button } from "@/components/ui/button"
@@ -10,7 +10,7 @@ export default function TabsLoading() {
   const [loading, setLoading] = useState({ tab1: false, tab2: false, tab3: false })
   const [data, setData] = useState({ tab1: null, tab2: null, tab3: null })
 
-  const loadData = (tab: keyof typeof loading) => {
+  const loadData = useCallback((tab: keyof typeof loading) => {
     setLoading(prev => ({ ...prev, [tab]: true }))
     
     // Simulate API call
@@ -21,12 +21,11 @@ export default function TabsLoading() {
       }))
       setLoading(prev => ({ ...prev, [tab]: false }))
     }, 2000)
-  }
+  },[])
 
   useEffect(() => {
-    // Load initial data for first tab
     loadData('tab1')
-  }, [])
+  }, [loadData])
 
   return (
     <Tabs defaultValue="tab1" className="w-[500px]">

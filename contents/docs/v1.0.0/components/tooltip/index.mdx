@@ -1,0 +1,1302 @@
+---
+title: Tooltip
+description: A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.
+component: true
+---
+
+## Import
+
+<CodePreview code="import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'" language="tsx" />
+
+## Usage
+
+### Default
+
+A basic tooltip with simple text content.
+
+<CodePreview 
+  code={`import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
+import { Button } from "@/components/ui/button"
+
+export default function TooltipDefault() {
+  return (
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button variant="outline">Hover me</Button>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>Add to library</p>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
+  )
+}`} 
+  language="tsx" 
+  preview={<TooltipDefault />} 
+/>
+
+### Positions
+
+Control tooltip positioning with the `side` prop.
+
+<CodePreview 
+  code={`import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
+import { Button } from "@/components/ui/button"
+
+export default function TooltipPositions() {
+  return (
+    <TooltipProvider>
+      <div className="flex flex-wrap gap-4 justify-center">
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button variant="outline">Top</Button>
+          </TooltipTrigger>
+          <TooltipContent side="top">
+            <p>Tooltip on top</p>
+          </TooltipContent>
+        </Tooltip>
+
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button variant="outline">Left</Button>
+          </TooltipTrigger>
+          <TooltipContent side="left">
+            <p>Tooltip on left</p>
+          </TooltipContent>
+        </Tooltip>
+
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button variant="outline">Right</Button>
+          </TooltipTrigger>
+          <TooltipContent side="right">
+            <p>Tooltip on right</p>
+          </TooltipContent>
+        </Tooltip>
+
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button variant="outline">Bottom</Button>
+          </TooltipTrigger>
+          <TooltipContent side="bottom">
+            <p>Tooltip on bottom</p>
+          </TooltipContent>
+        </Tooltip>
+      </div>
+    </TooltipProvider>
+  )
+}`} 
+  language="tsx" 
+  preview={<TooltipPositions />} 
+/>
+
+### Delays
+
+Configure tooltip delays for better user experience.
+
+<CodePreview 
+  code={`import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
+import { Button } from "@/components/ui/button"
+
+export default function TooltipDelays() {
+  return (
+    <div className="flex flex-wrap gap-4 justify-center">
+      <TooltipProvider delayDuration={0}>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button variant="outline">No Delay</Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Appears immediately</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+
+      <TooltipProvider delayDuration={500}>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button variant="outline">500ms Delay</Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Appears after 500ms</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+
+      <TooltipProvider delayDuration={1000}>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button variant="outline">1000ms Delay</Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Appears after 1 second</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<TooltipDelays />} 
+/>
+
+### Disabled States
+
+Handle disabled elements with tooltips.
+
+<CodePreview 
+  code={`import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
+import { Button } from "@/components/ui/button"
+
+export default function TooltipDisabled() {
+  return (
+    <TooltipProvider>
+      <div className="flex flex-wrap gap-4 justify-center">
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button>Enabled Button</Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>This button is enabled</p>
+          </TooltipContent>
+        </Tooltip>
+
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <span tabIndex={0}>
+              <Button disabled>Disabled with Tooltip</Button>
+            </span>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>This button is disabled but tooltip still works</p>
+          </TooltipContent>
+        </Tooltip>
+
+        <Button disabled>Disabled without Tooltip</Button>
+      </div>
+    </TooltipProvider>
+  )
+}`} 
+  language="tsx" 
+  preview={<TooltipDisabled />} 
+/>
+
+## Real-World Examples
+
+### Icon Buttons with Tooltips
+
+Perfect for icon-only buttons that need context.
+
+<CodePreview 
+  code={`import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
+import { Button } from "@/components/ui/button"
+import { 
+  Heart, 
+  Share2, 
+  Bookmark, 
+  MessageCircle,
+  MoreHorizontal,
+  ThumbsUp
+} from "lucide-react"
+
+export default function TooltipIconButtons() {
+  return (
+    <TooltipProvider>
+      <div className="space-y-6">
+        <div className="flex items-center gap-2">
+          <h3 className="text-sm font-medium">Social Actions</h3>
+          <div className="flex gap-1">
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="ghost" size="sm">
+                  <Heart className="h-4 w-4" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Like this post</p>
+              </TooltipContent>
+            </Tooltip>
+
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="ghost" size="sm">
+                  <MessageCircle className="h-4 w-4" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Add a comment</p>
+              </TooltipContent>
+            </Tooltip>
+
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="ghost" size="sm">
+                  <Share2 className="h-4 w-4" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Share this post</p>
+              </TooltipContent>
+            </Tooltip>
+
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="ghost" size="sm">
+                  <Bookmark className="h-4 w-4" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Save for later</p>
+              </TooltipContent>
+            </Tooltip>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <h3 className="text-sm font-medium">Content Actions</h3>
+          <div className="flex gap-1">
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="ghost" size="sm">
+                  <ThumbsUp className="h-4 w-4" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Upvote content</p>
+              </TooltipContent>
+            </Tooltip>
+
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="ghost" size="sm">
+                  <MoreHorizontal className="h-4 w-4" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>More options</p>
+              </TooltipContent>
+            </Tooltip>
+          </div>
+        </div>
+      </div>
+    </TooltipProvider>
+  )
+}`} 
+  language="tsx" 
+  preview={<TooltipIconButtons />} 
+/>
+
+### Form Help Tooltips
+
+Provide contextual help for form fields.
+
+<CodePreview 
+  code={`import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Button } from "@/components/ui/button"
+import { HelpCircle, Info, AlertCircle } from "lucide-react"
+
+export default function TooltipFormHelp() {
+  return (
+    <TooltipProvider>
+      <div className="space-y-6 max-w-md">
+        <div className="space-y-2">
+          <div className="flex items-center gap-2">
+            <Label htmlFor="username">Username</Label>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <HelpCircle className="h-4 w-4 text-muted-foreground cursor-help" />
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Must be 3-20 characters long and contain only letters, numbers, and underscores</p>
+              </TooltipContent>
+            </Tooltip>
+          </div>
+          <Input id="username" placeholder="Enter username" />
+        </div>
+
+        <div className="space-y-2">
+          <div className="flex items-center gap-2">
+            <Label htmlFor="password">Password</Label>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Info className="h-4 w-4 text-blue-500 cursor-help" />
+              </TooltipTrigger>
+              <TooltipContent>
+                <div className="space-y-1">
+                  <p className="font-medium">Password requirements:</p>
+                  <ul className="text-xs space-y-1">
+                    <li>• At least 8 characters</li>
+                    <li>• One uppercase letter</li>
+                    <li>• One lowercase letter</li>
+                    <li>• One number</li>
+                    <li>• One special character</li>
+                  </ul>
+                </div>
+              </TooltipContent>
+            </Tooltip>
+          </div>
+          <Input id="password" type="password" placeholder="Enter password" />
+        </div>
+
+        <div className="space-y-2">
+          <div className="flex items-center gap-2">
+            <Label htmlFor="email">Email</Label>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <HelpCircle className="h-4 w-4 text-muted-foreground cursor-help" />
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>We&apos;ll use this email for account verification and notifications</p>
+              </TooltipContent>
+            </Tooltip>
+          </div>
+          <Input id="email" type="email" placeholder="Enter email" />
+        </div>
+
+        <div className="space-y-2">
+          <div className="flex items-center gap-2">
+            <Label htmlFor="api-key">API Key</Label>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <AlertCircle className="h-4 w-4 text-amber-500 cursor-help" />
+              </TooltipTrigger>
+              <TooltipContent>
+                <div className="space-y-1">
+                  <p className="font-medium">Keep your API key secure!</p>
+                  <p className="text-xs">Don&apos;t share it publicly or commit it to version control</p>
+                </div>
+              </TooltipContent>
+            </Tooltip>
+          </div>
+          <Input id="api-key" type="password" placeholder="Enter API key" />
+        </div>
+
+        <Button className="w-full">Create Account</Button>
+      </div>
+    </TooltipProvider>
+  )
+}`} 
+  language="tsx" 
+  preview={<TooltipFormHelp />} 
+/>
+
+### Status Indicators
+
+Show detailed status information with tooltips.
+
+<CodePreview 
+  code={`import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
+import { Badge } from "@/components/ui/badge"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { 
+  CheckCircle, 
+  XCircle, 
+  AlertTriangle, 
+  Clock,
+  Activity,
+  Users,
+  Server
+} from "lucide-react"
+
+export default function TooltipStatusIndicators() {
+  return (
+    <TooltipProvider>
+      <div className="space-y-6">
+        <Card>
+          <CardHeader>
+            <CardTitle>System Status Dashboard</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="grid grid-cols-2 gap-4">
+              <div className="flex items-center justify-between">
+                <span className="text-sm">API Service</span>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <div className="flex items-center gap-2 cursor-help">
+                      <CheckCircle className="h-4 w-4 text-green-500" />
+                      <Badge variant="secondary">Online</Badge>
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <div className="space-y-1">
+                      <p className="font-medium">API Service Status</p>
+                      <p className="text-xs">✅ All endpoints responding</p>
+                      <p className="text-xs">⚡ Avg response time: 120ms</p>
+                      <p className="text-xs">📊 Uptime: 99.9%</p>
+                    </div>
+                  </TooltipContent>
+                </Tooltip>
+              </div>
+
+              <div className="flex items-center justify-between">
+                <span className="text-sm">Database</span>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <div className="flex items-center gap-2 cursor-help">
+                      <AlertTriangle className="h-4 w-4 text-yellow-500" />
+                      <Badge variant="outline">Warning</Badge>
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <div className="space-y-1">
+                      <p className="font-medium">Database Status</p>
+                      <p className="text-xs">⚠️ High CPU usage detected</p>
+                      <p className="text-xs">💾 Storage: 85% full</p>
+                      <p className="text-xs">🔄 Auto-scaling in progress</p>
+                    </div>
+                  </TooltipContent>
+                </Tooltip>
+              </div>
+
+              <div className="flex items-center justify-between">
+                <span className="text-sm">CDN</span>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <div className="flex items-center gap-2 cursor-help">
+                      <XCircle className="h-4 w-4 text-red-500" />
+                      <Badge variant="destructive">Offline</Badge>
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <div className="space-y-1">
+                      <p className="font-medium">CDN Status</p>
+                      <p className="text-xs">❌ Service unavailable</p>
+                      <p className="text-xs">🔧 Maintenance in progress</p>
+                      <p className="text-xs">⏱️ ETA: 30 minutes</p>
+                    </div>
+                  </TooltipContent>
+                </Tooltip>
+              </div>
+
+              <div className="flex items-center justify-between">
+                <span className="text-sm">Queue</span>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <div className="flex items-center gap-2 cursor-help">
+                      <Clock className="h-4 w-4 text-blue-500" />
+                      <Badge>Processing</Badge>
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <div className="space-y-1">
+                      <p className="font-medium">Queue Status</p>
+                      <p className="text-xs">📋 1,247 jobs pending</p>
+                      <p className="text-xs">⚡ Processing rate: 50/min</p>
+                      <p className="text-xs">⏳ Est. completion: 25 min</p>
+                    </div>
+                  </TooltipContent>
+                </Tooltip>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <div className="flex gap-4">
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <div className="flex items-center gap-2 p-3 border rounded-lg cursor-help">
+                <Activity className="h-5 w-5 text-green-500" />
+                <div>
+                  <p className="text-sm font-medium">Active Users</p>
+                  <p className="text-2xl font-bold">1,234</p>
+                </div>
+              </div>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Users active in the last 5 minutes</p>
+            </TooltipContent>
+          </Tooltip>
+
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <div className="flex items-center gap-2 p-3 border rounded-lg cursor-help">
+                <Users className="h-5 w-5 text-blue-500" />
+                <div>
+                  <p className="text-sm font-medium">Total Users</p>
+                  <p className="text-2xl font-bold">45.2K</p>
+                </div>
+              </div>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Total registered users</p>
+            </TooltipContent>
+          </Tooltip>
+
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <div className="flex items-center gap-2 p-3 border rounded-lg cursor-help">
+                <Server className="h-5 w-5 text-purple-500" />
+                <div>
+                  <p className="text-sm font-medium">Server Load</p>
+                  <p className="text-2xl font-bold">67%</p>
+                </div>
+              </div>
+            </TooltipTrigger>
+            <TooltipContent>
+              <div className="space-y-1">
+                <p>Current server utilization</p>
+                <p className="text-xs">CPU: 45% | Memory: 67% | Disk: 23%</p>
+              </div>
+            </TooltipContent>
+          </Tooltip>
+        </div>
+      </div>
+    </TooltipProvider>
+  )
+}`} 
+  language="tsx" 
+  preview={<TooltipStatusIndicators />} 
+/>
+
+### Navigation Menu Tooltips
+
+Enhance navigation with helpful tooltips.
+
+<CodePreview 
+  code={`import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
+import { Button } from "@/components/ui/button"
+import { 
+  Home, 
+  Search, 
+  Bell, 
+  Mail, 
+  User,
+  Settings,
+  HelpCircle,
+  LogOut,
+  BarChart3,
+  FileText,
+  Calendar,
+  Folder
+} from "lucide-react"
+
+export default function TooltipNavigationMenu() {
+  return (
+    <TooltipProvider>
+      <div className="space-y-8">
+        <div className="flex flex-col gap-2 w-16 p-2 border rounded-lg">
+          <h3 className="text-xs font-medium text-center mb-2">Sidebar</h3>
+          
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button variant="ghost" size="sm" className="w-full justify-center">
+                <Home className="h-4 w-4" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent side="right">
+              <p>Home Dashboard</p>
+            </TooltipContent>
+          </Tooltip>
+
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button variant="ghost" size="sm" className="w-full justify-center">
+                <BarChart3 className="h-4 w-4" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent side="right">
+              <p>Analytics & Reports</p>
+            </TooltipContent>
+          </Tooltip>
+
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button variant="ghost" size="sm" className="w-full justify-center">
+                <FileText className="h-4 w-4" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent side="right">
+              <p>Documents</p>
+            </TooltipContent>
+          </Tooltip>
+
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button variant="ghost" size="sm" className="w-full justify-center">
+                <Calendar className="h-4 w-4" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent side="right">
+              <p>Calendar & Events</p>
+            </TooltipContent>
+          </Tooltip>
+
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button variant="ghost" size="sm" className="w-full justify-center">
+                <Folder className="h-4 w-4" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent side="right">
+              <p>File Manager</p>
+            </TooltipContent>
+          </Tooltip>
+
+          <div className="border-t my-2" />
+
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button variant="ghost" size="sm" className="w-full justify-center">
+                <Settings className="h-4 w-4" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent side="right">
+              <p>Settings & Preferences</p>
+            </TooltipContent>
+          </Tooltip>
+
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button variant="ghost" size="sm" className="w-full justify-center">
+                <HelpCircle className="h-4 w-4" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent side="right">
+              <p>Help & Support</p>
+            </TooltipContent>
+          </Tooltip>
+
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button variant="ghost" size="sm" className="w-full justify-center">
+                <LogOut className="h-4 w-4" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent side="right">
+              <p>Sign Out</p>
+            </TooltipContent>
+          </Tooltip>
+        </div>
+
+        <div className="flex gap-2 p-2 border rounded-lg">
+          <h3 className="text-xs font-medium mr-4">Top Navigation</h3>
+          
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button variant="ghost" size="sm">
+                <Search className="h-4 w-4" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <div className="space-y-1">
+                <p>Search</p>
+                <p className="text-xs text-muted-foreground">Press Ctrl+K to open</p>
+              </div>
+            </TooltipContent>
+          </Tooltip>
+
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button variant="ghost" size="sm" className="relative">
+                <Bell className="h-4 w-4" />
+                <span className="absolute -top-1 -right-1 h-3 w-3 bg-red-500 rounded-full text-xs"></span>
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <div className="space-y-1">
+                <p>Notifications</p>
+                <p className="text-xs text-muted-foreground">3 unread notifications</p>
+              </div>
+            </TooltipContent>
+          </Tooltip>
+
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button variant="ghost" size="sm" className="relative">
+                <Mail className="h-4 w-4" />
+                <span className="absolute -top-1 -right-1 h-3 w-3 bg-blue-500 rounded-full text-xs"></span>
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <div className="space-y-1">
+                <p>Messages</p>
+                <p className="text-xs text-muted-foreground">5 new messages</p>
+              </div>
+            </TooltipContent>
+          </Tooltip>
+
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button variant="ghost" size="sm">
+                <User className="h-4 w-4" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <div className="space-y-1">
+                <p>Profile Menu</p>
+                <p className="text-xs text-muted-foreground">john.doe@example.com</p>
+              </div>
+            </TooltipContent>
+          </Tooltip>
+        </div>
+      </div>
+    </TooltipProvider>
+  )
+}`} 
+  language="tsx" 
+  preview={<TooltipNavigationMenu />} 
+/>
+
+### Data Visualization Tooltips
+
+Show detailed information for charts and data points.
+
+<CodePreview 
+  code={`import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
+import { Progress } from "@/components/ui/progress"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { TrendingUp, TrendingDown, Minus } from "lucide-react"
+
+export default function TooltipDataVisualization() {
+  const chartData = [
+    { month: "Jan", value: 65, change: 12 },
+    { month: "Feb", value: 78, change: 8 },
+    { month: "Mar", value: 52, change: -15 },
+    { month: "Apr", value: 91, change: 25 },
+    { month: "May", value: 87, change: -2 },
+    { month: "Jun", value: 95, change: 18 },
+  ]
+
+  const metrics = [
+    { label: "Conversion Rate", value: 3.2, target: 4.0, trend: "up" },
+    { label: "Bounce Rate", value: 42.1, target: 35.0, trend: "down" },
+    { label: "Session Duration", value: 2.8, target: 3.0, trend: "neutral" },
+  ]
+
+  return (
+    <TooltipProvider>
+      <div className="space-y-6">
+        <Card>
+          <CardHeader>
+            <CardTitle>Monthly Revenue</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex items-end gap-2 h-32">
+              {chartData.map((data, index) => (
+                <Tooltip key={data.month}>
+                  <TooltipTrigger asChild>
+                    <div className="flex flex-col items-center gap-1 cursor-help">
+                      <div 
+                        className="w-8 bg-blue-500 rounded-t hover:bg-blue-600 transition-colors"
+                        style={{ height: \`\${data.value}%\` }}
+                      />
+                      <span className="text-xs text-muted-foreground">{data.month}</span>
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <div className="space-y-1">
+                      <p className="font-medium">{data.month} 2024</p>
+                      <p className="text-sm">Revenue: $\{data.value}K</p>
+                      <p className="text-sm flex items-center gap-1">
+                        Change: 
+                        {data.change > 0 ? (
+                          <span className="text-green-500 flex items-center">
+                            <TrendingUp className="h-3 w-3" />
+                            +{data.change}%
+                          </span>
+                        ) : data.change < 0 ? (
+                          <span className="text-red-500 flex items-center">
+                            <TrendingDown className="h-3 w-3" />
+                            {data.change}%
+                          </span>
+                        ) : (
+                          <span className="text-gray-500 flex items-center">
+                            <Minus className="h-3 w-3" />
+                            {data.change}%
+                          </span>
+                        )}
+                      </p>
+                    </div>
+                  </TooltipContent>
+                </Tooltip>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {metrics.map((metric, index) => (
+            <Card key={index}>
+              <CardContent className="p-4">
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <div className="space-y-2 cursor-help">
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium">{metric.label}</span>
+                        {metric.trend === "up" && <TrendingUp className="h-4 w-4 text-green-500" />}
+                        {metric.trend === "down" && <TrendingDown className="h-4 w-4 text-red-500" />}
+                        {metric.trend === "neutral" && <Minus className="h-4 w-4 text-gray-500" />}
+                      </div>
+                      <div className="space-y-1">
+                        <div className="flex justify-between text-xs">
+                          <span>Current: {metric.value}%</span>
+                          <span>Target: {metric.target}%</span>
+                        </div>
+                        <Progress value={(metric.value / metric.target) * 100} className="h-2" />
+                      </div>
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <div className="space-y-1">
+                      <p className="font-medium">{metric.label} Details</p>
+                      <p className="text-xs">Current: {metric.value}%</p>
+                      <p className="text-xs">Target: {metric.target}%</p>
+                      <p className="text-xs">
+                        Progress: {Math.round((metric.value / metric.target) * 100)}% of target
+                      </p>
+                      <p className="text-xs">
+                        {metric.value >= metric.target 
+                          ? "✅ Target achieved!" 
+                          : \`📈 \${(metric.target - metric.value).toFixed(1)}% to go\`
+                        }
+                      </p>
+                    </div>
+                  </TooltipContent>
+                </Tooltip>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Interactive Data Points</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-4 gap-4">
+              {[
+                { label: "Users", value: "12.5K", change: "+8.2%", color: "bg-blue-500" },
+                { label: "Sessions", value: "45.2K", change: "+12.1%", color: "bg-green-500" },
+                { label: "Page Views", value: "128K", change: "-2.3%", color: "bg-yellow-500" },
+                { label: "Revenue", value: "$89.2K", change: "+15.7%", color: "bg-purple-500" },
+              ].map((item, index) => (
+                <Tooltip key={index}>
+                  <TooltipTrigger asChild>
+                    <div className="p-4 border rounded-lg cursor-help hover:bg-muted/50 transition-colors">
+                      <div className={\`w-3 h-3 rounded-full \${item.color} mb-2\`} />
+                      <p className="text-2xl font-bold">{item.value}</p>
+                      <p className="text-sm text-muted-foreground">{item.label}</p>
+                      <p className={\`text-xs \${item.change.startsWith('+') ? 'text-green-500' : 'text-red-500'}\`}>
+                        {item.change}
+                      </p>
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <div className="space-y-1">
+                      <p className="font-medium">{item.label} Analytics</p>
+                      <p className="text-xs">Current period: {item.value}</p>
+                      <p className="text-xs">Change from last period: {item.change}</p>
+                      <p className="text-xs">Data updated: 5 minutes ago</p>
+                    </div>
+                  </TooltipContent>
+                </Tooltip>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </TooltipProvider>
+  )
+}`} 
+  language="tsx" 
+  preview={<TooltipDataVisualization />} 
+/>
+
+### Accessibility Features
+
+Comprehensive accessibility support for tooltips.
+
+<CodePreview 
+  code={`"use client"
+
+import { useState } from "react"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
+import { Button } from "@/components/ui/button"
+import { Switch } from "@/components/ui/switch"
+import { Label } from "@/components/ui/label"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { 
+  Keyboard, 
+  MousePointer, 
+  Eye, 
+  Volume2,
+  Settings,
+  Accessibility
+} from "lucide-react"
+
+export default function TooltipAccessibility() {
+  const [keyboardNavigation, setKeyboardNavigation] = useState(true)
+  const [screenReaderMode, setScreenReaderMode] = useState(false)
+  const [highContrast, setHighContrast] = useState(false)
+
+  return (
+    <TooltipProvider>
+      <div className="space-y-6">
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Accessibility className="h-5 w-5" />
+              Accessibility Controls
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Label htmlFor="keyboard-nav">Keyboard Navigation</Label>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Keyboard className="h-4 w-4 text-muted-foreground cursor-help" />
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <div className="space-y-1">
+                      <p>Enable keyboard navigation for tooltips</p>
+                      <p className="text-xs">Use Tab to focus, Enter/Space to activate</p>
+                    </div>
+                  </TooltipContent>
+                </Tooltip>
+              </div>
+              <Switch 
+                id="keyboard-nav"
+                checked={keyboardNavigation}
+                onCheckedChange={setKeyboardNavigation}
+              />
+            </div>
+
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Label htmlFor="screen-reader">Screen Reader Mode</Label>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Volume2 className="h-4 w-4 text-muted-foreground cursor-help" />
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <div className="space-y-1">
+                      <p>Optimize tooltips for screen readers</p>
+                      <p className="text-xs">Uses aria-describedby and live regions</p>
+                    </div>
+                  </TooltipContent>
+                </Tooltip>
+              </div>
+              <Switch 
+                id="screen-reader"
+                checked={screenReaderMode}
+                onCheckedChange={setScreenReaderMode}
+              />
+            </div>
+
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Label htmlFor="high-contrast">High Contrast</Label>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Eye className="h-4 w-4 text-muted-foreground cursor-help" />
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <div className="space-y-1">
+                      <p>Increase contrast for better visibility</p>
+                      <p className="text-xs">Helpful for users with visual impairments</p>
+                    </div>
+                  </TooltipContent>
+                </Tooltip>
+              </div>
+              <Switch 
+                id="high-contrast"
+                checked={highContrast}
+                onCheckedChange={setHighContrast}
+              />
+            </div>
+          </CardContent>
+        </Card>
+
+        <div className="space-y-4">
+          <h3 className="text-lg font-medium">Keyboard Navigation Demo</h3>
+          <div className="flex gap-4">
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button 
+                  variant="outline"
+                  className="focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                >
+                  <MousePointer className="h-4 w-4 mr-2" />
+                  Hover or Focus
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <div className="space-y-1">
+                  <p>This tooltip supports both mouse and keyboard</p>
+                  <p className="text-xs">Try tabbing to this button and pressing Enter</p>
+                </div>
+              </TooltipContent>
+            </Tooltip>
+
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button 
+                  variant="outline"
+                  className="focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+                  aria-describedby={screenReaderMode ? "settings-tooltip" : undefined}
+                >
+                  <Settings className="h-4 w-4 mr-2" />
+                  Settings
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent 
+                id={screenReaderMode ? "settings-tooltip" : undefined}
+                className={highContrast ? "bg-black text-white border-white" : ""}
+              >
+                <div className="space-y-1">
+                  <p>Open application settings</p>
+                  <p className="text-xs">Keyboard shortcut: Ctrl+,</p>
+                  {screenReaderMode && (
+                    <p className="text-xs">Screen reader optimized</p>
+                  )}
+                </div>
+              </TooltipContent>
+            </Tooltip>
+
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <div 
+                  className="inline-flex items-center gap-2 px-3 py-2 border rounded-md cursor-help focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2"
+                  tabIndex={keyboardNavigation ? 0 : -1}
+                  role="button"
+                  aria-label="Custom focusable element with tooltip"
+                >
+                  <span className="text-sm">Custom Element</span>
+                </div>
+              </TooltipTrigger>
+              <TooltipContent className={highContrast ? "bg-black text-white border-white" : ""}>
+                <div className="space-y-1">
+                  <p>Custom focusable element</p>
+                  <p className="text-xs">Demonstrates ARIA compliance</p>
+                </div>
+              </TooltipContent>
+            </Tooltip>
+          </div>
+
+          <div className="text-sm text-muted-foreground space-y-1">
+            <p>💡 <strong>Accessibility Tips:</strong></p>
+            <ul className="list-disc list-inside space-y-1 ml-4">
+              <li>Use Tab key to navigate between focusable elements</li>
+              <li>Press Enter or Space to activate tooltips on focused elements</li>
+              <li>Tooltips automatically close when focus moves away</li>
+              <li>Screen readers will announce tooltip content</li>
+              <li>High contrast mode improves visibility</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </TooltipProvider>
+  )
+}`} 
+  language="tsx" 
+  preview={<TooltipAccessibility />} 
+/>
+
+## API Reference
+
+### TooltipProvider
+
+Provides context for all tooltip components. Wrap your app or component tree with this provider.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `delayDuration` | `number` | `700` | The duration from when the mouse enters a tooltip trigger until the tooltip opens (in milliseconds) |
+| `skipDelayDuration` | `number` | `300` | How much time a user has to enter another trigger without incurring a delay again (in milliseconds) |
+| `disableHoverableContent` | `boolean` | `false` | When true, trying to hover the content will result in the tooltip closing |
+| `children` | `ReactNode` | - | The content that can trigger tooltips |
+
+### Tooltip
+
+The root tooltip component that manages the tooltip state.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `open` | `boolean` | - | The controlled open state of the tooltip |
+| `defaultOpen` | `boolean` | `false` | The open state of the tooltip when it is initially rendered |
+| `onOpenChange` | `(open: boolean) => void` | - | Event handler called when the open state changes |
+| `delayDuration` | `number` | - | Override the duration given to the Provider to customize for this tooltip |
+| `disableHoverableContent` | `boolean` | - | Override the disableHoverableContent given to the Provider |
+
+### TooltipTrigger
+
+The element that triggers the tooltip. Must be a single focusable element.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `asChild` | `boolean` | `false` | Change the default rendered element for the one passed as a child |
+| `children` | `ReactNode` | - | The element that triggers the tooltip |
+
+### TooltipContent
+
+The component that contains the tooltip content.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `side` | `"top" \| "right" \| "bottom" \| "left"` | `"top"` | The preferred side of the trigger to render against |
+| `sideOffset` | `number` | `4` | The distance in pixels from the trigger |
+| `align` | `"start" \| "center" \| "end"` | `"center"` | The preferred alignment against the trigger |
+| `alignOffset` | `number` | `0` | An offset in pixels from the "start" or "end" alignment options |
+| `avoidCollisions` | `boolean` | `true` | When true, overrides the side and align preferences to prevent collisions |
+| `collisionBoundary` | `Element \| null \| Array<Element \| null>` | `[]` | The element used as the collision boundary |
+| `collisionPadding` | `number \| Partial<Record<Side, number>>` | `0` | The distance in pixels from the boundary edges where collision detection should occur |
+| `arrowPadding` | `number` | `0` | The padding between the arrow and the edges of the content |
+| `sticky` | `"partial" \| "always"` | `"partial"` | The sticky behavior on the align axis |
+| `hideWhenDetached` | `boolean` | `false` | Whether to hide the content when the trigger becomes fully occluded |
+| `className` | `string` | - | Additional CSS classes to apply |
+| `children` | `ReactNode` | - | The content of the tooltip |
+
+## Accessibility
+
+The Tooltip component follows WAI-ARIA guidelines and includes:
+
+### Keyboard Support
+
+| Key | Description |
+|-----|-------------|
+| `Tab` | Moves focus to the next focusable element |
+| `Shift + Tab` | Moves focus to the previous focusable element |
+| `Escape` | Closes the tooltip if it's open |
+
+### Screen Reader Support
+
+- Uses `aria-describedby` to associate tooltip content with trigger elements
+- Tooltip content is announced when the trigger receives focus
+- Supports both mouse and keyboard interactions
+- Content is properly exposed to assistive technologies
+
+### Focus Management
+
+- Tooltips appear on both hover and focus
+- Focus remains on the trigger element when tooltip is shown
+- Tooltips automatically close when focus moves away
+- Supports custom focusable elements with proper ARIA attributes
+
+## Best Practices
+
+1. **Keep content concise**: Tooltips should provide brief, helpful information
+2. **Use for non-essential information**: Don't put critical information only in tooltips
+3. **Ensure keyboard accessibility**: Always test with keyboard navigation
+4. **Consider mobile users**: Tooltips may not work well on touch devices
+5. **Provide adequate contrast**: Ensure tooltip content is readable
+6. **Use appropriate delays**: Don't make users wait too long for helpful information
+7. **Position thoughtfully**: Ensure tooltips don't cover important content
+8. **Test with screen readers**: Verify that tooltip content is properly announced
+
+## Examples in Context
+
+### Button with Tooltip
+
+```tsx
+<TooltipProvider>
+  <Tooltip>
+    <TooltipTrigger asChild>
+      <Button variant="outline" size="icon">
+        <Plus className="h-4 w-4" />
+      </Button>
+    </TooltipTrigger>
+    <TooltipContent>
+      <p>Add new item</p>
+    </TooltipContent>
+  </Tooltip>
+</TooltipProvider>
+```
+
+### Form Field Help
+
+```tsx
+<div className="flex items-center gap-2">
+  <Label htmlFor="email">Email</Label>
+  <TooltipProvider>
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <HelpCircle className="h-4 w-4 text-muted-foreground" />
+      </TooltipTrigger>
+      <TooltipContent>
+        <p>We'll never share your email with anyone else</p>
+      </TooltipContent>
+    </Tooltip>
+  </TooltipProvider>
+</div>
+```
+
+### Rich Content Tooltip
+
+```tsx
+<TooltipProvider>
+  <Tooltip>
+    <TooltipTrigger asChild>
+      <Button variant="ghost">User Status</Button>
+    </TooltipTrigger>
+    <TooltipContent>
+      <div className="space-y-1">
+        <p className="font-medium">John Doe</p>
+        <p className="text-xs text-muted-foreground">Online</p>
+        <p className="text-xs">Last seen: 2 minutes ago</p>
+      </div>
+    </TooltipContent>
+  </Tooltip>
+</TooltipProvider>
+```
+
+## Dependencies
+
+The Tooltip component depends on:
+
+- `@radix-ui/react-tooltip` - The underlying tooltip primitive
+- `class-variance-authority` - For variant management
+- `clsx` - For conditional class names
+- `tailwind-merge` - For merging Tailwind classes
