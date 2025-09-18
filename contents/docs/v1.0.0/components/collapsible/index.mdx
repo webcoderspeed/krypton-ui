@@ -1,0 +1,723 @@
+---
+title: Collapsible
+description: An interactive component which can be expanded/collapsed to show and hide content.
+---
+
+## Import
+
+## Usage
+
+```tsx
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible"
+```
+
+## Examples
+
+### Default
+
+A basic collapsible component with simple toggle functionality.
+
+<CodePreview 
+  code={`import { useState } from "react"
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible"
+import { Button } from "@/components/ui/button"
+import { ChevronDown } from "lucide-react"
+
+export default function CollapsibleDefault() {
+  const [isOpen, setIsOpen] = useState(false)
+
+  return (
+    <Collapsible open={isOpen} onOpenChange={setIsOpen} className="w-full space-y-2">
+      <div className="flex items-center justify-between space-x-4 px-4">
+        <h4 className="text-sm font-semibold">
+          @peduarte starred 3 repositories
+        </h4>
+        <CollapsibleTrigger asChild>
+          <Button variant="ghost" size="sm">
+            <ChevronDown className="h-4 w-4" />
+            <span className="sr-only">Toggle</span>
+          </Button>
+        </CollapsibleTrigger>
+      </div>
+      <div className="rounded-md border px-4 py-2 font-mono text-sm shadow-sm">
+        @radix-ui/primitives
+      </div>
+      <CollapsibleContent className="space-y-2">
+        <div className="rounded-md border px-4 py-2 font-mono text-sm shadow-sm">
+          @radix-ui/colors
+        </div>
+        <div className="rounded-md border px-4 py-2 font-mono text-sm shadow-sm">
+          @stitches/react
+        </div>
+      </CollapsibleContent>
+    </Collapsible>
+  )
+}`} 
+  language="tsx" 
+  preview={<CollapsibleDefault />} 
+/>
+
+### Controlled
+
+Control the collapsible state programmatically with external buttons.
+
+<CodePreview 
+  code={`"use client"
+
+import { useState } from "react"
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible"
+import { Button } from "@/components/ui/button"
+import { ChevronDown } from "lucide-react"
+
+export default function CollapsibleControlled() {
+  const [isOpen, setIsOpen] = useState(false)
+
+  return (
+    <div className="space-y-4">
+      <div className="flex gap-2">
+        <Button 
+          variant="outline" 
+          size="sm"
+          onClick={() => setIsOpen(true)}
+        >
+          Open
+        </Button>
+        <Button 
+          variant="outline" 
+          size="sm"
+          onClick={() => setIsOpen(false)}
+        >
+          Close
+        </Button>
+        <Button 
+          variant="outline" 
+          size="sm"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          Toggle
+        </Button>
+      </div>
+      
+      <Collapsible open={isOpen} onOpenChange={setIsOpen} className="w-full space-y-2">
+        <div className="flex items-center justify-between space-x-4 px-4">
+          <h4 className="text-sm font-semibold">
+            Controlled Collapsible (State: {isOpen ? 'Open' : 'Closed'})
+          </h4>
+          <CollapsibleTrigger asChild>
+            <Button variant="ghost" size="sm">
+              <ChevronDown className={\`h-4 w-4 transition-transform \${isOpen ? 'rotate-180' : ''}\`} />
+              <span className="sr-only">Toggle</span>
+            </Button>
+          </CollapsibleTrigger>
+        </div>
+        <div className="rounded-md border px-4 py-2 font-mono text-sm shadow-sm">
+          Always visible content
+        </div>
+        <CollapsibleContent className="space-y-2">
+          <div className="rounded-md border px-4 py-2 font-mono text-sm shadow-sm">
+            Hidden content 1
+          </div>
+          <div className="rounded-md border px-4 py-2 font-mono text-sm shadow-sm">
+            Hidden content 2
+          </div>
+          <div className="rounded-md border px-4 py-2 font-mono text-sm shadow-sm">
+            Hidden content 3
+          </div>
+        </CollapsibleContent>
+      </Collapsible>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<CollapsibleControlled />} 
+/>
+
+### Nested
+
+Create nested collapsible sections for hierarchical content organization.
+
+<CodePreview 
+  code={`"use client"
+
+import { useState } from "react"
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible"
+import { Button } from "@/components/ui/button"
+import { ChevronDown, Folder, File } from "lucide-react"
+
+export default function CollapsibleNested() {
+  const [openSections, setOpenSections] = useState<Record<string, boolean>>({})
+
+  const toggleSection = (section: string) => {
+    setOpenSections(prev => ({
+      ...prev,
+      [section]: !prev[section]
+    }))
+  }
+
+  return (
+    <div className="w-full space-y-2">
+      <Collapsible 
+        open={openSections.src} 
+        onOpenChange={() => toggleSection('src')} 
+        className="space-y-2"
+      >
+        <div className="flex items-center space-x-2 px-4">
+          <CollapsibleTrigger asChild>
+            <Button variant="ghost" size="sm" className="p-0 h-auto">
+              <ChevronDown className={\`h-4 w-4 transition-transform \${openSections.src ? 'rotate-180' : ''}\`} />
+              <Folder className="h-4 w-4 ml-1" />
+              <span className="text-sm font-medium ml-1">src</span>
+            </Button>
+          </CollapsibleTrigger>
+        </div>
+        <CollapsibleContent className="ml-6 space-y-2">
+          <Collapsible 
+            open={openSections.components} 
+            onOpenChange={() => toggleSection('components')} 
+            className="space-y-2"
+          >
+            <div className="flex items-center space-x-2 px-4">
+              <CollapsibleTrigger asChild>
+                <Button variant="ghost" size="sm" className="p-0 h-auto">
+                  <ChevronDown className={\`h-4 w-4 transition-transform \${openSections.components ? 'rotate-180' : ''}\`} />
+                  <Folder className="h-4 w-4 ml-1" />
+                  <span className="text-sm font-medium ml-1">components</span>
+                </Button>
+              </CollapsibleTrigger>
+            </div>
+            <CollapsibleContent className="ml-6 space-y-1">
+              <div className="flex items-center space-x-2 px-4 py-1">
+                <File className="h-4 w-4" />
+                <span className="text-sm">Button.tsx</span>
+              </div>
+              <div className="flex items-center space-x-2 px-4 py-1">
+                <File className="h-4 w-4" />
+                <span className="text-sm">Input.tsx</span>
+              </div>
+              <div className="flex items-center space-x-2 px-4 py-1">
+                <File className="h-4 w-4" />
+                <span className="text-sm">Card.tsx</span>
+              </div>
+            </CollapsibleContent>
+          </Collapsible>
+          
+          <div className="flex items-center space-x-2 px-4 py-1">
+            <File className="h-4 w-4" />
+            <span className="text-sm">App.tsx</span>
+          </div>
+          <div className="flex items-center space-x-2 px-4 py-1">
+            <File className="h-4 w-4" />
+            <span className="text-sm">index.tsx</span>
+          </div>
+        </CollapsibleContent>
+      </Collapsible>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<CollapsibleNested />} 
+/>
+
+## Real-World Examples
+
+### FAQ Section
+
+A comprehensive FAQ section with multiple questions and answers.
+
+<CodePreview 
+  code={`"use client"
+
+import { useState } from "react"
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { ChevronDown, HelpCircle } from "lucide-react"
+
+const faqs = [
+  {
+    id: 1,
+    question: "What is your return policy?",
+    answer: "We offer a 30-day return policy for all items. Items must be in original condition with tags attached. Return shipping is free for defective items, otherwise customer pays return shipping costs."
+  },
+  {
+    id: 2,
+    question: "How long does shipping take?",
+    answer: "Standard shipping takes 3-5 business days. Express shipping (1-2 business days) and overnight shipping options are also available at checkout for an additional fee."
+  },
+  {
+    id: 3,
+    question: "Do you ship internationally?",
+    answer: "Yes, we ship to over 50 countries worldwide. International shipping times vary by location but typically take 7-14 business days. Additional customs fees may apply."
+  },
+  {
+    id: 4,
+    question: "How can I track my order?",
+    answer: "Once your order ships, you'll receive a tracking number via email. You can also track your order by logging into your account and viewing your order history."
+  }
+]
+
+export default function CollapsibleFAQ() {
+  const [openItems, setOpenItems] = useState<Record<number, boolean>>({})
+
+  const toggleItem = (id: number) => {
+    setOpenItems(prev => ({
+      ...prev,
+      [id]: !prev[id]
+    }))
+  }
+
+  return (
+    <Card className="w-full max-w-2xl">
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2">
+          <HelpCircle className="h-5 w-5" />
+          Frequently Asked Questions
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        {faqs.map((faq) => (
+          <Collapsible 
+            key={faq.id}
+            open={openItems[faq.id]} 
+            onOpenChange={() => toggleItem(faq.id)}
+            className="border rounded-lg"
+          >
+            <CollapsibleTrigger asChild>
+              <Button 
+                variant="ghost" 
+                className="w-full justify-between p-4 h-auto text-left font-medium"
+              >
+                <span>{faq.question}</span>
+                <ChevronDown className={\`h-4 w-4 transition-transform \${openItems[faq.id] ? 'rotate-180' : ''}\`} />
+              </Button>
+            </CollapsibleTrigger>
+            <CollapsibleContent className="px-4 pb-4">
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                {faq.answer}
+              </p>
+            </CollapsibleContent>
+          </Collapsible>
+        ))}
+      </CardContent>
+    </Card>
+  )
+}`} 
+  language="tsx" 
+  preview={<CollapsibleFAQ />} 
+/>
+
+### Shopping Cart
+
+An interactive shopping cart with collapsible item details.
+
+<CodePreview 
+  code={`"use client"
+
+import { useState } from "react"
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible"
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+import { Separator } from "@/components/ui/separator"
+import { ShoppingCart, ChevronDown, Plus, Minus, Trash2 } from "lucide-react"
+
+export default function CollapsibleShoppingCart() {
+  const [isOpen, setIsOpen] = useState(false)
+  const [cartItems, setCartItems] = useState([
+    { id: 1, name: "Wireless Headphones", price: 99.99, quantity: 1, image: "/api/placeholder/60/60" },
+    { id: 2, name: "Smartphone Case", price: 24.99, quantity: 2, image: "/api/placeholder/60/60" },
+    { id: 3, name: "USB-C Cable", price: 12.99, quantity: 1, image: "/api/placeholder/60/60" }
+  ])
+
+  const updateQuantity = (id: number, change: number) => {
+    setCartItems(items => 
+      items.map(item => 
+        item.id === id 
+          ? { ...item, quantity: Math.max(0, item.quantity + change) }
+          : item
+      ).filter(item => item.quantity > 0)
+    )
+  }
+
+  const removeItem = (id: number) => {
+    setCartItems(items => items.filter(item => item.id !== id))
+  }
+
+  const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0)
+  const totalPrice = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0)
+
+  return (
+    <div className="w-full max-w-md">
+      <Collapsible open={isOpen} onOpenChange={setIsOpen}>
+        <CollapsibleTrigger asChild>
+          <Button variant="outline" className="w-full justify-between">
+            <div className="flex items-center gap-2">
+              <ShoppingCart className="h-4 w-4" />
+              <span>Shopping Cart</span>
+              <Badge variant="secondary">{totalItems}</Badge>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="font-semibold">\${totalPrice.toFixed(2)}</span>
+              <ChevronDown className={\`h-4 w-4 transition-transform \${isOpen ? 'rotate-180' : ''}\`} />
+            </div>
+          </Button>
+        </CollapsibleTrigger>
+        <CollapsibleContent className="mt-2 border rounded-lg p-4 space-y-4">
+          {cartItems.length === 0 ? (
+            <p className="text-center text-muted-foreground py-4">Your cart is empty</p>
+          ) : (
+            <>
+              {cartItems.map((item, index) => (
+                <div key={item.id}>
+                  <div className="flex items-center gap-3">
+                    <img 
+                      src={item.image} 
+                      alt={item.name} 
+                      className="w-12 h-12 rounded object-cover"
+                    />
+                    <div className="flex-1 min-w-0">
+                      <h4 className="font-medium text-sm truncate">{item.name}</h4>
+                      <p className="text-sm text-muted-foreground">\${item.price}</p>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        className="h-8 w-8 p-0"
+                        onClick={() => updateQuantity(item.id, -1)}
+                      >
+                        <Minus className="h-3 w-3" />
+                      </Button>
+                      <span className="w-8 text-center text-sm">{item.quantity}</span>
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        className="h-8 w-8 p-0"
+                        onClick={() => updateQuantity(item.id, 1)}
+                      >
+                        <Plus className="h-3 w-3" />
+                      </Button>
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        className="h-8 w-8 p-0 text-destructive"
+                        onClick={() => removeItem(item.id)}
+                      >
+                        <Trash2 className="h-3 w-3" />
+                      </Button>
+                    </div>
+                  </div>
+                  {index < cartItems.length - 1 && <Separator className="mt-4" />}
+                </div>
+              ))}
+              <Separator />
+              <div className="flex justify-between items-center font-semibold">
+                <span>Total ({totalItems} items)</span>
+                <span>\${totalPrice.toFixed(2)}</span>
+              </div>
+              <Button className="w-full">Proceed to Checkout</Button>
+            </>
+          )}
+        </CollapsibleContent>
+      </Collapsible>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<CollapsibleShoppingCart />} 
+/>
+
+### Notification Panel
+
+A notification center with collapsible notification groups.
+
+<CodePreview 
+  code={`"use client"
+
+import { useState } from "react"
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible"
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Bell, ChevronDown, Check, X, Mail, MessageSquare, AlertTriangle } from "lucide-react"
+
+export default function CollapsibleNotifications() {
+  const [isOpen, setIsOpen] = useState(false)
+  const [notifications, setNotifications] = useState([
+    {
+      id: 1,
+      type: "message",
+      title: "New message from John",
+      description: "Hey, are we still on for the meeting tomorrow?",
+      time: "2 min ago",
+      read: false,
+      icon: MessageSquare
+    },
+    {
+      id: 2,
+      type: "email",
+      title: "Weekly newsletter",
+      description: "Check out this week's top articles and updates",
+      time: "1 hour ago",
+      read: false,
+      icon: Mail
+    },
+    {
+      id: 3,
+      type: "alert",
+      title: "System maintenance",
+      description: "Scheduled maintenance will begin at 2 AM UTC",
+      time: "3 hours ago",
+      read: true,
+      icon: AlertTriangle
+    },
+    {
+      id: 4,
+      type: "message",
+      title: "Team update",
+      description: "Project milestone completed successfully",
+      time: "1 day ago",
+      read: true,
+      icon: MessageSquare
+    }
+  ])
+
+  const unreadCount = notifications.filter(n => !n.read).length
+
+  const markAsRead = (id: number) => {
+    setNotifications(prev => 
+      prev.map(notification => 
+        notification.id === id 
+          ? { ...notification, read: true }
+          : notification
+      )
+    )
+  }
+
+  const markAllAsRead = () => {
+    setNotifications(prev => 
+      prev.map(notification => ({ ...notification, read: true }))
+    )
+  }
+
+  const removeNotification = (id: number) => {
+    setNotifications(prev => prev.filter(n => n.id !== id))
+  }
+
+  return (
+    <div className="w-full max-w-md">
+      <Collapsible open={isOpen} onOpenChange={setIsOpen}>
+        <CollapsibleTrigger asChild>
+          <Button variant="outline" className="w-full justify-between">
+            <div className="flex items-center gap-2">
+              <Bell className="h-4 w-4" />
+              <span>Notifications</span>
+              {unreadCount > 0 && (
+                <Badge variant="destructive" className="h-5 min-w-5 text-xs">
+                  {unreadCount}
+                </Badge>
+              )}
+            </div>
+            <ChevronDown className={\`h-4 w-4 transition-transform \${isOpen ? 'rotate-180' : ''}\`} />
+          </Button>
+        </CollapsibleTrigger>
+        <CollapsibleContent className="mt-2">
+          <Card>
+            <CardHeader className="pb-3">
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-base">Recent Activity</CardTitle>
+                {unreadCount > 0 && (
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    onClick={markAllAsRead}
+                    className="text-xs"
+                  >
+                    Mark all read
+                  </Button>
+                )}
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              {notifications.length === 0 ? (
+                <p className="text-center text-muted-foreground py-4">No notifications</p>
+              ) : (
+                notifications.map((notification) => {
+                  const Icon = notification.icon
+                  return (
+                    <div 
+                      key={notification.id} 
+                      className={\`flex items-start gap-3 p-3 rounded-lg border \${!notification.read ? 'bg-muted/50' : ''}\`}
+                    >
+                      <Icon className={\`h-4 w-4 mt-0.5 \${!notification.read ? 'text-primary' : 'text-muted-foreground'}\`} />
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-start justify-between gap-2">
+                          <div className="flex-1">
+                            <h4 className={\`text-sm font-medium \${!notification.read ? 'font-semibold' : ''}\`}>
+                              {notification.title}
+                            </h4>
+                            <p className="text-xs text-muted-foreground mt-1">
+                              {notification.description}
+                            </p>
+                            <p className="text-xs text-muted-foreground mt-2">
+                              {notification.time}
+                            </p>
+                          </div>
+                          <div className="flex gap-1">
+                            {!notification.read && (
+                              <Button 
+                                variant="ghost" 
+                                size="sm" 
+                                className="h-6 w-6 p-0"
+                                onClick={() => markAsRead(notification.id)}
+                              >
+                                <Check className="h-3 w-3" />
+                              </Button>
+                            )}
+                            <Button 
+                              variant="ghost" 
+                              size="sm" 
+                              className="h-6 w-6 p-0 text-muted-foreground hover:text-destructive"
+                              onClick={() => removeNotification(notification.id)}
+                            >
+                              <X className="h-3 w-3" />
+                            </Button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )
+                })
+              )}
+            </CardContent>
+          </Card>
+        </CollapsibleContent>
+      </Collapsible>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<CollapsibleNotifications />} 
+/>
+
+## API Reference
+
+### Collapsible
+
+Built on top of [Radix Collapsible](https://www.radix-ui.com/docs/primitives/components/collapsible).
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `open` | `boolean` | - | The controlled open state of the collapsible. |
+| `defaultOpen` | `boolean` | `false` | The open state of the collapsible when it is initially rendered. |
+| `onOpenChange` | `(open: boolean) => void` | - | Event handler called when the open state changes. |
+| `disabled` | `boolean` | `false` | When `true`, prevents the user from interacting with the collapsible. |
+| `asChild` | `boolean` | `false` | Change the default rendered element for the one passed as a child. |
+
+### CollapsibleTrigger
+
+Extends `button` element props.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `asChild` | `boolean` | `false` | Change the default rendered element for the one passed as a child. |
+
+### CollapsibleContent
+
+Extends `div` element props.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `asChild` | `boolean` | `false` | Change the default rendered element for the one passed as a child. |
+| `forceMount` | `boolean` | - | Used to force mounting when more control is needed. |
+
+## Accessibility
+
+- Full keyboard navigation support
+- Follows WAI-ARIA design pattern for disclosure widgets
+- Screen reader friendly with proper ARIA attributes
+- Focus management and keyboard interaction
+- Supports both controlled and uncontrolled modes
+
+## Animation
+
+The collapsible component includes smooth animations for opening and closing content. The animation is handled automatically and respects user preferences for reduced motion.
+
+## Common Patterns
+
+### Multiple Collapsibles
+
+```tsx
+const [openSections, setOpenSections] = useState<Record<string, boolean>>({})
+
+const toggleSection = (section: string) => {
+  setOpenSections(prev => ({
+    ...prev,
+    [section]: !prev[section]
+  }))
+}
+
+// Use with multiple Collapsible components
+<Collapsible 
+  open={openSections.section1} 
+  onOpenChange={() => toggleSection('section1')}
+>
+  {/* Content */}
+</Collapsible>
+```
+
+### Accordion-like Behavior
+
+```tsx
+const [activeSection, setActiveSection] = useState<string | null>(null)
+
+const toggleSection = (section: string) => {
+  setActiveSection(prev => prev === section ? null : section)
+}
+
+// Only one section open at a time
+<Collapsible 
+  open={activeSection === 'section1'} 
+  onOpenChange={() => toggleSection('section1')}
+>
+  {/* Content */}
+</Collapsible>
+```
+
+### With Icons and Animations
+
+```tsx
+<CollapsibleTrigger asChild>
+  <Button variant="ghost">
+    <ChevronDown className={`h-4 w-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+    Toggle Content
+  </Button>
+</CollapsibleTrigger>
+```

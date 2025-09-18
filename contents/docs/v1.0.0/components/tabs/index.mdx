@@ -1,0 +1,840 @@
+---
+title: Tabs
+description: A set of layered sections of content—known as tab panels—that are displayed one at a time.
+component: true
+---
+
+## Import
+
+<CodePreview code="import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'" language="tsx" />
+
+## Usage
+
+### Default
+
+A basic tabs component with multiple panels.
+
+<CodePreview 
+  code={`import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+
+export default function TabsDefault() {
+  return (
+    <Tabs defaultValue="account" className="w-[400px]">
+      <TabsList className="grid w-full grid-cols-2">
+        <TabsTrigger value="account">Account</TabsTrigger>
+        <TabsTrigger value="password">Password</TabsTrigger>
+      </TabsList>
+      <TabsContent value="account">
+        <Card>
+          <CardHeader>
+            <CardTitle>Account</CardTitle>
+            <CardDescription>
+              Make changes to your account here. Click save when you're done.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-2">
+            <p>Account settings content goes here.</p>
+          </CardContent>
+        </Card>
+      </TabsContent>
+      <TabsContent value="password">
+        <Card>
+          <CardHeader>
+            <CardTitle>Password</CardTitle>
+            <CardDescription>
+              Change your password here. After saving, you'll be logged out.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-2">
+            <p>Password settings content goes here.</p>
+          </CardContent>
+        </Card>
+      </TabsContent>
+    </Tabs>
+  )
+}`} 
+  language="tsx" 
+  preview={<TabsDefault />} 
+/>
+
+### Disabled
+
+Tabs with disabled state that cannot be interacted with.
+
+<CodePreview 
+  code={`import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+
+export default function TabsDisabled() {
+  return (
+    <Tabs defaultValue="tab1" className="w-[400px]">
+      <TabsList className="grid w-full grid-cols-3">
+        <TabsTrigger value="tab1">Active</TabsTrigger>
+        <TabsTrigger value="tab2" disabled>Disabled</TabsTrigger>
+        <TabsTrigger value="tab3">Available</TabsTrigger>
+      </TabsList>
+      <TabsContent value="tab1">
+        <Card>
+          <CardHeader>
+            <CardTitle>Active Tab</CardTitle>
+            <CardDescription>
+              This tab is active and can be interacted with.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p>Content for the active tab.</p>
+          </CardContent>
+        </Card>
+      </TabsContent>
+      <TabsContent value="tab3">
+        <Card>
+          <CardHeader>
+            <CardTitle>Available Tab</CardTitle>
+            <CardDescription>
+              This tab is available for interaction.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p>Content for the available tab.</p>
+          </CardContent>
+        </Card>
+      </TabsContent>
+    </Tabs>
+  )
+}`} 
+  language="tsx" 
+  preview={<TabsDisabled />} 
+/>
+
+### With Icons
+
+Tabs enhanced with icons for better visual identification.
+
+<CodePreview 
+  code={`import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { User, Settings, Bell, Shield } from 'lucide-react'
+
+export default function TabsWithIcons() {
+  return (
+    <Tabs defaultValue="profile" className="w-[500px]">
+      <TabsList className="grid w-full grid-cols-4">
+        <TabsTrigger value="profile" className="flex items-center gap-2">
+          <User className="h-4 w-4" />
+          Profile
+        </TabsTrigger>
+        <TabsTrigger value="settings" className="flex items-center gap-2">
+          <Settings className="h-4 w-4" />
+          Settings
+        </TabsTrigger>
+        <TabsTrigger value="notifications" className="flex items-center gap-2">
+          <Bell className="h-4 w-4" />
+          Alerts
+        </TabsTrigger>
+        <TabsTrigger value="security" className="flex items-center gap-2">
+          <Shield className="h-4 w-4" />
+          Security
+        </TabsTrigger>
+      </TabsList>
+      
+      <TabsContent value="profile">
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <User className="h-5 w-5" />
+              Profile Information
+            </CardTitle>
+            <CardDescription>
+              Manage your personal information and preferences.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p>Profile settings and personal information go here.</p>
+          </CardContent>
+        </Card>
+      </TabsContent>
+      
+      <TabsContent value="settings">
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Settings className="h-5 w-5" />
+              Application Settings
+            </CardTitle>
+            <CardDescription>
+              Configure your application preferences.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p>Application settings and configurations go here.</p>
+          </CardContent>
+        </Card>
+      </TabsContent>
+      
+      <TabsContent value="notifications">
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Bell className="h-5 w-5" />
+              Notification Preferences
+            </CardTitle>
+            <CardDescription>
+              Manage how you receive notifications.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p>Notification settings and preferences go here.</p>
+          </CardContent>
+        </Card>
+      </TabsContent>
+      
+      <TabsContent value="security">
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Shield className="h-5 w-5" />
+              Security Settings
+            </CardTitle>
+            <CardDescription>
+              Manage your account security and privacy.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p>Security settings and privacy controls go here.</p>
+          </CardContent>
+        </Card>
+      </TabsContent>
+    </Tabs>
+  )
+}`} 
+  language="tsx" 
+  preview={<TabsWithIcons />} 
+/>
+
+### Form Integration
+
+Tabs integrated with form handling and validation across different sections.
+
+<CodePreview 
+  code={`import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Textarea } from '@/components/ui/textarea'
+import { Checkbox } from '@/components/ui/checkbox'
+import { useState } from 'react'
+
+export default function TabsWithForm() {
+  const [formData, setFormData] = useState({
+    personal: {
+      firstName: '',
+      lastName: '',
+      email: ''
+    },
+    address: {
+      street: '',
+      city: '',
+      zipCode: ''
+    },
+    preferences: {
+      newsletter: false,
+      notifications: true,
+      bio: ''
+    }
+  })
+  
+  const [activeTab, setActiveTab] = useState('personal')
+  const [errors, setErrors] = useState<Record<string, string>>({})
+
+  const handleInputChange = (section: string, field: string, value: string | boolean) => {
+    setFormData(prev => ({
+      ...prev,
+      [section]: {
+        ...prev[section as keyof typeof prev],
+        [field]: value
+      }
+    }))
+  }
+
+  const validateSection = (section: string) => {
+    const newErrors: Record<string, string> = {}
+    
+    if (section === 'personal') {
+      if (!formData.personal.firstName.trim()) {
+        newErrors.firstName = 'First name is required'
+      }
+      if (!formData.personal.email.trim()) {
+        newErrors.email = 'Email is required'
+      }
+    }
+    
+    setErrors(newErrors)
+    return Object.keys(newErrors).length === 0
+  }
+
+  const handleNext = () => {
+    if (validateSection(activeTab)) {
+      const tabs = ['personal', 'address', 'preferences']
+      const currentIndex = tabs.indexOf(activeTab)
+      if (currentIndex < tabs.length - 1) {
+        setActiveTab(tabs[currentIndex + 1])
+      }
+    }
+  }
+
+  return (
+    <Tabs value={activeTab} onValueChange={setActiveTab} className="w-[500px]">
+      <TabsList className="grid w-full grid-cols-3">
+        <TabsTrigger value="personal">Personal</TabsTrigger>
+        <TabsTrigger value="address">Address</TabsTrigger>
+        <TabsTrigger value="preferences">Preferences</TabsTrigger>
+      </TabsList>
+      
+      <TabsContent value="personal">
+        <Card>
+          <CardHeader>
+            <CardTitle>Personal Information</CardTitle>
+            <CardDescription>
+              Enter your personal details below.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="firstName">First Name *</Label>
+                <Input
+                  id="firstName"
+                  value={formData.personal.firstName}
+                  onChange={(e) => handleInputChange('personal', 'firstName', e.target.value)}
+                  className={errors.firstName ? 'border-red-500' : ''}
+                />
+                {errors.firstName && (
+                  <p className="text-sm text-red-500">{errors.firstName}</p>
+                )}
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="lastName">Last Name</Label>
+                <Input
+                  id="lastName"
+                  value={formData.personal.lastName}
+                  onChange={(e) => handleInputChange('personal', 'lastName', e.target.value)}
+                />
+              </div>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="email">Email *</Label>
+              <Input
+                id="email"
+                type="email"
+                value={formData.personal.email}
+                onChange={(e) => handleInputChange('personal', 'email', e.target.value)}
+                className={errors.email ? 'border-red-500' : ''}
+              />
+              {errors.email && (
+                <p className="text-sm text-red-500">{errors.email}</p>
+              )}
+            </div>
+            <Button onClick={handleNext} className="w-full">
+              Next: Address
+            </Button>
+          </CardContent>
+        </Card>
+      </TabsContent>
+      
+      <TabsContent value="address">
+        <Card>
+          <CardHeader>
+            <CardTitle>Address Information</CardTitle>
+            <CardDescription>
+              Enter your address details.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="street">Street Address</Label>
+              <Input
+                id="street"
+                value={formData.address.street}
+                onChange={(e) => handleInputChange('address', 'street', e.target.value)}
+              />
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="city">City</Label>
+                <Input
+                  id="city"
+                  value={formData.address.city}
+                  onChange={(e) => handleInputChange('address', 'city', e.target.value)}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="zipCode">ZIP Code</Label>
+                <Input
+                  id="zipCode"
+                  value={formData.address.zipCode}
+                  onChange={(e) => handleInputChange('address', 'zipCode', e.target.value)}
+                />
+              </div>
+            </div>
+            <Button onClick={handleNext} className="w-full">
+              Next: Preferences
+            </Button>
+          </CardContent>
+        </Card>
+      </TabsContent>
+      
+      <TabsContent value="preferences">
+        <Card>
+          <CardHeader>
+            <CardTitle>Preferences</CardTitle>
+            <CardDescription>
+              Set your preferences and complete the form.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="bio">Bio</Label>
+              <Textarea
+                id="bio"
+                placeholder="Tell us about yourself..."
+                value={formData.preferences.bio}
+                onChange={(e) => handleInputChange('preferences', 'bio', e.target.value)}
+              />
+            </div>
+            <Button className="w-full">
+              Complete Registration
+            </Button>
+          </CardContent>
+        </Card>
+      </TabsContent>
+    </Tabs>
+  )
+}`} 
+  language="tsx" 
+  preview={<TabsWithForm />} 
+/>
+
+### Vertical Orientation
+
+Tabs displayed in vertical layout for better space utilization.
+
+<CodePreview 
+  code={`import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+
+export default function TabsVertical() {
+  return (
+    <Tabs defaultValue="overview" orientation="vertical" className="w-[600px] flex">
+      <TabsList className="flex flex-col h-fit w-[200px]">
+        <TabsTrigger value="overview" className="w-full justify-start">
+          Overview
+        </TabsTrigger>
+        <TabsTrigger value="analytics" className="w-full justify-start">
+          Analytics
+        </TabsTrigger>
+        <TabsTrigger value="reports" className="w-full justify-start">
+          Reports
+        </TabsTrigger>
+        <TabsTrigger value="notifications" className="w-full justify-start">
+          Notifications
+        </TabsTrigger>
+      </TabsList>
+      
+      <div className="flex-1 ml-4">
+        <TabsContent value="overview">
+          <Card>
+            <CardHeader>
+              <CardTitle>Overview</CardTitle>
+              <CardDescription>
+                Get a quick overview of your dashboard metrics.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p>Dashboard overview content with key metrics and summaries.</p>
+            </CardContent>
+          </Card>
+        </TabsContent>
+        
+        <TabsContent value="analytics">
+          <Card>
+            <CardHeader>
+              <CardTitle>Analytics</CardTitle>
+              <CardDescription>
+                Detailed analytics and performance metrics.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p>Analytics charts, graphs, and detailed performance data.</p>
+            </CardContent>
+          </Card>
+        </TabsContent>
+        
+        <TabsContent value="reports">
+          <Card>
+            <CardHeader>
+              <CardTitle>Reports</CardTitle>
+              <CardDescription>
+                Generate and view detailed reports.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p>Report generation tools and historical data views.</p>
+            </CardContent>
+          </Card>
+        </TabsContent>
+        
+        <TabsContent value="notifications">
+          <Card>
+            <CardHeader>
+              <CardTitle>Notifications</CardTitle>
+              <CardDescription>
+                Manage your notification preferences.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p>Notification settings and message center.</p>
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </div>
+    </Tabs>
+  )
+}`} 
+  language="tsx" 
+  preview={<TabsVertical />} 
+/>
+
+### Controlled Tabs
+
+Tabs with controlled state management for advanced use cases.
+
+<CodePreview 
+  code={`import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { useState } from 'react'
+
+export default function TabsControlled() {
+  const [activeTab, setActiveTab] = useState('step1')
+  const [completedSteps, setCompletedSteps] = useState<string[]>([])
+
+  const handleStepComplete = (step: string) => {
+    if (!completedSteps.includes(step)) {
+      setCompletedSteps(prev => [...prev, step])
+    }
+    
+    // Auto-advance to next step
+    const steps = ['step1', 'step2', 'step3']
+    const currentIndex = steps.indexOf(step)
+    if (currentIndex < steps.length - 1) {
+      setActiveTab(steps[currentIndex + 1])
+    }
+  }
+
+  const isStepAccessible = (step: string) => {
+    const steps = ['step1', 'step2', 'step3']
+    const stepIndex = steps.indexOf(step)
+    const currentIndex = steps.indexOf(activeTab)
+    
+    return stepIndex <= currentIndex || completedSteps.includes(steps[stepIndex - 1])
+  }
+
+  return (
+    <Tabs value={activeTab} onValueChange={setActiveTab} className="w-[500px]">
+      <TabsList className="grid w-full grid-cols-3">
+        <TabsTrigger 
+          value="step1" 
+          disabled={!isStepAccessible('step1')}
+          className={completedSteps.includes('step1') ? 'bg-green-100' : ''}
+        >
+          Step 1 {completedSteps.includes('step1') && '✓'}
+        </TabsTrigger>
+        <TabsTrigger 
+          value="step2" 
+          disabled={!isStepAccessible('step2')}
+          className={completedSteps.includes('step2') ? 'bg-green-100' : ''}
+        >
+          Step 2 {completedSteps.includes('step2') && '✓'}
+        </TabsTrigger>
+        <TabsTrigger 
+          value="step3" 
+          disabled={!isStepAccessible('step3')}
+          className={completedSteps.includes('step3') ? 'bg-green-100' : ''}
+        >
+          Step 3 {completedSteps.includes('step3') && '✓'}
+        </TabsTrigger>
+      </TabsList>
+      
+      <TabsContent value="step1">
+        <Card>
+          <CardHeader>
+            <CardTitle>Step 1: Basic Information</CardTitle>
+            <CardDescription>
+              Complete this step to proceed to the next one.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <p>Fill out your basic information here.</p>
+            <Button 
+              onClick={() => handleStepComplete('step1')}
+              disabled={completedSteps.includes('step1')}
+            >
+              {completedSteps.includes('step1') ? 'Completed' : 'Complete Step 1'}
+            </Button>
+          </CardContent>
+        </Card>
+      </TabsContent>
+      
+      <TabsContent value="step2">
+        <Card>
+          <CardHeader>
+            <CardTitle>Step 2: Additional Details</CardTitle>
+            <CardDescription>
+              Provide additional details to continue.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <p>Add your additional details here.</p>
+            <Button 
+              onClick={() => handleStepComplete('step2')}
+              disabled={completedSteps.includes('step2')}
+            >
+              {completedSteps.includes('step2') ? 'Completed' : 'Complete Step 2'}
+            </Button>
+          </CardContent>
+        </Card>
+      </TabsContent>
+      
+      <TabsContent value="step3">
+        <Card>
+          <CardHeader>
+            <CardTitle>Step 3: Review & Submit</CardTitle>
+            <CardDescription>
+              Review your information and submit.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <p>Review all your information before submitting.</p>
+            <Button 
+              onClick={() => handleStepComplete('step3')}
+              disabled={completedSteps.includes('step3')}
+            >
+              {completedSteps.includes('step3') ? 'Submitted' : 'Submit'}
+            </Button>
+          </CardContent>
+        </Card>
+      </TabsContent>
+    </Tabs>
+  )
+}`} 
+  language="tsx" 
+  preview={<TabsControlled />} 
+/>
+
+## API Reference
+
+### Tabs
+
+The root tabs component that manages state and provides context.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `defaultValue` | `string` | - | The default active tab value |
+| `value` | `string` | - | The controlled active tab value |
+| `onValueChange` | `(value: string) => void` | - | Callback fired when the active tab changes |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | The orientation of the tabs |
+| `dir` | `"ltr" \| "rtl"` | `"ltr"` | The reading direction |
+| `activationMode` | `"automatic" \| "manual"` | `"automatic"` | How tabs are activated |
+| `className` | `string` | - | Additional CSS classes to apply |
+| `children` | `ReactNode` | - | The tabs content |
+
+### TabsList
+
+Container for the tab triggers.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes to apply |
+| `children` | `ReactNode` | - | The tab triggers |
+| `loop` | `boolean` | `true` | Whether to loop focus when reaching the end |
+
+### TabsTrigger
+
+A button that activates a tab panel.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | - | The unique value for this tab |
+| `disabled` | `boolean` | `false` | Whether the tab is disabled |
+| `className` | `string` | - | Additional CSS classes to apply |
+| `children` | `ReactNode` | - | The tab trigger content |
+| `asChild` | `boolean` | `false` | Render as a different element |
+
+### TabsContent
+
+The content panel for a tab.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | - | The value that corresponds to this content |
+| `forceMount` | `boolean` | `false` | Force the content to be mounted |
+| `className` | `string` | - | Additional CSS classes to apply |
+| `children` | `ReactNode` | - | The tab content |
+
+### Tab States
+
+The tabs component supports various states:
+
+- **Active**: The currently selected tab
+- **Inactive**: Tabs that are not currently selected
+- **Disabled**: Tabs that cannot be interacted with
+- **Focus**: Keyboard focus state for accessibility
+- **Hover**: Mouse hover state for better UX
+
+### Keyboard Navigation
+
+- **Tab**: Moves focus into the tab list
+- **Arrow Keys**: Navigate between tab triggers
+- **Space/Enter**: Activate the focused tab
+- **Home**: Move to the first tab
+- **End**: Move to the last tab
+
+## Accessibility
+
+The Tabs component follows accessibility best practices:
+
+- Uses semantic ARIA roles and properties
+- Supports keyboard navigation with arrow keys
+- Provides proper focus management
+- Maintains tab order and focus indicators
+- Supports screen reader announcements
+- Includes appropriate ARIA labels and descriptions
+- Maintains color contrast ratios
+- Supports both automatic and manual activation modes
+
+## Best Practices
+
+1. **Use clear tab labels**: Make tab labels descriptive and concise
+2. **Limit the number of tabs**: Keep tabs to a reasonable number (5-7 max)
+3. **Provide visual feedback**: Use active states and hover effects
+4. **Consider mobile experience**: Ensure tabs work well on touch devices
+5. **Use consistent content structure**: Maintain similar layouts across tabs
+6. **Handle loading states**: Show appropriate loading indicators when needed
+7. **Implement proper validation**: Validate form data before allowing tab switching
+
+## Examples in Context
+
+### Settings Panel
+
+```tsx
+<Tabs defaultValue="general" className="w-full max-w-2xl">
+  <TabsList className="grid w-full grid-cols-4">
+    <TabsTrigger value="general">General</TabsTrigger>
+    <TabsTrigger value="security">Security</TabsTrigger>
+    <TabsTrigger value="notifications">Notifications</TabsTrigger>
+    <TabsTrigger value="billing">Billing</TabsTrigger>
+  </TabsList>
+  
+  <TabsContent value="general">
+    <Card>
+      <CardHeader>
+        <CardTitle>General Settings</CardTitle>
+        <CardDescription>
+          Manage your general account settings and preferences.
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        {/* General settings form */}
+      </CardContent>
+    </Card>
+  </TabsContent>
+  
+  {/* Other tab contents */}
+</Tabs>
+```
+
+### Dashboard Navigation
+
+```tsx
+<Tabs defaultValue="overview" className="w-full">
+  <TabsList className="grid w-full grid-cols-3">
+    <TabsTrigger value="overview" className="flex items-center gap-2">
+      <BarChart className="h-4 w-4" />
+      Overview
+    </TabsTrigger>
+    <TabsTrigger value="analytics" className="flex items-center gap-2">
+      <TrendingUp className="h-4 w-4" />
+      Analytics
+    </TabsTrigger>
+    <TabsTrigger value="reports" className="flex items-center gap-2">
+      <FileText className="h-4 w-4" />
+      Reports
+    </TabsTrigger>
+  </TabsList>
+  
+  <TabsContent value="overview">
+    {/* Dashboard overview */}
+  </TabsContent>
+  
+  <TabsContent value="analytics">
+    {/* Analytics charts */}
+  </TabsContent>
+  
+  <TabsContent value="reports">
+    {/* Reports table */}
+  </TabsContent>
+</Tabs>
+```
+
+### Product Information
+
+```tsx
+<Tabs defaultValue="description" className="w-full">
+  <TabsList>
+    <TabsTrigger value="description">Description</TabsTrigger>
+    <TabsTrigger value="specifications">Specifications</TabsTrigger>
+    <TabsTrigger value="reviews">Reviews</TabsTrigger>
+    <TabsTrigger value="shipping">Shipping</TabsTrigger>
+  </TabsList>
+  
+  <TabsContent value="description">
+    <div className="prose max-w-none">
+      <h3>Product Description</h3>
+      <p>Detailed product description goes here...</p>
+    </div>
+  </TabsContent>
+  
+  <TabsContent value="specifications">
+    <div className="space-y-4">
+      <h3 className="text-lg font-semibold">Technical Specifications</h3>
+      {/* Specifications table */}
+    </div>
+  </TabsContent>
+  
+  <TabsContent value="reviews">
+    <div className="space-y-4">
+      <h3 className="text-lg font-semibold">Customer Reviews</h3>
+      {/* Reviews list */}
+    </div>
+  </TabsContent>
+  
+  <TabsContent value="shipping">
+    <div className="space-y-4">
+      <h3 className="text-lg font-semibold">Shipping Information</h3>
+      {/* Shipping details */}
+    </div>
+  </TabsContent>
+</Tabs>
+```
+
+## Dependencies
+
+The Tabs component depends on:
+
+- `React` - Core React functionality
+- `@radix-ui/react-tabs` - Headless tabs primitive
+- `class-variance-authority` - For variant management
+- `clsx` - For conditional class names
+- `tailwind-merge` - For merging Tailwind classes

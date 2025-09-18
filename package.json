@@ -1,5 +1,5 @@
 {
-  "name": "nezuko-ui",
+  "name": "nova-ui",
   "version": "1.0.2",
   "description": "A next-generation design system for Next.js with comprehensive theming, accessibility, and type safety",
   "keywords": [
@@ -11,7 +11,7 @@
     "ui-components",
     "accessibility"
   ],
-  "author": "Krypton UI Team",
+  "author": "Nova UI Team",
   "license": "MIT",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -31,7 +31,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@bitbucket.org/your-username/krypton-ui.git"
+    "url": "git+ssh://git@bitbucket.org/your-username/nova-ui.git"
   },
   "scripts": {
     "dev": "next dev",

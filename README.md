@@ -1,8 +1,6 @@
-## AriaDocs - Documentation Template (Branch - `version_docs`)
+# Nova UI - Next Generation Design System
 
-This branch has feature for document versioning
-
-This feature-packed documentation template, built with Next.js, offers a sleek and responsive design, perfect for all your project documentation needs.
+A comprehensive React component library built with Next.js, TypeScript, and Tailwind CSS. Nova UI provides beautiful, accessible, and customizable components for modern web applications.
 
 <img src="./public/public-og.png" />
 

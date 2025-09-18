@@ -1,0 +1,1502 @@
+---
+title: Select
+description: A dropdown component that allows users to choose from a list of options with keyboard navigation and accessibility support.
+---
+
+## Import
+
+```tsx
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+```
+
+## Usage
+
+## Examples
+
+### Default
+
+A basic select component with simple options.
+
+<CodePreview 
+  code={`import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+
+export default function SelectDefault() {
+  return (
+    <Select>
+      <SelectTrigger className="w-[180px]">
+        <SelectValue placeholder="Select a fruit" />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectItem value="apple">Apple</SelectItem>
+        <SelectItem value="banana">Banana</SelectItem>
+        <SelectItem value="blueberry">Blueberry</SelectItem>
+        <SelectItem value="grapes">Grapes</SelectItem>
+        <SelectItem value="pineapple">Pineapple</SelectItem>
+      </SelectContent>
+    </Select>
+  )
+}`} 
+  language="tsx" 
+  preview={<SelectDefault />} 
+/>
+
+### With Form
+
+A select component integrated with form handling and validation.
+
+<CodePreview 
+  code={`"use client"
+
+import { useState } from "react"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Label } from "@/components/ui/label"
+import { Input } from "@/components/ui/input"
+
+export default function SelectWithForm() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    country: "",
+    role: ""
+  })
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    console.log("Form submitted:", formData)
+  }
+
+  return (
+    <Card className="w-full max-w-md">
+      <CardHeader>
+        <CardTitle>User Registration</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="name">Name</Label>
+            <Input
+              id="name"
+              value={formData.name}
+              onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
+              placeholder="Enter your name"
+            />
+          </div>
+          
+          <div className="space-y-2">
+            <Label htmlFor="email">Email</Label>
+            <Input
+              id="email"
+              type="email"
+              value={formData.email}
+              onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
+              placeholder="Enter your email"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label>Country</Label>
+            <Select onValueChange={(value) => setFormData(prev => ({ ...prev, country: value }))}>
+              <SelectTrigger>
+                <SelectValue placeholder="Select your country" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="us">United States</SelectItem>
+                <SelectItem value="uk">United Kingdom</SelectItem>
+                <SelectItem value="ca">Canada</SelectItem>
+                <SelectItem value="au">Australia</SelectItem>
+                <SelectItem value="de">Germany</SelectItem>
+                <SelectItem value="fr">France</SelectItem>
+                <SelectItem value="in">India</SelectItem>
+                <SelectItem value="jp">Japan</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="space-y-2">
+            <Label>Role</Label>
+            <Select onValueChange={(value) => setFormData(prev => ({ ...prev, role: value }))}>
+              <SelectTrigger>
+                <SelectValue placeholder="Select your role" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="developer">Developer</SelectItem>
+                <SelectItem value="designer">Designer</SelectItem>
+                <SelectItem value="manager">Manager</SelectItem>
+                <SelectItem value="analyst">Analyst</SelectItem>
+                <SelectItem value="other">Other</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          <Button type="submit" className="w-full">
+            Register
+          </Button>
+        </form>
+      </CardContent>
+    </Card>
+  )
+}`} 
+  language="tsx" 
+  preview={<SelectWithForm />} 
+/>
+
+### With Groups
+
+A select component with grouped options for better organization.
+
+<CodePreview 
+  code={`import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+
+export default function SelectWithGroups() {
+  return (
+    <Select>
+      <SelectTrigger className="w-[250px]">
+        <SelectValue placeholder="Select a timezone" />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectGroup>
+          <SelectLabel>North America</SelectLabel>
+          <SelectItem value="est">Eastern Standard Time (EST)</SelectItem>
+          <SelectItem value="cst">Central Standard Time (CST)</SelectItem>
+          <SelectItem value="mst">Mountain Standard Time (MST)</SelectItem>
+          <SelectItem value="pst">Pacific Standard Time (PST)</SelectItem>
+        </SelectGroup>
+        <SelectGroup>
+          <SelectLabel>Europe</SelectLabel>
+          <SelectItem value="gmt">Greenwich Mean Time (GMT)</SelectItem>
+          <SelectItem value="cet">Central European Time (CET)</SelectItem>
+          <SelectItem value="eet">Eastern European Time (EET)</SelectItem>
+        </SelectGroup>
+        <SelectGroup>
+          <SelectLabel>Asia</SelectLabel>
+          <SelectItem value="ist">India Standard Time (IST)</SelectItem>
+          <SelectItem value="jst">Japan Standard Time (JST)</SelectItem>
+          <SelectItem value="cst-china">China Standard Time (CST)</SelectItem>
+        </SelectGroup>
+        <SelectGroup>
+          <SelectLabel>Australia</SelectLabel>
+          <SelectItem value="aest">Australian Eastern Standard Time (AEST)</SelectItem>
+          <SelectItem value="acst">Australian Central Standard Time (ACST)</SelectItem>
+          <SelectItem value="awst">Australian Western Standard Time (AWST)</SelectItem>
+        </SelectGroup>
+      </SelectContent>
+    </Select>
+  )
+}`} 
+  language="tsx" 
+  preview={<SelectWithGroups />} 
+/>
+
+## Real-World Examples
+
+### Settings Panel
+
+A settings panel with multiple select components for user preferences.
+
+<CodePreview 
+  code={`"use client"
+
+import { useState } from "react"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { Label } from "@/components/ui/label"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+
+export default function SettingsPanel() {
+  const [theme, setTheme] = useState("system")
+  const [language, setLanguage] = useState("en")
+  const [timezone, setTimezone] = useState("auto")
+  const [notifications, setNotifications] = useState("all")
+
+  const handleSave = () => {
+    console.log("Settings saved:", { theme, language, timezone, notifications })
+  }
+
+  const handleReset = () => {
+    setTheme("system")
+    setLanguage("en")
+    setTimezone("auto")
+    setNotifications("all")
+  }
+
+  return (
+    <Card className="w-full max-w-2xl">
+      <CardHeader>
+        <CardTitle>User Preferences</CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="space-y-2">
+            <Label htmlFor="theme">Theme</Label>
+            <Select value={theme} onValueChange={setTheme}>
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="light">
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 rounded-full bg-yellow-400" />
+                    Light
+                  </div>
+                </SelectItem>
+                <SelectItem value="dark">
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 rounded-full bg-gray-800" />
+                    Dark
+                  </div>
+                </SelectItem>
+                <SelectItem value="system">
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 rounded-full bg-gradient-to-r from-yellow-400 to-gray-800" />
+                    System
+                  </div>
+                </SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="language">Language</Label>
+            <Select value={language} onValueChange={setLanguage}>
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="en">🇺🇸 English</SelectItem>
+                <SelectItem value="es">🇪🇸 Español</SelectItem>
+                <SelectItem value="fr">🇫🇷 Français</SelectItem>
+                <SelectItem value="de">🇩🇪 Deutsch</SelectItem>
+                <SelectItem value="ja">🇯🇵 日本語</SelectItem>
+                <SelectItem value="zh">🇨🇳 中文</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="timezone">Timezone</Label>
+            <Select value={timezone} onValueChange={setTimezone}>
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="auto">Auto-detect</SelectItem>
+                <SelectItem value="utc">UTC</SelectItem>
+                <SelectItem value="est">Eastern (EST)</SelectItem>
+                <SelectItem value="pst">Pacific (PST)</SelectItem>
+                <SelectItem value="gmt">Greenwich (GMT)</SelectItem>
+                <SelectItem value="ist">India (IST)</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="notifications">Notifications</Label>
+            <Select value={notifications} onValueChange={setNotifications}>
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All notifications</SelectItem>
+                <SelectItem value="important">Important only</SelectItem>
+                <SelectItem value="mentions">Mentions only</SelectItem>
+                <SelectItem value="none">None</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+
+        <div className="border-t pt-4">
+          <div className="flex flex-wrap gap-2 mb-4">
+            <Badge variant="outline">Theme: {theme}</Badge>
+            <Badge variant="outline">Language: {language}</Badge>
+            <Badge variant="outline">Timezone: {timezone}</Badge>
+            <Badge variant="outline">Notifications: {notifications}</Badge>
+          </div>
+
+          <div className="flex gap-2">
+            <Button onClick={handleSave}>Save Settings</Button>
+            <Button variant="outline" onClick={handleReset}>Reset to Default</Button>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  )
+}`} 
+  language="tsx" 
+  preview={<SettingsPanel />} 
+/>
+
+### User Role Selector
+
+A comprehensive user role selector with permissions display and role descriptions.
+
+<CodePreview 
+  code={`"use client"
+
+import { useState } from "react"
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectSeparator,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { Shield, Users, Crown, Settings, Eye } from "lucide-react"
+
+const roles = {
+  admin: {
+    name: "Administrator",
+    description: "Full system access and user management",
+    permissions: ["Create", "Read", "Update", "Delete", "Manage Users"],
+    icon: Crown,
+    color: "destructive" as const
+  },
+  moderator: {
+    name: "Moderator",
+    description: "Content moderation and user support",
+    permissions: ["Read", "Update", "Moderate Content", "Support Users"],
+    icon: Shield,
+    color: "default" as const
+  },
+  editor: {
+    name: "Editor",
+    description: "Content creation and editing",
+    permissions: ["Create", "Read", "Update", "Publish Content"],
+    icon: Settings,
+    color: "secondary" as const
+  },
+  viewer: {
+    name: "Viewer",
+    description: "Read-only access to content",
+    permissions: ["Read"],
+    icon: Eye,
+    color: "outline" as const
+  },
+  contributor: {
+    name: "Contributor",
+    description: "Submit content for review",
+    permissions: ["Create", "Read", "Submit for Review"],
+    icon: Users,
+    color: "secondary" as const
+  }
+}
+
+export default function SelectUserRole() {
+  const [selectedRole, setSelectedRole] = useState<string>("")
+
+  const selectedRoleData = selectedRole ? roles[selectedRole as keyof typeof roles] : null
+
+  return (
+    <Card className="w-full max-w-2xl">
+      <CardHeader>
+        <CardTitle>User Role Assignment</CardTitle>
+        <CardDescription>
+          Select a role to assign to the user. Each role has different permissions and access levels.
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-6">
+        <div className="space-y-2">
+          <label className="text-sm font-medium">Role</label>
+          <Select value={selectedRole} onValueChange={setSelectedRole}>
+            <SelectTrigger>
+              <SelectValue placeholder="Select a role" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectLabel>Administrative Roles</SelectLabel>
+                <SelectItem value="admin">
+                  <div className="flex items-center gap-2">
+                    <Crown className="h-4 w-4 text-red-500" />
+                    <div>
+                      <div className="font-medium">Administrator</div>
+                      <div className="text-xs text-muted-foreground">Full system access</div>
+                    </div>
+                  </div>
+                </SelectItem>
+                <SelectItem value="moderator">
+                  <div className="flex items-center gap-2">
+                    <Shield className="h-4 w-4 text-blue-500" />
+                    <div>
+                      <div className="font-medium">Moderator</div>
+                      <div className="text-xs text-muted-foreground">Content moderation</div>
+                    </div>
+                  </div>
+                </SelectItem>
+              </SelectGroup>
+              
+              <SelectSeparator />
+              
+              <SelectGroup>
+                <SelectLabel>Content Roles</SelectLabel>
+                <SelectItem value="editor">
+                  <div className="flex items-center gap-2">
+                    <Settings className="h-4 w-4 text-green-500" />
+                    <div>
+                      <div className="font-medium">Editor</div>
+                      <div className="text-xs text-muted-foreground">Content creation</div>
+                    </div>
+                  </div>
+                </SelectItem>
+                <SelectItem value="contributor">
+                  <div className="flex items-center gap-2">
+                    <Users className="h-4 w-4 text-purple-500" />
+                    <div>
+                      <div className="font-medium">Contributor</div>
+                      <div className="text-xs text-muted-foreground">Submit for review</div>
+                    </div>
+                  </div>
+                </SelectItem>
+              </SelectGroup>
+              
+              <SelectSeparator />
+              
+              <SelectGroup>
+                <SelectLabel>Basic Roles</SelectLabel>
+                <SelectItem value="viewer">
+                  <div className="flex items-center gap-2">
+                    <Eye className="h-4 w-4 text-gray-500" />
+                    <div>
+                      <div className="font-medium">Viewer</div>
+                      <div className="text-xs text-muted-foreground">Read-only access</div>
+                    </div>
+                  </div>
+                </SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        </div>
+
+        {selectedRoleData && (
+          <div className="space-y-4 p-4 bg-muted rounded-lg">
+            <div className="flex items-center gap-2">
+              <selectedRoleData.icon className="h-5 w-5" />
+              <div>
+                <h3 className="font-semibold">{selectedRoleData.name}</h3>
+                <p className="text-sm text-muted-foreground">{selectedRoleData.description}</p>
+              </div>
+            </div>
+            
+            <div>
+              <h4 className="text-sm font-medium mb-2">Permissions:</h4>
+              <div className="flex flex-wrap gap-1">
+                {selectedRoleData.permissions.map((permission) => (
+                  <Badge key={permission} variant={selectedRoleData.color}>
+                    {permission}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+      </CardContent>
+    </Card>
+  )
+}`} 
+  language="tsx" 
+  preview={<SelectUserRole />} 
+/>
+
+### Theme Selector
+
+An advanced theme selector with visual previews and descriptions.
+
+<CodePreview 
+  code={`"use client"
+
+import { useState } from "react"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Sun, Moon, Monitor, Palette } from "lucide-react"
+
+const themes = [
+  {
+    value: "light",
+    name: "Light",
+    description: "Clean and bright interface",
+    icon: Sun,
+    preview: "bg-white border-gray-200",
+    textColor: "text-gray-900"
+  },
+  {
+    value: "dark",
+    name: "Dark",
+    description: "Easy on the eyes in low light",
+    icon: Moon,
+    preview: "bg-gray-900 border-gray-700",
+    textColor: "text-white"
+  },
+  {
+    value: "system",
+    name: "System",
+    description: "Follows your system preference",
+    icon: Monitor,
+    preview: "bg-gradient-to-r from-white to-gray-900 border-gray-400",
+    textColor: "text-gray-700"
+  },
+  {
+    value: "auto",
+    name: "Auto",
+    description: "Changes based on time of day",
+    icon: Palette,
+    preview: "bg-gradient-to-r from-orange-200 to-blue-900 border-orange-400",
+    textColor: "text-gray-800"
+  }
+]
+
+export default function SelectThemeSelector() {
+  const [selectedTheme, setSelectedTheme] = useState<string>("system")
+
+  const selectedThemeData = themes.find(theme => theme.value === selectedTheme)
+
+  return (
+    <Card className="w-full max-w-lg">
+      <CardHeader>
+        <CardTitle>Theme Preferences</CardTitle>
+        <CardDescription>
+          Choose your preferred theme for the application interface.
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-6">
+        <div className="space-y-2">
+          <label className="text-sm font-medium">Theme</label>
+          <Select value={selectedTheme} onValueChange={setSelectedTheme}>
+            <SelectTrigger>
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {themes.map((theme) => (
+                <SelectItem key={theme.value} value={theme.value}>
+                  <div className="flex items-center gap-3 py-1">
+                    <theme.icon className="h-4 w-4" />
+                    <div className="flex-1">
+                      <div className="font-medium">{theme.name}</div>
+                      <div className="text-xs text-muted-foreground">{theme.description}</div>
+                    </div>
+                    <div className={\`w-6 h-6 rounded border-2 \${theme.preview}\`} />
+                  </div>
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+
+        {selectedThemeData && (
+          <div className="space-y-4">
+            <div className="p-4 rounded-lg border-2 border-dashed">
+              <h3 className="text-sm font-medium mb-2">Preview</h3>
+              <div className={\`p-4 rounded-lg border-2 \${selectedThemeData.preview}\`}>
+                <div className={\`\${selectedThemeData.textColor} space-y-2\`}>
+                  <div className="font-semibold">Sample Interface</div>
+                  <div className="text-sm opacity-75">
+                    This is how your interface will look with the {selectedThemeData.name.toLowerCase()} theme.
+                  </div>
+                  <div className="flex gap-2 mt-3">
+                    <div className="px-3 py-1 bg-blue-500 text-white text-xs rounded">Button</div>
+                    <div className="px-3 py-1 border border-current text-xs rounded">Secondary</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="text-sm text-muted-foreground">
+              <strong>{selectedThemeData.name} Theme:</strong> {selectedThemeData.description}
+            </div>
+          </div>
+        )}
+      </CardContent>
+    </Card>
+  )
+}`} 
+  language="tsx" 
+  preview={<SelectThemeSelector />} 
+/>
+
+### Timezone Selector
+
+A timezone selector with real-time clock display and grouped regions.
+
+<CodePreview 
+  code={`"use client"
+
+import { useState, useEffect } from "react"
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectSeparator,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Clock, Globe } from "lucide-react"
+
+const timezones = [
+  // Americas
+  { value: "America/New_York", label: "Eastern Time (ET)", offset: "-05:00", region: "Americas" },
+  { value: "America/Chicago", label: "Central Time (CT)", offset: "-06:00", region: "Americas" },
+  { value: "America/Denver", label: "Mountain Time (MT)", offset: "-07:00", region: "Americas" },
+  { value: "America/Los_Angeles", label: "Pacific Time (PT)", offset: "-08:00", region: "Americas" },
+  { value: "America/Toronto", label: "Toronto", offset: "-05:00", region: "Americas" },
+  { value: "America/Sao_Paulo", label: "São Paulo", offset: "-03:00", region: "Americas" },
+  
+  // Europe
+  { value: "Europe/London", label: "London (GMT)", offset: "+00:00", region: "Europe" },
+  { value: "Europe/Paris", label: "Paris (CET)", offset: "+01:00", region: "Europe" },
+  { value: "Europe/Berlin", label: "Berlin (CET)", offset: "+01:00", region: "Europe" },
+  { value: "Europe/Rome", label: "Rome (CET)", offset: "+01:00", region: "Europe" },
+  { value: "Europe/Moscow", label: "Moscow (MSK)", offset: "+03:00", region: "Europe" },
+  
+  // Asia
+  { value: "Asia/Tokyo", label: "Tokyo (JST)", offset: "+09:00", region: "Asia" },
+  { value: "Asia/Shanghai", label: "Shanghai (CST)", offset: "+08:00", region: "Asia" },
+  { value: "Asia/Kolkata", label: "Mumbai (IST)", offset: "+05:30", region: "Asia" },
+  { value: "Asia/Dubai", label: "Dubai (GST)", offset: "+04:00", region: "Asia" },
+  { value: "Asia/Singapore", label: "Singapore (SGT)", offset: "+08:00", region: "Asia" },
+  
+  // Oceania
+  { value: "Australia/Sydney", label: "Sydney (AEDT)", offset: "+11:00", region: "Oceania" },
+  { value: "Australia/Melbourne", label: "Melbourne (AEDT)", offset: "+11:00", region: "Oceania" },
+  { value: "Pacific/Auckland", label: "Auckland (NZDT)", offset: "+13:00", region: "Oceania" },
+]
+
+export default function SelectTimezone() {
+  const [selectedTimezone, setSelectedTimezone] = useState<string>("")
+  const [currentTime, setCurrentTime] = useState<string>("")
+  const [localTime, setLocalTime] = useState<string>("")
+  
+  useEffect(() => {
+    const updateTimes = () => {
+      const now = new Date()
+      setLocalTime(now.toLocaleTimeString())
+      
+      if (selectedTimezone) {
+        try {
+          const timezoneTime = new Date().toLocaleString("en-US", {
+            timeZone: selectedTimezone,
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: true
+          })
+          setCurrentTime(timezoneTime)
+        } catch (error) {
+          setCurrentTime("Invalid timezone")
+        }
+      }
+    }
+
+    updateTimes()
+    const interval = setInterval(updateTimes, 1000)
+    return () => clearInterval(interval)
+  }, [selectedTimezone])
+
+  const selectedTimezoneData = timezones.find(tz => tz.value === selectedTimezone)
+  const groupedTimezones = timezones.reduce((acc, timezone) => {
+    if (!acc[timezone.region]) {
+      acc[timezone.region] = []
+    }
+    acc[timezone.region].push(timezone)
+    return acc
+  }, {} as Record<string, typeof timezones>)
+
+  return (
+    <Card className="w-full max-w-2xl">
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2">
+          <Globe className="h-5 w-5" />
+          Timezone Settings
+        </CardTitle>
+        <CardDescription>
+          Select your timezone to display accurate local times throughout the application.
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-6">
+        <div className="space-y-2">
+          <label className="text-sm font-medium">Timezone</label>
+          <Select value={selectedTimezone} onValueChange={setSelectedTimezone}>
+            <SelectTrigger>
+              <SelectValue placeholder="Select your timezone" />
+            </SelectTrigger>
+            <SelectContent className="max-h-[300px]">
+              {Object.entries(groupedTimezones).map(([region, timezones]) => (
+                <SelectGroup key={region}>
+                  <SelectLabel>{region}</SelectLabel>
+                  {timezones.map((timezone) => (
+                    <SelectItem key={timezone.value} value={timezone.value}>
+                      <div className="flex items-center justify-between w-full">
+                        <span>{timezone.label}</span>
+                        <span className="text-xs text-muted-foreground ml-2">
+                          UTC{timezone.offset}
+                        </span>
+                      </div>
+                    </SelectItem>
+                  ))}
+                  <SelectSeparator />
+                </SelectGroup>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="p-4 bg-muted rounded-lg">
+            <div className="flex items-center gap-2 mb-2">
+              <Clock className="h-4 w-4" />
+              <span className="text-sm font-medium">Local Time</span>
+            </div>
+            <div className="text-2xl font-mono">{localTime}</div>
+            <div className="text-xs text-muted-foreground">Your current timezone</div>
+          </div>
+
+          {selectedTimezoneData && (
+            <div className="p-4 bg-muted rounded-lg">
+              <div className="flex items-center gap-2 mb-2">
+                <Clock className="h-4 w-4" />
+                <span className="text-sm font-medium">Selected Time</span>
+              </div>
+              <div className="text-2xl font-mono">{currentTime}</div>
+              <div className="text-xs text-muted-foreground">
+                {selectedTimezoneData.label}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {selectedTimezoneData && (
+          <div className="p-3 bg-blue-50 dark:bg-blue-950 rounded-lg border border-blue-200 dark:border-blue-800">
+            <div className="text-sm">
+              <strong>Selected:</strong> {selectedTimezoneData.label}
+              <br />
+              <strong>Offset:</strong> UTC{selectedTimezoneData.offset}
+              <br />
+              <strong>Region:</strong> {selectedTimezoneData.region}
+            </div>
+          </div>
+        )}
+      </CardContent>
+    </Card>
+  )
+}`} 
+  language="tsx" 
+  preview={<SelectTimezone />} 
+/>
+
+### Language Selector
+
+A comprehensive language selector with native names, flags, and live translation preview.
+
+<CodePreview 
+  code={`"use client"
+
+import { useState } from "react"
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectSeparator,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Languages, Globe2 } from "lucide-react"
+
+const languages = [
+  // Popular Languages
+  { code: "en", name: "English", nativeName: "English", flag: "🇺🇸", region: "Popular", speakers: "1.5B" },
+  { code: "zh", name: "Chinese", nativeName: "中文", flag: "🇨🇳", region: "Popular", speakers: "1.1B" },
+  { code: "hi", name: "Hindi", nativeName: "हिन्दी", flag: "🇮🇳", region: "Popular", speakers: "600M" },
+  { code: "es", name: "Spanish", nativeName: "Español", flag: "🇪🇸", region: "Popular", speakers: "500M" },
+  { code: "fr", name: "French", nativeName: "Français", flag: "🇫🇷", region: "Popular", speakers: "280M" },
+  { code: "ar", name: "Arabic", nativeName: "العربية", flag: "🇸🇦", region: "Popular", speakers: "420M" },
+  
+  // European Languages
+  { code: "de", name: "German", nativeName: "Deutsch", flag: "🇩🇪", region: "European", speakers: "100M" },
+  { code: "it", name: "Italian", nativeName: "Italiano", flag: "🇮🇹", region: "European", speakers: "65M" },
+  { code: "pt", name: "Portuguese", nativeName: "Português", flag: "🇵🇹", region: "European", speakers: "260M" },
+  { code: "ru", name: "Russian", nativeName: "Русский", flag: "🇷🇺", region: "European", speakers: "150M" },
+  
+  // Asian Languages
+  { code: "ja", name: "Japanese", nativeName: "日本語", flag: "🇯🇵", region: "Asian", speakers: "125M" },
+  { code: "ko", name: "Korean", nativeName: "한국어", flag: "🇰🇷", region: "Asian", speakers: "77M" },
+  { code: "th", name: "Thai", nativeName: "ไทย", flag: "🇹🇭", region: "Asian", speakers: "60M" },
+  { code: "vi", name: "Vietnamese", nativeName: "Tiếng Việt", flag: "🇻🇳", region: "Asian", speakers: "95M" },
+]
+
+const translations = {
+  en: {
+    welcome: "Welcome to our application!",
+    description: "This text changes based on your language selection.",
+    button: "Get Started"
+  },
+  es: {
+    welcome: "¡Bienvenido a nuestra aplicación!",
+    description: "Este texto cambia según tu selección de idioma.",
+    button: "Comenzar"
+  },
+  fr: {
+    welcome: "Bienvenue dans notre application !",
+    description: "Ce texte change en fonction de votre sélection de langue.",
+    button: "Commencer"
+  },
+  de: {
+    welcome: "Willkommen in unserer Anwendung!",
+    description: "Dieser Text ändert sich je nach Ihrer Sprachauswahl.",
+    button: "Loslegen"
+  },
+  zh: {
+    welcome: "欢迎使用我们的应用程序！",
+    description: "此文本根据您的语言选择而变化。",
+    button: "开始使用"
+  },
+  ja: {
+    welcome: "私たちのアプリケーションへようこそ！",
+    description: "このテキストは言語選択に基づいて変更されます。",
+    button: "始める"
+  }
+}
+
+export default function SelectLanguage() {
+  const [selectedLanguage, setSelectedLanguage] = useState<string>("en")
+
+  const selectedLangData = languages.find(lang => lang.code === selectedLanguage)
+  const currentTranslation = translations[selectedLanguage as keyof typeof translations] || translations.en
+  
+  const groupedLanguages = languages.reduce((acc, language) => {
+    if (!acc[language.region]) {
+      acc[language.region] = []
+    }
+    acc[language.region].push(language)
+    return acc
+  }, {} as Record<string, typeof languages>)
+
+  return (
+    <Card className="w-full max-w-2xl">
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2">
+          <Languages className="h-5 w-5" />
+          Language Preferences
+        </CardTitle>
+        <CardDescription>
+          Choose your preferred language for the application interface.
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-6">
+        <div className="space-y-2">
+          <label className="text-sm font-medium">Language</label>
+          <Select value={selectedLanguage} onValueChange={setSelectedLanguage}>
+            <SelectTrigger>
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent className="max-h-[300px]">
+              {Object.entries(groupedLanguages).map(([region, languages]) => (
+                <SelectGroup key={region}>
+                  <SelectLabel>{region} Languages</SelectLabel>
+                  {languages.map((language) => (
+                    <SelectItem key={language.code} value={language.code}>
+                      <div className="flex items-center gap-3 py-1">
+                        <span className="text-lg">{language.flag}</span>
+                        <div className="flex-1">
+                          <div className="font-medium">{language.name}</div>
+                          <div className="text-xs text-muted-foreground">
+                            {language.nativeName} • {language.speakers} speakers
+                          </div>
+                        </div>
+                      </div>
+                    </SelectItem>
+                  ))}
+                  <SelectSeparator />
+                </SelectGroup>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+
+        {selectedLangData && (
+          <div className="space-y-4">
+            <div className="p-4 bg-muted rounded-lg">
+              <div className="flex items-center gap-2 mb-3">
+                <Globe2 className="h-4 w-4" />
+                <span className="text-sm font-medium">Language Information</span>
+              </div>
+              <div className="grid grid-cols-2 gap-4 text-sm">
+                <div>
+                  <span className="text-muted-foreground">Language:</span>
+                  <div className="font-medium">{selectedLangData.name}</div>
+                </div>
+                <div>
+                  <span className="text-muted-foreground">Native Name:</span>
+                  <div className="font-medium">{selectedLangData.nativeName}</div>
+                </div>
+                <div>
+                  <span className="text-muted-foreground">Region:</span>
+                  <div className="font-medium">{selectedLangData.region}</div>
+                </div>
+                <div>
+                  <span className="text-muted-foreground">Speakers:</span>
+                  <div className="font-medium">{selectedLangData.speakers}</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="p-4 border-2 border-dashed rounded-lg">
+              <div className="flex items-center gap-2 mb-3">
+                <span className="text-lg">{selectedLangData.flag}</span>
+                <span className="text-sm font-medium">Live Preview</span>
+              </div>
+              <div className="space-y-3">
+                <h3 className="text-lg font-semibold">{currentTranslation.welcome}</h3>
+                <p className="text-muted-foreground">{currentTranslation.description}</p>
+                <Button size="sm">{currentTranslation.button}</Button>
+              </div>
+            </div>
+          </div>
+        )}
+      </CardContent>
+    </Card>
+  )
+}`} 
+  language="tsx" 
+  preview={<SelectLanguage />} 
+/>
+
+## API Reference
+
+### Select
+
+The root select component that manages the state and provides context to child components.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `defaultValue` | `string` | `undefined` | The default value of the select when initially rendered. Use when you do not need to control its state. |
+| `value` | `string` | `undefined` | The controlled value of the select. Must be used in conjunction with `onValueChange`. |
+| `onValueChange` | `(value: string) => void` | `undefined` | Event handler called when the value changes. |
+| `defaultOpen` | `boolean` | `false` | The open state of the select when it is initially rendered. Use when you do not need to control its open state. |
+| `open` | `boolean` | `undefined` | The controlled open state of the select. Must be used in conjunction with `onOpenChange`. |
+| `onOpenChange` | `(open: boolean) => void` | `undefined` | Event handler called when the open state of the select changes. |
+| `dir` | `"ltr" \| "rtl"` | `"ltr"` | The reading direction of the select when applicable. |
+| `name` | `string` | `undefined` | The name of the select. Submitted with its owning form as part of a name/value pair. |
+| `disabled` | `boolean` | `false` | When `true`, prevents the user from interacting with the select. |
+| `required` | `boolean` | `false` | When `true`, indicates that the user must select a value before the owning form can be submitted. |
+
+### SelectTrigger
+
+The button that toggles the select. The `SelectContent` will position itself by aligning over the trigger.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `asChild` | `boolean` | `false` | Change the default rendered element for the one passed as a child, merging their props and behavior. |
+| `className` | `string` | `undefined` | Additional CSS classes to apply to the trigger. |
+| `disabled` | `boolean` | `false` | When `true`, prevents the user from interacting with the trigger. |
+
+### SelectValue
+
+The part that reflects the selected value. By default the selected item's text will be rendered. Use the `placeholder` prop to render something when no value is selected.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `placeholder` | `ReactNode` | `undefined` | The content that will be rendered inside the `SelectValue` when no value is selected. |
+| `asChild` | `boolean` | `false` | Change the default rendered element for the one passed as a child, merging their props and behavior. |
+| `className` | `string` | `undefined` | Additional CSS classes to apply to the value. |
+
+### SelectContent
+
+The component that pops out when the select is open.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `onCloseAutoFocus` | `(event: Event) => void` | `undefined` | Event handler called when focus moves to the trigger after closing. It can be prevented by calling `event.preventDefault`. |
+| `onEscapeKeyDown` | `(event: KeyboardEvent) => void` | `undefined` | Event handler called when the escape key is down. It can be prevented by calling `event.preventDefault`. |
+| `onPointerDownOutside` | `(event: PointerDownOutsideEvent) => void` | `undefined` | Event handler called when a pointer event occurs outside the bounds of the component. |
+| `position` | `"item-aligned" \| "popper"` | `"item-aligned"` | The positioning mode to use. |
+| `side` | `"top" \| "right" \| "bottom" \| "left"` | `"bottom"` | The preferred side of the trigger to render against when open. |
+| `sideOffset` | `number` | `4` | The distance in pixels from the trigger. |
+| `align` | `"start" \| "center" \| "end"` | `"center"` | The preferred alignment against the trigger. |
+| `alignOffset` | `number` | `0` | An offset in pixels from the "start" or "end" alignment options. |
+| `avoidCollisions` | `boolean` | `true` | When `true`, overrides the side and align preferences to prevent collisions with boundary edges. |
+| `collisionBoundary` | `Element \| null \| Array<Element \| null>` | `[]` | The element used as the collision boundary. |
+| `collisionPadding` | `number \| Partial<Record<Side, number>>` | `10` | The distance in pixels from the boundary edges where collision detection should occur. |
+| `arrowPadding` | `number` | `0` | The padding between the arrow and the edges of the content. |
+| `sticky` | `"partial" \| "always"` | `"partial"` | The sticky behavior on the align axis. |
+| `hideWhenDetached` | `boolean` | `false` | Whether to hide the content when the trigger becomes fully occluded. |
+| `className` | `string` | `undefined` | Additional CSS classes to apply to the content. |
+
+### SelectItem
+
+The component that contains the select items.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `value` | `string` | `undefined` | The value given as data when submitted with a `name`. |
+| `disabled` | `boolean` | `false` | When `true`, prevents the user from interacting with the item. |
+| `onSelect` | `(event: Event) => void` | `undefined` | Event handler called when the selecting item. It can be prevented by calling `event.preventDefault`. |
+| `textValue` | `string` | `undefined` | Optional text used for typeahead purposes. By default the typeahead behavior will use the `.textContent` of the item. |
+| `asChild` | `boolean` | `false` | Change the default rendered element for the one passed as a child, merging their props and behavior. |
+| `className` | `string` | `undefined` | Additional CSS classes to apply to the item. |
+
+### SelectGroup
+
+Used to group multiple items. Use in conjunction with `SelectLabel` to ensure good accessibility via automatic labelling.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `asChild` | `boolean` | `false` | Change the default rendered element for the one passed as a child, merging their props and behavior. |
+| `className` | `string` | `undefined` | Additional CSS classes to apply to the group. |
+
+### SelectLabel
+
+Used to render the label of a group. It won't be focusable using arrow keys.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `asChild` | `boolean` | `false` | Change the default rendered element for the one passed as a child, merging their props and behavior. |
+| `className` | `string` | `undefined` | Additional CSS classes to apply to the label. |
+
+### SelectSeparator
+
+Used to visually separate items in the select.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `asChild` | `boolean` | `false` | Change the default rendered element for the one passed as a child, merging their props and behavior. |
+| `className` | `string` | `undefined` | Additional CSS classes to apply to the separator. |
+
+### SelectScrollUpButton
+
+An optional button used as an affordance to show the user that there are more items above the visible area.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `asChild` | `boolean` | `false` | Change the default rendered element for the one passed as a child, merging their props and behavior. |
+| `className` | `string` | `undefined` | Additional CSS classes to apply to the scroll up button. |
+
+### SelectScrollDownButton
+
+An optional button used as an affordance to show the user that there are more items below the visible area.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `asChild` | `boolean` | `false` | Change the default rendered element for the one passed as a child, merging their props and behavior. |
+| `className` | `string` | `undefined` | Additional CSS classes to apply to the scroll down button. |
+
+## Accessibility
+
+The Select component follows the [WAI-ARIA Select Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-select-only/) and provides full keyboard navigation support.
+
+### Keyboard Interactions
+
+| Key | Description |
+| --- | --- |
+| `Space` | When focus is on the trigger, opens the select and focuses the selected item. |
+| `Enter` | When focus is on the trigger, opens the select and focuses the first item or the selected item. |
+| `ArrowDown` | When focus is on the trigger, opens the select. When focus is on an item, moves focus to the next item. |
+| `ArrowUp` | When focus is on the trigger, opens the select. When focus is on an item, moves focus to the previous item. |
+| `Esc` | Closes the select and moves focus to the trigger. |
+| `A-Z` or `a-z` | When the select is open, moves focus to the next item with a label that starts with the typed character. |
+
+### ARIA Attributes
+
+The component automatically manages ARIA attributes:
+
+- `aria-expanded` is set on the trigger to indicate if the select is open
+- `aria-haspopup` is set to "listbox" on the trigger
+- `role="listbox"` is set on the content
+- `role="option"` is set on each item
+- `aria-selected` is set on the selected item
+- `aria-labelledby` connects the content to the trigger
+
+### Screen Reader Support
+
+- The selected value is announced when the trigger receives focus
+- All items are announced as the user navigates through them
+- The total number of items and current position is announced
+- Group labels are announced when navigating into grouped sections
+
+## Common Patterns
+
+### Multiple Selects in Forms
+
+When using multiple select components in forms, ensure proper labeling and validation.
+
+<CodePreview 
+  code={`"use client"
+
+import { useState } from "react"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { Label } from "@/components/ui/label"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+
+export default function MultipleSelectsForm() {
+  const [formData, setFormData] = useState({
+    country: "",
+    state: "",
+    city: "",
+    category: ""
+  })
+
+  const [errors, setErrors] = useState({})
+
+  const countries = [
+    { value: "us", label: "United States" },
+    { value: "ca", label: "Canada" },
+    { value: "uk", label: "United Kingdom" }
+  ]
+
+  const states = {
+    us: [
+      { value: "ca", label: "California" },
+      { value: "ny", label: "New York" },
+      { value: "tx", label: "Texas" }
+    ],
+    ca: [
+      { value: "on", label: "Ontario" },
+      { value: "bc", label: "British Columbia" },
+      { value: "qc", label: "Quebec" }
+    ],
+    uk: [
+      { value: "en", label: "England" },
+      { value: "sc", label: "Scotland" },
+      { value: "wa", label: "Wales" }
+    ]
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const newErrors = {}
+    
+    if (!formData.country) newErrors.country = "Country is required"
+    if (!formData.state) newErrors.state = "State is required"
+    if (!formData.category) newErrors.category = "Category is required"
+    
+    setErrors(newErrors)
+    
+    if (Object.keys(newErrors).length === 0) {
+      console.log("Form submitted:", formData)
+    }
+  }
+
+  return (
+    <Card className="w-full max-w-md">
+      <CardHeader>
+        <CardTitle>Location & Category</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="country">Country *</Label>
+            <Select 
+              value={formData.country} 
+              onValueChange={(value) => {
+                setFormData(prev => ({ ...prev, country: value, state: "", city: "" }))
+                setErrors(prev => ({ ...prev, country: "" }))
+              }}
+            >
+              <SelectTrigger className={errors.country ? "border-red-500" : ""}>
+                <SelectValue placeholder="Select country" />
+              </SelectTrigger>
+              <SelectContent>
+                {countries.map((country) => (
+                  <SelectItem key={country.value} value={country.value}>
+                    {country.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            {errors.country && (
+              <p className="text-sm text-red-500">{errors.country}</p>
+            )}
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="state">State/Province *</Label>
+            <Select 
+              value={formData.state} 
+              onValueChange={(value) => {
+                setFormData(prev => ({ ...prev, state: value, city: "" }))
+                setErrors(prev => ({ ...prev, state: "" }))
+              }}
+              disabled={!formData.country}
+            >
+              <SelectTrigger className={errors.state ? "border-red-500" : ""}>
+                <SelectValue placeholder="Select state" />
+              </SelectTrigger>
+              <SelectContent>
+                {formData.country && states[formData.country]?.map((state) => (
+                  <SelectItem key={state.value} value={state.value}>
+                    {state.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            {errors.state && (
+              <p className="text-sm text-red-500">{errors.state}</p>
+            )}
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="category">Category *</Label>
+            <Select 
+              value={formData.category} 
+              onValueChange={(value) => {
+                setFormData(prev => ({ ...prev, category: value }))
+                setErrors(prev => ({ ...prev, category: "" }))
+              }}
+            >
+              <SelectTrigger className={errors.category ? "border-red-500" : ""}>
+                <SelectValue placeholder="Select category" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="business">Business</SelectItem>
+                <SelectItem value="personal">Personal</SelectItem>
+                <SelectItem value="education">Education</SelectItem>
+                <SelectItem value="healthcare">Healthcare</SelectItem>
+              </SelectContent>
+            </Select>
+            {errors.category && (
+              <p className="text-sm text-red-500">{errors.category}</p>
+            )}
+          </div>
+
+          <Button type="submit" className="w-full">
+            Submit
+          </Button>
+        </form>
+      </CardContent>
+    </Card>
+  )
+}`} 
+  language="tsx" 
+  preview={<MultipleSelectsForm />} 
+/>
+
+### Custom Styling
+
+Customize the appearance of select components to match your design system.
+
+<CodePreview 
+  code={`import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { Badge } from "@/components/ui/badge"
+
+export default function CustomStyledSelect() {
+  return (
+    <div className="space-y-6">
+      <div className="space-y-2">
+        <label className="text-sm font-medium">Rounded Style</label>
+        <Select>
+          <SelectTrigger className="rounded-full border-2 border-blue-200 focus:border-blue-500 bg-blue-50">
+            <SelectValue placeholder="Choose an option" />
+          </SelectTrigger>
+          <SelectContent className="rounded-xl">
+            <SelectItem value="option1" className="rounded-lg">Option 1</SelectItem>
+            <SelectItem value="option2" className="rounded-lg">Option 2</SelectItem>
+            <SelectItem value="option3" className="rounded-lg">Option 3</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+
+      <div className="space-y-2">
+        <label className="text-sm font-medium">Minimal Style</label>
+        <Select>
+          <SelectTrigger className="border-0 border-b-2 border-gray-200 rounded-none focus:border-gray-900 bg-transparent">
+            <SelectValue placeholder="Select option" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="minimal1">Minimal Option 1</SelectItem>
+            <SelectItem value="minimal2">Minimal Option 2</SelectItem>
+            <SelectItem value="minimal3">Minimal Option 3</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+
+      <div className="space-y-2">
+        <label className="text-sm font-medium">Status with Colors</label>
+        <Select>
+          <SelectTrigger className="w-[200px]">
+            <SelectValue placeholder="Select status" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="active">
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 rounded-full bg-green-500" />
+                <span>Active</span>
+                <Badge variant="secondary" className="ml-auto">Live</Badge>
+              </div>
+            </SelectItem>
+            <SelectItem value="pending">
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 rounded-full bg-yellow-500" />
+                <span>Pending</span>
+                <Badge variant="outline" className="ml-auto">Review</Badge>
+              </div>
+            </SelectItem>
+            <SelectItem value="inactive">
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 rounded-full bg-red-500" />
+                <span>Inactive</span>
+                <Badge variant="destructive" className="ml-auto">Off</Badge>
+              </div>
+            </SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<CustomStyledSelect />} 
+/>
+
+### Search and Filter
+
+Implement search functionality within select components for large datasets.
+
+<CodePreview 
+  code={`"use client"
+
+import { useState, useMemo } from "react"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+
+const countries = [
+  "Afghanistan", "Albania", "Algeria", "Argentina", "Australia", "Austria",
+  "Bangladesh", "Belgium", "Brazil", "Bulgaria", "Canada", "Chile", "China",
+  "Colombia", "Croatia", "Czech Republic", "Denmark", "Egypt", "Finland",
+  "France", "Germany", "Greece", "Hungary", "Iceland", "India", "Indonesia",
+  "Iran", "Iraq", "Ireland", "Israel", "Italy", "Japan", "Jordan", "Kenya",
+  "South Korea", "Kuwait", "Latvia", "Lebanon", "Lithuania", "Malaysia",
+  "Mexico", "Morocco", "Netherlands", "New Zealand", "Nigeria", "Norway",
+  "Pakistan", "Peru", "Philippines", "Poland", "Portugal", "Romania",
+  "Russia", "Saudi Arabia", "Singapore", "South Africa", "Spain", "Sweden",
+  "Switzerland", "Thailand", "Turkey", "Ukraine", "United Kingdom",
+  "United States", "Venezuela", "Vietnam"
+]
+
+export default function SearchableSelect() {
+  const [searchTerm, setSearchTerm] = useState("")
+  const [selectedCountry, setSelectedCountry] = useState("")
+  const [isOpen, setIsOpen] = useState(false)
+
+  const filteredCountries = useMemo(() => {
+    return countries.filter(country =>
+      country.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+  }, [searchTerm])
+
+  return (
+    <div className="space-y-2 w-[300px]">
+      <Label>Country (Searchable)</Label>
+      <Select 
+        value={selectedCountry} 
+        onValueChange={setSelectedCountry}
+        open={isOpen}
+        onOpenChange={setIsOpen}
+      >
+        <SelectTrigger>
+          <SelectValue placeholder="Search and select country" />
+        </SelectTrigger>
+        <SelectContent>
+          <div className="p-2">
+            <Input
+              placeholder="Search countries..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="h-8"
+            />
+          </div>
+          <div className="max-h-[200px] overflow-auto">
+            {filteredCountries.length > 0 ? (
+              filteredCountries.map((country) => (
+                <SelectItem key={country} value={country.toLowerCase()}>
+                  {country}
+                </SelectItem>
+              ))
+            ) : (
+              <div className="p-2 text-sm text-muted-foreground">
+                No countries found
+              </div>
+            )}
+          </div>
+        </SelectContent>
+      </Select>
+      
+      {selectedCountry && (
+        <p className="text-sm text-muted-foreground">
+          Selected: {countries.find(c => c.toLowerCase() === selectedCountry)}
+        </p>
+      )}
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<SearchableSelect />} 
+/>

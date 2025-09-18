@@ -1,0 +1,10 @@
+export { default as BasicDialog } from "./basic-dialog";
+export { default as FormDialog } from "./form-dialog";
+export { default as ConfirmationDialog } from "./confirmation-dialog";
+export { default as CustomSizeDialog } from "./custom-size-dialog";
+export { default as UserProfileDialog } from "./user-profile-dialog";
+export { default as ProductDetailsDialog } from "./product-details-dialog";
+export { default as SettingsDialog } from "./settings-dialog";
+export { default as ImageGalleryDialog } from "./image-gallery-dialog";
+export { default as TaskCreationDialog } from "./task-creation-dialog";
+export { default as PaymentDialog } from "./payment-dialog";

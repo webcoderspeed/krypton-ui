@@ -60,8 +60,80 @@ const v1_0_0_ROUTES: EachRoute[] = [
         "href": "/components/checkbox"
       },
       {
+        "title": "Collapsible",
+        "href": "/components/collapsible"
+      },
+      {
+        "title": "Command",
+        "href": "/components/command"
+      },
+      {
+        "title": "Context Menu",
+        "href": "/components/context-menu"
+      },
+      {
+        "title": "Dialog",
+        "href": "/components/dialog"
+      },
+      {
+        "title": "Drawer",
+        "href": "/components/drawer"
+      },
+      {
+        "title": "Dropdown Menu",
+        "href": "/components/dropdown-menu"
+      },
+      {
+        "title": "Form",
+        "href": "/components/form"
+      },
+      {
+        "title": "Hover Card",
+        "href": "/components/hover-card"
+      },
+      {
         "title": "Input",
         "href": "/components/input"
+      },
+      {
+        "title": "Popover",
+        "href": "/components/popover"
+      },
+      {
+        "title": "Progress",
+        "href": "/components/progress"
+      },
+      {
+        "title": "Radio Group",
+        "href": "/components/radio-group"
+      },
+      {
+        "title": "Select",
+        "href": "/components/select"
+      },
+      {
+        "title": "Slider",
+        "href": "/components/slider"
+      },
+      {
+        "title": "Stepper",
+        "href": "/components/stepper"
+      },
+      {
+        "title": "Switch",
+        "href": "/components/switch"
+      },
+      {
+        "title": "Tabs",
+        "href": "/components/tabs"
+      },
+      {
+        "title": "Toggle",
+        "href": "/components/toggle"
+      },
+      {
+        "title": "Tooltip",
+        "href": "/components/tooltip"
       }
     ]
   },

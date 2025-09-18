@@ -1,0 +1,820 @@
+---
+title: Dropdown Menu
+description: A menu component that displays a list of actions or options when triggered, typically by clicking a button or other interactive element.
+component: true
+---
+
+A dropdown menu is a navigational component that displays a list of links, actions, or options in a floating panel. It's commonly used for user menus, action menus, and navigation dropdowns. The menu can contain various types of items including regular menu items, checkboxes, radio groups, separators, and submenus.
+
+## Import
+
+<CodePreview code="import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'" language="tsx" />
+
+## Usage
+
+### Default
+
+A basic dropdown menu with simple menu items and a button trigger.
+
+<CodePreview 
+  code={`import { Button } from "@/components/ui/button"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+
+export default function DropdownMenuDefault() {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline">Open Menu</Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-56">
+        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>Profile</DropdownMenuItem>
+        <DropdownMenuItem>Billing</DropdownMenuItem>
+        <DropdownMenuItem>Team</DropdownMenuItem>
+        <DropdownMenuItem>Subscription</DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  )
+}`} 
+  language="tsx" 
+  preview={<DropdownMenuDefault />} 
+/>
+
+### With Checkboxes
+
+A dropdown menu with checkbox items for toggling multiple options.
+
+<CodePreview 
+  code={`"use client"
+
+import { useState } from "react"
+import { Button } from "@/components/ui/button"
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+
+export default function DropdownMenuCheckboxes() {
+  const [showStatusBar, setShowStatusBar] = useState(true)
+  const [showActivityBar, setShowActivityBar] = useState(false)
+  const [showPanel, setShowPanel] = useState(false)
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline">View Options</Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-56">
+        <DropdownMenuLabel>Appearance</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuCheckboxItem
+          checked={showStatusBar}
+          onCheckedChange={setShowStatusBar}
+        >
+          Status Bar
+        </DropdownMenuCheckboxItem>
+        <DropdownMenuCheckboxItem
+          checked={showActivityBar}
+          onCheckedChange={setShowActivityBar}
+          disabled
+        >
+          Activity Bar
+        </DropdownMenuCheckboxItem>
+        <DropdownMenuCheckboxItem
+          checked={showPanel}
+          onCheckedChange={setShowPanel}
+        >
+          Panel
+        </DropdownMenuCheckboxItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  )
+}`} 
+  language="tsx" 
+  preview={<DropdownMenuCheckboxes />} 
+/>
+
+### Radio Group
+
+A dropdown menu with radio group items for selecting a single option from multiple choices.
+
+<CodePreview 
+  code={`"use client"
+
+import { useState } from "react"
+import { Button } from "@/components/ui/button"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+
+export default function DropdownMenuRadioGroup() {
+  const [position, setPosition] = useState("bottom")
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline">Panel Position</Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-56">
+        <DropdownMenuLabel>Panel Position</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuRadioGroup value={position} onValueChange={setPosition}>
+          <DropdownMenuRadioItem value="top">Top</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="bottom">Bottom</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="right">Right</DropdownMenuRadioItem>
+        </DropdownMenuRadioGroup>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  )
+}`} 
+  language="tsx" 
+  preview={<DropdownMenuRadioGroupDemo />} 
+/>
+
+### With Submenu
+
+A dropdown menu with nested submenus for organizing related actions.
+
+<CodePreview 
+  code={`import { Button } from "@/components/ui/button"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuPortal,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+
+export default function DropdownMenuSub() {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline">Open Menu</Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-56">
+        <DropdownMenuItem>New Tab</DropdownMenuItem>
+        <DropdownMenuItem>New Window</DropdownMenuItem>
+        <DropdownMenuSub>
+          <DropdownMenuSubTrigger>More Tools</DropdownMenuSubTrigger>
+          <DropdownMenuPortal>
+            <DropdownMenuSubContent>
+              <DropdownMenuItem>Save Page As...</DropdownMenuItem>
+              <DropdownMenuItem>Create Shortcut...</DropdownMenuItem>
+              <DropdownMenuItem>Name Window...</DropdownMenuItem>
+            </DropdownMenuSubContent>
+          </DropdownMenuPortal>
+        </DropdownMenuSub>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  )
+}`} 
+  language="tsx" 
+  preview={<DropdownMenuSubDemo />} 
+/>
+
+### User Profile Menu
+
+A comprehensive user profile dropdown with avatar, user info, and various account actions.
+
+<CodePreview 
+  code={`import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Button } from "@/components/ui/button"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { User, Settings, CreditCard, LogOut } from "lucide-react"
+
+export default function DropdownMenuUserProfile() {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="ghost" className="relative h-8 w-8 rounded-full">
+          <Avatar className="h-8 w-8">
+            <AvatarImage src="/avatars/01.png" alt="@johndoe" />
+            <AvatarFallback>JD</AvatarFallback>
+          </Avatar>
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-56" align="end" forceMount>
+        <DropdownMenuLabel className="font-normal">
+          <div className="flex flex-col space-y-1">
+            <p className="text-sm font-medium leading-none">John Doe</p>
+            <p className="text-xs leading-none text-muted-foreground">
+              john.doe@example.com
+            </p>
+          </div>
+        </DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>
+          <User className="mr-2 h-4 w-4" />
+          <span>Profile</span>
+          <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <CreditCard className="mr-2 h-4 w-4" />
+          <span>Billing</span>
+          <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <Settings className="mr-2 h-4 w-4" />
+          <span>Settings</span>
+          <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>
+          <LogOut className="mr-2 h-4 w-4" />
+          <span>Log out</span>
+          <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  )
+}`} 
+  language="tsx" 
+  preview={<DropdownMenuUserProfile />} 
+/>
+
+### Actions Menu
+
+A dropdown menu with common actions and keyboard shortcuts.
+
+<CodePreview 
+  code={`import { Button } from "@/components/ui/button"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { MoreHorizontal, Eye, Edit, Copy, Trash } from "lucide-react"
+
+export default function DropdownMenuActions() {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="ghost" className="h-8 w-8 p-0">
+          <span className="sr-only">Open menu</span>
+          <MoreHorizontal className="h-4 w-4" />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end">
+        <DropdownMenuItem>
+          <Eye className="mr-2 h-4 w-4" />
+          View
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <Edit className="mr-2 h-4 w-4" />
+          Edit
+          <DropdownMenuShortcut>⌘E</DropdownMenuShortcut>
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <Copy className="mr-2 h-4 w-4" />
+          Copy
+          <DropdownMenuShortcut>⌘C</DropdownMenuShortcut>
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem className="text-red-600">
+          <Trash className="mr-2 h-4 w-4" />
+          Delete
+          <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  )
+}`} 
+  language="tsx" 
+  preview={<DropdownMenuActions />} 
+/>
+
+### Settings Menu
+
+A comprehensive settings dropdown with checkboxes, submenus, and various configuration options.
+
+<CodePreview 
+  code={`"use client"
+
+import { useState } from "react"
+import { Button } from "@/components/ui/button"
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuPortal,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { Settings, Monitor, Moon, Sun, Globe } from "lucide-react"
+
+export default function DropdownMenuSettings() {
+  const [notifications, setNotifications] = useState(true)
+  const [autoSave, setAutoSave] = useState(false)
+  const [theme, setTheme] = useState("system")
+  const [language, setLanguage] = useState("en")
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline">
+          <Settings className="mr-2 h-4 w-4" />
+          Settings
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-56">
+        <DropdownMenuLabel>Preferences</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuCheckboxItem
+          checked={notifications}
+          onCheckedChange={setNotifications}
+        >
+          Enable notifications
+        </DropdownMenuCheckboxItem>
+        <DropdownMenuCheckboxItem
+          checked={autoSave}
+          onCheckedChange={setAutoSave}
+        >
+          Auto-save changes
+        </DropdownMenuCheckboxItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuSub>
+          <DropdownMenuSubTrigger>
+            <Monitor className="mr-2 h-4 w-4" />
+            Theme
+          </DropdownMenuSubTrigger>
+          <DropdownMenuPortal>
+            <DropdownMenuSubContent>
+              <DropdownMenuRadioGroup value={theme} onValueChange={setTheme}>
+                <DropdownMenuRadioItem value="light">
+                  <Sun className="mr-2 h-4 w-4" />
+                  Light
+                </DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="dark">
+                  <Moon className="mr-2 h-4 w-4" />
+                  Dark
+                </DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="system">
+                  <Monitor className="mr-2 h-4 w-4" />
+                  System
+                </DropdownMenuRadioItem>
+              </DropdownMenuRadioGroup>
+            </DropdownMenuSubContent>
+          </DropdownMenuPortal>
+        </DropdownMenuSub>
+        <DropdownMenuSub>
+          <DropdownMenuSubTrigger>
+            <Globe className="mr-2 h-4 w-4" />
+            Language
+          </DropdownMenuSubTrigger>
+          <DropdownMenuPortal>
+            <DropdownMenuSubContent>
+              <DropdownMenuRadioGroup value={language} onValueChange={setLanguage}>
+                <DropdownMenuRadioItem value="en">English</DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="es">Español</DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="fr">Français</DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="de">Deutsch</DropdownMenuRadioItem>
+              </DropdownMenuRadioGroup>
+            </DropdownMenuSubContent>
+          </DropdownMenuPortal>
+        </DropdownMenuSub>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>
+          Account Settings
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          Privacy & Security
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  )
+}`} 
+  language="tsx" 
+  preview={<DropdownMenuSettings />} 
+/>
+
+### File Operations Menu
+
+A dropdown menu for file operations with keyboard shortcuts and submenus.
+
+<CodePreview 
+  code={`import { Button } from "@/components/ui/button"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuPortal,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { 
+  File, 
+  FolderOpen, 
+  Upload, 
+  Scissors, 
+  Copy, 
+  Clipboard, 
+  FileText, 
+  Image, 
+  FileSpreadsheet 
+} from "lucide-react"
+
+export default function DropdownMenuFileOperations() {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline">
+          <File className="mr-2 h-4 w-4" />
+          File
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-56">
+        <DropdownMenuLabel>File Operations</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>
+          <File className="mr-2 h-4 w-4" />
+          New File
+          <DropdownMenuShortcut>⌘N</DropdownMenuShortcut>
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <FolderOpen className="mr-2 h-4 w-4" />
+          Open
+          <DropdownMenuShortcut>⌘O</DropdownMenuShortcut>
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <Upload className="mr-2 h-4 w-4" />
+          Upload
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>
+          <Scissors className="mr-2 h-4 w-4" />
+          Cut
+          <DropdownMenuShortcut>⌘X</DropdownMenuShortcut>
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <Copy className="mr-2 h-4 w-4" />
+          Copy
+          <DropdownMenuShortcut>⌘C</DropdownMenuShortcut>
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <Clipboard className="mr-2 h-4 w-4" />
+          Paste
+          <DropdownMenuShortcut>⌘V</DropdownMenuShortcut>
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuSub>
+          <DropdownMenuSubTrigger>
+            <FileText className="mr-2 h-4 w-4" />
+            Export As
+          </DropdownMenuSubTrigger>
+          <DropdownMenuPortal>
+            <DropdownMenuSubContent>
+              <DropdownMenuItem>
+                <FileText className="mr-2 h-4 w-4" />
+                PDF
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Image className="mr-2 h-4 w-4" />
+                PNG
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <FileSpreadsheet className="mr-2 h-4 w-4" />
+                CSV
+              </DropdownMenuItem>
+            </DropdownMenuSubContent>
+          </DropdownMenuPortal>
+        </DropdownMenuSub>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  )
+}`} 
+  language="tsx" 
+  preview={<DropdownMenuFileOperations />} 
+/>
+
+### Sort & Filter Menu
+
+A dropdown menu with sorting and filtering options using radio groups and checkboxes.
+
+<CodePreview 
+  code={`"use client"
+
+import { useState } from "react"
+import { Button } from "@/components/ui/button"
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { Filter, ArrowUpDown } from "lucide-react"
+
+export default function DropdownMenuSortFilter() {
+  const [sortBy, setSortBy] = useState("name")
+  const [showCompleted, setShowCompleted] = useState(true)
+  const [showPending, setShowPending] = useState(true)
+  const [showArchived, setShowArchived] = useState(false)
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline">
+          <Filter className="mr-2 h-4 w-4" />
+          Sort & Filter
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-56">
+        <DropdownMenuLabel>Sort by</DropdownMenuLabel>
+        <DropdownMenuRadioGroup value={sortBy} onValueChange={setSortBy}>
+          <DropdownMenuRadioItem value="name">Name</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="date">Date</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="size">Size</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="type">Type</DropdownMenuRadioItem>
+        </DropdownMenuRadioGroup>
+        <DropdownMenuSeparator />
+        <DropdownMenuLabel>Show items</DropdownMenuLabel>
+        <DropdownMenuCheckboxItem
+          checked={showCompleted}
+          onCheckedChange={setShowCompleted}
+        >
+          Completed
+        </DropdownMenuCheckboxItem>
+        <DropdownMenuCheckboxItem
+          checked={showPending}
+          onCheckedChange={setShowPending}
+        >
+          Pending
+        </DropdownMenuCheckboxItem>
+        <DropdownMenuCheckboxItem
+          checked={showArchived}
+          onCheckedChange={setShowArchived}
+        >
+          Archived
+        </DropdownMenuCheckboxItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>Reset filters</DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  )
+}`} 
+  language="tsx" 
+  preview={<DropdownMenuSortFilter />} 
+/>
+
+### Context Menu
+
+A context menu that appears when right-clicking on an element.
+
+<CodePreview 
+  code={`"use client"
+
+import { useState } from "react"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { 
+  Copy, 
+  Edit, 
+  Trash, 
+  Share, 
+  Download, 
+  Star, 
+  Archive,
+  MoreHorizontal 
+} from "lucide-react"
+
+export default function DropdownMenuContext() {
+  const [isOpen, setIsOpen] = useState(false)
+
+  return (
+    <div className="flex items-center justify-center p-8">
+      <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
+        <DropdownMenuTrigger asChild>
+          <div
+            className="w-64 h-32 border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center cursor-pointer hover:border-gray-400 transition-colors"
+            onContextMenu={(e) => {
+              e.preventDefault()
+              setIsOpen(true)
+            }}
+          >
+            <div className="text-center">
+              <MoreHorizontal className="h-8 w-8 mx-auto mb-2 text-gray-400" />
+              <p className="text-sm text-gray-500">Right-click me</p>
+            </div>
+          </div>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent className="w-56">
+          <DropdownMenuItem>
+            <Edit className="mr-2 h-4 w-4" />
+            Edit
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <Copy className="mr-2 h-4 w-4" />
+            Copy
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <Star className="mr-2 h-4 w-4" />
+            Add to favorites
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuSub>
+            <DropdownMenuSubTrigger>
+              <Share className="mr-2 h-4 w-4" />
+              Share
+            </DropdownMenuSubTrigger>
+            <DropdownMenuSubContent>
+              <DropdownMenuItem>Copy link</DropdownMenuItem>
+              <DropdownMenuItem>Email</DropdownMenuItem>
+              <DropdownMenuItem>Social media</DropdownMenuItem>
+            </DropdownMenuSubContent>
+          </DropdownMenuSub>
+          <DropdownMenuItem>
+            <Download className="mr-2 h-4 w-4" />
+            Download
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem>
+            <Archive className="mr-2 h-4 w-4" />
+            Archive
+          </DropdownMenuItem>
+          <DropdownMenuItem className="text-red-600">
+            <Trash className="mr-2 h-4 w-4" />
+            Delete
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<DropdownMenuContext />} 
+/>
+
+## API Reference
+
+### DropdownMenu
+
+The root component that manages the dropdown menu state.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `defaultOpen` | `boolean` | `false` | The open state of the dropdown menu when it is initially rendered. |
+| `open` | `boolean` | - | The controlled open state of the dropdown menu. |
+| `onOpenChange` | `(open: boolean) => void` | - | Event handler called when the open state changes. |
+| `modal` | `boolean` | `true` | The modality of the dropdown menu. |
+
+### DropdownMenuTrigger
+
+The button that toggles the dropdown menu.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `asChild` | `boolean` | `false` | Change the default rendered element for the one passed as a child. |
+
+### DropdownMenuContent
+
+The component that pops out when the dropdown menu is open.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `align` | `"start" \| "center" \| "end"` | `"center"` | The preferred alignment against the trigger. |
+| `alignOffset` | `number` | `0` | An offset in pixels from the "start" or "end" alignment options. |
+| `side` | `"top" \| "right" \| "bottom" \| "left"` | `"bottom"` | The preferred side of the trigger to render against. |
+| `sideOffset` | `number` | `0` | The distance in pixels from the trigger. |
+| `forceMount` | `boolean` | - | Used to force mounting when more control is needed. |
+
+### DropdownMenuItem
+
+The component that contains the dropdown menu items.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `asChild` | `boolean` | `false` | Change the default rendered element for the one passed as a child. |
+| `disabled` | `boolean` | `false` | When true, prevents the user from interacting with the item. |
+| `onSelect` | `(event: Event) => void` | - | Event handler called when the user selects an item. |
+
+### DropdownMenuCheckboxItem
+
+An item that can be controlled and rendered like a checkbox.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `checked` | `boolean \| "indeterminate"` | - | The controlled checked state of the item. |
+| `onCheckedChange` | `(checked: boolean) => void` | - | Event handler called when the checked state changes. |
+| `disabled` | `boolean` | `false` | When true, prevents the user from interacting with the item. |
+
+### DropdownMenuRadioGroup
+
+Used to group multiple `DropdownMenuRadioItem`s.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `value` | `string` | - | The value of the selected item in the group. |
+| `onValueChange` | `(value: string) => void` | - | Event handler called when the value changes. |
+
+### DropdownMenuRadioItem
+
+An item that can be controlled and rendered like a radio button.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `value` | `string` | - | The unique value of the item. |
+| `disabled` | `boolean` | `false` | When true, prevents the user from interacting with the item. |
+
+### DropdownMenuLabel
+
+Used to render a label. It won't be focusable using arrow keys.
+
+### DropdownMenuSeparator
+
+Used to visually separate items in the dropdown menu.
+
+### DropdownMenuShortcut
+
+A utility component for displaying keyboard shortcuts.
+
+### DropdownMenuSub
+
+Contains all the parts of a submenu.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `defaultOpen` | `boolean` | `false` | The open state of the submenu when it is initially rendered. |
+| `open` | `boolean` | - | The controlled open state of the submenu. |
+| `onOpenChange` | `(open: boolean) => void` | - | Event handler called when the open state changes. |
+
+### DropdownMenuSubTrigger
+
+An item that opens a submenu.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `asChild` | `boolean` | `false` | Change the default rendered element for the one passed as a child. |
+| `disabled` | `boolean` | `false` | When true, prevents the user from interacting with the item. |
+
+### DropdownMenuSubContent
+
+The component that pops out when a submenu is open.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `forceMount` | `boolean` | - | Used to force mounting when more control is needed. |
+
+### DropdownMenuPortal
+
+When used, portals the content part into the body.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `forceMount` | `boolean` | - | Used to force mounting when more control is needed. |
+| `container` | `HTMLElement` | `document.body` | Specify a container element to portal the content into. |
