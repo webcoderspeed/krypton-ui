@@ -1,0 +1,1030 @@
+---
+title: Switch
+description: A control that allows the user to toggle between checked and not checked.
+component: true
+---
+
+## Import
+
+<CodePreview code="import { Switch } from '@/components/ui/switch'" language="tsx" />
+
+## Usage
+
+### Default
+
+A basic switch component with a label.
+
+<CodePreview 
+  code={`import { Switch } from "@/components/ui/switch"
+import { Label } from "@/components/ui/label"
+
+export default function SwitchDefault() {
+  return (
+    <div className="flex items-center space-x-2">
+      <Switch id="airplane-mode" />
+      <Label htmlFor="airplane-mode">Airplane Mode</Label>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<SwitchDefault />} 
+/>
+
+### Controlled
+
+Control the switch state programmatically using React state.
+
+<CodePreview 
+  code={`"use client"
+
+import { useState } from "react"
+import { Switch } from "@/components/ui/switch"
+import { Label } from "@/components/ui/label"
+
+export default function SwitchControlled() {
+  const [isChecked, setIsChecked] = useState(false)
+
+  return (
+    <div className="space-y-4">
+      <div className="flex items-center space-x-2">
+        <Switch 
+          id="controlled-switch" 
+          checked={isChecked}
+          onCheckedChange={setIsChecked}
+        />
+        <Label htmlFor="controlled-switch">
+          {isChecked ? "Enabled" : "Disabled"}
+        </Label>
+      </div>
+      <p className="text-sm text-muted-foreground">
+        Current state: {isChecked ? "On" : "Off"}
+      </p>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<SwitchControlled />} 
+/>
+
+### Disabled
+
+Show disabled switches in both off and on states.
+
+<CodePreview 
+  code={`import { Switch } from "@/components/ui/switch"
+import { Label } from "@/components/ui/label"
+
+export default function SwitchDisabled() {
+  return (
+    <div className="space-y-4">
+      <div className="flex items-center space-x-2">
+        <Switch id="disabled-off" disabled />
+        <Label htmlFor="disabled-off">Disabled (Off)</Label>
+      </div>
+      <div className="flex items-center space-x-2">
+        <Switch id="disabled-on" disabled checked />
+        <Label htmlFor="disabled-on">Disabled (On)</Label>
+      </div>
+    </div>
+  )
+}`} 
+  language="tsx" 
+  preview={<SwitchDisabled />} 
+/>
+
+## Real-World Examples
+
+### Form Integration
+
+Use switches in forms to collect user preferences.
+
+<CodePreview 
+  code={`"use client"
+
+import { useState } from "react"
+import { Switch } from "@/components/ui/switch"
+import { Label } from "@/components/ui/label"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+
+export default function SwitchWithForm() {
+  const [preferences, setPreferences] = useState({
+    notifications: false,
+    marketing: false,
+    analytics: true,
+  })
+
+  const handleSave = () => {
+    console.log("Preferences saved:", preferences)
+  }
+
+  return (
+    <Card className="w-full max-w-md">
+      <CardHeader>
+        <CardTitle>Preferences</CardTitle>
+        <CardDescription>
+          Manage your account preferences and settings.
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-6">
+        <div className="flex items-center justify-between">
+          <div className="space-y-0.5">
+            <Label htmlFor="notifications">Push Notifications</Label>
+            <p className="text-sm text-muted-foreground">
+              Receive notifications about your account activity.
+            </p>
+          </div>
+          <Switch
+            id="notifications"
+            checked={preferences.notifications}
+            onCheckedChange={(checked) =>
+              setPreferences(prev => ({ ...prev, notifications: checked }))
+            }
+          />
+        </div>
+        
+        <div className="flex items-center justify-between">
+          <div className="space-y-0.5">
+            <Label htmlFor="marketing">Marketing Emails</Label>
+            <p className="text-sm text-muted-foreground">
+              Receive emails about new products and features.
+            </p>
+          </div>
+          <Switch
+            id="marketing"
+            checked={preferences.marketing}
+            onCheckedChange={(checked) =>
+              setPreferences(prev => ({ ...prev, marketing: checked }))
+            }
+          />
+        </div>
+        
+        <div className="flex items-center justify-between">
+          <div className="space-y-0.5">
+            <Label htmlFor="analytics">Analytics</Label>
+            <p className="text-sm text-muted-foreground">
+              Help us improve by sharing usage data.
+            </p>
+          </div>
+          <Switch
+            id="analytics"
+            checked={preferences.analytics}
+            onCheckedChange={(checked) =>
+              setPreferences(prev => ({ ...prev, analytics: checked }))
+            }
+          />
+        </div>
+        
+        <Button onClick={handleSave} className="w-full">
+          Save Preferences
+        </Button>
+      </CardContent>
+    </Card>
+  )
+}`} 
+  language="tsx" 
+  preview={<SwitchWithForm />} 
+/>
+
+### Theme Toggle
+
+Create a theme toggle switch with visual feedback.
+
+<CodePreview 
+  code={`"use client"
+
+import { useState } from "react"
+import { Switch } from "@/components/ui/switch"
+import { Label } from "@/components/ui/label"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Moon, Sun } from "lucide-react"
+
+export default function SwitchThemeToggle() {
+  const [isDarkMode, setIsDarkMode] = useState(false)
+
+  return (
+    <Card className="w-full max-w-sm">
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2">
+          {isDarkMode ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
+          Theme Settings
+        </CardTitle>
+        <CardDescription>
+          Choose your preferred theme appearance.
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <div className="flex items-center justify-between">
+          <div className="space-y-0.5">
+            <Label htmlFor="theme-toggle">
+              {isDarkMode ? "Dark Mode" : "Light Mode"}
+            </Label>
+            <p className="text-sm text-muted-foreground">
+              {isDarkMode 
+                ? "Switch to light mode for better visibility in bright environments" 
+                : "Switch to dark mode for reduced eye strain in low light"
+              }
+            </p>
+          </div>
+          <Switch
+            id="theme-toggle"
+            checked={isDarkMode}
+            onCheckedChange={setIsDarkMode}
+          />
+        </div>
+      </CardContent>
+    </Card>
+  )
+}`} 
+  language="tsx" 
+  preview={<SwitchThemeToggle />} 
+/>
+
+### Privacy Settings
+
+Comprehensive privacy settings panel with multiple switches.
+
+<CodePreview 
+  code={`"use client"
+
+import { useState } from "react"
+import { Switch } from "@/components/ui/switch"
+import { Label } from "@/components/ui/label"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Shield, Eye, Users, MessageSquare } from "lucide-react"
+
+export default function SwitchPrivacySettings() {
+  const [settings, setSettings] = useState({
+    profileVisibility: true,
+    activityStatus: false,
+    dataSharing: false,
+    readReceipts: true,
+  })
+
+  const updateSetting = (key: keyof typeof settings, value: boolean) => {
+    setSettings(prev => ({ ...prev, [key]: value }))
+  }
+
+  return (
+    <Card className="w-full max-w-lg">
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2">
+          <Shield className="h-5 w-5" />
+          Privacy Settings
+        </CardTitle>
+        <CardDescription>
+          Control how your information is shared and displayed.
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-6">
+        <div className="flex items-center justify-between">
+          <div className="space-y-0.5 flex-1">
+            <Label htmlFor="profile-visibility" className="flex items-center gap-2">
+              <Users className="h-4 w-4" />
+              Profile Visibility
+            </Label>
+            <p className="text-sm text-muted-foreground">
+              Allow others to see your profile information
+            </p>
+          </div>
+          <Switch
+            id="profile-visibility"
+            checked={settings.profileVisibility}
+            onCheckedChange={(checked) => updateSetting('profileVisibility', checked)}
+          />
+        </div>
+
+        <div className="flex items-center justify-between">
+          <div className="space-y-0.5 flex-1">
+            <Label htmlFor="activity-status" className="flex items-center gap-2">
+              <Eye className="h-4 w-4" />
+              Activity Status
+            </Label>
+            <p className="text-sm text-muted-foreground">
+              Show when you&apos;re online or active
+            </p>
+          </div>
+          <Switch
+            id="activity-status"
+            checked={settings.activityStatus}
+            onCheckedChange={(checked) => updateSetting('activityStatus', checked)}
+          />
+        </div>
+
+        <div className="flex items-center justify-between">
+          <div className="space-y-0.5 flex-1">
+            <Label htmlFor="data-sharing" className="flex items-center gap-2">
+              <Shield className="h-4 w-4" />
+              Data Sharing
+            </Label>
+            <p className="text-sm text-muted-foreground">
+              Share anonymized usage data to improve our services
+            </p>
+          </div>
+          <Switch
+            id="data-sharing"
+            checked={settings.dataSharing}
+            onCheckedChange={(checked) => updateSetting('dataSharing', checked)}
+          />
+        </div>
+
+        <div className="flex items-center justify-between">
+          <div className="space-y-0.5 flex-1">
+            <Label htmlFor="read-receipts" className="flex items-center gap-2">
+              <MessageSquare className="h-4 w-4" />
+              Read Receipts
+            </Label>
+            <p className="text-sm text-muted-foreground">
+              Let others know when you&apos;ve read their messages
+            </p>
+          </div>
+          <Switch
+            id="read-receipts"
+            checked={settings.readReceipts}
+            onCheckedChange={(checked) => updateSetting('readReceipts', checked)}
+          />
+        </div>
+      </CardContent>
+    </Card>
+  )
+}`} 
+  language="tsx" 
+  preview={<SwitchPrivacySettings />} 
+/>
+
+### Feature Flags
+
+Developer-focused feature flags panel for enabling beta features.
+
+<CodePreview 
+  code={`"use client"
+
+import { useState } from "react"
+import { Switch } from "@/components/ui/switch"
+import { Label } from "@/components/ui/label"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Code, Zap, Settings, Bug } from "lucide-react"
+
+export default function SwitchFeatureFlags() {
+  const [features, setFeatures] = useState({
+    betaFeatures: false,
+    experimentalUI: false,
+    advancedMode: true,
+    debugMode: false,
+  })
+
+  const updateFeature = (key: keyof typeof features, value: boolean) => {
+    setFeatures(prev => ({ ...prev, [key]: value }))
+  }
+
+  return (
+    <Card className="w-full max-w-lg">
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2">
+          <Code className="h-5 w-5" />
+          Feature Flags
+        </CardTitle>
+        <CardDescription>
+          Enable experimental features and developer tools.
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-6">
+        <div className="flex items-center justify-between">
+          <div className="space-y-0.5 flex-1">
+            <Label htmlFor="beta-features" className="flex items-center gap-2">
+              <Zap className="h-4 w-4" />
+              Beta Features
+            </Label>
+            <p className="text-sm text-muted-foreground">
+              Access to new features before they&apos;re released
+            </p>
+          </div>
+          <Switch
+            id="beta-features"
+            checked={features.betaFeatures}
+            onCheckedChange={(checked) => updateFeature('betaFeatures', checked)}
+          />
+        </div>
+
+        <div className="flex items-center justify-between">
+          <div className="space-y-0.5 flex-1">
+            <Label htmlFor="experimental-ui" className="flex items-center gap-2">
+              <Settings className="h-4 w-4" />
+              Experimental UI
+            </Label>
+            <p className="text-sm text-muted-foreground">
+              Try out new interface designs and layouts
+            </p>
+          </div>
+          <Switch
+            id="experimental-ui"
+            checked={features.experimentalUI}
+            onCheckedChange={(checked) => updateFeature('experimentalUI', checked)}
+          />
+        </div>
+
+        <div className="flex items-center justify-between">
+          <div className="space-y-0.5 flex-1">
+            <Label htmlFor="advanced-mode" className="flex items-center gap-2">
+              <Code className="h-4 w-4" />
+              Advanced Mode
+            </Label>
+            <p className="text-sm text-muted-foreground">
+              Show additional options and technical details
+            </p>
+          </div>
+          <Switch
+            id="advanced-mode"
+            checked={features.advancedMode}
+            onCheckedChange={(checked) => updateFeature('advancedMode', checked)}
+          />
+        </div>
+
+        <div className="flex items-center justify-between">
+          <div className="space-y-0.5 flex-1">
+            <Label htmlFor="debug-mode" className="flex items-center gap-2">
+              <Bug className="h-4 w-4" />
+              Debug Mode
+            </Label>
+            <p className="text-sm text-muted-foreground">
+              Enable debugging tools and verbose logging
+            </p>
+          </div>
+          <Switch
+            id="debug-mode"
+            checked={features.debugMode}
+            onCheckedChange={(checked) => updateFeature('debugMode', checked)}
+          />
+        </div>
+      </CardContent>
+    </Card>
+  )
+}`} 
+  language="tsx" 
+  preview={<SwitchFeatureFlags />} 
+/>
+
+### Device Settings
+
+Mobile-style device settings with various system toggles.
+
+<CodePreview 
+  code={`"use client"
+
+import { useState } from "react"
+import { Switch } from "@/components/ui/switch"
+import { Label } from "@/components/ui/label"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Wifi, Bluetooth, Volume2, Vibrate, RotateCcw, Battery } from "lucide-react"
+
+export default function SwitchDeviceSettings() {
+  const [settings, setSettings] = useState({
+    wifi: true,
+    bluetooth: false,
+    sound: true,
+    vibration: true,
+    autoRotate: false,
+    batterySaver: false,
+  })
+
+  const updateSetting = (key: keyof typeof settings, value: boolean) => {
+    setSettings(prev => ({ ...prev, [key]: value }))
+  }
+
+  return (
+    <Card className="w-full max-w-lg">
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2">
+          <Settings className="h-5 w-5" />
+          Device Settings
+        </CardTitle>
+        <CardDescription>
+          Manage your device connectivity and preferences.
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-6">
+        <div className="flex items-center justify-between">
+          <div className="space-y-0.5 flex-1">
+            <Label htmlFor="wifi" className="flex items-center gap-2">
+              <Wifi className="h-4 w-4" />
+              Wi-Fi
+            </Label>
+            <p className="text-sm text-muted-foreground">
+              Connect to wireless networks
+            </p>
+          </div>
+          <Switch
+            id="wifi"
+            checked={settings.wifi}
+            onCheckedChange={(checked) => updateSetting('wifi', checked)}
+          />
+        </div>
+
+        <div className="flex items-center justify-between">
+          <div className="space-y-0.5 flex-1">
+            <Label htmlFor="bluetooth" className="flex items-center gap-2">
+              <Bluetooth className="h-4 w-4" />
+              Bluetooth
+            </Label>
+            <p className="text-sm text-muted-foreground">
+              Connect to nearby devices
+            </p>
+          </div>
+          <Switch
+            id="bluetooth"
+            checked={settings.bluetooth}
+            onCheckedChange={(checked) => updateSetting('bluetooth', checked)}
+          />
+        </div>
+
+        <div className="flex items-center justify-between">
+          <div className="space-y-0.5 flex-1">
+            <Label htmlFor="sound" className="flex items-center gap-2">
+              <Volume2 className="h-4 w-4" />
+              Sound
+            </Label>
+            <p className="text-sm text-muted-foreground">
+              Enable system sounds and notifications
+            </p>
+          </div>
+          <Switch
+            id="sound"
+            checked={settings.sound}
+            onCheckedChange={(checked) => updateSetting('sound', checked)}
+          />
+        </div>
+
+        <div className="flex items-center justify-between">
+          <div className="space-y-0.5 flex-1">
+            <Label htmlFor="vibration" className="flex items-center gap-2">
+              <Vibrate className="h-4 w-4" />
+              Vibration
+            </Label>
+            <p className="text-sm text-muted-foreground">
+              Vibrate for calls and notifications
+            </p>
+          </div>
+          <Switch
+            id="vibration"
+            checked={settings.vibration}
+            onCheckedChange={(checked) => updateSetting('vibration', checked)}
+          />
+        </div>
+
+        <div className="flex items-center justify-between">
+          <div className="space-y-0.5 flex-1">
+            <Label htmlFor="auto-rotate" className="flex items-center gap-2">
+              <RotateCcw className="h-4 w-4" />
+              Auto-rotate
+            </Label>
+            <p className="text-sm text-muted-foreground">
+              Automatically rotate screen orientation
+            </p>
+          </div>
+          <Switch
+            id="auto-rotate"
+            checked={settings.autoRotate}
+            onCheckedChange={(checked) => updateSetting('autoRotate', checked)}
+          />
+        </div>
+
+        <div className="flex items-center justify-between">
+          <div className="space-y-0.5 flex-1">
+            <Label htmlFor="battery-saver" className="flex items-center gap-2">
+              <Battery className="h-4 w-4" />
+              Battery Saver
+            </Label>
+            <p className="text-sm text-muted-foreground">
+              Reduce power consumption to extend battery life
+            </p>
+          </div>
+          <Switch
+            id="battery-saver"
+            checked={settings.batterySaver}
+            onCheckedChange={(checked) => updateSetting('batterySaver', checked)}
+          />
+        </div>
+      </CardContent>
+    </Card>
+  )
+}`} 
+  language="tsx" 
+  preview={<SwitchDeviceSettings />} 
+/>
+
+### Dashboard Widgets
+
+Control which widgets are displayed on a dashboard.
+
+<CodePreview 
+  code={`"use client"
+
+import { useState } from "react"
+import { Switch } from "@/components/ui/switch"
+import { Label } from "@/components/ui/label"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { BarChart3, Users, DollarSign, TrendingUp, Calendar, Bell } from "lucide-react"
+
+export default function SwitchDashboardWidgets() {
+  const [widgets, setWidgets] = useState({
+    analytics: true,
+    salesChart: true,
+    userMetrics: false,
+    revenue: true,
+    calendar: false,
+    notifications: true,
+  })
+
+  const updateWidget = (key: keyof typeof widgets, value: boolean) => {
+    setWidgets(prev => ({ ...prev, [key]: value }))
+  }
+
+  return (
+    <Card className="w-full max-w-lg">
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2">
+          <BarChart3 className="h-5 w-5" />
+          Dashboard Widgets
+        </CardTitle>
+        <CardDescription>
+          Choose which widgets to display on your dashboard.
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-6">
+        <div className="flex items-center justify-between">
+          <div className="space-y-0.5 flex-1">
+            <Label htmlFor="analytics" className="flex items-center gap-2">
+              <BarChart3 className="h-4 w-4" />
+              Analytics Overview
+            </Label>
+            <p className="text-sm text-muted-foreground">
+              Show website traffic and engagement metrics
+            </p>
+          </div>
+          <Switch
+            id="analytics"
+            checked={widgets.analytics}
+            onCheckedChange={(checked) => updateWidget('analytics', checked)}
+          />
+        </div>
+
+        <div className="flex items-center justify-between">
+          <div className="space-y-0.5 flex-1">
+            <Label htmlFor="sales-chart" className="flex items-center gap-2">
+              <TrendingUp className="h-4 w-4" />
+              Sales Chart
+            </Label>
+            <p className="text-sm text-muted-foreground">
+              Display sales performance over time
+            </p>
+          </div>
+          <Switch
+            id="sales-chart"
+            checked={widgets.salesChart}
+            onCheckedChange={(checked) => updateWidget('salesChart', checked)}
+          />
+        </div>
+
+        <div className="flex items-center justify-between">
+          <div className="space-y-0.5 flex-1">
+            <Label htmlFor="user-metrics" className="flex items-center gap-2">
+              <Users className="h-4 w-4" />
+              User Metrics
+            </Label>
+            <p className="text-sm text-muted-foreground">
+              Show active users and registration stats
+            </p>
+          </div>
+          <Switch
+            id="user-metrics"
+            checked={widgets.userMetrics}
+            onCheckedChange={(checked) => updateWidget('userMetrics', checked)}
+          />
+        </div>
+
+        <div className="flex items-center justify-between">
+          <div className="space-y-0.5 flex-1">
+            <Label htmlFor="revenue" className="flex items-center gap-2">
+              <DollarSign className="h-4 w-4" />
+              Revenue Tracker
+            </Label>
+            <p className="text-sm text-muted-foreground">
+              Track monthly and yearly revenue
+            </p>
+          </div>
+          <Switch
+            id="revenue"
+            checked={widgets.revenue}
+            onCheckedChange={(checked) => updateWidget('revenue', checked)}
+          />
+        </div>
+
+        <div className="flex items-center justify-between">
+          <div className="space-y-0.5 flex-1">
+            <Label htmlFor="calendar" className="flex items-center gap-2">
+              <Calendar className="h-4 w-4" />
+              Calendar Widget
+            </Label>
+            <p className="text-sm text-muted-foreground">
+              Show upcoming events and meetings
+            </p>
+          </div>
+          <Switch
+            id="calendar"
+            checked={widgets.calendar}
+            onCheckedChange={(checked) => updateWidget('calendar', checked)}
+          />
+        </div>
+
+        <div className="flex items-center justify-between">
+          <div className="space-y-0.5 flex-1">
+            <Label htmlFor="notifications" className="flex items-center gap-2">
+              <Bell className="h-4 w-4" />
+              Notifications Panel
+            </Label>
+            <p className="text-sm text-muted-foreground">
+              Display recent notifications and alerts
+            </p>
+          </div>
+          <Switch
+            id="notifications"
+            checked={widgets.notifications}
+            onCheckedChange={(checked) => updateWidget('notifications', checked)}
+          />
+        </div>
+      </CardContent>
+    </Card>
+  )
+}`} 
+  language="tsx" 
+  preview={<SwitchDashboardWidgets />} 
+/>
+
+### Accessibility Settings
+
+Comprehensive accessibility options for better user experience.
+
+<CodePreview 
+  code={`"use client"
+
+import { useState } from "react"
+import { Switch } from "@/components/ui/switch"
+import { Label } from "@/components/ui/label"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Accessibility, Type, Volume2, MousePointer, Eye, Keyboard } from "lucide-react"
+
+export default function SwitchAccessibility() {
+  const [settings, setSettings] = useState({
+    highContrast: false,
+    largeText: false,
+    screenReader: true,
+    reduceMotion: false,
+    keyboardNav: true,
+    audioDescriptions: false,
+  })
+
+  const updateSetting = (key: keyof typeof settings, value: boolean) => {
+    setSettings(prev => ({ ...prev, [key]: value }))
+  }
+
+  return (
+    <Card className="w-full max-w-lg">
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2">
+          <Accessibility className="h-5 w-5" />
+          Accessibility Settings
+        </CardTitle>
+        <CardDescription>
+          Customize your experience for better accessibility.
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-6">
+        <div className="flex items-center justify-between">
+          <div className="space-y-0.5 flex-1">
+            <Label htmlFor="high-contrast" className="flex items-center gap-2">
+              <Eye className="h-4 w-4" />
+              High Contrast
+            </Label>
+            <p className="text-sm text-muted-foreground">
+              Increase contrast for better visibility
+            </p>
+          </div>
+          <Switch
+            id="high-contrast"
+            checked={settings.highContrast}
+            onCheckedChange={(checked) => updateSetting('highContrast', checked)}
+          />
+        </div>
+
+        <div className="flex items-center justify-between">
+          <div className="space-y-0.5 flex-1">
+            <Label htmlFor="large-text" className="flex items-center gap-2">
+              <Type className="h-4 w-4" />
+              Large Text
+            </Label>
+            <p className="text-sm text-muted-foreground">
+              Increase text size for better readability
+            </p>
+          </div>
+          <Switch
+            id="large-text"
+            checked={settings.largeText}
+            onCheckedChange={(checked) => updateSetting('largeText', checked)}
+          />
+        </div>
+
+        <div className="flex items-center justify-between">
+          <div className="space-y-0.5 flex-1">
+            <Label htmlFor="screen-reader" className="flex items-center gap-2">
+              <Volume2 className="h-4 w-4" />
+              Screen Reader Support
+            </Label>
+            <p className="text-sm text-muted-foreground">
+              Enable enhanced screen reader compatibility
+            </p>
+          </div>
+          <Switch
+            id="screen-reader"
+            checked={settings.screenReader}
+            onCheckedChange={(checked) => updateSetting('screenReader', checked)}
+          />
+        </div>
+
+        <div className="flex items-center justify-between">
+          <div className="space-y-0.5 flex-1">
+            <Label htmlFor="reduce-motion" className="flex items-center gap-2">
+              <MousePointer className="h-4 w-4" />
+              Reduce Motion
+            </Label>
+            <p className="text-sm text-muted-foreground">
+              Minimize animations and transitions
+            </p>
+          </div>
+          <Switch
+            id="reduce-motion"
+            checked={settings.reduceMotion}
+            onCheckedChange={(checked) => updateSetting('reduceMotion', checked)}
+          />
+        </div>
+
+        <div className="flex items-center justify-between">
+          <div className="space-y-0.5 flex-1">
+            <Label htmlFor="keyboard-nav" className="flex items-center gap-2">
+              <Keyboard className="h-4 w-4" />
+              Enhanced Keyboard Navigation
+            </Label>
+            <p className="text-sm text-muted-foreground">
+              Improve keyboard-only navigation experience
+            </p>
+          </div>
+          <Switch
+            id="keyboard-nav"
+            checked={settings.keyboardNav}
+            onCheckedChange={(checked) => updateSetting('keyboardNav', checked)}
+          />
+        </div>
+
+        <div className="flex items-center justify-between">
+          <div className="space-y-0.5 flex-1">
+            <Label htmlFor="audio-descriptions" className="flex items-center gap-2">
+              <Volume2 className="h-4 w-4" />
+              Audio Descriptions
+            </Label>
+            <p className="text-sm text-muted-foreground">
+              Enable audio descriptions for visual content
+            </p>
+          </div>
+          <Switch
+            id="audio-descriptions"
+            checked={settings.audioDescriptions}
+            onCheckedChange={(checked) => updateSetting('audioDescriptions', checked)}
+          />
+        </div>
+      </CardContent>
+    </Card>
+  )
+}`} 
+  language="tsx" 
+  preview={<SwitchAccessibility />} 
+/>
+
+## API Reference
+
+### Switch
+
+Built on top of [Radix Switch](https://www.radix-ui.com/docs/primitives/components/switch).
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `checked` | `boolean` | - | The controlled checked state of the switch. |
+| `defaultChecked` | `boolean` | `false` | The checked state of the switch when it is initially rendered. |
+| `onCheckedChange` | `(checked: boolean) => void` | - | Event handler called when the checked state changes. |
+| `disabled` | `boolean` | `false` | When `true`, prevents the user from interacting with the switch. |
+| `required` | `boolean` | `false` | When `true`, indicates that the user must check the switch before the owning form can be submitted. |
+| `name` | `string` | - | The name of the switch. Submitted with its owning form as part of a name/value pair. |
+| `value` | `string` | `"on"` | The value given as data when submitted with a `name`. |
+| `id` | `string` | - | The id of the switch. |
+| `className` | `string` | - | Additional CSS classes to apply to the switch. |
+
+## Accessibility
+
+The Switch component follows WAI-ARIA guidelines:
+
+- Uses semantic `role="switch"` for proper screen reader support
+- Supports keyboard navigation with **Space** and **Enter** keys
+- Provides proper focus management and visual focus indicators
+- Includes `aria-checked` attribute to communicate state
+- Supports `aria-labelledby` and `aria-describedby` for enhanced labeling
+- Works with form libraries and validation
+
+### Keyboard Navigation
+
+- **Space** or **Enter**: Toggles the switch state
+- **Tab**: Moves focus to the next focusable element
+- **Shift + Tab**: Moves focus to the previous focusable element
+
+## Best Practices
+
+1. **Always provide labels**: Use the Label component or aria-label for accessibility
+2. **Use descriptive text**: Make it clear what the switch controls
+3. **Consider the default state**: Choose sensible defaults for your use case
+4. **Group related switches**: Use consistent spacing and grouping for related options
+5. **Provide feedback**: Consider showing the current state in the label or description
+6. **Handle loading states**: Disable switches during async operations
+7. **Form integration**: Use proper form handling for data persistence
+
+## Examples in Context
+
+### Settings Form
+
+```tsx
+<form onSubmit={handleSubmit}>
+  <div className="space-y-4">
+    <div className="flex items-center justify-between">
+      <Label htmlFor="notifications">Email Notifications</Label>
+      <Switch
+        id="notifications"
+        name="notifications"
+        checked={settings.notifications}
+        onCheckedChange={(checked) => 
+          setSettings(prev => ({ ...prev, notifications: checked }))
+        }
+      />
+    </div>
+    <Button type="submit">Save Settings</Button>
+  </div>
+</form>
+```
+
+### Feature Toggle
+
+```tsx
+const [isEnabled, setIsEnabled] = useState(false)
+
+return (
+  <div className="flex items-center space-x-2">
+    <Switch
+      id="feature-toggle"
+      checked={isEnabled}
+      onCheckedChange={setIsEnabled}
+    />
+    <Label htmlFor="feature-toggle">
+      Enable Beta Features {isEnabled && "(Active)"}
+    </Label>
+  </div>
+)
+```
+
+### Conditional Rendering
+
+```tsx
+const [showAdvanced, setShowAdvanced] = useState(false)
+
+return (
+  <div className="space-y-4">
+    <div className="flex items-center space-x-2">
+      <Switch
+        id="advanced-mode"
+        checked={showAdvanced}
+        onCheckedChange={setShowAdvanced}
+      />
+      <Label htmlFor="advanced-mode">Show Advanced Options</Label>
+    </div>
+    
+    {showAdvanced && (
+      <div className="border rounded-lg p-4">
+        {/* Advanced options */}
+      </div>
+    )}
+  </div>
+)
+```
+
+## Dependencies
+
+The Switch component depends on:
+
+- `@radix-ui/react-switch` - Provides the accessible switch primitive
+- `class-variance-authority` - For component styling variants
+- `clsx` - For conditional CSS classes
+- `tailwind-merge` - For merging Tailwind classes

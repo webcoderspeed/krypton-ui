@@ -92,6 +92,10 @@ const v1_0_0_ROUTES: EachRoute[] = [
         "href": "/components/slider"
       },
       {
+        "title": "Switch",
+        "href": "/components/switch"
+      },
+      {
         "title": "Tabs",
         "href": "/components/tabs"
       }

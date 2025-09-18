@@ -317,6 +317,19 @@ import {
   SliderTemperature,
   SliderProgress,
 } from "@/components/playground/slider";
+import { Switch } from "@/components/ui/switch";
+import {
+  SwitchDefault,
+  SwitchControlled,
+  SwitchDisabled,
+  SwitchWithForm,
+  SwitchThemeToggle,
+  SwitchPrivacySettings,
+  SwitchFeatureFlags,
+  SwitchDeviceSettings,
+  SwitchDashboardWidgets,
+  SwitchAccessibility,
+} from "@/components/playground/switch";
 
 const components = {
   LucideIcon,
@@ -570,6 +583,17 @@ const components = {
   SliderBrightness,
   SliderTemperature,
   SliderProgress,
+  Switch,
+  SwitchDefault,
+  SwitchControlled,
+  SwitchDisabled,
+  SwitchWithForm,
+  SwitchThemeToggle,
+  SwitchPrivacySettings,
+  SwitchFeatureFlags,
+  SwitchDeviceSettings,
+  SwitchDashboardWidgets,
+  SwitchAccessibility,
 };
 async function parseMdx<Frontmatter>(rawMdx: string) {
   return await compileMDX<Frontmatter>({
