@@ -429,6 +429,19 @@ import {
   DropdownMenuSortFilter,
   DropdownMenuContext,
 } from "@/components/playground/dropdown-menu";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import {
+  RadioGroupDefault,
+  RadioGroupControlled,
+  RadioGroupDisabled,
+  RadioGroupForm,
+  RadioGroupPayment,
+  RadioGroupShipping,
+  RadioGroupSurvey,
+  RadioGroupNotifications,
+  RadioGroupTheme,
+  RadioGroupProduct,
+} from "@/components/playground/radio-group";
 
 const components = {
   LucideIcon,
@@ -774,6 +787,18 @@ const components = {
   DropdownMenuFileOperations,
   DropdownMenuSortFilter,
   DropdownMenuContext,
+  RadioGroup,
+  RadioGroupItem,
+  RadioGroupDefault,
+  RadioGroupControlled,
+  RadioGroupDisabled,
+  RadioGroupForm,
+  RadioGroupPayment,
+  RadioGroupShipping,
+  RadioGroupSurvey,
+  RadioGroupNotifications,
+  RadioGroupTheme,
+  RadioGroupProduct,
 };
 async function parseMdx<Frontmatter>(rawMdx: string) {
   return await compileMDX<Frontmatter>({

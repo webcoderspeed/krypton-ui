@@ -100,6 +100,10 @@ const v1_0_0_ROUTES: EachRoute[] = [
         "href": "/components/progress"
       },
       {
+        "title": "Radio Group",
+        "href": "/components/radio-group"
+      },
+      {
         "title": "Select",
         "href": "/components/select"
       },
