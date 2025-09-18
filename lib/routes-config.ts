@@ -96,6 +96,10 @@ const v1_0_0_ROUTES: EachRoute[] = [
         "href": "/components/input"
       },
       {
+        "title": "Input Otp",
+        "href": "/components/input-otp"
+      },
+      {
         "title": "Popover",
         "href": "/components/popover"
       },

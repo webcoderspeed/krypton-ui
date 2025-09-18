@@ -467,6 +467,18 @@ import {
   ToggleMediaPlayer,
   ToggleFeatureFlags,
 } from "@/components/playground/toggle";
+import {
+  InputOTPDefault,
+  InputOTPWithSeparator,
+  InputOTPControlled,
+  InputOTPCustomLength,
+  InputOTPLoginVerification,
+  InputOTPPaymentConfirmation,
+  InputOTPAccountRecovery,
+  InputOTPMultiFactorAuth,
+  InputOTPBankingTransaction,
+  InputOTPEmailVerification,
+} from "@/components/playground/input-otp";
 
 const components = {
   LucideIcon,
@@ -845,6 +857,16 @@ const components = {
   ToggleFilterPanel,
   ToggleMediaPlayer,
   ToggleFeatureFlags,
+  InputOTPDefault,
+  InputOTPWithSeparator,
+  InputOTPControlled,
+  InputOTPCustomLength,
+  InputOTPLoginVerification,
+  InputOTPPaymentConfirmation,
+  InputOTPAccountRecovery,
+  InputOTPMultiFactorAuth,
+  InputOTPBankingTransaction,
+  InputOTPEmailVerification,
 };
 async function parseMdx<Frontmatter>(rawMdx: string) {
   return await compileMDX<Frontmatter>({
