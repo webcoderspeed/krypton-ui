@@ -1,0 +1,1109 @@
+---
+title: Drawer
+description: A drawer component that slides in from the bottom of the screen. Perfect for mobile interfaces, navigation menus, and quick actions.
+component: true
+---
+
+## Import
+
+<CodePreview code="import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from '@/components/ui/drawer'" language="tsx" />
+
+## Usage
+
+### Default
+
+A basic drawer with a trigger button, header, content, and footer.
+
+<CodePreview 
+  code={`import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer"
+import { Button } from "@/components/ui/button"
+
+export default function DrawerDefault() {
+  return (
+    <Drawer>
+      <DrawerTrigger asChild>
+        <Button variant="outline">Open Drawer</Button>
+      </DrawerTrigger>
+      <DrawerContent>
+        <DrawerHeader>
+          <DrawerTitle>Are you absolutely sure?</DrawerTitle>
+          <DrawerDescription>This action cannot be undone.</DrawerDescription>
+        </DrawerHeader>
+        <div className="p-4">
+          <p>This is the drawer content. You can put any content here.</p>
+        </div>
+        <DrawerFooter>
+          <Button>Submit</Button>
+          <DrawerClose asChild>
+            <Button variant="outline">Cancel</Button>
+          </DrawerClose>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
+  )
+}`} 
+  language="tsx" 
+  preview={<DrawerDefault />} 
+/>
+
+### Simple
+
+A minimal drawer with just essential content.
+
+<CodePreview 
+  code={`import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer"
+import { Button } from "@/components/ui/button"
+
+export default function DrawerSimple() {
+  return (
+    <Drawer>
+      <DrawerTrigger asChild>
+        <Button>Simple Drawer</Button>
+      </DrawerTrigger>
+      <DrawerContent>
+        <DrawerHeader>
+          <DrawerTitle>Simple Drawer</DrawerTitle>
+        </DrawerHeader>
+        <div className="p-4 pb-8">
+          <p className="text-sm text-muted-foreground">
+            This is a simple drawer with minimal content.
+          </p>
+        </div>
+      </DrawerContent>
+    </Drawer>
+  )
+}`} 
+  language="tsx" 
+  preview={<DrawerSimple />} 
+/>
+
+### With Form
+
+A drawer containing form elements for user input.
+
+<CodePreview 
+  code={`import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Textarea } from "@/components/ui/textarea"
+
+export default function DrawerWithForm() {
+  return (
+    <Drawer>
+      <DrawerTrigger asChild>
+        <Button variant="outline">Edit Profile</Button>
+      </DrawerTrigger>
+      <DrawerContent>
+        <DrawerHeader>
+          <DrawerTitle>Edit Profile</DrawerTitle>
+          <DrawerDescription>
+            Make changes to your profile here. Click save when you're done.
+          </DrawerDescription>
+        </DrawerHeader>
+        <div className="p-4 space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="name">Name</Label>
+            <Input id="name" placeholder="Enter your name" />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="email">Email</Label>
+            <Input id="email" type="email" placeholder="Enter your email" />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="bio">Bio</Label>
+            <Textarea id="bio" placeholder="Tell us about yourself" />
+          </div>
+        </div>
+        <DrawerFooter>
+          <Button>Save Changes</Button>
+          <DrawerClose asChild>
+            <Button variant="outline">Cancel</Button>
+          </DrawerClose>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
+  )
+}`} 
+  language="tsx" 
+  preview={<DrawerWithForm />} 
+/>
+
+### Scrollable Content
+
+A drawer with scrollable content for handling long text or multiple sections.
+
+<CodePreview 
+  code={`import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer"
+import { Button } from "@/components/ui/button"
+
+export default function DrawerScrollable() {
+  return (
+    <Drawer>
+      <DrawerTrigger asChild>
+        <Button variant="outline">View Terms</Button>
+      </DrawerTrigger>
+      <DrawerContent className="max-h-[80vh]">
+        <DrawerHeader>
+          <DrawerTitle>Terms and Conditions</DrawerTitle>
+          <DrawerDescription>
+            Please read our terms and conditions carefully.
+          </DrawerDescription>
+        </DrawerHeader>
+        <div className="p-4 overflow-y-auto">
+          <div className="space-y-4 text-sm">
+            <section>
+              <h3 className="font-semibold mb-2">1. Acceptance of Terms</h3>
+              <p>By accessing and using this service, you accept and agree to be bound by the terms and provision of this agreement.</p>
+            </section>
+            <section>
+              <h3 className="font-semibold mb-2">2. Use License</h3>
+              <p>Permission is granted to temporarily download one copy of the materials on our website for personal, non-commercial transitory viewing only.</p>
+            </section>
+            <section>
+              <h3 className="font-semibold mb-2">3. Disclaimer</h3>
+              <p>The materials on our website are provided on an 'as is' basis. We make no warranties, expressed or implied, and hereby disclaim and negate all other warranties including without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.</p>
+            </section>
+            <section>
+              <h3 className="font-semibold mb-2">4. Limitations</h3>
+              <p>In no event shall our company or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on our website, even if we or our authorized representative has been notified orally or in writing of the possibility of such damage.</p>
+            </section>
+            <section>
+              <h3 className="font-semibold mb-2">5. Privacy Policy</h3>
+              <p>Your privacy is important to us. Our Privacy Policy explains how we collect, use, and protect your information when you use our service.</p>
+            </section>
+          </div>
+        </div>
+        <DrawerFooter>
+          <Button>Accept</Button>
+          <DrawerClose asChild>
+            <Button variant="outline">Decline</Button>
+          </DrawerClose>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
+  )
+}`} 
+  language="tsx" 
+  preview={<DrawerScrollable />} 
+/>
+
+## Real-World Examples
+
+### Shopping Cart
+
+A comprehensive shopping cart drawer with item management and checkout functionality.
+
+<CodePreview 
+  code={`import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer"
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+import { Separator } from "@/components/ui/separator"
+import { ShoppingCart, Plus, Minus, X } from "lucide-react"
+
+export default function DrawerShoppingCart() {
+  const cartItems = [
+    { id: 1, name: "Wireless Headphones", price: 99.99, quantity: 1, image: "/api/placeholder/60/60" },
+    { id: 2, name: "Smart Watch", price: 299.99, quantity: 2, image: "/api/placeholder/60/60" },
+    { id: 3, name: "Phone Case", price: 24.99, quantity: 1, image: "/api/placeholder/60/60" },
+  ]
+
+  const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0)
+  const shipping = 9.99
+  const tax = subtotal * 0.08
+  const total = subtotal + shipping + tax
+
+  return (
+    <Drawer>
+      <DrawerTrigger asChild>
+        <Button variant="outline" className="relative">
+          <ShoppingCart className="h-4 w-4 mr-2" />
+          Cart
+          <Badge variant="destructive" className="ml-2 h-5 w-5 rounded-full p-0 text-xs">
+            {cartItems.reduce((sum, item) => sum + item.quantity, 0)}
+          </Badge>
+        </Button>
+      </DrawerTrigger>
+      <DrawerContent className="max-h-[90vh]">
+        <DrawerHeader>
+          <DrawerTitle>Shopping Cart</DrawerTitle>
+          <DrawerDescription>
+            Review your items and proceed to checkout
+          </DrawerDescription>
+        </DrawerHeader>
+        <div className="p-4 overflow-y-auto">
+          <div className="space-y-4">
+            {cartItems.map((item) => (
+              <div key={item.id} className="flex items-center gap-4 p-3 border rounded-lg">
+                <div className="w-15 h-15 bg-muted rounded-md flex items-center justify-center">
+                  <span className="text-xs">IMG</span>
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-medium">{item.name}</h4>
+                  <p className="text-sm text-muted-foreground">\${item.price}</p>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Button variant="outline" size="icon" className="h-8 w-8">
+                    <Minus className="h-3 w-3" />
+                  </Button>
+                  <span className="w-8 text-center">{item.quantity}</span>
+                  <Button variant="outline" size="icon" className="h-8 w-8">
+                    <Plus className="h-3 w-3" />
+                  </Button>
+                </div>
+                <Button variant="ghost" size="icon" className="h-8 w-8">
+                  <X className="h-3 w-3" />
+                </Button>
+              </div>
+            ))}
+          </div>
+          <Separator className="my-4" />
+          <div className="space-y-2">
+            <div className="flex justify-between text-sm">
+              <span>Subtotal</span>
+              <span>\${subtotal.toFixed(2)}</span>
+            </div>
+            <div className="flex justify-between text-sm">
+              <span>Shipping</span>
+              <span>\${shipping.toFixed(2)}</span>
+            </div>
+            <div className="flex justify-between text-sm">
+              <span>Tax</span>
+              <span>\${tax.toFixed(2)}</span>
+            </div>
+            <Separator />
+            <div className="flex justify-between font-medium">
+              <span>Total</span>
+              <span>\${total.toFixed(2)}</span>
+            </div>
+          </div>
+        </div>
+        <DrawerFooter>
+          <Button className="w-full">Proceed to Checkout</Button>
+          <DrawerClose asChild>
+            <Button variant="outline">Continue Shopping</Button>
+          </DrawerClose>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
+  )
+}`} 
+  language="tsx" 
+  preview={<DrawerShoppingCart />} 
+/>
+
+### User Profile
+
+A user profile drawer displaying account information and quick actions.
+
+<CodePreview 
+  code={`import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer"
+import { Button } from "@/components/ui/button"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Badge } from "@/components/ui/badge"
+import { Separator } from "@/components/ui/separator"
+import { User, Mail, Phone, MapPin, Calendar, Settings, LogOut } from "lucide-react"
+
+export default function DrawerUserProfile() {
+  return (
+    <Drawer>
+      <DrawerTrigger asChild>
+        <Button variant="ghost" className="flex items-center gap-2">
+          <Avatar className="h-8 w-8">
+            <AvatarImage src="/api/placeholder/32/32" />
+            <AvatarFallback>JD</AvatarFallback>
+          </Avatar>
+          <span>John Doe</span>
+        </Button>
+      </DrawerTrigger>
+      <DrawerContent>
+        <DrawerHeader>
+          <div className="flex items-center gap-4">
+            <Avatar className="h-16 w-16">
+              <AvatarImage src="/api/placeholder/64/64" />
+              <AvatarFallback>JD</AvatarFallback>
+            </Avatar>
+            <div>
+              <DrawerTitle>John Doe</DrawerTitle>
+              <DrawerDescription>Premium Member</DrawerDescription>
+              <Badge variant="secondary" className="mt-1">Pro</Badge>
+            </div>
+          </div>
+        </DrawerHeader>
+        <div className="p-4 space-y-4">
+          <div className="space-y-3">
+            <div className="flex items-center gap-3">
+              <Mail className="h-4 w-4 text-muted-foreground" />
+              <span className="text-sm">john.doe@example.com</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <Phone className="h-4 w-4 text-muted-foreground" />
+              <span className="text-sm">+1 (555) 123-4567</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <MapPin className="h-4 w-4 text-muted-foreground" />
+              <span className="text-sm">San Francisco, CA</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <Calendar className="h-4 w-4 text-muted-foreground" />
+              <span className="text-sm">Member since Jan 2023</span>
+            </div>
+          </div>
+          <Separator />
+          <div className="grid grid-cols-3 gap-4 text-center">
+            <div>
+              <p className="text-2xl font-bold">127</p>
+              <p className="text-xs text-muted-foreground">Orders</p>
+            </div>
+            <div>
+              <p className="text-2xl font-bold">4.9</p>
+              <p className="text-xs text-muted-foreground">Rating</p>
+            </div>
+            <div>
+              <p className="text-2xl font-bold">2.1K</p>
+              <p className="text-xs text-muted-foreground">Points</p>
+            </div>
+          </div>
+          <Separator />
+          <div className="space-y-2">
+            <Button variant="ghost" className="w-full justify-start">
+              <Settings className="h-4 w-4 mr-2" />
+              Account Settings
+            </Button>
+            <Button variant="ghost" className="w-full justify-start">
+              <User className="h-4 w-4 mr-2" />
+              Edit Profile
+            </Button>
+          </div>
+        </div>
+        <DrawerFooter>
+          <Button variant="outline" className="w-full">
+            <LogOut className="h-4 w-4 mr-2" />
+            Sign Out
+          </Button>
+          <DrawerClose asChild>
+            <Button variant="ghost">Close</Button>
+          </DrawerClose>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
+  )
+}`} 
+  language="tsx" 
+  preview={<DrawerUserProfile />} 
+/>
+
+### Notification Center
+
+A notification center drawer showing recent activities and updates.
+
+<CodePreview 
+  code={`import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer"
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+import { Bell, Check, X, Mail, ShoppingCart, User, AlertCircle } from "lucide-react"
+
+export default function DrawerNotificationCenter() {
+  const notifications = [
+    {
+      id: 1,
+      type: "order",
+      title: "Order Shipped",
+      message: "Your order #12345 has been shipped and is on its way.",
+      time: "2 minutes ago",
+      unread: true,
+      icon: ShoppingCart,
+    },
+    {
+      id: 2,
+      type: "message",
+      title: "New Message",
+      message: "You have received a new message from Sarah.",
+      time: "1 hour ago",
+      unread: true,
+      icon: Mail,
+    },
+    {
+      id: 3,
+      type: "system",
+      title: "System Update",
+      message: "A new system update is available for download.",
+      time: "3 hours ago",
+      unread: false,
+      icon: AlertCircle,
+    },
+    {
+      id: 4,
+      type: "social",
+      title: "New Follower",
+      message: "Alex started following you.",
+      time: "1 day ago",
+      unread: false,
+      icon: User,
+    },
+  ]
+
+  const unreadCount = notifications.filter(n => n.unread).length
+
+  return (
+    <Drawer>
+      <DrawerTrigger asChild>
+        <Button variant="outline" className="relative">
+          <Bell className="h-4 w-4" />
+          {unreadCount > 0 && (
+            <Badge variant="destructive" className="absolute -top-2 -right-2 h-5 w-5 rounded-full p-0 text-xs">
+              {unreadCount}
+            </Badge>
+          )}
+        </Button>
+      </DrawerTrigger>
+      <DrawerContent className="max-h-[80vh]">
+        <DrawerHeader>
+          <div className="flex items-center justify-between">
+            <div>
+              <DrawerTitle>Notifications</DrawerTitle>
+              <DrawerDescription>
+                You have {unreadCount} unread notifications
+              </DrawerDescription>
+            </div>
+            <Button variant="ghost" size="sm">
+              <Check className="h-4 w-4 mr-1" />
+              Mark all read
+            </Button>
+          </div>
+        </DrawerHeader>
+        <div className="p-4 overflow-y-auto">
+          <div className="space-y-3">
+            {notifications.map((notification) => {
+              const IconComponent = notification.icon
+              return (
+                <div
+                  key={notification.id}
+                  className={\`flex items-start gap-3 p-3 rounded-lg border \${
+                    notification.unread ? "bg-muted/50" : ""
+                  }\`}
+                >
+                  <div className="flex-shrink-0">
+                    <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+                      <IconComponent className="h-4 w-4 text-primary" />
+                    </div>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center justify-between">
+                      <h4 className="text-sm font-medium">{notification.title}</h4>
+                      {notification.unread && (
+                        <div className="w-2 h-2 bg-blue-500 rounded-full flex-shrink-0" />
+                      )}
+                    </div>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      {notification.message}
+                    </p>
+                    <p className="text-xs text-muted-foreground mt-2">
+                      {notification.time}
+                    </p>
+                  </div>
+                  <Button variant="ghost" size="icon" className="h-8 w-8 flex-shrink-0">
+                    <X className="h-3 w-3" />
+                  </Button>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+        <DrawerFooter>
+          <Button variant="outline">View All Notifications</Button>
+          <DrawerClose asChild>
+            <Button variant="ghost">Close</Button>
+          </DrawerClose>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
+  )
+}`} 
+  language="tsx" 
+  preview={<DrawerNotificationCenter />} 
+/>
+
+### Mobile Menu
+
+A mobile navigation menu drawer with user info and menu items.
+
+<CodePreview 
+  code={`import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer"
+import { Button } from "@/components/ui/button"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Badge } from "@/components/ui/badge"
+import { Separator } from "@/components/ui/separator"
+import { 
+  Menu, 
+  Home, 
+  Search, 
+  Heart, 
+  ShoppingBag, 
+  User, 
+  Settings, 
+  HelpCircle, 
+  LogOut,
+  ChevronRight
+} from "lucide-react"
+
+export default function DrawerMobileMenu() {
+  const mainMenuItems = [
+    { icon: Home, label: "Home", badge: null },
+    { icon: Search, label: "Discover", badge: null },
+    { icon: Heart, label: "Favorites", badge: "12" },
+    { icon: ShoppingBag, label: "Orders", badge: "3" },
+  ]
+
+  const secondaryMenuItems = [
+    { icon: User, label: "Profile" },
+    { icon: Settings, label: "Settings" },
+    { icon: HelpCircle, label: "Help & Support" },
+  ]
+
+  return (
+    <Drawer>
+      <DrawerTrigger asChild>
+        <Button variant="ghost" size="icon">
+          <Menu className="h-5 w-5" />
+        </Button>
+      </DrawerTrigger>
+      <DrawerContent>
+        <DrawerHeader>
+          <div className="flex items-center gap-3">
+            <Avatar className="h-12 w-12">
+              <AvatarImage src="/api/placeholder/48/48" />
+              <AvatarFallback>JD</AvatarFallback>
+            </Avatar>
+            <div>
+              <DrawerTitle className="text-left">John Doe</DrawerTitle>
+              <p className="text-sm text-muted-foreground">john.doe@example.com</p>
+            </div>
+            <Badge variant="secondary" className="ml-auto">Pro</Badge>
+          </div>
+        </DrawerHeader>
+        <div className="p-4 space-y-4">
+          <div className="space-y-1">
+            {mainMenuItems.map((item) => {
+              const IconComponent = item.icon
+              return (
+                <Button
+                  key={item.label}
+                  variant="ghost"
+                  className="w-full justify-between h-12"
+                >
+                  <div className="flex items-center gap-3">
+                    <IconComponent className="h-5 w-5" />
+                    <span>{item.label}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    {item.badge && (
+                      <Badge variant="secondary" className="h-5">
+                        {item.badge}
+                      </Badge>
+                    )}
+                    <ChevronRight className="h-4 w-4 text-muted-foreground" />
+                  </div>
+                </Button>
+              )
+            })}
+          </div>
+          <Separator />
+          <div className="space-y-1">
+            {secondaryMenuItems.map((item) => {
+              const IconComponent = item.icon
+              return (
+                <Button
+                  key={item.label}
+                  variant="ghost"
+                  className="w-full justify-between h-12"
+                >
+                  <div className="flex items-center gap-3">
+                    <IconComponent className="h-5 w-5" />
+                    <span>{item.label}</span>
+                  </div>
+                  <ChevronRight className="h-4 w-4 text-muted-foreground" />
+                </Button>
+              )
+            })}
+          </div>
+        </div>
+        <DrawerFooter>
+          <Button variant="outline" className="w-full">
+            <LogOut className="h-4 w-4 mr-2" />
+            Sign Out
+          </Button>
+          <DrawerClose asChild>
+            <Button variant="ghost">Close Menu</Button>
+          </DrawerClose>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
+  )
+}`} 
+  language="tsx" 
+  preview={<DrawerMobileMenu />} 
+/>
+
+### Filter Panel
+
+A filter panel drawer for e-commerce or search interfaces with various filter options.
+
+<CodePreview 
+  code={`import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer"
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+import { Checkbox } from "@/components/ui/checkbox"
+import { Slider } from "@/components/ui/slider"
+import { Separator } from "@/components/ui/separator"
+import { Filter, X, Star } from "lucide-react"
+
+export default function DrawerFilterPanel() {
+  const activeFilters = ["Electronics", "4+ Stars", "$50-$200"]
+  
+  const categories = [
+    { id: "electronics", label: "Electronics", count: 1234 },
+    { id: "clothing", label: "Clothing", count: 856 },
+    { id: "home", label: "Home & Garden", count: 432 },
+    { id: "sports", label: "Sports", count: 298 },
+    { id: "books", label: "Books", count: 167 },
+  ]
+
+  const brands = [
+    { id: "apple", label: "Apple", count: 89 },
+    { id: "samsung", label: "Samsung", count: 76 },
+    { id: "nike", label: "Nike", count: 54 },
+    { id: "adidas", label: "Adidas", count: 43 },
+    { id: "sony", label: "Sony", count: 32 },
+  ]
+
+  return (
+    <Drawer>
+      <DrawerTrigger asChild>
+        <Button variant="outline" className="relative">
+          <Filter className="h-4 w-4 mr-2" />
+          Filters
+          {activeFilters.length > 0 && (
+            <Badge variant="destructive" className="ml-2 h-5 w-5 rounded-full p-0 text-xs">
+              {activeFilters.length}
+            </Badge>
+          )}
+        </Button>
+      </DrawerTrigger>
+      <DrawerContent className="max-h-[90vh]">
+        <DrawerHeader>
+          <DrawerTitle>Filters</DrawerTitle>
+          <DrawerDescription>
+            Refine your search results
+          </DrawerDescription>
+          {activeFilters.length > 0 && (
+            <div className="flex flex-wrap gap-2 mt-3">
+              {activeFilters.map((filter) => (
+                <Badge key={filter} variant="secondary" className="gap-1">
+                  {filter}
+                  <X className="h-3 w-3 cursor-pointer" />
+                </Badge>
+              ))}
+            </div>
+          )}
+        </DrawerHeader>
+        <div className="p-4 overflow-y-auto space-y-6">
+          <div>
+            <h3 className="font-medium mb-3">Price Range</h3>
+            <div className="space-y-3">
+              <Slider
+                defaultValue={[50, 200]}
+                max={500}
+                min={0}
+                step={10}
+                className="w-full"
+              />
+              <div className="flex justify-between text-sm text-muted-foreground">
+                <span>$0</span>
+                <span>$50 - $200</span>
+                <span>$500</span>
+              </div>
+            </div>
+          </div>
+          
+          <Separator />
+          
+          <div>
+            <h3 className="font-medium mb-3">Categories</h3>
+            <div className="space-y-3">
+              {categories.map((category) => (
+                <div key={category.id} className="flex items-center justify-between">
+                  <div className="flex items-center space-x-2">
+                    <Checkbox id={category.id} />
+                    <label
+                      htmlFor={category.id}
+                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    >
+                      {category.label}
+                    </label>
+                  </div>
+                  <span className="text-xs text-muted-foreground">
+                    ({category.count})
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          <Separator />
+          
+          <div>
+            <h3 className="font-medium mb-3">Brands</h3>
+            <div className="space-y-3">
+              {brands.map((brand) => (
+                <div key={brand.id} className="flex items-center justify-between">
+                  <div className="flex items-center space-x-2">
+                    <Checkbox id={brand.id} />
+                    <label
+                      htmlFor={brand.id}
+                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    >
+                      {brand.label}
+                    </label>
+                  </div>
+                  <span className="text-xs text-muted-foreground">
+                    ({brand.count})
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          <Separator />
+          
+          <div>
+            <h3 className="font-medium mb-3">Rating</h3>
+            <div className="space-y-3">
+              {[5, 4, 3, 2, 1].map((rating) => (
+                <div key={rating} className="flex items-center space-x-2">
+                  <Checkbox id={\`rating-\${rating}\`} />
+                  <label
+                    htmlFor={\`rating-\${rating}\`}
+                    className="flex items-center gap-1 text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                  >
+                    <div className="flex">
+                      {Array.from({ length: 5 }).map((_, i) => (
+                        <Star
+                          key={i}
+                          className={\`h-3 w-3 \${
+                            i < rating ? "fill-yellow-400 text-yellow-400" : "text-gray-300"
+                          }\`}
+                        />
+                      ))}
+                    </div>
+                    <span>{rating}+ Stars</span>
+                  </label>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        <DrawerFooter>
+          <Button>Apply Filters</Button>
+          <div className="flex gap-2">
+            <Button variant="outline" className="flex-1">Clear All</Button>
+            <DrawerClose asChild>
+              <Button variant="ghost" className="flex-1">Cancel</Button>
+            </DrawerClose>
+          </div>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
+  )
+}`} 
+  language="tsx" 
+  preview={<DrawerFilterPanel />} 
+/>
+
+## API Reference
+
+### Drawer
+
+The root drawer component that manages the drawer state.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `open` | `boolean` | - | The controlled open state of the drawer |
+| `onOpenChange` | `(open: boolean) => void` | - | Event handler called when the open state changes |
+| `shouldScaleBackground` | `boolean` | `true` | Whether the background should scale when the drawer is open |
+| `modal` | `boolean` | `true` | Whether the drawer should be modal |
+| `children` | `ReactNode` | - | The drawer content |
+
+### DrawerTrigger
+
+The element that triggers the drawer. Must be a single focusable element.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `asChild` | `boolean` | `false` | Change the default rendered element for the one passed as a child |
+| `children` | `ReactNode` | - | The element that triggers the drawer |
+
+### DrawerContent
+
+The container for the drawer content that slides in from the bottom.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes to apply |
+| `children` | `ReactNode` | - | The content of the drawer |
+
+### DrawerHeader
+
+The header section of the drawer, typically containing the title and description.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes to apply |
+| `children` | `ReactNode` | - | The header content |
+
+### DrawerTitle
+
+The title of the drawer. Important for accessibility.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes to apply |
+| `children` | `ReactNode` | - | The title content |
+
+### DrawerDescription
+
+The description of the drawer. Provides additional context.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes to apply |
+| `children` | `ReactNode` | - | The description content |
+
+### DrawerFooter
+
+The footer section of the drawer, typically containing action buttons.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes to apply |
+| `children` | `ReactNode` | - | The footer content |
+
+### DrawerClose
+
+A button that closes the drawer when clicked.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `asChild` | `boolean` | `false` | Change the default rendered element for the one passed as a child |
+| `children` | `ReactNode` | - | The close button content |
+
+## Accessibility
+
+The Drawer component follows WAI-ARIA guidelines and includes:
+
+### Keyboard Support
+
+| Key | Description |
+|-----|-------------|
+| `Escape` | Closes the drawer when it's open |
+| `Tab` | Moves focus to the next focusable element within the drawer |
+| `Shift + Tab` | Moves focus to the previous focusable element within the drawer |
+
+### Screen Reader Support
+
+- Uses proper ARIA attributes for drawer identification
+- Drawer content is announced when opened
+- Focus is trapped within the drawer when open
+- Focus returns to the trigger element when closed
+- Supports both mouse and keyboard interactions
+
+### Focus Management
+
+- Automatically focuses the drawer content when opened
+- Traps focus within the drawer while open
+- Returns focus to the trigger element when closed
+- Supports custom focus management with proper ARIA attributes
+
+## Best Practices
+
+1. **Mobile-First Design**: Drawers are primarily designed for mobile interfaces
+2. **Keep Content Focused**: Limit drawer content to essential information and actions
+3. **Use Clear Headers**: Always include a descriptive title and optional description
+4. **Provide Clear Actions**: Include obvious close buttons and primary action buttons
+5. **Consider Height**: Ensure content fits comfortably within the drawer height
+6. **Handle Scrolling**: Use scrollable content for long lists or forms
+7. **Test on Devices**: Always test drawer interactions on actual mobile devices
+8. **Backdrop Interaction**: Allow users to close the drawer by tapping the backdrop
+
+## Examples in Context
+
+### Basic Drawer
+
+```tsx
+<Drawer>
+  <DrawerTrigger asChild>
+    <Button>Open Drawer</Button>
+  </DrawerTrigger>
+  <DrawerContent>
+    <DrawerHeader>
+      <DrawerTitle>Drawer Title</DrawerTitle>
+      <DrawerDescription>Drawer description goes here.</DrawerDescription>
+    </DrawerHeader>
+    <div className="p-4">
+      <p>Drawer content goes here.</p>
+    </div>
+    <DrawerFooter>
+      <Button>Action</Button>
+      <DrawerClose asChild>
+        <Button variant="outline">Cancel</Button>
+      </DrawerClose>
+    </DrawerFooter>
+  </DrawerContent>
+</Drawer>
+```
+
+### Controlled Drawer
+
+```tsx
+const [open, setOpen] = useState(false)
+
+return (
+  <Drawer open={open} onOpenChange={setOpen}>
+    <DrawerTrigger asChild>
+      <Button>Open Controlled Drawer</Button>
+    </DrawerTrigger>
+    <DrawerContent>
+      <DrawerHeader>
+        <DrawerTitle>Controlled Drawer</DrawerTitle>
+      </DrawerHeader>
+      <div className="p-4">
+        <Button onClick={() => setOpen(false)}>
+          Close Programmatically
+        </Button>
+      </div>
+    </DrawerContent>
+  </Drawer>
+)
+```
+
+### Drawer with Form
+
+```tsx
+<Drawer>
+  <DrawerTrigger asChild>
+    <Button>Edit Profile</Button>
+  </DrawerTrigger>
+  <DrawerContent>
+    <DrawerHeader>
+      <DrawerTitle>Edit Profile</DrawerTitle>
+      <DrawerDescription>
+        Make changes to your profile here.
+      </DrawerDescription>
+    </DrawerHeader>
+    <form className="p-4 space-y-4">
+      <div>
+        <Label htmlFor="name">Name</Label>
+        <Input id="name" placeholder="Your name" />
+      </div>
+      <div>
+        <Label htmlFor="email">Email</Label>
+        <Input id="email" type="email" placeholder="Your email" />
+      </div>
+    </form>
+    <DrawerFooter>
+      <Button type="submit">Save Changes</Button>
+      <DrawerClose asChild>
+        <Button variant="outline">Cancel</Button>
+      </DrawerClose>
+    </DrawerFooter>
+  </DrawerContent>
+</Drawer>
+```
+
+## Dependencies
+
+The Drawer component depends on:
+
+- `vaul` - The underlying drawer primitive that provides smooth animations and gestures
+- `@radix-ui/react-dialog` - For dialog primitives and accessibility features
+- `class-variance-authority` - For variant management
+- `clsx` - For conditional class names
+- `tailwind-merge` - For merging Tailwind classes

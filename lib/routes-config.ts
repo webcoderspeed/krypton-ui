@@ -76,6 +76,10 @@ const v1_0_0_ROUTES: EachRoute[] = [
         "href": "/components/dialog"
       },
       {
+        "title": "Drawer",
+        "href": "/components/drawer"
+      },
+      {
         "title": "Hover Card",
         "href": "/components/hover-card"
       },

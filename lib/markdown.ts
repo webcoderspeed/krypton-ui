@@ -373,6 +373,17 @@ import {
   HoverCardNotifications,
   HoverCardSocialMedia,
 } from "@/components/playground/hover-card";
+import {
+  DrawerDefault,
+  DrawerSimple,
+  DrawerWithForm,
+  DrawerScrollable,
+  DrawerShoppingCart,
+  DrawerUserProfile,
+  DrawerNotificationCenter,
+  DrawerMobileMenu,
+  DrawerFilterPanel,
+} from "@/components/playground/drawer";
 
 const components = {
   LucideIcon,
@@ -672,6 +683,15 @@ const components = {
   HoverCardAnalytics,
   HoverCardNotifications,
   HoverCardSocialMedia,
+  DrawerDefault,
+  DrawerSimple,
+  DrawerWithForm,
+  DrawerScrollable,
+  DrawerShoppingCart,
+  DrawerUserProfile,
+  DrawerNotificationCenter,
+  DrawerMobileMenu,
+  DrawerFilterPanel,
 };
 async function parseMdx<Frontmatter>(rawMdx: string) {
   return await compileMDX<Frontmatter>({
