@@ -1,0 +1,757 @@
+---
+title: Input OTP
+description: Accessible one-time password component with customizable inputs and separators. Perfect for authentication flows, verification processes, and secure user interactions.
+component: true
+---
+
+## Import
+
+<CodePreview code="import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from '@/components/ui/input-otp'" language="tsx" />
+
+## Usage
+
+### Default
+
+A basic 6-digit OTP input with default styling and behavior.
+
+<CodePreview 
+  code={`import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSlot,
+} from "@/components/ui/input-otp";
+
+export default function InputOTPDefault() {
+  return (
+    <InputOTP maxLength={6}>
+      <InputOTPGroup>
+        <InputOTPSlot index={0} />
+        <InputOTPSlot index={1} />
+        <InputOTPSlot index={2} />
+        <InputOTPSlot index={3} />
+        <InputOTPSlot index={4} />
+        <InputOTPSlot index={5} />
+      </InputOTPGroup>
+    </InputOTP>
+  );
+}`} 
+  language="tsx" 
+  preview={<InputOTPDefault />} 
+/>
+
+### With Separator
+
+OTP input with visual separators to group digits for better readability.
+
+<CodePreview 
+  code={`import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSeparator,
+  InputOTPSlot,
+} from "@/components/ui/input-otp";
+
+export default function InputOTPWithSeparator() {
+  return (
+    <InputOTP maxLength={6}>
+      <InputOTPGroup>
+        <InputOTPSlot index={0} />
+        <InputOTPSlot index={1} />
+        <InputOTPSlot index={2} />
+      </InputOTPGroup>
+      <InputOTPSeparator />
+      <InputOTPGroup>
+        <InputOTPSlot index={3} />
+        <InputOTPSlot index={4} />
+        <InputOTPSlot index={5} />
+      </InputOTPGroup>
+    </InputOTP>
+  );
+}`} 
+  language="tsx" 
+  preview={<InputOTPWithSeparator />} 
+/>
+
+### Controlled
+
+A controlled OTP input with state management and additional functionality.
+
+<CodePreview 
+  code={`import { useState } from "react";
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSlot,
+} from "@/components/ui/input-otp";
+import { Button } from "@/components/ui/button";
+
+export default function InputOTPControlled() {
+  const [value, setValue] = useState("");
+
+  return (
+    <div className="space-y-4">
+      <div className="space-y-2">
+        <label className="text-sm font-medium">Enter verification code</label>
+        <InputOTP
+          maxLength={6}
+          value={value}
+          onChange={(value) => setValue(value)}
+        >
+          <InputOTPGroup>
+            <InputOTPSlot index={0} />
+            <InputOTPSlot index={1} />
+            <InputOTPSlot index={2} />
+            <InputOTPSlot index={3} />
+            <InputOTPSlot index={4} />
+            <InputOTPSlot index={5} />
+          </InputOTPGroup>
+        </InputOTP>
+      </div>
+      
+      <div className="text-center text-sm text-muted-foreground">
+        {value === "" ? (
+          <>Enter your one-time password.</>
+        ) : (
+          <>You entered: {value}</>
+        )}
+      </div>
+      
+      <div className="flex gap-2 justify-center">
+        <Button
+          onClick={() => setValue("")}
+          variant="outline"
+          size="sm"
+        >
+          Clear
+        </Button>
+        <Button
+          onClick={() => setValue("123456")}
+          variant="outline"
+          size="sm"
+        >
+          Fill
+        </Button>
+      </div>
+    </div>
+  );
+}`} 
+  language="tsx" 
+  preview={<InputOTPControlled />} 
+/>
+
+### Custom Length
+
+OTP inputs with different lengths for various use cases.
+
+<CodePreview 
+  code={`import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSlot,
+} from "@/components/ui/input-otp";
+
+export default function InputOTPCustomLength() {
+  return (
+    <div className="space-y-6">
+      <div className="space-y-2">
+        <label className="text-sm font-medium">4-digit PIN</label>
+        <InputOTP maxLength={4}>
+          <InputOTPGroup>
+            <InputOTPSlot index={0} />
+            <InputOTPSlot index={1} />
+            <InputOTPSlot index={2} />
+            <InputOTPSlot index={3} />
+          </InputOTPGroup>
+        </InputOTP>
+      </div>
+
+      <div className="space-y-2">
+        <label className="text-sm font-medium">6-digit verification code</label>
+        <InputOTP maxLength={6}>
+          <InputOTPGroup>
+            <InputOTPSlot index={0} />
+            <InputOTPSlot index={1} />
+            <InputOTPSlot index={2} />
+            <InputOTPSlot index={3} />
+            <InputOTPSlot index={4} />
+            <InputOTPSlot index={5} />
+          </InputOTPGroup>
+        </InputOTP>
+      </div>
+
+      <div className="space-y-2">
+        <label className="text-sm font-medium">8-digit security code</label>
+        <InputOTP maxLength={8}>
+          <InputOTPGroup>
+            <InputOTPSlot index={0} />
+            <InputOTPSlot index={1} />
+            <InputOTPSlot index={2} />
+            <InputOTPSlot index={3} />
+            <InputOTPSlot index={4} />
+            <InputOTPSlot index={5} />
+            <InputOTPSlot index={6} />
+            <InputOTPSlot index={7} />
+          </InputOTPGroup>
+        </InputOTP>
+      </div>
+    </div>
+  );
+}`} 
+  language="tsx" 
+  preview={<InputOTPCustomLength />} 
+/>
+
+## Real-World Examples
+
+### Login Verification
+
+Complete login verification flow with OTP input and form handling.
+
+<CodePreview 
+  code={`import { useState } from "react";
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSeparator,
+  InputOTPSlot,
+} from "@/components/ui/input-otp";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { CheckCircle, AlertCircle, Loader2 } from "lucide-react";
+
+export default function InputOTPLoginVerification() {
+  const [value, setValue] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+
+  const handleSubmit = async () => {
+    if (value.length !== 6) return;
+    
+    setIsLoading(true);
+    setStatus("idle");
+    
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    
+    if (value === "123456") {
+      setStatus("success");
+    } else {
+      setStatus("error");
+    }
+    setIsLoading(false);
+  };
+
+  const handleResend = () => {
+    setValue("");
+    setStatus("idle");
+    // Simulate resend logic
+    console.log("Resending verification code...");
+  };
+
+  return (
+    <Card className="w-full max-w-md mx-auto">
+      <CardHeader className="text-center">
+        <CardTitle>Verify Your Account</CardTitle>
+        <CardDescription>
+          We&apos;ve sent a verification code to your email address
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        <div className="space-y-2">
+          <label className="text-sm font-medium">Verification Code</label>
+          <div className="flex justify-center">
+            <InputOTP
+              maxLength={6}
+              value={value}
+              onChange={(value) => setValue(value)}
+            >
+              <InputOTPGroup>
+                <InputOTPSlot index={0} />
+                <InputOTPSlot index={1} />
+                <InputOTPSlot index={2} />
+              </InputOTPGroup>
+              <InputOTPSeparator />
+              <InputOTPGroup>
+                <InputOTPSlot index={3} />
+                <InputOTPSlot index={4} />
+                <InputOTPSlot index={5} />
+              </InputOTPGroup>
+            </InputOTP>
+          </div>
+        </div>
+
+        {status === "success" && (
+          <Alert className="border-green-200 bg-green-50">
+            <CheckCircle className="h-4 w-4 text-green-600" />
+            <AlertDescription className="text-green-800">
+              Verification successful! Redirecting to your account...
+            </AlertDescription>
+          </Alert>
+        )}
+
+        {status === "error" && (
+          <Alert variant="destructive">
+            <AlertCircle className="h-4 w-4" />
+            <AlertDescription>
+              Invalid verification code. Please try again.
+            </AlertDescription>
+          </Alert>
+        )}
+      </CardContent>
+      <CardFooter className="flex flex-col space-y-2">
+        <Button 
+          onClick={handleSubmit} 
+          disabled={value.length !== 6 || isLoading}
+          className="w-full"
+        >
+          {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+          Verify Account
+        </Button>
+        <Button variant="link" onClick={handleResend} className="text-sm">
+          Didn&apos;t receive the code? Resend
+        </Button>
+      </CardFooter>
+    </Card>
+  );
+}`} 
+  language="tsx" 
+  preview={<InputOTPLoginVerification />} 
+/>
+
+### Payment Confirmation
+
+Secure payment confirmation with OTP verification.
+
+<CodePreview 
+  code={`import { useState } from "react";
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSeparator,
+  InputOTPSlot,
+} from "@/components/ui/input-otp";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Separator } from "@/components/ui/separator";
+import { CreditCard, Shield, Loader2, CheckCircle, AlertCircle } from "lucide-react";
+
+export default function InputOTPPaymentConfirmation() {
+  const [value, setValue] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+
+  const handleConfirmPayment = async () => {
+    if (value.length !== 6) return;
+    
+    setIsLoading(true);
+    setStatus("idle");
+    
+    // Simulate payment processing
+    await new Promise(resolve => setTimeout(resolve, 3000));
+    
+    if (value === "123456") {
+      setStatus("success");
+    } else {
+      setStatus("error");
+    }
+    setIsLoading(false);
+  };
+
+  return (
+    <Card className="w-full max-w-md mx-auto">
+      <CardHeader className="text-center">
+        <div className="mx-auto w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+          <CreditCard className="h-6 w-6 text-blue-600" />
+        </div>
+        <CardTitle>Confirm Payment</CardTitle>
+        <CardDescription>
+          Enter the verification code sent to your registered mobile number
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        <div className="bg-gray-50 p-4 rounded-lg space-y-2">
+          <div className="flex justify-between text-sm">
+            <span className="text-muted-foreground">Amount</span>
+            <span className="font-medium">$299.99</span>
+          </div>
+          <div className="flex justify-between text-sm">
+            <span className="text-muted-foreground">Merchant</span>
+            <span className="font-medium">TechStore Inc.</span>
+          </div>
+          <div className="flex justify-between text-sm">
+            <span className="text-muted-foreground">Card</span>
+            <span className="font-medium">•••• 4242</span>
+          </div>
+        </div>
+
+        <Separator />
+
+        <div className="space-y-2">
+          <div className="flex items-center gap-2">
+            <Shield className="h-4 w-4 text-green-600" />
+            <label className="text-sm font-medium">Security Code</label>
+          </div>
+          <div className="flex justify-center">
+            <InputOTP
+              maxLength={6}
+              value={value}
+              onChange={(value) => setValue(value)}
+            >
+              <InputOTPGroup>
+                <InputOTPSlot index={0} />
+                <InputOTPSlot index={1} />
+                <InputOTPSlot index={2} />
+              </InputOTPGroup>
+              <InputOTPSeparator />
+              <InputOTPGroup>
+                <InputOTPSlot index={3} />
+                <InputOTPSlot index={4} />
+                <InputOTPSlot index={5} />
+              </InputOTPGroup>
+            </InputOTP>
+          </div>
+        </div>
+
+        {status === "success" && (
+          <Alert className="border-green-200 bg-green-50">
+            <CheckCircle className="h-4 w-4 text-green-600" />
+            <AlertDescription className="text-green-800">
+              Payment confirmed successfully! Transaction ID: #TXN123456
+            </AlertDescription>
+          </Alert>
+        )}
+
+        {status === "error" && (
+          <Alert variant="destructive">
+            <AlertCircle className="h-4 w-4" />
+            <AlertDescription>
+              Invalid security code. Payment failed. Please try again.
+            </AlertDescription>
+          </Alert>
+        )}
+      </CardContent>
+      <CardFooter className="flex flex-col space-y-2">
+        <Button 
+          onClick={handleConfirmPayment} 
+          disabled={value.length !== 6 || isLoading}
+          className="w-full"
+        >
+          {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+          {isLoading ? "Processing Payment..." : "Confirm Payment"}
+        </Button>
+        <p className="text-xs text-muted-foreground text-center">
+          Your payment is secured with 256-bit SSL encryption
+        </p>
+      </CardFooter>
+    </Card>
+  );
+}`} 
+  language="tsx" 
+  preview={<InputOTPPaymentConfirmation />} 
+/>
+
+### Email Verification
+
+Email verification flow with countdown timer and resend functionality.
+
+<CodePreview 
+  code={`import { useState, useEffect } from "react";
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSeparator,
+  InputOTPSlot,
+} from "@/components/ui/input-otp";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Progress } from "@/components/ui/progress";
+import { Mail, Clock, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
+
+export default function InputOTPEmailVerification() {
+  const [value, setValue] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+  const [countdown, setCountdown] = useState(60);
+  const [canResend, setCanResend] = useState(false);
+
+  useEffect(() => {
+    if (countdown > 0) {
+      const timer = setTimeout(() => setCountdown(countdown - 1), 1000);
+      return () => clearTimeout(timer);
+    } else {
+      setCanResend(true);
+    }
+  }, [countdown]);
+
+  const handleVerify = async () => {
+    if (value.length !== 6) return;
+    
+    setIsLoading(true);
+    setStatus("idle");
+    
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    
+    if (value === "123456") {
+      setStatus("success");
+    } else {
+      setStatus("error");
+    }
+    setIsLoading(false);
+  };
+
+  const handleResend = () => {
+    setValue("");
+    setStatus("idle");
+    setCountdown(60);
+    setCanResend(false);
+    // Simulate resend logic
+    console.log("Resending verification email...");
+  };
+
+  const progressValue = ((60 - countdown) / 60) * 100;
+
+  return (
+    <Card className="w-full max-w-md mx-auto">
+      <CardHeader className="text-center">
+        <div className="mx-auto w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+          <Mail className="h-6 w-6 text-blue-600" />
+        </div>
+        <CardTitle>Verify Your Email</CardTitle>
+        <CardDescription>
+          We&apos;ve sent a 6-digit verification code to<br />
+          <strong>john.doe@example.com</strong>
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        <div className="space-y-2">
+          <label className="text-sm font-medium">Verification Code</label>
+          <div className="flex justify-center">
+            <InputOTP
+              maxLength={6}
+              value={value}
+              onChange={(value) => setValue(value)}
+            >
+              <InputOTPGroup>
+                <InputOTPSlot index={0} />
+                <InputOTPSlot index={1} />
+                <InputOTPSlot index={2} />
+              </InputOTPGroup>
+              <InputOTPSeparator />
+              <InputOTPGroup>
+                <InputOTPSlot index={3} />
+                <InputOTPSlot index={4} />
+                <InputOTPSlot index={5} />
+              </InputOTPGroup>
+            </InputOTP>
+          </div>
+        </div>
+
+        {!canResend && (
+          <div className="space-y-2">
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <Clock className="h-4 w-4" />
+              <span>Resend available in {countdown}s</span>
+            </div>
+            <Progress value={progressValue} className="h-2" />
+          </div>
+        )}
+
+        {status === "success" && (
+          <Alert className="border-green-200 bg-green-50">
+            <CheckCircle className="h-4 w-4 text-green-600" />
+            <AlertDescription className="text-green-800">
+              Email verified successfully! Welcome to our platform.
+            </AlertDescription>
+          </Alert>
+        )}
+
+        {status === "error" && (
+          <Alert variant="destructive">
+            <AlertCircle className="h-4 w-4" />
+            <AlertDescription>
+              Invalid verification code. Please check and try again.
+            </AlertDescription>
+          </Alert>
+        )}
+      </CardContent>
+      <CardFooter className="flex flex-col space-y-2">
+        <Button 
+          onClick={handleVerify} 
+          disabled={value.length !== 6 || isLoading}
+          className="w-full"
+        >
+          {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+          Verify Email
+        </Button>
+        <Button 
+          variant="link" 
+          onClick={handleResend} 
+          disabled={!canResend}
+          className="text-sm"
+        >
+          {canResend ? "Resend verification code" : `Resend in ${countdown}s`}
+        </Button>
+      </CardFooter>
+    </Card>
+  );
+}`} 
+  language="tsx" 
+  preview={<InputOTPEmailVerification />} 
+/>
+
+## API Reference
+
+### InputOTP
+
+The main container component for the OTP input.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `maxLength` | `number` | `6` | Maximum number of characters |
+| `value` | `string` | - | Controlled value of the input |
+| `onChange` | `(value: string) => void` | - | Callback when value changes |
+| `onComplete` | `(value: string) => void` | - | Callback when all slots are filled |
+| `disabled` | `boolean` | `false` | Whether the input is disabled |
+| `autoFocus` | `boolean` | `false` | Whether to auto-focus the first slot |
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | InputOTPGroup and InputOTPSeparator components |
+
+### InputOTPGroup
+
+Groups multiple InputOTPSlot components together.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | InputOTPSlot components |
+
+### InputOTPSlot
+
+Individual input slot for a single character.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `index` | `number` | - | The index of this slot (required) |
+| `className` | `string` | - | Additional CSS classes |
+
+### InputOTPSeparator
+
+Visual separator between groups of slots.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+
+## Accessibility
+
+The InputOTP component follows accessibility best practices:
+
+### Keyboard Support
+
+| Key | Description |
+|-----|-------------|
+| `Tab` | Moves focus to the next focusable element |
+| `Shift + Tab` | Moves focus to the previous focusable element |
+| `Arrow Left` | Moves focus to the previous slot |
+| `Arrow Right` | Moves focus to the next slot |
+| `Backspace` | Deletes the current character and moves to previous slot |
+| `Delete` | Deletes the current character |
+| `Home` | Moves focus to the first slot |
+| `End` | Moves focus to the last slot |
+
+### Screen Reader Support
+
+- Each slot is properly labeled for screen readers
+- The component announces the current position and total length
+- Completion status is announced when all slots are filled
+- Error states are properly communicated
+
+### Focus Management
+
+- Focus moves automatically between slots as user types
+- Focus is trapped within the OTP input when active
+- Visual focus indicators are clearly visible
+- Supports both mouse and keyboard interactions
+
+## Best Practices
+
+1. **Use appropriate length**: Choose the right number of digits for your use case (4-8 digits are common)
+2. **Provide clear instructions**: Always include labels and descriptions
+3. **Handle errors gracefully**: Show clear error messages for invalid codes
+4. **Auto-advance focus**: Let users type continuously without manual navigation
+5. **Support paste**: Allow users to paste complete codes
+6. **Add visual separators**: Use separators for better readability with longer codes
+7. **Implement timeouts**: Add expiration times for security codes
+8. **Provide resend options**: Allow users to request new codes if needed
+
+## Examples in Context
+
+### Two-Factor Authentication Setup
+
+```tsx
+<InputOTP maxLength={6} onComplete={handleSetup}>
+  <InputOTPGroup>
+    <InputOTPSlot index={0} />
+    <InputOTPSlot index={1} />
+    <InputOTPSlot index={2} />
+    <InputOTPSlot index={3} />
+    <InputOTPSlot index={4} />
+    <InputOTPSlot index={5} />
+  </InputOTPGroup>
+</InputOTP>
+```
+
+### PIN Entry
+
+```tsx
+<InputOTP maxLength={4} onChange={handlePinChange}>
+  <InputOTPGroup>
+    <InputOTPSlot index={0} />
+    <InputOTPSlot index={1} />
+    <InputOTPSlot index={2} />
+    <InputOTPSlot index={3} />
+  </InputOTPGroup>
+</InputOTP>
+```
+
+### Verification Code with Groups
+
+```tsx
+<InputOTP maxLength={8}>
+  <InputOTPGroup>
+    <InputOTPSlot index={0} />
+    <InputOTPSlot index={1} />
+    <InputOTPSlot index={2} />
+    <InputOTPSlot index={3} />
+  </InputOTPGroup>
+  <InputOTPSeparator />
+  <InputOTPGroup>
+    <InputOTPSlot index={4} />
+    <InputOTPSlot index={5} />
+    <InputOTPSlot index={6} />
+    <InputOTPSlot index={7} />
+  </InputOTPGroup>
+</InputOTP>
+```
+
+## Dependencies
+
+The InputOTP component depends on:
+
+- `input-otp` - The underlying OTP input primitive
+- `@radix-ui/react-slot` - For composition patterns
+- `class-variance-authority` - For variant management
+- `clsx` - For conditional class names
+- `tailwind-merge` - For merging Tailwind classes
+
+## Related Components
+
+- [Input](/docs/components/input) - For general text input
+- [Form](/docs/components/form) - For form validation and handling
+- [Button](/docs/components/button) - For submit actions
+- [Card](/docs/components/card) - For containing OTP forms
+- [Alert](/docs/components/alert) - For showing verification status
