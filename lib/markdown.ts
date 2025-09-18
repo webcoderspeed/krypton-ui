@@ -442,6 +442,19 @@ import {
   RadioGroupTheme,
   RadioGroupProduct,
 } from "@/components/playground/radio-group";
+import { Toggle } from "@/components/ui/toggle";
+import {
+  ToggleDefault,
+  ToggleVariants,
+  ToggleSizes,
+  ToggleWithText,
+  ToggleTextEditor,
+  ToggleViewModes,
+  ToggleNotificationSettings,
+  ToggleFilterPanel,
+  ToggleMediaPlayer,
+  ToggleFeatureFlags,
+} from "@/components/playground/toggle";
 
 const components = {
   LucideIcon,
@@ -799,6 +812,17 @@ const components = {
   RadioGroupNotifications,
   RadioGroupTheme,
   RadioGroupProduct,
+  Toggle,
+  ToggleDefault,
+  ToggleVariants,
+  ToggleSizes,
+  ToggleWithText,
+  ToggleTextEditor,
+  ToggleViewModes,
+  ToggleNotificationSettings,
+  ToggleFilterPanel,
+  ToggleMediaPlayer,
+  ToggleFeatureFlags,
 };
 async function parseMdx<Frontmatter>(rawMdx: string) {
   return await compileMDX<Frontmatter>({

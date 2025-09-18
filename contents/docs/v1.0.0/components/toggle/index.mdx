@@ -1,0 +1,1543 @@
+---
+title: Toggle
+description: A two-state button that can be either on or off. Built on top of Radix UI Toggle primitive with customizable variants and sizes.
+component: true
+---
+
+## Import
+
+<CodePreview code="import { Toggle } from '@/components/ui/toggle'" language="tsx" />
+
+## Usage
+
+### Default Toggle
+
+A basic toggle button with an icon.
+
+<CodePreview 
+  code={`import { Toggle } from "@/components/ui/toggle";
+import { Bold } from "lucide-react";
+
+export default function ToggleDefault() {
+  return (
+    <div className="flex items-center justify-center p-8">
+      <Toggle aria-label="Toggle bold">
+        <Bold className="h-4 w-4" />
+      </Toggle>
+    </div>
+  );
+}`} 
+  language="tsx" 
+  preview={<ToggleDefault />} 
+/>
+
+### Toggle Variants
+
+Different visual styles for the toggle component.
+
+<CodePreview 
+  code={`import { Toggle } from "@/components/ui/toggle";
+import { Bold, Italic } from "lucide-react";
+
+export default function ToggleVariants() {
+  return (
+    <div className="flex items-center justify-center gap-4 p-8">
+      <div className="flex flex-col items-center gap-2">
+        <Toggle variant="default" aria-label="Toggle bold">
+          <Bold className="h-4 w-4" />
+        </Toggle>
+        <span className="text-sm text-muted-foreground">Default</span>
+      </div>
+      
+      <div className="flex flex-col items-center gap-2">
+        <Toggle variant="outline" aria-label="Toggle italic">
+          <Italic className="h-4 w-4" />
+        </Toggle>
+        <span className="text-sm text-muted-foreground">Outline</span>
+      </div>
+    </div>
+  );
+}`} 
+  language="tsx" 
+  preview={<ToggleVariants />} 
+/>
+
+### Toggle Sizes
+
+Different sizes available for the toggle component.
+
+<CodePreview 
+  code={`import { Toggle } from "@/components/ui/toggle";
+import { Bold, Italic, Underline } from "lucide-react";
+
+export default function ToggleSizes() {
+  return (
+    <div className="flex items-center justify-center gap-4 p-8">
+      <div className="flex flex-col items-center gap-2">
+        <Toggle size="sm" aria-label="Toggle bold">
+          <Bold className="h-3 w-3" />
+        </Toggle>
+        <span className="text-sm text-muted-foreground">Small</span>
+      </div>
+      
+      <div className="flex flex-col items-center gap-2">
+        <Toggle size="default" aria-label="Toggle italic">
+          <Italic className="h-4 w-4" />
+        </Toggle>
+        <span className="text-sm text-muted-foreground">Default</span>
+      </div>
+      
+      <div className="flex flex-col items-center gap-2">
+        <Toggle size="lg" aria-label="Toggle underline">
+          <Underline className="h-5 w-5" />
+        </Toggle>
+        <span className="text-sm text-muted-foreground">Large</span>
+      </div>
+    </div>
+  );
+}`} 
+  language="tsx" 
+  preview={<ToggleSizes />} 
+/>
+
+### Toggle with Text
+
+Toggle buttons that include both icons and text labels.
+
+<CodePreview 
+  code={`import { Toggle } from "@/components/ui/toggle";
+import { Bold, Italic, Underline } from "lucide-react";
+
+export default function ToggleWithText() {
+  return (
+    <div className="flex items-center justify-center gap-4 p-8">
+      <Toggle aria-label="Toggle bold">
+        <Bold className="h-4 w-4" />
+        Bold
+      </Toggle>
+      
+      <Toggle variant="outline" aria-label="Toggle italic">
+        <Italic className="h-4 w-4" />
+        Italic
+      </Toggle>
+      
+      <Toggle aria-label="Toggle underline">
+        <Underline className="h-4 w-4" />
+        Underline
+      </Toggle>
+    </div>
+  );
+}`} 
+  language="tsx" 
+  preview={<ToggleWithText />} 
+/>
+
+## Real-World Examples
+
+### Text Editor Toolbar
+
+A comprehensive text editor toolbar with formatting options using toggle buttons.
+
+<CodePreview 
+  code={`import { useState } from "react";
+import { Toggle } from "@/components/ui/toggle";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { 
+  Bold, 
+  Italic, 
+  Underline, 
+  AlignLeft, 
+  AlignCenter, 
+  AlignRight,
+  List,
+  ListOrdered
+} from "lucide-react";
+
+export default function ToggleTextEditor() {
+  const [formatting, setFormatting] = useState({
+    bold: false,
+    italic: false,
+    underline: false,
+    alignLeft: true,
+    alignCenter: false,
+    alignRight: false,
+    bulletList: false,
+    numberedList: false
+  });
+
+  const handleToggle = (key: string) => {
+    setFormatting(prev => {
+      const newState = { ...prev, [key]: !prev[key] };
+      
+      // Handle alignment exclusivity
+      if (key.startsWith('align')) {
+        newState.alignLeft = key === 'alignLeft';
+        newState.alignCenter = key === 'alignCenter';
+        newState.alignRight = key === 'alignRight';
+      }
+      
+      // Handle list exclusivity
+      if (key.includes('List')) {
+        if (key === 'bulletList') {
+          newState.numberedList = false;
+        } else if (key === 'numberedList') {
+          newState.bulletList = false;
+        }
+      }
+      
+      return newState;
+    });
+  };
+
+  const getFormattingPreview = () => {
+    const styles = [];
+    if (formatting.bold) styles.push('font-bold');
+    if (formatting.italic) styles.push('italic');
+    if (formatting.underline) styles.push('underline');
+    
+    let alignment = 'text-left';
+    if (formatting.alignCenter) alignment = 'text-center';
+    if (formatting.alignRight) alignment = 'text-right';
+    
+    return { styles: styles.join(' '), alignment };
+  };
+
+  const { styles, alignment } = getFormattingPreview();
+
+  return (
+    <Card className="w-full max-w-2xl">
+      <CardHeader>
+        <CardTitle>Text Editor</CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        {/* Formatting Toolbar */}
+        <div className="flex flex-wrap items-center gap-1 p-2 border rounded-lg bg-muted/50">
+          {/* Text Formatting */}
+          <div className="flex items-center gap-1">
+            <Toggle
+              pressed={formatting.bold}
+              onPressedChange={() => handleToggle('bold')}
+              aria-label="Toggle bold"
+              size="sm"
+            >
+              <Bold className="h-4 w-4" />
+            </Toggle>
+            <Toggle
+              pressed={formatting.italic}
+              onPressedChange={() => handleToggle('italic')}
+              aria-label="Toggle italic"
+              size="sm"
+            >
+              <Italic className="h-4 w-4" />
+            </Toggle>
+            <Toggle
+              pressed={formatting.underline}
+              onPressedChange={() => handleToggle('underline')}
+              aria-label="Toggle underline"
+              size="sm"
+            >
+              <Underline className="h-4 w-4" />
+            </Toggle>
+          </div>
+
+          <Separator orientation="vertical" className="h-6" />
+
+          {/* Alignment */}
+          <div className="flex items-center gap-1">
+            <Toggle
+              pressed={formatting.alignLeft}
+              onPressedChange={() => handleToggle('alignLeft')}
+              aria-label="Align left"
+              size="sm"
+            >
+              <AlignLeft className="h-4 w-4" />
+            </Toggle>
+            <Toggle
+              pressed={formatting.alignCenter}
+              onPressedChange={() => handleToggle('alignCenter')}
+              aria-label="Align center"
+              size="sm"
+            >
+              <AlignCenter className="h-4 w-4" />
+            </Toggle>
+            <Toggle
+              pressed={formatting.alignRight}
+              onPressedChange={() => handleToggle('alignRight')}
+              aria-label="Align right"
+              size="sm"
+            >
+              <AlignRight className="h-4 w-4" />
+            </Toggle>
+          </div>
+
+          <Separator orientation="vertical" className="h-6" />
+
+          {/* Lists */}
+          <div className="flex items-center gap-1">
+            <Toggle
+              pressed={formatting.bulletList}
+              onPressedChange={() => handleToggle('bulletList')}
+              aria-label="Bullet list"
+              size="sm"
+            >
+              <List className="h-4 w-4" />
+            </Toggle>
+            <Toggle
+              pressed={formatting.numberedList}
+              onPressedChange={() => handleToggle('numberedList')}
+              aria-label="Numbered list"
+              size="sm"
+            >
+              <ListOrdered className="h-4 w-4" />
+            </Toggle>
+          </div>
+        </div>
+
+        {/* Preview */}
+        <div className="p-4 border rounded-lg bg-background min-h-[100px]">
+          <p className={\`\${styles} \${alignment}\`}>
+            This is a preview of your formatted text. The formatting will be applied based on your toolbar selections.
+          </p>
+          {formatting.bulletList && (
+            <ul className="list-disc list-inside mt-2">
+              <li>Bullet point one</li>
+              <li>Bullet point two</li>
+            </ul>
+          )}
+          {formatting.numberedList && (
+            <ol className="list-decimal list-inside mt-2">
+              <li>Numbered item one</li>
+              <li>Numbered item two</li>
+            </ol>
+          )}
+        </div>
+      </CardContent>
+    </Card>
+  );
+}`} 
+  language="tsx" 
+  preview={<ToggleTextEditor />} 
+/>
+
+### View Mode Switcher
+
+A dashboard view mode switcher allowing users to toggle between different display formats.
+
+<CodePreview 
+  code={`import { useState } from "react";
+import { Toggle } from "@/components/ui/toggle";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { 
+  Grid3X3, 
+  List, 
+  Calendar,
+  User,
+  Clock,
+  Star
+} from "lucide-react";
+
+const projects = [
+  {
+    id: 1,
+    title: "Website Redesign",
+    status: "In Progress",
+    assignee: "John Doe",
+    dueDate: "2024-02-15",
+    priority: "High"
+  },
+  {
+    id: 2,
+    title: "Mobile App Development",
+    status: "Planning",
+    assignee: "Jane Smith",
+    dueDate: "2024-03-01",
+    priority: "Medium"
+  },
+  {
+    id: 3,
+    title: "Database Migration",
+    status: "Completed",
+    assignee: "Mike Johnson",
+    dueDate: "2024-01-30",
+    priority: "High"
+  }
+];
+
+export default function ToggleViewModes() {
+  const [viewMode, setViewMode] = useState("grid");
+
+  const handleViewChange = (mode: string) => {
+    setViewMode(mode);
+  };
+
+  return (
+    <div className="w-full max-w-4xl space-y-4">
+      {/* View Mode Toggle */}
+      <div className="flex items-center justify-between">
+        <h2 className="text-2xl font-bold">Project Dashboard</h2>
+        <div className="flex items-center gap-1 p-1 border rounded-lg bg-muted/50">
+          <Toggle
+            pressed={viewMode === "grid"}
+            onPressedChange={() => handleViewChange("grid")}
+            aria-label="Grid view"
+            size="sm"
+          >
+            <Grid3X3 className="h-4 w-4" />
+          </Toggle>
+          <Toggle
+            pressed={viewMode === "list"}
+            onPressedChange={() => handleViewChange("list")}
+            aria-label="List view"
+            size="sm"
+          >
+            <List className="h-4 w-4" />
+          </Toggle>
+          <Toggle
+            pressed={viewMode === "calendar"}
+            onPressedChange={() => handleViewChange("calendar")}
+            aria-label="Calendar view"
+            size="sm"
+          >
+            <Calendar className="h-4 w-4" />
+          </Toggle>
+        </div>
+      </div>
+
+      {/* Content based on view mode */}
+      {viewMode === "grid" && (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {projects.map((project) => (
+            <Card key={project.id}>
+              <CardHeader className="pb-3">
+                <div className="flex items-start justify-between">
+                  <CardTitle className="text-lg">{project.title}</CardTitle>
+                  <Badge variant={project.priority === "High" ? "destructive" : "secondary"}>
+                    {project.priority}
+                  </Badge>
+                </div>
+              </CardHeader>
+              <CardContent className="space-y-2">
+                <div className="flex items-center gap-2 text-sm">
+                  <User className="h-4 w-4" />
+                  {project.assignee}
+                </div>
+                <div className="flex items-center gap-2 text-sm">
+                  <Clock className="h-4 w-4" />
+                  {project.dueDate}
+                </div>
+                <Badge variant="outline">{project.status}</Badge>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      )}
+
+      {viewMode === "list" && (
+        <Card>
+          <CardContent className="p-0">
+            <div className="divide-y">
+              {projects.map((project) => (
+                <div key={project.id} className="p-4 flex items-center justify-between">
+                  <div className="space-y-1">
+                    <h3 className="font-medium">{project.title}</h3>
+                    <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                      <span className="flex items-center gap-1">
+                        <User className="h-3 w-3" />
+                        {project.assignee}
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <Clock className="h-3 w-3" />
+                        {project.dueDate}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Badge variant="outline">{project.status}</Badge>
+                    <Badge variant={project.priority === "High" ? "destructive" : "secondary"}>
+                      {project.priority}
+                    </Badge>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {viewMode === "calendar" && (
+        <Card>
+          <CardContent className="p-6">
+            <div className="text-center space-y-4">
+              <Calendar className="h-12 w-12 mx-auto text-muted-foreground" />
+              <div>
+                <h3 className="text-lg font-medium">Calendar View</h3>
+                <p className="text-sm text-muted-foreground">
+                  Calendar view would show projects organized by their due dates
+                </p>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                {projects.map((project) => (
+                  <div key={project.id} className="p-3 border rounded-lg">
+                    <div className="flex items-center justify-between">
+                      <span className="font-medium">{project.title}</span>
+                      <span className="text-sm text-muted-foreground">{project.dueDate}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+    </div>
+  );
+}`} 
+  language="tsx" 
+  preview={<ToggleViewModes />} 
+/>
+
+### Notification Settings
+
+A comprehensive notification settings panel with toggle controls for different notification types.
+
+<CodePreview 
+  code={`import { useState } from "react";
+import { Toggle } from "@/components/ui/toggle";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { 
+  Bell, 
+  Mail, 
+  MessageSquare, 
+  Smartphone,
+  Volume2,
+  VolumeX,
+  Moon,
+  Sun
+} from "lucide-react";
+
+export default function ToggleNotificationSettings() {
+  const [notifications, setNotifications] = useState({
+    email: true,
+    push: false,
+    sms: false,
+    inApp: true,
+    sound: true,
+    vibration: false,
+    doNotDisturb: false,
+    marketing: false
+  });
+
+  const handleToggle = (key: string) => {
+    setNotifications(prev => ({
+      ...prev,
+      [key]: !prev[key]
+    }));
+  };
+
+  const getActiveCount = () => {
+    return Object.values(notifications).filter(Boolean).length;
+  };
+
+  return (
+    <div className="w-full max-w-2xl space-y-6">
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Bell className="h-5 w-5" />
+            Notification Preferences
+          </CardTitle>
+          <CardDescription>
+            Manage how you receive notifications and updates
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          {/* Notification Types */}
+          <div className="space-y-4">
+            <h3 className="text-sm font-medium">Notification Types</h3>
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <Mail className="h-4 w-4 text-muted-foreground" />
+                  <div>
+                    <p className="text-sm font-medium">Email Notifications</p>
+                    <p className="text-xs text-muted-foreground">Receive updates via email</p>
+                  </div>
+                </div>
+                <Toggle
+                  pressed={notifications.email}
+                  onPressedChange={() => handleToggle('email')}
+                  aria-label="Toggle email notifications"
+                />
+              </div>
+
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <Smartphone className="h-4 w-4 text-muted-foreground" />
+                  <div>
+                    <p className="text-sm font-medium">Push Notifications</p>
+                    <p className="text-xs text-muted-foreground">Get notified on your device</p>
+                  </div>
+                </div>
+                <Toggle
+                  pressed={notifications.push}
+                  onPressedChange={() => handleToggle('push')}
+                  aria-label="Toggle push notifications"
+                />
+              </div>
+
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <MessageSquare className="h-4 w-4 text-muted-foreground" />
+                  <div>
+                    <p className="text-sm font-medium">SMS Notifications</p>
+                    <p className="text-xs text-muted-foreground">Receive text messages</p>
+                  </div>
+                </div>
+                <Toggle
+                  pressed={notifications.sms}
+                  onPressedChange={() => handleToggle('sms')}
+                  aria-label="Toggle SMS notifications"
+                />
+              </div>
+
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <Bell className="h-4 w-4 text-muted-foreground" />
+                  <div>
+                    <p className="text-sm font-medium">In-App Notifications</p>
+                    <p className="text-xs text-muted-foreground">Show notifications within the app</p>
+                  </div>
+                </div>
+                <Toggle
+                  pressed={notifications.inApp}
+                  onPressedChange={() => handleToggle('inApp')}
+                  aria-label="Toggle in-app notifications"
+                />
+              </div>
+            </div>
+          </div>
+
+          <Separator />
+
+          {/* Notification Preferences */}
+          <div className="space-y-4">
+            <h3 className="text-sm font-medium">Notification Preferences</h3>
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  {notifications.sound ? (
+                    <Volume2 className="h-4 w-4 text-muted-foreground" />
+                  ) : (
+                    <VolumeX className="h-4 w-4 text-muted-foreground" />
+                  )}
+                  <div>
+                    <p className="text-sm font-medium">Sound</p>
+                    <p className="text-xs text-muted-foreground">Play sound for notifications</p>
+                  </div>
+                </div>
+                <Toggle
+                  pressed={notifications.sound}
+                  onPressedChange={() => handleToggle('sound')}
+                  aria-label="Toggle notification sound"
+                />
+              </div>
+
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <Smartphone className="h-4 w-4 text-muted-foreground" />
+                  <div>
+                    <p className="text-sm font-medium">Vibration</p>
+                    <p className="text-xs text-muted-foreground">Vibrate device for notifications</p>
+                  </div>
+                </div>
+                <Toggle
+                  pressed={notifications.vibration}
+                  onPressedChange={() => handleToggle('vibration')}
+                  aria-label="Toggle vibration"
+                />
+              </div>
+
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  {notifications.doNotDisturb ? (
+                    <Moon className="h-4 w-4 text-muted-foreground" />
+                  ) : (
+                    <Sun className="h-4 w-4 text-muted-foreground" />
+                  )}
+                  <div>
+                    <p className="text-sm font-medium">Do Not Disturb</p>
+                    <p className="text-xs text-muted-foreground">Silence all notifications</p>
+                  </div>
+                </div>
+                <Toggle
+                  pressed={notifications.doNotDisturb}
+                  onPressedChange={() => handleToggle('doNotDisturb')}
+                  aria-label="Toggle do not disturb"
+                />
+              </div>
+
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <Mail className="h-4 w-4 text-muted-foreground" />
+                  <div>
+                    <p className="text-sm font-medium">Marketing Emails</p>
+                    <p className="text-xs text-muted-foreground">Receive promotional content</p>
+                  </div>
+                </div>
+                <Toggle
+                  pressed={notifications.marketing}
+                  onPressedChange={() => handleToggle('marketing')}
+                  aria-label="Toggle marketing emails"
+                />
+              </div>
+            </div>
+          </div>
+
+          <Separator />
+
+          {/* Settings Summary */}
+          <div className="p-4 bg-muted rounded-lg">
+            <h4 className="text-sm font-medium mb-2">Settings Summary</h4>
+            <p className="text-sm text-muted-foreground">
+              You have <strong>{getActiveCount()}</strong> out of {Object.keys(notifications).length} notification types enabled.
+            </p>
+            {notifications.doNotDisturb && (
+              <p className="text-sm text-amber-600 mt-1">
+                ⚠️ Do Not Disturb is enabled - you won't receive any notifications.
+              </p>
+            )}
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}`} 
+  language="tsx" 
+  preview={<ToggleNotificationSettings />} 
+/>
+
+### E-commerce Filter Panel
+
+A product filter panel for e-commerce applications with toggle-based filtering options.
+
+<CodePreview 
+  code={`import { useState } from "react";
+import { Toggle } from "@/components/ui/toggle";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
+import { 
+  Filter,
+  Star,
+  Truck,
+  Shield,
+  Zap,
+  Heart,
+  Tag,
+  Package
+} from "lucide-react";
+
+export default function ToggleFilterPanel() {
+  const [filters, setFilters] = useState({
+    inStock: false,
+    onSale: false,
+    freeShipping: false,
+    highRated: false,
+    newArrivals: false,
+    premium: false,
+    eco: false,
+    fastDelivery: false
+  });
+
+  const handleToggle = (key: string) => {
+    setFilters(prev => ({
+      ...prev,
+      [key]: !prev[key]
+    }));
+  };
+
+  const getActiveFilters = () => {
+    return Object.entries(filters)
+      .filter(([_, value]) => value)
+      .map(([key, _]) => key);
+  };
+
+  const filterLabels = {
+    inStock: "In Stock",
+    onSale: "On Sale",
+    freeShipping: "Free Shipping",
+    highRated: "4+ Stars",
+    newArrivals: "New Arrivals",
+    premium: "Premium",
+    eco: "Eco-Friendly",
+    fastDelivery: "Fast Delivery"
+  };
+
+  const mockProducts = [
+    { id: 1, name: "Wireless Headphones", price: "$99", rating: 4.5, inStock: true, onSale: true },
+    { id: 2, name: "Smart Watch", price: "$299", rating: 4.2, inStock: true, onSale: false },
+    { id: 3, name: "Laptop Stand", price: "$49", rating: 4.8, inStock: false, onSale: true },
+  ];
+
+  return (
+    <div className="w-full max-w-4xl space-y-6">
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+        {/* Filter Panel */}
+        <Card className="lg:col-span-1">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Filter className="h-5 w-5" />
+              Filters
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            {/* Availability */}
+            <div className="space-y-3">
+              <h3 className="text-sm font-medium">Availability</h3>
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Package className="h-4 w-4 text-muted-foreground" />
+                    <span className="text-sm">In Stock</span>
+                  </div>
+                  <Toggle
+                    pressed={filters.inStock}
+                    onPressedChange={() => handleToggle('inStock')}
+                    aria-label="Filter by in stock"
+                    size="sm"
+                  />
+                </div>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Tag className="h-4 w-4 text-muted-foreground" />
+                    <span className="text-sm">On Sale</span>
+                  </div>
+                  <Toggle
+                    pressed={filters.onSale}
+                    onPressedChange={() => handleToggle('onSale')}
+                    aria-label="Filter by on sale"
+                    size="sm"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <Separator />
+
+            {/* Shipping & Delivery */}
+            <div className="space-y-3">
+              <h3 className="text-sm font-medium">Shipping & Delivery</h3>
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Truck className="h-4 w-4 text-muted-foreground" />
+                    <span className="text-sm">Free Shipping</span>
+                  </div>
+                  <Toggle
+                    pressed={filters.freeShipping}
+                    onPressedChange={() => handleToggle('freeShipping')}
+                    aria-label="Filter by free shipping"
+                    size="sm"
+                  />
+                </div>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Zap className="h-4 w-4 text-muted-foreground" />
+                    <span className="text-sm">Fast Delivery</span>
+                  </div>
+                  <Toggle
+                    pressed={filters.fastDelivery}
+                    onPressedChange={() => handleToggle('fastDelivery')}
+                    aria-label="Filter by fast delivery"
+                    size="sm"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <Separator />
+
+            {/* Product Features */}
+            <div className="space-y-3">
+              <h3 className="text-sm font-medium">Product Features</h3>
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Star className="h-4 w-4 text-muted-foreground" />
+                    <span className="text-sm">4+ Stars</span>
+                  </div>
+                  <Toggle
+                    pressed={filters.highRated}
+                    onPressedChange={() => handleToggle('highRated')}
+                    aria-label="Filter by high rating"
+                    size="sm"
+                  />
+                </div>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Heart className="h-4 w-4 text-muted-foreground" />
+                    <span className="text-sm">New Arrivals</span>
+                  </div>
+                  <Toggle
+                    pressed={filters.newArrivals}
+                    onPressedChange={() => handleToggle('newArrivals')}
+                    aria-label="Filter by new arrivals"
+                    size="sm"
+                  />
+                </div>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Shield className="h-4 w-4 text-muted-foreground" />
+                    <span className="text-sm">Premium</span>
+                  </div>
+                  <Toggle
+                    pressed={filters.premium}
+                    onPressedChange={() => handleToggle('premium')}
+                    aria-label="Filter by premium"
+                    size="sm"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Active Filters Summary */}
+            {getActiveFilters().length > 0 && (
+              <>
+                <Separator />
+                <div className="space-y-2">
+                  <h3 className="text-sm font-medium">Active Filters</h3>
+                  <div className="flex flex-wrap gap-1">
+                    {getActiveFilters().map((filter) => (
+                      <Badge key={filter} variant="secondary" className="text-xs">
+                        {filterLabels[filter]}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+              </>
+            )}
+          </CardContent>
+        </Card>
+
+        {/* Product Grid */}
+        <div className="lg:col-span-3">
+          <Card>
+            <CardHeader>
+              <CardTitle>
+                Products {getActiveFilters().length > 0 && `(${getActiveFilters().length} filters applied)`}
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+                {mockProducts.map((product) => (
+                  <Card key={product.id} className="border">
+                    <CardContent className="p-4">
+                      <div className="aspect-square bg-muted rounded-lg mb-3"></div>
+                      <h3 className="font-medium">{product.name}</h3>
+                      <div className="flex items-center justify-between mt-2">
+                        <span className="font-bold">{product.price}</span>
+                        <div className="flex items-center gap-1">
+                          <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
+                          <span className="text-xs">{product.rating}</span>
+                        </div>
+                      </div>
+                      <div className="flex gap-1 mt-2">
+                        {product.inStock && <Badge variant="outline" className="text-xs">In Stock</Badge>}
+                        {product.onSale && <Badge variant="destructive" className="text-xs">Sale</Badge>}
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    </div>
+  );
+}`} 
+  language="tsx" 
+  preview={<ToggleFilterPanel />} 
+/>
+
+### Media Player Controls
+
+A comprehensive media player interface with toggle controls for various playback options.
+
+<CodePreview 
+  code={`import { useState } from "react";
+import { Toggle } from "@/components/ui/toggle";
+import { Card, CardContent } from "@/components/ui/card";
+import { Slider } from "@/components/ui/slider";
+import { 
+  Play,
+  Pause,
+  SkipBack,
+  SkipForward,
+  Volume2,
+  VolumeX,
+  Repeat,
+  Shuffle,
+  Heart,
+  Share,
+  MoreHorizontal,
+  Music
+} from "lucide-react";
+
+export default function ToggleMediaPlayer() {
+  const [playerState, setPlayerState] = useState({
+    isPlaying: false,
+    isMuted: false,
+    isShuffled: false,
+    isRepeating: false,
+    isLiked: false,
+    volume: [75],
+    progress: [30]
+  });
+
+  const handleToggle = (key: string) => {
+    setPlayerState(prev => ({
+      ...prev,
+      [key]: !prev[key]
+    }));
+  };
+
+  const currentTrack = {
+    title: "Awesome Song Title",
+    artist: "Amazing Artist",
+    album: "Great Album",
+    duration: "3:45",
+    currentTime: "1:23"
+  };
+
+  return (
+    <Card className="w-full max-w-md mx-auto">
+      <CardContent className="p-6">
+        {/* Album Art */}
+        <div className="aspect-square bg-gradient-to-br from-purple-400 to-pink-400 rounded-lg mb-4 flex items-center justify-center">
+          <Music className="h-16 w-16 text-white/80" />
+        </div>
+
+        {/* Track Info */}
+        <div className="text-center mb-4">
+          <h3 className="font-semibold text-lg">{currentTrack.title}</h3>
+          <p className="text-muted-foreground">{currentTrack.artist}</p>
+          <p className="text-sm text-muted-foreground">{currentTrack.album}</p>
+        </div>
+
+        {/* Progress Bar */}
+        <div className="space-y-2 mb-6">
+          <Slider
+            value={playerState.progress}
+            onValueChange={(value) => setPlayerState(prev => ({ ...prev, progress: value }))}
+            max={100}
+            step={1}
+            className="w-full"
+          />
+          <div className="flex justify-between text-xs text-muted-foreground">
+            <span>{currentTrack.currentTime}</span>
+            <span>{currentTrack.duration}</span>
+          </div>
+        </div>
+
+        {/* Main Controls */}
+        <div className="flex items-center justify-center gap-4 mb-6">
+          <Toggle
+            pressed={playerState.isShuffled}
+            onPressedChange={() => handleToggle('isShuffled')}
+            aria-label="Toggle shuffle"
+            variant="outline"
+            size="sm"
+          >
+            <Shuffle className="h-4 w-4" />
+          </Toggle>
+
+          <button className="p-2 rounded-full hover:bg-muted">
+            <SkipBack className="h-5 w-5" />
+          </button>
+
+          <Toggle
+            pressed={playerState.isPlaying}
+            onPressedChange={() => handleToggle('isPlaying')}
+            aria-label={playerState.isPlaying ? "Pause" : "Play"}
+            className="h-12 w-12 rounded-full"
+          >
+            {playerState.isPlaying ? (
+              <Pause className="h-6 w-6" />
+            ) : (
+              <Play className="h-6 w-6 ml-1" />
+            )}
+          </Toggle>
+
+          <button className="p-2 rounded-full hover:bg-muted">
+            <SkipForward className="h-5 w-5" />
+          </button>
+
+          <Toggle
+            pressed={playerState.isRepeating}
+            onPressedChange={() => handleToggle('isRepeating')}
+            aria-label="Toggle repeat"
+            variant="outline"
+            size="sm"
+          >
+            <Repeat className="h-4 w-4" />
+          </Toggle>
+        </div>
+
+        {/* Volume Control */}
+        <div className="flex items-center gap-3 mb-4">
+          <Toggle
+            pressed={playerState.isMuted}
+            onPressedChange={() => handleToggle('isMuted')}
+            aria-label="Toggle mute"
+            variant="outline"
+            size="sm"
+          >
+            {playerState.isMuted ? (
+              <VolumeX className="h-4 w-4" />
+            ) : (
+              <Volume2 className="h-4 w-4" />
+            )}
+          </Toggle>
+          <Slider
+            value={playerState.isMuted ? [0] : playerState.volume}
+            onValueChange={(value) => setPlayerState(prev => ({ ...prev, volume: value }))}
+            max={100}
+            step={1}
+            className="flex-1"
+          />
+          <span className="text-xs text-muted-foreground w-8">
+            {playerState.isMuted ? 0 : playerState.volume[0]}
+          </span>
+        </div>
+
+        {/* Additional Controls */}
+        <div className="flex items-center justify-between">
+          <Toggle
+            pressed={playerState.isLiked}
+            onPressedChange={() => handleToggle('isLiked')}
+            aria-label="Toggle like"
+            variant="outline"
+            size="sm"
+          >
+            <Heart className={\`h-4 w-4 \${playerState.isLiked ? 'fill-red-500 text-red-500' : ''}\`} />
+          </Toggle>
+
+          <div className="flex gap-2">
+            <button className="p-2 rounded-full hover:bg-muted">
+              <Share className="h-4 w-4" />
+            </button>
+            <button className="p-2 rounded-full hover:bg-muted">
+              <MoreHorizontal className="h-4 w-4" />
+            </button>
+          </div>
+        </div>
+
+        {/* Player Status */}
+        <div className="mt-4 p-3 bg-muted rounded-lg">
+          <div className="text-xs text-muted-foreground space-y-1">
+            <div className="flex justify-between">
+              <span>Status:</span>
+              <span>{playerState.isPlaying ? 'Playing' : 'Paused'}</span>
+            </div>
+            <div className="flex justify-between">
+              <span>Mode:</span>
+              <span>
+                {playerState.isShuffled && 'Shuffle '}
+                {playerState.isRepeating && 'Repeat '}
+                {!playerState.isShuffled && !playerState.isRepeating && 'Normal'}
+              </span>
+            </div>
+            <div className="flex justify-between">
+              <span>Volume:</span>
+              <span>{playerState.isMuted ? 'Muted' : \`\${playerState.volume[0]}%\`}</span>
+            </div>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  );
+}`} 
+  language="tsx" 
+  preview={<ToggleMediaPlayer />} 
+/>
+
+### Feature Flags Dashboard
+
+An admin dashboard for managing feature flags with toggle controls and detailed information.
+
+<CodePreview 
+  code={`import { useState } from "react";
+import { Toggle } from "@/components/ui/toggle";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
+import { 
+  Flag,
+  Users,
+  Zap,
+  Shield,
+  Bell,
+  Palette,
+  Database,
+  Globe,
+  AlertTriangle,
+  CheckCircle,
+  Clock
+} from "lucide-react";
+
+const featureFlags = [
+  {
+    id: 'new-dashboard',
+    name: 'New Dashboard UI',
+    description: 'Enable the redesigned dashboard interface with improved UX',
+    enabled: true,
+    environment: 'production',
+    rollout: 85,
+    risk: 'low',
+    icon: Palette,
+    lastModified: '2024-01-15',
+    dependencies: ['user-preferences', 'analytics']
+  },
+  {
+    id: 'advanced-search',
+    name: 'Advanced Search',
+    description: 'Enhanced search functionality with filters and AI suggestions',
+    enabled: false,
+    environment: 'staging',
+    rollout: 0,
+    risk: 'medium',
+    icon: Zap,
+    lastModified: '2024-01-14',
+    dependencies: ['elasticsearch', 'ml-service']
+  },
+  {
+    id: 'real-time-notifications',
+    name: 'Real-time Notifications',
+    description: 'WebSocket-based real-time notification system',
+    enabled: true,
+    environment: 'production',
+    rollout: 100,
+    risk: 'high',
+    icon: Bell,
+    lastModified: '2024-01-13',
+    dependencies: ['websocket-service', 'notification-queue']
+  },
+  {
+    id: 'multi-factor-auth',
+    name: 'Multi-Factor Authentication',
+    description: 'Enhanced security with 2FA and biometric authentication',
+    enabled: false,
+    environment: 'development',
+    rollout: 0,
+    risk: 'high',
+    icon: Shield,
+    lastModified: '2024-01-12',
+    dependencies: ['auth-service', 'sms-provider']
+  },
+  {
+    id: 'data-export',
+    name: 'Data Export Feature',
+    description: 'Allow users to export their data in various formats',
+    enabled: true,
+    environment: 'production',
+    rollout: 60,
+    risk: 'low',
+    icon: Database,
+    lastModified: '2024-01-11',
+    dependencies: ['export-service']
+  }
+];
+
+export default function ToggleFeatureFlags() {
+  const [features, setFeatures] = useState(featureFlags);
+
+  const handleToggle = (featureId: string) => {
+    setFeatures(prev => 
+      prev.map(feature => 
+        feature.id === featureId 
+          ? { 
+              ...feature, 
+              enabled: !feature.enabled,
+              lastModified: new Date().toISOString().split('T')[0]
+            }
+          : feature
+      )
+    );
+  };
+
+  const getEnabledCount = () => {
+    return features.filter(f => f.enabled).length;
+  };
+
+  const getRiskColor = (risk: string) => {
+    switch (risk) {
+      case 'low': return 'text-green-600';
+      case 'medium': return 'text-yellow-600';
+      case 'high': return 'text-red-600';
+      default: return 'text-gray-600';
+    }
+  };
+
+  const getEnvironmentColor = (env: string) => {
+    switch (env) {
+      case 'production': return 'destructive';
+      case 'staging': return 'secondary';
+      case 'development': return 'outline';
+      default: return 'outline';
+    }
+  };
+
+  return (
+    <div className="w-full max-w-4xl space-y-6">
+      {/* Header */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Flag className="h-5 w-5" />
+            Feature Flags Dashboard
+          </CardTitle>
+          <CardDescription>
+            Manage feature rollouts and experimental functionality across environments
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="text-center p-4 border rounded-lg">
+              <div className="text-2xl font-bold text-green-600">{getEnabledCount()}</div>
+              <div className="text-sm text-muted-foreground">Features Enabled</div>
+            </div>
+            <div className="text-center p-4 border rounded-lg">
+              <div className="text-2xl font-bold text-blue-600">{features.length - getEnabledCount()}</div>
+              <div className="text-sm text-muted-foreground">Features Disabled</div>
+            </div>
+            <div className="text-center p-4 border rounded-lg">
+              <div className="text-2xl font-bold text-purple-600">{features.length}</div>
+              <div className="text-sm text-muted-foreground">Total Features</div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Feature List */}
+      <div className="space-y-4">
+        {features.map((feature) => {
+          const IconComponent = feature.icon;
+          return (
+            <Card key={feature.id} className={\`transition-all \${feature.enabled ? 'border-green-200 bg-green-50/50' : 'border-gray-200'}\`}>
+              <CardContent className="p-6">
+                <div className="flex items-start justify-between">
+                  <div className="flex items-start gap-4 flex-1">
+                    <div className={\`p-2 rounded-lg \${feature.enabled ? 'bg-green-100 text-green-600' : 'bg-gray-100 text-gray-600'}\`}>
+                      <IconComponent className="h-5 w-5" />
+                    </div>
+                    
+                    <div className="flex-1 space-y-2">
+                      <div className="flex items-center gap-2">
+                        <h3 className="font-semibold">{feature.name}</h3>
+                        <Badge variant={getEnvironmentColor(feature.environment)}>
+                          {feature.environment}
+                        </Badge>
+                        <Badge variant="outline" className={getRiskColor(feature.risk)}>
+                          {feature.risk} risk
+                        </Badge>
+                      </div>
+                      
+                      <p className="text-sm text-muted-foreground">
+                        {feature.description}
+                      </p>
+                      
+                      <div className="flex items-center gap-4 text-xs text-muted-foreground">
+                        <div className="flex items-center gap-1">
+                          <Users className="h-3 w-3" />
+                          <span>Rollout: {feature.rollout}%</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <Clock className="h-3 w-3" />
+                          <span>Modified: {feature.lastModified}</span>
+                        </div>
+                        {feature.enabled ? (
+                          <div className="flex items-center gap-1 text-green-600">
+                            <CheckCircle className="h-3 w-3" />
+                            <span>Active</span>
+                          </div>
+                        ) : (
+                          <div className="flex items-center gap-1 text-gray-500">
+                            <AlertTriangle className="h-3 w-3" />
+                            <span>Inactive</span>
+                          </div>
+                        )}
+                      </div>
+                      
+                      {feature.dependencies && feature.dependencies.length > 0 && (
+                        <div className="space-y-1">
+                          <span className="text-xs font-medium text-muted-foreground">Dependencies:</span>
+                          <div className="flex flex-wrap gap-1 mt-1">
+                            {feature.dependencies.map(dep => (
+                              <Badge key={dep} variant="outline" className="text-xs">
+                                {dep}
+                              </Badge>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <Toggle
+                      pressed={feature.enabled}
+                      onPressedChange={() => handleToggle(feature.id)}
+                      aria-label={\`Toggle \${feature.name}\`}
+                      className="data-[state=on]:bg-green-600 data-[state=on]:text-white"
+                    />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          );
+        })}
+      </div>
+
+      {/* Footer Info */}
+      <Card className="bg-muted/50">
+        <CardContent className="p-4">
+          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            <AlertTriangle className="h-4 w-4" />
+            <span>
+              Changes to production features require approval. High-risk features should be tested thoroughly in staging.
+            </span>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}`} 
+  language="tsx" 
+  preview={<ToggleFeatureFlags />} 
+/>
+
+## API Reference
+
+### Toggle
+
+The main toggle component built on top of Radix UI Toggle primitive.
+
+#### Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `variant` | `"default" \| "outline"` | `"default"` | The visual style variant |
+| `size` | `"default" \| "sm" \| "lg"` | `"default"` | The size of the toggle |
+| `pressed` | `boolean` | `undefined` | The controlled pressed state |
+| `defaultPressed` | `boolean` | `false` | The default pressed state when uncontrolled |
+| `onPressedChange` | `(pressed: boolean) => void` | `undefined` | Callback fired when the pressed state changes |
+| `disabled` | `boolean` | `false` | Whether the toggle is disabled |
+| `className` | `string` | `undefined` | Additional CSS classes |
+| `children` | `ReactNode` | `undefined` | The content to display inside the toggle |
+
+#### Data Attributes
+
+| Attribute | Values | Description |
+| --- | --- | --- |
+| `[data-state]` | `"on" \| "off"` | The current pressed state |
+| `[data-disabled]` | Present when disabled | Indicates the toggle is disabled |
+
+## Keyboard Navigation
+
+| Key | Action |
+| --- | --- |
+| **Space** | Toggles the pressed state |
+| **Enter** | Toggles the pressed state |
+| **Tab** | Moves focus to the next focusable element |
+| **Shift + Tab** | Moves focus to the previous focusable element |
+
+## Accessibility
+
+The Toggle component follows accessibility best practices:
+
+- Uses semantic button element with proper ARIA attributes
+- Supports keyboard navigation with Space and Enter keys
+- Provides clear focus indicators
+- Includes proper state announcements for screen readers
+- Supports disabled state with appropriate ARIA attributes
+- Uses `aria-pressed` to indicate the current state
+- Includes `aria-label` or `aria-labelledby` for proper labeling
+
+## Best Practices
+
+1. **Provide clear labels**: Always include descriptive `aria-label` or visible text
+2. **Use appropriate variants**: Choose outline variant for secondary actions
+3. **Consider state persistence**: Implement proper state management for user preferences
+4. **Group related toggles**: Use consistent spacing and alignment for toggle groups
+5. **Provide feedback**: Consider visual or haptic feedback for state changes
+6. **Test accessibility**: Ensure proper keyboard navigation and screen reader support
+
+## Examples in Context
+
+### Toolbar Integration
+
+```tsx
+<div className="flex items-center gap-1 p-1 border rounded-lg">
+  <Toggle pressed={bold} onPressedChange={setBold} size="sm">
+    <Bold className="h-4 w-4" />
+  </Toggle>
+  <Toggle pressed={italic} onPressedChange={setItalic} size="sm">
+    <Italic className="h-4 w-4" />
+  </Toggle>
+  <Toggle pressed={underline} onPressedChange={setUnderline} size="sm">
+    <Underline className="h-4 w-4" />
+  </Toggle>
+</div>
+```
+
+### Settings Panel
+
+```tsx
+<div className="space-y-4">
+  <div className="flex items-center justify-between">
+    <div>
+      <p className="font-medium">Dark Mode</p>
+      <p className="text-sm text-muted-foreground">Switch to dark theme</p>
+    </div>
+    <Toggle pressed={darkMode} onPressedChange={setDarkMode}>
+      {darkMode ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
+    </Toggle>
+  </div>
+</div>
+```
+
+### Filter Controls
+
+```tsx
+<div className="flex flex-wrap gap-2">
+  <Toggle pressed={showCompleted} onPressedChange={setShowCompleted} variant="outline">
+    <CheckCircle className="h-4 w-4" />
+    Completed
+  </Toggle>
+  <Toggle pressed={showPending} onPressedChange={setShowPending} variant="outline">
+    <Clock className="h-4 w-4" />
+    Pending
+  </Toggle>
+</div>
+```
+
+## Dependencies
+
+The Toggle component depends on:
+
+- `@radix-ui/react-toggle` - The underlying toggle primitive
+- `lucide-react` - For icons in examples
+- `class-variance-authority` - For variant management
+- `clsx` - For conditional class names
+- `tailwind-merge` - For merging Tailwind classes
+
+## Related Components
+
+- [Switch](/docs/components/switch) - For binary on/off states with different visual style
+- [Checkbox](/docs/components/checkbox) - For multiple selections in forms
+- [Radio Group](/docs/components/radio-group) - For single selection from multiple options
+- [Button](/docs/components/button) - For action triggers without state persistence
