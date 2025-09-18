@@ -99,6 +99,11 @@ import {
 } from "@/components/ui/command";
 import { Progress } from "@/components/ui/progress";
 import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
@@ -384,6 +389,18 @@ import {
   DrawerMobileMenu,
   DrawerFilterPanel,
 } from "@/components/playground/drawer";
+import {
+  PopoverDefault,
+  PopoverPositions,
+  PopoverWithForm,
+  PopoverHelpTooltip,
+  PopoverDatePicker,
+  PopoverColorPicker,
+  PopoverUserMenu,
+  PopoverShareMenu,
+  PopoverNotificationSettings,
+  PopoverQuickActions,
+} from "@/components/playground/popover";
 
 const components = {
   LucideIcon,
@@ -617,6 +634,9 @@ const components = {
   CustomStyledSelect,
   MultipleSelectsForm,
   SearchableSelect,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
   Progress,
   ProgressDefault,
   ProgressSizes,
@@ -692,6 +712,16 @@ const components = {
   DrawerNotificationCenter,
   DrawerMobileMenu,
   DrawerFilterPanel,
+  PopoverDefault,
+  PopoverPositions,
+  PopoverWithForm,
+  PopoverHelpTooltip,
+  PopoverDatePicker,
+  PopoverColorPicker,
+  PopoverUserMenu,
+  PopoverShareMenu,
+  PopoverNotificationSettings,
+  PopoverQuickActions,
 };
 async function parseMdx<Frontmatter>(rawMdx: string) {
   return await compileMDX<Frontmatter>({

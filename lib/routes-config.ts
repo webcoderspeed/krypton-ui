@@ -88,6 +88,10 @@ const v1_0_0_ROUTES: EachRoute[] = [
         "href": "/components/input"
       },
       {
+        "title": "Popover",
+        "href": "/components/popover"
+      },
+      {
         "title": "Progress",
         "href": "/components/progress"
       },
